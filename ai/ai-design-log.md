@@ -38,13 +38,13 @@ Constraints: all UI text in Vietnamese; exactly one primary action per screen; t
 
 | Màn hình | Ảnh |
 |---|---|
-| Toàn cảnh | ![](../assets/stitch/v1-00-overview.png) |
-| Design system do Stitch tạo | ![](../assets/stitch/v1-00-design-system.png) |
-| 01 Onboarding | ![](../assets/stitch/v1-01-onboarding.png) |
-| 02 Home Dashboard | ![](../assets/stitch/v1-02-home.png) |
-| 03 Add Purchase (biến thể lỗi) | ![](../assets/stitch/v1-03-add-purchase-error.png) |
-| 04 Purchase Reason | ![](../assets/stitch/v1-04-purchase-reason.png) |
-| 05 Home sau khi lưu | ![](../assets/stitch/v1-05-home-saved.png) |
+| Toàn cảnh | ![](../assets/stitch/stitch 1/v1-00-overview.png) |
+| Design system do Stitch tạo | ![](../assets/stitch/stitch 1/v1-00-design-system.png) |
+| 01 Onboarding | ![](../assets/stitch/stitch 1/v1-01-onboarding.png) |
+| 02 Home Dashboard | ![](../assets/stitch/stitch 1/v1-02-home.png) |
+| 03 Add Purchase (biến thể lỗi) | ![](../assets/stitch/stitch 1/v1-03-add-purchase-error.png) |
+| 04 Purchase Reason | ![](../assets/stitch/stitch 1/v1-04-purchase-reason.png) |
+| 05 Home sau khi lưu | ![](../assets/stitch/stitch 1/v1-05-home-saved.png) |
 
 **Phản hồi của Stitch (nguyên văn, chưa kiểm chứng):**
 
