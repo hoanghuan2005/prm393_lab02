@@ -93,17 +93,47 @@ Constraints: all UI text in Vietnamese; exactly one primary action per screen; t
 ---
 
 ## P2 — Prompt thứ hai (Flow 2, Flow 3)
-**Ngày:**
-**Công cụ:** Google Stitch, chế độ Mobile
+**Ngày:** 11/10/2026
+**Công cụ:** Google Stitch, chế độ Mobile, cùng project với P1
 **Prompt (nguyên văn):**
 
-(dán prompt 2 vào đây)
+```
+Using the same style and design system as the existing screens, add these screens for "Why I Buy?" (all text in Vietnamese, same constraints):
+1. Purchase History – motive filter chips, purchases grouped by day with daily total; each row shows motive icon, item name, motive label, time, amount. Also an empty variant for a filter with no results: icon, message, button "Xóa bộ lọc". Bottom navigation with "Lịch sử" selected.
+2. Purchase Detail – large amount, item name, date, motive chip, note, delete icon in the app bar, button "Sửa".
+3. Delete confirmation dialog over Purchase Detail – "Xóa khoản mua này?", buttons "Hủy" and a red "Xóa".
+4. Purchase History after deletion – snackbar "Đã xóa" with action "Hoàn tác".
+5. Buying Patterns – tabs "Tuần / Tháng", horizontal bars per motive with icon, label, count and percentage, a 4-column chart of purchase time (Sáng, Trưa, Chiều, Tối). Also a skeleton loading variant and an error variant with plain-language cause and a "Thử lại" button. Bottom navigation with "Mô hình" selected.
+6. Personal Insights – 3 insight cards written as neutral observations, button "Mở chiêm nghiệm tháng". Bottom navigation with "Góc nhìn" selected.
+7. Monthly Reflection – summary of the month by motive, satisfaction rating 1–5, goal input for next month, primary button "Lưu chiêm nghiệm", text button "Để sau".
+8. Profile & Settings – profile card, toggles "Nhắc ghi khoản mua" and "Nhắc chiêm nghiệm hằng tháng", rows "Xuất dữ liệu" and a red "Xóa toàn bộ dữ liệu". Bottom navigation with "Cá nhân" selected.
+```
 
-**Kết quả:**
+**Kết quả:** Stitch sinh 8 khung màn hình. Các biến thể trạng thái trống, loading và lỗi không được tách thành khung riêng mà nằm ở cuối khung Lịch sử và khung Mô hình; tôi chụp riêng các phần đó.
+
 | Màn hình | Ảnh |
 |---|---|
-| | assets/stitch/v2-... |
+| Toàn cảnh | ![](../assets/stitch/stitch2/v2-00-overview.png) |
+| 06 Purchase History | ![](../assets/stitch/stitch2/v2-06-history.png) |
+| 06 Purchase History (trống, nằm cuối khung 06) | ![](../assets/stitch/stitch2/v2-06b-history-empty.png) |
+| 06 Purchase History (sau khi xóa) | ![](../assets/stitch/stitch2/v2-06c-history-undo.png) |
+| 05 Purchase Detail | ![](../assets/stitch/stitch2/v2-05-detail.png) |
+| 05 Dialog xác nhận xóa | ![](../assets/stitch/stitch2/v2-05b-delete-dialog.png) |
+| 07 Buying Patterns | ![](../assets/stitch/stitch2/v2-07-patterns.png) |
+| 07 Buying Patterns (loading, nằm cuối khung 07) | ![](../assets/stitch/stitch2/v2-07b-patterns-loading.png) |
+| 07 Buying Patterns (lỗi, nằm cuối khung 07) | ![](../assets/stitch/stitch2/v2-07c-patterns-error.png) |
+| 08 Personal Insights | ![](../assets/stitch/stitch2/v2-08-insights.png) |
+| 09 Monthly Reflection | ![](../assets/stitch/stitch2/v2-09-reflection.png) |
+| 10 Profile & Settings | ![](../assets/stitch/stitch2/v2-10-settings.png) |
 
-**Nhận xét của tôi:**
+**Phản hồi của Stitch (nguyên văn, chưa kiểm chứng):**
+
+> (dán đoạn Stitch tự mô tả nếu có, mỗi dòng bắt đầu bằng >; nếu Stitch không viết gì thì xóa mục này)
+
+**Nhận xét (đối chiếu với ảnh):**
 - Được:
+  - 
 - Chưa được:
+  - 
+- Điểm Stitch tự mô tả nhưng không khớp với ảnh:
+  -
