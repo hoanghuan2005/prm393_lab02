@@ -128,8 +128,56 @@ Using the same style and design system as the existing screens, add these screen
 
 **Phản hồi của Stitch (nguyên văn, chưa kiểm chứng):**
 
-> (dán đoạn Stitch tự mô tả nếu có, mỗi dòng bắt đầu bằng >; nếu Stitch không viết gì thì xóa mục này)
-
+> Danh sách chi tiết 8 màn hình vừa hoàn thiện:
+>
+> **1. Lịch sử chi tiêu & Bộ lọc:**
+> Thanh bộ lọc động cơ dạng chip lướt ngang (Tất cả (15), Khuyến mãi (6), Cảm xúc (4)...).
+> Danh sách chi tiêu gom nhóm theo ngày (Hôm nay 24/10, Hôm qua 23/10, Thứ hai 21/10) kèm tổng tiền từng ngày rõ nét.
+> Mỗi hàng hiển thị đầy đủ: icon động cơ, tên món đồ, nhãn động cơ, giờ phát sinh, và số tiền.
+> Tích hợp sẵn biến thể Empty State khi bộ lọc không có kết quả với thông báo nhẹ nhàng và nút "Xóa bộ lọc".
+> Thanh điều hướng đáy active tại tab Lịch sử với pill background.
+>
+> **2. Chi tiết khoản mua:**
+> Header hiển thị số tiền lớn 65.000 ₫ rõ ràng, tên món đồ kèm huy hiệu "Chi tiêu ngoài giờ cao điểm 🌙".
+> Thẻ động cơ kích hoạt (🏷️ Khuyến mãi) và khung trích dẫn tâm trạng khi mua đồ.
+> Thẻ gợi ý suy ngẫm nhẹ nhàng không phán xét.
+> Nút icon thùng rác 🗑️ trên thanh App Bar và nút hành động chính ở nửa dưới: "Sửa khoản mua".
+>
+> **3. Hộp thoại xác nhận xóa:**
+> Modal Dialog chuẩn Material 3 hiển thị trên nền mờ của màn hình Chi tiết.
+> Tiêu đề "Xóa khoản mua này?", nội dung giải thích bình an (thông báo có thể hoàn tác ngay).
+> Nút bấm với vùng chạm tối thiểu 48dp: nút chữ "Hủy" và nút cảnh báo màu đỏ "Xóa" (#B3261E).
+>
+> **4. Lịch sử sau khi xóa (Snackbar):**
+> Khoản mua vừa xóa được gỡ khỏi danh sách đầu ngày.
+> Snackbar nổi phía trên Bottom Bar: thông báo "Đã xóa khoản mua 'Trà sữa nướng & Bánh tráng'" cùng nút hành động tương phản "Hoàn tác".
+>
+> **5. Mô hình chi tiêu (kèm Loading & Lỗi):**
+> Chuyển đổi tab "Tuần / Tháng".
+> Biểu đồ thanh ngang (Horizontal bars) trực quan cho từng động cơ (Khuyến mãi 40%, Cảm xúc 27%, Tiện lợi 13%...).
+> Biểu đồ 4 cột khung giờ chi tiêu (Sáng, Trưa, Chiều, Tối), làm nổi bật khung giờ cao điểm đêm muộn của Nam (22h - 04h).
+> Trình bày trực quan biến thể Skeleton Loading (hiệu ứng khung tải) và biến thể Báo lỗi kết nối với ngôn ngữ thân thiện, nút "Thử lại".
+> Tab Mô hình được kích hoạt ở thanh điều hướng.
+>
+> **6. Góc nhìn cá nhân:**
+> 3 thẻ nhận định tâm lý được viết dưới dạng quan sát trung lập, thấu cảm (không phán xét hay khiển trách):
+> Chi tiêu sau 23:00 thường gắn với khuyến mãi.
+> Khoảng dừng 15 phút giúp giảm 40% mua bốc đồng.
+> Cảm giác tiết kiệm thúc đẩy chi tiêu.
+> Nút hành động chính lớn ở đáy: "Mở chiêm nghiệm tháng →".
+> Tab Góc nhìn được kích hoạt.
+>
+> **7. Chiêm nghiệm tháng:**
+> Tổng kết động cơ tháng (6.850.000 ₫ với 38 khoản mua).
+> Thang đo mức độ hài lòng/bình an từ 1 đến 5 với các nút tròn dễ chạm.
+> Ô nhập mục tiêu & định hướng cho tháng tiếp theo với nội dung gợi ý sâu sắc.
+> Nút chính "Lưu chiêm nghiệm" và nút phụ "Để sau".
+>
+> **8. Cá nhân & Cài đặt:**
+> Thẻ hồ sơ của Nam Nguyễn kèm thông điệp triết lý tiền bạc từ Morgan Housel.
+> Công tắc bật/tắt (Switch toggles): "Nhắc ghi khoản mua" (23:30) và "Nhắc chiêm nghiệm hằng tháng".
+> Các hàng thao tác: "Xuất dữ liệu cá nhân" (CSV/JSON) và hàng màu đỏ "Xóa toàn bộ dữ liệu".
+> Tab Cá nhân được kích hoạt.
 **Nhận xét (đối chiếu với ảnh):**
 - Được:
   - 
