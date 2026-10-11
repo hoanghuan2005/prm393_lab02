@@ -79,3 +79,20 @@ By nudging users to log the emotional and contextual reasons behind each transac
    * *Mục tiêu:* **≥ 70%** người dùng hoạt động chủ động truy cập tab **Patterns** và **Insights** ít nhất 2 lần/tuần để xem báo cáo phân tích tâm lý.
 4. **Mức độ giảm thiểu cảm xúc hối tiếc (Regret Reduction Score):**
    * *Mục tiêu:* Điểm hài lòng sau mua sắm tự đánh giá tăng **30%** sau 30 ngày sử dụng ứng dụng thông qua việc nhận diện các "bẫy cảm xúc" (Emotional & Discount Triggers).
+
+### Bối cảnh hằng ngày
+- 8:30–17:30: thực tập ở công ty, ăn trưa đặt ShopeeFood cùng đồng nghiệp.
+- 19:00–23:00: làm đồ án tốt nghiệp ở nhà trọ hoặc quán cà phê.
+- Sau 22:00: lướt TikTok để giải tỏa căng thẳng, đây là lúc hay đặt đồ ăn khuya
+  và chốt đơn flash sale.
+
+### Thói quen dùng thiết bị
+- Điện thoại Android màn hình 6.5 inch, thường dùng **một tay** khi đang đi
+  hoặc nằm, ngón cái chỉ với tới nửa dưới màn hình.
+- Mở điện thoại ngay sau khi thanh toán để kiểm tra thông báo đơn hàng.
+- Tắt phần lớn thông báo, chỉ giữ thông báo từ các app dùng hằng ngày.
+
+### Nhu cầu accessibility
+- Cận 2 độ, hay dùng điện thoại trong phòng tối hoặc dưới nắng
+  → cần độ tương phản cao và chữ không quá nhỏ.
+- Thao tác một tay khi mệt → nút chính đặt ở nửa dưới màn hình, vùng chạm lớn.
