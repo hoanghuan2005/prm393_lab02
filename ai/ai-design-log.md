@@ -308,3 +308,115 @@ Keep all constraints from the original brief:
   - Chữ "động lực" còn ở 6 chỗ trên 5 màn (02, 03, 05, 06, 07) dù prompt cấm rõ ràng,
   - 02' và 06' vẫn là hai màn khác hẳn 02 và 06, và đều không có snackbar dù Stitch nói đã thêm. Hai trạng thái này là điểm cuối của Flow 1 và Flow 3, nên thiếu snackbar thì cả hai flow không có phản hồi sau khi lưu/xóa
   - 09 Chiêm nghiệm tháng mang nhầm tiêu đề "Ghi Nhận Chi Tiêu" kèm nút Back, giống màn ghi khoản mua → người dùng không biết mình đang ở đâu. Đây là lỗi mới do R1 gây ra.
+
+## R2 — Tinh chỉnh: Phù hợp persona Nam (dùng một tay, dễ đọc)
+**Ngày:** 11/10/2026
+**Công cụ:** Google Stitch, chế độ Mobile, project remix
+**Mục tiêu:** Nam dùng điện thoại một tay, cận 2 độ và từng bỏ app vì cảm giác bị phán xét. Vòng này đưa nút chính vào vùng ngón cái và trong khung 800dp, tăng cỡ chữ và vùng chạm, bỏ ảnh trang trí và mọi nội dung khuyên bảo hoặc suy diễn. Các lỗi câu chữ và trạng thái còn sót từ R1 được ghi đích danh trong từng mục theo màn hình.
+**Màn hình chọn:** Onboarding, Trang chủ, Trang chủ sau khi lưu, Ghi khoản mua bước 1, Ghi khoản mua bước 2, Chi tiết, Dialog xóa, Lịch sử, Lịch sử sau khi xóa, Mô hình, Góc nhìn, Chiêm nghiệm tháng, Cá nhân (13 khung)
+
+**Prompt (nguyên văn):**
+
+```
+Edit these screens. Goal of this round: fit every screen to Nam — one-handed use, easy reading for a near-sighted user, and non-judgmental content only. Keep all sample data from the previous round unless a line below changes it.
+
+Rules for every screen:
+1. The screen fits 360x800 dp with the primary button always visible: pin it in a bottom bar (16 dp side margins) directly above the navigation bar (or at the bottom when there is no navigation). Content may scroll behind it; the button stays fixed.
+2. App bar titles in sentence case, exactly: "Trang chủ", "Ghi khoản mua", "Chi tiết khoản mua", "Lịch sử", "Mô hình", "Góc nhìn", "Chiêm nghiệm tháng", "Cá nhân".
+3. Always use the word "động cơ", never "động lực".
+4. No text smaller than 14 sp, except navigation labels and timestamps (minimum 12 sp, medium weight). Item names wrap to 2 lines instead of being cut with "...".
+5. Navigation bar: the selected tab has a pill background #E3E8F7 and a bold label on every screen, including Trang chủ.
+6. Remove every decorative photo and every card, tip or sentence that advises, judges or interprets the user's mind.
+
+Screen by screen:
+7. Trang chủ: remove the photo card "Nhật ký thấu suốt", the chip "Tâm thế bình an", the line "Mỗi khoản chi là một câu chuyện cảm xúc...", the line "Một khoảng lặng 10 giây trước khi bấm mua..." and the card "Gợi ý suy ngẫm hôm nay". Rename "Động lực chủ đạo" to "Động cơ chính". The "Ghi khoản mua" button is one line, full width, 56 dp tall, in the bottom bar.
+8. Trang chủ after saving: an exact copy of Trang chủ (same cards, same order), only with the new data (6 khoản · 862.000 ₫ · Khuyến mãi (2/6); recent list = Trà sữa nướng, Cơm tấm, Tai nghe Bluetooth) and a snackbar above the bottom bar: "Đã lưu “Trà sữa nướng”".
+9. Ghi khoản mua – Bước 1/2: make TWO separate frames.
+   a) Default: amount 45.000 ₫, no error message, "Tiếp tục" enabled.
+   b) Error: amount 0 ₫, error message with an icon under the amount field: "Vui lòng nhập số tiền lớn hơn 0 ₫", field border #B3261E, "Tiếp tục" clearly disabled (grey, not tappable look).
+   In both frames: quick-amount chips exactly "+20.000", "+50.000", "+100.000", each at least 48 dp tall and fully visible (remove "35.000 ₫", "60.000 ₫" and "0 ₫ (Thử lỗi)"); remove the card "Ghi nhận trung thực là bước đầu tiên..." and the card "Minh ảnh tham chiếu... Đổi ảnh chụp"; the text under the button is "Bước tiếp theo: chọn động cơ của khoản mua".
+10. Ghi khoản mua – Bước 2/2: motive cards show icon + label only (remove the small description lines), 2 columns x 4 rows, each card at least 72 dp tall, so the grid, the note field and the "Lưu" button fit on one screen. Remove the green card "Nhận diện cảm xúc là bước đầu tiên...".
+11. Chi tiết khoản mua: trash icon in the top app bar (48 dp touch target); remove "Mã giao dịch #WB-8492" and the photo; rename "Động lực tâm lý khi bạn mua" to "Động cơ"; primary button "Sửa" in the bottom bar.
+12. Delete dialog: the screen behind it is an exact copy of Chi tiết khoản mua, dimmed by the scrim. Title "Xóa khoản mua này?", body "“Tai nghe Bluetooth” sẽ bị xóa khỏi lịch sử. Bạn có 5 giây để hoàn tác.", buttons "Hủy" (text button) and "Xóa" (filled, #B3261E).
+13. Lịch sử: show the state after saving — 6 purchases; the group "Hôm nay, 11/10/2026" has Trà sữa nướng 23:10 and Cơm tấm 12:15, day total 85.000 ₫. Remove the top card "Góc nhìn chi tiêu tuần này..." and the bottom note "Quan sát không phán xét... Hãy dừng lại một nhịp thở...".
+14. Lịch sử after deletion: an exact copy of Lịch sử without the Tai nghe Bluetooth row (5 purchases), with a snackbar above the navigation bar: "Đã xóa “Tai nghe Bluetooth”" and the action "Hoàn tác".
+15. Mô hình: rename "Động lực ẩn sau các quyết định mua sắm của bạn" to "Động cơ của các khoản mua trong tháng".
+16. Góc nhìn: exactly these 3 insight cards, written as plain observations, each with an icon and no extra lines:
+   - "5 trong 15 khoản tháng này gắn với Khuyến mãi."
+   - "8 trong 15 khoản được ghi sau 18:00."
+   - "Cả 4 khoản Cảm xúc đều được ghi sau 22:00."
+   Primary button: "Mở chiêm nghiệm tháng".
+17. Chiêm nghiệm tháng: the title is "Chiêm nghiệm tháng" (not "Ghi Nhận Chi Tiêu"). Keep the month summary by motive. Remove the quote card "Khoảnh khắc nhìn lại", the photo, the sentence "60% quyết định chi tiêu vừa qua xuất phát từ kích thích bên ngoài..." and the chips "Đợi 24h trước khi săn sale", "Nhận diện cảm xúc khi mệt mỏi". Rating 1–5 with nothing pre-selected and end labels "Không hài lòng" and "Rất hài lòng". The goal field is empty with placeholder "Một điều bạn muốn để ý trong tháng 11".
+18. Cá nhân: remove the photo card "Mỗi đồng tiền rời tay...", the badge "Hiện diện", the quote under "Bạn" and the row "Hành trình quan chiếu · 18 ngày liên tục". Data note: "Dữ liệu được lưu trên máy và đồng bộ với tài khoản của bạn khi có mạng." Row "Xóa toàn bộ dữ liệu" with the description "Xóa vĩnh viễn mọi khoản mua đã ghi."
+19. Onboarding: apply the rules for every screen only.
+
+Keep all constraints from the original brief:
+- Android 360x800 dp, Material 3, light theme, font Be Vietnam Pro. Background #F5F6F2, primary #2E4A9E, text #1A2320, secondary text #545E59, error #B3261E.
+- All UI text in Vietnamese WITH full diacritics (e.g. "Chi tiết khoản mua", never "Chi Tiet Khoan Mua").
+- Exactly one filled primary button per screen. Touch targets at least 48 dp. Body text at least 14 sp. Text contrast at least 4.5:1.
+- Motives always shown as icon + label. Selected tab = pill background + bold label.
+- Do not add any feature, card, tip, statistic, image or label that is not described here.
+```
+
+**Phản hồi của Stitch (nguyên văn, chưa kiểm chứng):**
+
+> Tóm tắt các điểm đã được chuẩn hóa trong bản R2:
+>
+> 1. Tối ưu thao tác 1 tay & Ghim nút hành động chính (Rule 1):
+>    - Nút hành động chính (CTA) cao 56 dp, viền lề 16 dp, được ghim cố định ở thanh đáy ngay trên thanh điều hướng hoặc ở đáy màn hình. Nội dung có thể cuộn tự do bên dưới mà nút bấm luôn ở vị trí dễ chạm nhất của ngón tay cái.
+> 2. Dễ đọc cho người dùng cận thị (Rule 4):
+>    - Cỡ chữ thân từ 14 sp trở lên (chỉ nhãn phụ / mốc thời gian ở mức 12 sp với font medium).
+>    - Tên món đồ cho phép xuống 2 dòng, không còn bị cắt bằng dấu ba chấm `...`.
+> 3. Loại bỏ triệt để định kiến & Ảnh trang trí (Rule 6):
+>    - Đã gỡ bỏ toàn bộ ảnh minh họa trang trí, hình cà phê/sách/trà sữa mang tính trừu tượng.
+>    - Loại bỏ các câu chữ giáo huấn, khuyên răn hay diễn giải tâm lý áp đặt ("Tâm thế bình an", "Khoảnh khắc nhìn lại", v.v.).
+> 4. Danh sách chi tiết 13 màn hình R2 đã xuất bản:
+>    - Trang chủ (`Trang chủ`): Tinh gọn, nút "Ghi khoản mua" ghim đáy 56 dp, hiển thị 5 khoản chi tuần 41 (817.000 ₫).
+>    - Trang chủ sau khi lưu (`Trang chủ sau khi lưu`): Giữ nguyên bố cục với Trang chủ, cập nhật 6 khoản (862.000 ₫), hiển thị Snackbar Đã lưu “Trà sữa nướng” kèm nút Hoàn tác.
+>    - Ghi khoản mua – Bước 1/2 (`Ghi khoản mua (Bước 1/2)`): Số tiền 45.000 ₫, 3 chip `+20.000`, `+50.000`, `+100.000` (≥48 dp), nút "Tiếp tục" kích hoạt.
+>    - Ghi khoản mua – Bước 1/2 (Báo lỗi) (`Ghi khoản mua (Bước 1/2 - Báo lỗi)`): Số tiền 0 ₫, viền đỏ `#B3261E`, thông báo nội dòng "Vui lòng nhập số tiền lớn hơn 0 ₫", nút "Tiếp tục" bị vô hiệu hóa rõ ràng.
+>    - Ghi khoản mua – Bước 2/2 (`Ghi khoản mua (Bước 2/2)`): Lưới 8 thẻ động cơ 2 cột x 4 hàng (chỉ có Icon + Nhãn, chiều cao ≥72 dp), vừa vặn trọn vẹn màn hình cùng ô ghi chú và nút "Lưu" ghim đáy.
+>    - Chi tiết khoản mua (`Chi tiết khoản mua`): Nút thùng rác 🗑️ ở App bar (vùng chạm 48 dp), nhãn "Động cơ", nút "Sửa" ghim đáy.
+>    - Hộp thoại xác nhận xóa (`Hộp thoại xác nhận xóa`): Nền sau là bản sao màn Chi tiết làm mờ dưới scrim, dialog Material 3 với nút "Hủy" và nút "Xóa" đỏ.
+>    - Lịch sử (`Lịch sử`): Danh sách 6 khoản chi đầy đủ ngày 11/10 (85.000 ₫), mỗi hàng chỉ hiển thị đúng 1 chip động cơ.
+>    - Lịch sử sau khi xóa (`Lịch sử sau khi xóa`): Loại bỏ dòng Tai nghe Bluetooth (còn 5 khoản), hiển thị Snackbar Đã xóa “Tai nghe Bluetooth” + nút Hoàn tác.
+>    - Mô hình (`Mô hình`): Phân tích 15 khoản tháng 10/2026 và biểu đồ 4 khung giờ với giờ Tối (8 khoản) nổi bật.
+>    - Góc nhìn (`Góc nhìn`): Đúng 3 nhận định thuần quan sát, nút "Mở chiêm nghiệm tháng" ghim đáy.
+>    - Chiêm nghiệm tháng (`Chiêm nghiệm tháng`): Thang điểm hài lòng 1–5 không chọn sẵn, ô mục tiêu để trống với placeholder đúng chuẩn.
+>    - Cá nhân (`Cá nhân`): Giao diện hồ sơ "Bạn", 2 công tắc nhắc nhở, tùy chọn xuất và xóa dữ liệu rõ ràng.
+
+**Ảnh trước / sau:**
+
+| Màn hình | Trước (R1) | Sau (R2) |
+|---|---|---|
+| Toàn cảnh | ![](../assets/stitch/stitch%20refinement%201/r1-overview.png) | ![](../assets/stitch/stitch%20refinement%202/r2-overview.png) |
+| 02 Trang chủ | ![](../assets/stitch/stitch%20refinement%201/r1-homepage.png) | ![](../assets/stitch/stitch%20refinement%202/r2-homepage.png) |
+| 02' Trang chủ sau khi lưu | ![](../assets/stitch/stitch%20refinement%201/recent.png) | ![](../assets/stitch/stitch%20refinement%202/r2-recent.png) |
+| 03 Ghi khoản mua – Bước 1/2 | ![](../assets/stitch/stitch%20refinement%201/r1-step1.png) | ![](../assets/stitch/stitch%20refinement%202/r2-step1.png) |
+| 03 Ghi khoản mua – Bước 1/2 (lỗi) | — (chưa có khung riêng) | ![](../assets/stitch/stitch%20refinement%202/r2-step1-error.png) |
+| 04 Ghi khoản mua – Bước 2/2 | ![](../assets/stitch/stitch%20refinement%201/r1-step2.png) | ![](../assets/stitch/stitch%20refinement%202/r2-step2.png) |
+| 05 Chi tiết khoản mua | ![](../assets/stitch/stitch%20refinement%201/r1-payment-details.png) | ![](../assets/stitch/stitch%20refinement%202/r2-payment-details.png) |
+| 05' Dialog xóa | ![](../assets/stitch/stitch%20refinement%201/r1-delete-dialog.png) | ![](../assets/stitch/stitch%20refinement%202/r2-delete-dialog.png) |
+| 06 Lịch sử | ![](../assets/stitch/stitch%20refinement%201/r1-history.png) | ![](../assets/stitch/stitch%20refinement%202/r2-history.png) |
+| 06' Lịch sử sau khi xóa | ![](../assets/stitch/stitch%20refinement%201/r1-history-by-month.png) | ![](../assets/stitch/stitch%20refinement%202/r2-history-by-month.png) |
+| 07 Mô hình | ![](../assets/stitch/stitch%20refinement%201/r1-chart.png) | ![](../assets/stitch/stitch%20refinement%202/r2-chart.png) |
+| 08 Góc nhìn | ![](../assets/stitch/stitch%20refinement%201/r1-quote.png) | ![](../assets/stitch/stitch%20refinement%202/r2-quote.png) |
+| 09 Chiêm nghiệm tháng | ![](../assets/stitch/stitch%20refinement%201/r1-quote-detils.png) | ![](../assets/stitch/stitch%20refinement%202/r2-quote-detils.png) |
+| 10 Cá nhân | ![](../assets/stitch/stitch%20refinement%201/r1-profile.png) | ![](../assets/stitch/stitch%20refinement%202/r2-profile.png) |
+
+**Nhận xét của tôi (đối chiếu với ảnh):**
+- Được:
+  - Mục tiêu chính của vòng (một tay) đạt: nút chính được ghim ở đáy trên mọi màn có hành động chính; Bước 2/2 vừa trọn lưới 8 động cơ, ô ghi chú và nút "Lưu" trong một màn, Nam không phải cuộn.
+  - Trạng thái lỗi của Bước 1/2 giờ là một khung riêng, đúng chuẩn phòng ngừa lỗi: số tiền 0 ₫ hiện đỏ, thông báo kèm icon và cách sửa, nút "Tiếp tục" bị khóa rõ ràng (Nielsen #5, #9).
+  - Lưới động cơ chỉ còn icon + tên, dễ quét hơn và giữ thẻ được chọn bằng cả nền, viền và dấu tích (không chỉ dựa vào màu).
+  - Toàn bộ ảnh trang trí đã bỏ; các câu khuyên bảo được liệt kê đích danh đều đã mất.
+  - Các màn có câu chữ được ghi nguyên văn trong prompt ra đúng gần như tuyệt đối: dialog xóa, 3 câu ở Góc nhìn, Chiêm nghiệm tháng, câu lưu dữ liệu ở Cá nhân.
+  - Lỗi còn sót từ R1 phần lớn đã xử lý: tiêu đề Chiêm nghiệm tháng đúng, không còn chữ "động lực", Lịch sử có đủ 6 khoản, tên món không bị cắt, tab đang chọn có pill.
+- Chưa được:
+  - Stitch "lấp chỗ trống" bằng nội dung mới cùng kiểu với nội dung vừa xóa: ít nhất 8 câu khuyên bảo, khen ngợi hoặc suy diễn mới xuất hiện ở 7 màn. Câu "Bạn nhận diện được cơn sốt ưu đãi kịp thời" ở Chi tiết là đánh giá hành vi của Nam, đúng điều persona muốn tránh.
+  - Trang chủ sau khi lưu và Lịch sử sau khi xóa lần thứ hai không giữ được bố cục của màn gốc (Nielsen #4). Lịch sử sau khi xóa còn tệ hơn R1: dữ liệu, chip lọc và nhãn động cơ đều sai, tức là các lỗi đã sửa ở R1 quay trở lại.
+  - Dữ liệu sai ở chỗ không được nhắc tên trong prompt: 02 ghi "Tiện lợi 2 khoản" (đúng là 1) và thiếu Nhu cầu; 02 ghi ngày "Hôm nay, 10/10" và 02' ghi "Hôm nay, 24 tháng 10" (đúng là 11/10); 02' ghi Cảm xúc 33% (đúng là 1/6 ≈ 17%).
+  - Mô hình định nghĩa khung "Tối" là 22h–04h, nhưng Góc nhìn ghi "8 trong 15 khoản được ghi sau 18:00" → hai màn hiểu cùng con số 8 theo hai cách (Nielsen #4).
+  - Hai khung của Bước 1/2 dùng nhãn khác nhau cho cùng một trường, lặp lại đúng lỗi "hai trạng thái của một màn không giống nhau".
+  - Onboarding không được sửa.
+
