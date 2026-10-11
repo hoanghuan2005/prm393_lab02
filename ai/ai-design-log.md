@@ -178,10 +178,34 @@ Using the same style and design system as the existing screens, add these screen
 > Công tắc bật/tắt (Switch toggles): "Nhắc ghi khoản mua" (23:30) và "Nhắc chiêm nghiệm hằng tháng".
 > Các hàng thao tác: "Xuất dữ liệu cá nhân" (CSV/JSON) và hàng màu đỏ "Xóa toàn bộ dữ liệu".
 > Tab Cá nhân được kích hoạt.
-**Nhận xét (đối chiếu với ảnh):**
+
+**Nhận xét**
 - Được:
-  - 
+  - Thanh điều hướng ở 06 Lịch sử, 07 Mô hình, 08 Góc nhìn, 10 Cá nhân có tab đang chọn với nền pill rõ ràng (đã khắc phục so với 02 Home ở v1).
+  - 05 Dialog xóa: hiển thị dạng overlay trên nền tối, nút "Xóa" màu đỏ có cả icon và chữ, nút "Hủy" tách biệt.
+  - 07 Mô hình: thanh ngang theo động cơ có đủ icon + tên + số khoản + phần trăm; biểu đồ khung giờ có nhãn phần trăm và khung giờ cụ thể, không chỉ dựa vào màu.
+  - 07 Trạng thái lỗi: nêu nguyên nhân bằng ngôn ngữ dễ hiểu ("do kết nối mạng gián đoạn"), trấn an dữ liệu vẫn an toàn, có nút "Thử lại" và lựa chọn "Xem dữ liệu ngoại tuyến".
+  - 06 Trạng thái trống: có icon, thông báo và một hành động "Xóa bộ lọc".
+  - 09 Chiêm nghiệm tháng: thang 1–5 có nhãn ở hai đầu ("Rất bồn chồn" / "Rất bình an & chủ động"), có cả nút chính "Lưu chiêm nghiệm" và lối thoát "Để sau".
+  - 10 Cá nhân: mỗi công tắc có dòng mô tả; hàng "Xóa toàn bộ dữ liệu" có màu đỏ, icon và câu giải thích hậu quả.
+
 - Chưa được:
-  - 
-- Điểm Stitch tự mô tả nhưng không khớp với ảnh:
-  -
+  - Tiêu đề và phụ đề app bar mất dấu tiếng Việt: "Chi Tiet Chi Tieu" (05), "Phan Chieu Thang" (09), và phụ đề "Lich Su", "Mo Hinh", "Goc Nhin", "Ca Nhan" dưới logo → vi phạm ràng buộc "toàn bộ chữ tiếng Việt" và gây khó đọc.
+  - 06 sau khi xóa: không có snackbar và nút "Hoàn tác"; chỉ có thẻ "Bạn vừa điều chỉnh nhật ký…" ở phía trên, không nói rõ khoản nào đã bị xóa → Nam không thể khôi phục khi xóa nhầm (Nielsen #3) và không biết chuyện gì vừa xảy ra (Nielsen #1).
+  - 05 Dialog hứa "Thông báo hoàn tác sẽ hiển thị trong 5 giây" và "Bạn vẫn có thể hoàn tác", nhưng màn sau khi xóa không có hoàn tác → giao diện hứa một điều rồi không thực hiện. Dòng phụ "Hành động không làm mất dữ liệu vĩnh viễn" cũng mâu thuẫn với nút "Xóa".
+  - 05 Dialog: màn Chi tiết phía sau dialog có bố cục khác hẳn màn 05 (giờ "15:42" thay vì "23:45", có nút "Chỉnh sửa" và thùng rác ở đáy) → cùng một màn nhưng hai phiên bản khác nhau (Nielsen #4).
+  - 05 Chi tiết: không có icon xóa trên app bar như yêu cầu (chỉ có menu ⋮); hành động phụ "Xác nhận & Đóng" không rõ dùng để làm gì.
+  - Nhiều nhận định có số liệu không có nguồn và không phải quan sát từ dữ liệu của Nam: 08 "Khoảng dừng 15 phút giúp giảm 40% mua bốc đồng", "75% các đơn hàng đặt sau 23h…"; 07 "giúp hoãn 75% chi tiêu bốc đồng"; 09 "+12% hài lòng" → trái với yêu cầu "quan sát trung lập" và định hướng khách quan của app.
+  - Số liệu mâu thuẫn giữa các màn: 07 ghi "8/15 khoản diễn ra từ 22h–04h", 08 ghi "75% đơn sau 23h" và "8 trên 10 đơn hàng đồ ăn đêm"; 06 sau khi xóa ghi tuần này 630.000 ₫ và động cơ chủ đạo "Cảm xúc", trong khi 05 Home (v1) ghi tuần này 2.515.000 ₫ và "Khuyến mãi (37%)".
+  - Stitch tự thêm các tính năng ngoài phạm vi: "Khoảng hạ nhiệt 24h" (08), bộ lọc "Ngủ quá đêm" (07), "danh sách cần thiết từ đầu tuần" (08), ảnh đính kèm khoản mua (05). Thẻ 08 còn tự mâu thuẫn: tiêu đề nói "15 phút" nhưng nội dung nói "24h".
+  - Giọng văn chuyển từ quan sát sang khuyên bảo và chấm điểm: 05 "Lần tới, bạn có thể thử đợi 10 phút trước khi thanh toán"; 09 "Bạn đang giữ nhịp kiểm soát rất tích cực"; 09 ô mục tiêu được điền sẵn nội dung do app viết thay Nam → trái với thông điệp "Hiểu trước khi thay đổi".
+  - 07 và 08: các câu diễn giải tâm lý như "Tâm trí bạn có xu hướng tìm kiếm niềm vui nhanh vào đêm muộn…", "tâm trí có xu hướng tìm kiếm sự xoa dịu tức thì" là suy diễn về Nam, không phải dữ liệu.
+  - 06 Lịch sử: mỗi hàng có thêm nhãn diễn giải do app tự gán ("Chưa hối tiếc", "Xoa dịu áp lực", "Đầu tư hiểu biết") ngoài nhãn động cơ → thêm nhiễu và mang tính đánh giá.
+  - 06 Lịch sử và 06 sau khi xóa: hai trạng thái của cùng một màn có bố cục và nhãn khác nhau (chip "Tất cả (15)" và "Tất cả động lực"; thẻ đầu trang khác nhau) (Nielsen #4).
+  - Biến thể trạng thái không được tách riêng: trạng thái trống nằm cuối khung 06 với nhãn "MẪU TRẠNG THÁI BỘ LỌC"; skeleton và lỗi nằm cuối khung 07 kèm các nút "Xem Mẫu A: Shimmer Loading", "Xem Mẫu B" → lẫn nút trình diễn vào giao diện thật, không dùng trực tiếp làm màn trạng thái được.
+  - 10 Cá nhân ghi "Mọi suy ngẫm và chi tiêu chỉ được lưu trữ cục bộ trên máy… Không máy chủ", nhưng 07 báo lỗi "không thể đồng bộ dữ liệu", và Flow 1 có bước đồng bộ khi có mạng → mâu thuẫn về cách lưu dữ liệu.
+  - 10 Cá nhân: câu "trên máy của Nam" gọi người dùng bằng tên ở ngôi thứ ba thay vì "bạn"; câu trích "Tiền bạc không phải là con số trên bảng tính…" đặt trong phần lấy cảm hứng từ Morgan Housel nhưng không rõ có phải trích dẫn thật không.
+  - Dữ liệu mẫu dùng năm 2023 ("24/10/2023", "Tháng 10/2023"), giờ của cùng một khoản mua không khớp giữa các màn (Cơm tấm đêm "23:30 hôm qua" ở v1 nhưng "00:15 hôm nay" ở 06).
+  - Tên món tiếp tục bị cắt nhiều ở 06 ("Trà sữa nướng & Bá…", "Sách Tâm lý học v…"); dãy chip lọc bị cắt ở mép phải.
+  - Nhiều chữ phụ trông nhỏ hơn 14sp (mô tả dưới thẻ, chú thích biểu đồ, dòng phụ ở 10); các màn dài hơn nhiều so với khung 800dp.
+
