@@ -615,7 +615,7 @@ Constraints (same as before): Android 360x800 dp, Material 3, light theme. All t
 ---
 
 ## F6 — Flow 6: Danh sách mong muốn (Smart Wishlist)
-**Ngày:** [CẦN ĐIỀN – ngày chạy Stitch]
+**Ngày:** 12/10/2026
 **Công cụ:** Google Stitch (project https://stitch.withgoogle.com/projects/1668611817022706714), sau đó Claude + Figma connector để dựng trong Figma
 **Màn hình Stitch sinh:** Home – Wishlist Entry, Wishlist Overview, Add Wishlist Item, Wishlist Detail, Wishlist Empty, Add Item Error, Wishlist Saved, Wishlist Skipped, Skip Confirmation Dialog, Add Purchase with Prefilled Wishlist Data
 
@@ -910,9 +910,16 @@ toàn bộ mấy này làm theo 360x800
 
 | Nội dung | Ảnh |
 |---|---|
-| Trang chủ, Overview, Add Item, Detail (bản có 48h) | ![](../assets/stitch/flow6/f6-stitch-overview-add-detail.png) |
-| Add Purchase điền sẵn, Bỏ qua, Đã lưu | ![](../assets/stitch/flow6/f6-stitch-prefill-skipped-saved.png) |
-| Add Item lỗi, Dialog bỏ qua, Bỏ qua trống | ![](../assets/stitch/flow6/f6-stitch-error-dialog-empty.png) |
+| Home – Wishlist Entry | ![](../assets/stitch/flow6/f6-stitch-home-wishlist-entry.png) |
+| Wishlist Overview (bản có 48h, "Đã hạ nhiệt 40%") | ![](../assets/stitch/flow6/f6-stitch-wishlist-overview.png) |
+| Add Wishlist Item | ![](../assets/stitch/flow6/f6-stitch-add-item.png) |
+| Wishlist Detail (bản có 48h, nhật ký tâm lý) | ![](../assets/stitch/flow6/f6-stitch-wishlist-detail.png) |
+| Add Purchase điền sẵn | ![](../assets/stitch/flow6/f6-stitch-add-purchase-prefilled.png) |
+| Wishlist Skipped | ![](../assets/stitch/flow6/f6-stitch-wishlist-skipped.png) |
+| Wishlist Saved | ![](../assets/stitch/flow6/f6-stitch-wishlist-saved.png) |
+| Add Item Error | ![](../assets/stitch/flow6/f6-stitch-add-item-error.png) |
+| Skip Confirmation Dialog | ![](../assets/stitch/flow6/f6-stitch-skip-dialog.png) |
+| Wishlist Empty (bộ lọc Bỏ qua) | ![](../assets/stitch/flow6/f6-stitch-skipped-empty.png) |
 
 **Phản biện bằng Claude** (đối chiếu ảnh với 10 heuristic của Nielsen, accessibility, persona Nam):
 

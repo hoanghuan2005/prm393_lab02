@@ -86,7 +86,7 @@ Stitch tự thêm chip "Khoảng lặng 48h", nhãn "Đang tĩnh tâm", dòng "C
 
 | Trước | Sau |
 |---|---|
-| ![](../assets/stitch/flow6/f6-stitch-overview-add-detail.png) | ![](../assets/figma/13-wishlist-detail.png) |
+| ![](../assets/stitch/flow6/f6-stitch-wishlist-detail.png) | ![](../assets/figma/13-wishlist-detail.png) |
 
 ### Quyết định 7 — TỪ CHỐI: nhật ký tâm lý nhiều bước
 Thẻ "Nhật ký tâm lý · Bước 2/3" buộc người dùng đi qua các giai đoạn trước khi quyết định. Nó thêm thao tác, nằm ngoài phạm vi và lặp lại chức năng của Chiêm nghiệm tháng (09). Ghi chú tự do ở 12/13 đã đủ để ghi lại cảm xúc.
