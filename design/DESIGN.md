@@ -9,7 +9,7 @@ Thông điệp: "Hiểu trước khi thay đổi".
 
 ## Người dùng
 Nguyễn Hải Nam, 22 tuổi, sinh viên năm cuối ngành CNTT kiêm thực tập sinh,
-thu nhập 6–9 triệu/tháng. Hay đặt đồ ăn khuya và chốt flash sale sau 23h,
+thu nhập 6–9 triệu/tháng. Hay đặt đồ ăn khuya và chốt flash sale sau 22h,
 dùng điện thoại một tay, cận 2 độ. Đã bỏ các app chi tiêu vì nhập lâu và
 cảm giác tội lỗi khi thấy cảnh báo đỏ.
 
@@ -86,8 +86,11 @@ Giá dự kiến không phải tiền đã chi: không cộng vào tổng tuần
 | surface | #FFFFFF | Card, ô nhập |
 | on-surface | #1A2320 | Chữ chính |
 | on-surface-variant | #545E59 | Chữ phụ |
-| outline | #8A918A | Viền ô nhập, chip |
+| surface-container | #E8F0EB | Nền ô nhập (tonal), chip mặc định, khối tóm tắt |
+| outline | #8A918A | Viền ô nhập trên thẻ trắng, chip "Bỏ qua", viền switch tắt |
+| outline-strong | #7A817B | Viền ô nhập đặt thẳng trên nền #F5F6F2 (≥ 3 : 1, PB-5) |
 | error | #B3261E | Lỗi nhập liệu, hành động xóa |
+| error-container | #F9DEDC | Nền ô nhập khi lỗi, nền icon trong dialog xóa |
 
 Màu động cơ (nền / chữ):
 | Động cơ | Nền | Chữ |
@@ -109,7 +112,10 @@ Màu động cơ (nền / chữ):
 | Subtitle | 16 / 24 | 600 |
 | Body | 16 / 24 | 400 |
 | Body small | 14 / 20 | 400 |
-| Label | 12 / 16 | 500 (chỉ cho nhãn phụ, không dùng cho nội dung) |
+| Label | 14 / 20 | 500 (chip, nút chữ, nhãn ô nhập) |
+| Overline | 14 / 20 | 500, viết hoa (nhãn phía trên tiêu đề / thẻ) |
+| Caption | 12 / 16 | 500 (chỉ nhãn tab chưa chọn và mốc giờ phụ) |
+| Caption strong | 12 / 16 | 700 (nhãn tab đang chọn) |
 
 ## Khoảng cách, bo góc, elevation
 - Spacing: 4 · 8 · 12 · 16 · 24 · 32 dp; lề màn hình 16 dp.
@@ -140,7 +146,7 @@ Màu động cơ (nền / chữ):
 - Tên món xuống tối đa 2 dòng; chỉ khi vượt 2 dòng mới cắt bằng "…" (thẻ Danh sách mong muốn).
 
 ## Danh sách màn hình
-01 Onboarding · 02 Trang chủ (Home Dashboard) · 03 Ghi khoản mua – Bước 1/2 (Add Purchase) ·
+00a Đăng nhập · 00b Đăng ký · 01 Onboarding · 02 Trang chủ (Home Dashboard) · 03 Ghi khoản mua – Bước 1/2 (Add Purchase) ·
 04 Ghi khoản mua – Bước 2/2 (Purchase Reason) · 05 Chi tiết khoản mua (Purchase Detail) ·
 06 Lịch sử (Purchase History) · 07 Mô hình (Buying Patterns) · 08 Góc nhìn (Personal Insights) ·
 09 Chiêm nghiệm tháng (Monthly Reflection) · 10 Cá nhân (Profile & Settings)
@@ -155,3 +161,6 @@ Màu động cơ (nền / chữ):
   quy tắc giọng văn (không khuyên bảo, không ảnh trang trí); nút chính ghim đáy 56 dp; snackbar
   hoàn tác sau khi lưu; thẻ động cơ chỉ icon + tên; quy tắc khung trạng thái. Lý do xem
   [`ai/ai-design-log.md`](../ai/ai-design-log.md) và [`design-decisions.md`](design-decisions.md).
+- 12/10/2026 (sau Flow 6 và vòng phản biện PB): đồng bộ thang chữ với Figma (Label 14 sp, thêm Overline,
+  Caption, Caption strong; đã sửa 33 lớp chữ 12 → 14 sp); thêm token surface-container, error-container,
+  outline-strong (PB-5); thêm màn 00a Đăng nhập, 00b Đăng ký (Flow 7); thống nhất mốc "sau 22h" với persona (PB-14).
