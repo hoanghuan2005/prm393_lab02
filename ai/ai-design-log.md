@@ -937,7 +937,7 @@ toàn bộ mấy này làm theo 360x800
 | 10 | Skip Confirmation | Dialog nằm trong canvas ngang, màn nền không phải 360 × 800 | Ràng buộc nền tảng | Chấp nhận nội dung, dựng lại overlay (QĐ 9) |
 | 11 | Add Purchase prefilled | Nhãn "Từ Mong muốn" + ghi chú "Động cơ ban đầu: Khuyến mãi (có thể chọn lại ở Bước 2/2)" | #6 Recognition | Chấp nhận, đổi thành banner "Điền sẵn từ Danh sách mong muốn" |
 
-**Chuyển sang Figma (làm tay / bằng Claude, không qua Stitch):** 3 component mới (Wishlist status chip, Wishlist item card có State Default/Pressed, Wishlist entry) và 2 icon (bookmark, archive); 19 khung Final UI (thêm 13c đã bỏ qua, 13d đã mua); 6 wireframe; sơ đồ Flow 6 ở trang 01; prototype 17 khung + overlay + chuyển cảnh đang lưu → đã mua.
+**Chuyển sang Figma (làm tay / bằng Claude, không qua Stitch):** 3 component mới (Wishlist status chip, Wishlist item card có State Default/Pressed, Wishlist entry) và 2 icon (bookmark, archive); 22 khung Final UI (thêm 13c đã bỏ qua, 13d đã mua, và 3 khung chi tiết theo dữ liệu: Áo khoác, Chuột công thái học, Bình giữ nhiệt); 6 wireframe; sơ đồ Flow 6 ở trang 01; prototype 17 khung + overlay + chuyển cảnh đang lưu → đã mua.
 
 **Điều rút ra:** Stitch tự thêm cơ chế "hạ nhiệt" dù không được yêu cầu. Khi đưa vào sản phẩm phải lọc lại theo DESIGN.md, giống bài học ở R2 (Stitch luôn sinh câu khuyên bảo mới).
 

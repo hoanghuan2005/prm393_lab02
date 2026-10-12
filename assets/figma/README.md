@@ -31,3 +31,17 @@ File Figma được thiết kế đúng theo chuẩn 6 trang bắt buộc của 
 | `figma-08-personal-insights.png`| Màn hình Góc nhìn sâu sắc AI |
 | `figma-09-monthly-reflection.png`| Màn hình Báo cáo chiêm nghiệm tháng |
 | `figma-10-profile-settings.png` | Màn hình Cài đặt & Tùy chọn nhắc nhở |
+
+## 4. Flow 6 – Smart Wishlist (export PNG 2x từ trang `03 Final UI`)
+
+| Tên tệp ảnh | Khung Figma |
+| :--- | :--- |
+| `11-wishlist-overview.png` | 11 Danh sách mong muốn – bộ lọc Đang cân nhắc (2) |
+| `12a-add-item-error.png` | 12a Thêm món mong muốn – lỗi tên trống và chưa chọn động cơ |
+| `13-wishlist-detail.png` | 13 Chi tiết món mong muốn – Bàn phím cơ, Đang cân nhắc |
+| `13-wishlist-detail-ao-khoac.png` | 13 Chi tiết – Áo khoác, Đang cân nhắc |
+| `13-wishlist-detail-chuot-cong-thai-hoc.png` | 13 Chi tiết – Chuột công thái học, Đang cân nhắc (vừa thêm) |
+| `13a-skip-dialog.png` | 13a Dialog "Không mua món này nữa?" |
+| `13c-wishlist-detail-skipped.png` | 13c Chi tiết – Bàn phím cơ, đã bỏ qua |
+| `13d-wishlist-detail-purchased.png` | 13d Chi tiết – Bàn phím cơ, đã mua |
+| `13d-wishlist-detail-purchased-binh-giu-nhiet.png` | 13d Chi tiết – Bình giữ nhiệt, đã mua |
