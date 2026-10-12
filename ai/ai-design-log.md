@@ -8,6 +8,7 @@
 |---|---|
 | Claude (claude.ai, Cowork) | Soạn nháp persona, user flow, DESIGN.md, prompt Stitch; giao diện tham chiếu; soạn prompt tinh chỉnh R1–R3 và hỗ trợ đối chiếu ảnh khi nhận xét output Stitch (tôi kiểm tra lại và tự quyết định từng mục) |
 | Google Stitch | Sinh UI ban đầu và các vòng lặp |
+| Claude (claude.ai + Figma connector), 12/10/2026 | Phản biện ảnh Stitch của Flow 6; dựng Flow 6 trực tiếp trong file Figma (component, Final UI, wireframe, sơ đồ user flow, prototype) theo master prompt của tôi; soạn nội dung tài liệu Flow 6. Tôi kiểm tra lại từng màn và tự quyết định giữ / sửa / bỏ. |
 
 ---
 
@@ -610,6 +611,47 @@ Constraints (same as before): Android 360x800 dp, Material 3, light theme. All t
   - Hai khung lỗi và chưa đủ dữ liệu của Mô hình trình bày khác nhau (một có thẻ bao, một không), nút chính không ghim đáy, và khung ngắn hơn 800dp.
 
 **Hướng xử lý:** Chấp nhận 6 khung trạng thái làm cơ sở cho Final UI và Prototype. Phần còn thiếu sửa trong Figma: chip "Quảng cáo (0)" ở trạng thái được chọn và bỏ câu phụ có chữ "động lực"; làm mờ lưới động cơ khi đang lưu; dùng chung component thẻ "Tổng quan tuần" cho Trang chủ và Trang chủ – trống; dùng chung component trạng thái lỗi/trống cho Mô hình, ghim nút ở đáy và đặt mọi khung 360 × 800.
+
+---
+
+## F6 — Flow 6: Danh sách mong muốn (Smart Wishlist)
+**Ngày:** [CẦN ĐIỀN – ngày chạy Stitch]
+**Công cụ:** Google Stitch (project https://stitch.withgoogle.com/projects/1668611817022706714), sau đó Claude + Figma connector để dựng trong Figma
+**Màn hình Stitch sinh:** Home – Wishlist Entry, Wishlist Overview, Add Wishlist Item, Wishlist Detail, Wishlist Empty, Add Item Error, Wishlist Saved, Wishlist Skipped, Skip Confirmation Dialog, Add Purchase with Prefilled Wishlist Data
+
+**Prompt Stitch (nguyên văn):**
+
+```
+[CẦN ĐIỀN – dán nguyên văn từng prompt đã dùng trong Stitch cho Flow 6, mỗi lần tinh chỉnh một khối riêng]
+```
+
+**Kết quả:**
+
+| Nội dung | Ảnh |
+|---|---|
+| Trang chủ, Overview, Add Item, Detail (bản có 48h) | ![](../assets/stitch/flow6/f6-stitch-overview-add-detail.png) |
+| Add Purchase điền sẵn, Bỏ qua, Đã lưu | ![](../assets/stitch/flow6/f6-stitch-prefill-skipped-saved.png) |
+| Add Item lỗi, Dialog bỏ qua, Bỏ qua trống | ![](../assets/stitch/flow6/f6-stitch-error-dialog-empty.png) |
+
+**Phản biện bằng Claude** (đối chiếu ảnh với 10 heuristic của Nielsen, accessibility, persona Nam):
+
+| # | Màn hình | Phát hiện | Heuristic / tiêu chí | Quyết định |
+|---|---|---|---|---|
+| 1 | Wishlist Detail | Chip "Khoảng lặng 48h", "Đang tĩnh tâm"; ép chờ trước khi mua | #3 User control; persona không phán xét | Từ chối (QĐ 6) |
+| 2 | Wishlist Overview | "Còn 48h suy ngẫm", "Đã hạ nhiệt 40%" + đồng hồ cát: số liệu ứng dụng không đo được, gây áp lực | #2 Match real world; #8 | Từ chối (QĐ 6) |
+| 3 | Wishlist Detail | Thẻ "Nhật ký tâm lý · Bước 2/3" bắt buộc qua nhiều giai đoạn | #8 Minimalist; phạm vi | Từ chối (QĐ 7) |
+| 4 | Home – Wishlist Entry | Trang chủ bị thiết kế lại; nhãn "Danh …" bị cắt; thẻ "Khoảng lặng 24 giờ" mang giọng khuyên bảo | #4 Consistency; DESIGN.md tone | Sửa (QĐ 8) |
+| 5 | Add Wishlist Item | Báo lỗi "Vui lòng nhập tên món đồ để lưu" trong khi ô tên đã có "Bàn phím cơ không dây" | #9 Recover from errors; #1 | Sửa: tách khung lỗi riêng (12a), form hợp lệ không báo lỗi |
+| 6 | Add Wishlist Item | Thẻ "Không gian trì hoãn lành mạnh" và dòng "Món đồ chỉ thực sự đáng mua khi nó vẫn hữu ích sau 30 ngày." | DESIGN.md: không khuyên bảo | Từ chối |
+| 7 | Wishlist Overview | Thẻ món và khung "Chưa có món nào trong danh mục này" hiện cùng lúc | #1 Visibility of status | Sửa: empty state chỉ khi bộ lọc trống |
+| 8 | Wishlist Overview / Empty | Chip "Bỏ qua" bị cắt ở mép phải; số lượng giữa các khung không khớp (Đã mua 3 / 0) | Accessibility; #4 | Sửa (QĐ 10), thống nhất dữ liệu mẫu |
+| 9 | Saved / Skipped | Snackbar bị cắt chữ ("Đã lưu món vào danh sách mon…"), nhãn hành động viết hoa "ĐÓNG" | #1; tone | Sửa: message 2 dòng, bỏ "Đóng", giữ "Hoàn tác" |
+| 10 | Skip Confirmation | Dialog nằm trong canvas ngang, màn nền không phải 360 × 800 | Ràng buộc nền tảng | Chấp nhận nội dung, dựng lại overlay (QĐ 9) |
+| 11 | Add Purchase prefilled | Nhãn "Từ Mong muốn" + ghi chú "Động cơ ban đầu: Khuyến mãi (có thể chọn lại ở Bước 2/2)" | #6 Recognition | Chấp nhận, đổi thành banner "Điền sẵn từ Danh sách mong muốn" |
+
+**Chuyển sang Figma (làm tay / bằng Claude, không qua Stitch):** 3 component mới (Wishlist status chip, Wishlist item card có State Default/Pressed, Wishlist entry) và 2 icon (bookmark, archive); 19 khung Final UI (thêm 13c đã bỏ qua, 13d đã mua); 6 wireframe; sơ đồ Flow 6 ở trang 01; prototype 17 khung + overlay + chuyển cảnh đang lưu → đã mua.
+
+**Điều rút ra:** Stitch tự thêm cơ chế "hạ nhiệt" dù không được yêu cầu. Khi đưa vào sản phẩm phải lọc lại theo DESIGN.md, giống bài học ở R2 (Stitch luôn sinh câu khuyên bảo mới).
 
 ---
 

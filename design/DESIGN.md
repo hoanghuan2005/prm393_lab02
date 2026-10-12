@@ -31,6 +31,10 @@ Android, khung 360 × 800 dp, Material Design 3, light theme.
 | Lý do mua | "động cơ" | "động lực", "lý do kích hoạt" |
 | Một lần mua | "khoản mua" | "giao dịch", "khoản chi" (trên giao diện) |
 | Xưng hô | "bạn" | gọi tên người dùng, ngôi thứ ba |
+| Danh sách món muốn mua | "Danh sách mong muốn" | "Wishlist", "giỏ hàng" (trên giao diện) |
+| Một mục trong danh sách | "món" | "sản phẩm", "đơn hàng" |
+| Không mua món nữa | "Bỏ qua" / "Không mua nữa" | "Xóa", "Hủy món" |
+| Trạng thái | "Đang cân nhắc" · "Đã mua" · "Bỏ qua" | "Chờ", "Hạ nhiệt", "Đang tĩnh tâm" |
 
 - **8 động cơ** (đúng tên, đúng thứ tự): Nhu cầu, Mong muốn, Khuyến mãi, Ảnh hưởng MXH, Quảng cáo, Cảm xúc, Tiện lợi, Khác. Không dùng "Giảm giá". Mỗi khoản mua chỉ có **một** chip động cơ, không thêm nhãn phụ.
 - **Tiêu đề app bar** (chỉ viết hoa chữ đầu): Trang chủ · Ghi khoản mua (Bước 1/2, Bước 2/2) · Chi tiết khoản mua · Lịch sử · Mô hình · Góc nhìn · Chiêm nghiệm tháng · Cá nhân.
@@ -60,6 +64,17 @@ Hôm nay là Chủ nhật 11/10/2026 (tuần 41, từ 05/10 đến 11/10).
 - **Mô hình, tháng 10:** 15 khoản — Khuyến mãi 5 (33%), Cảm xúc 4 (27%), Tiện lợi 2 (13%), Nhu cầu 2 (13%), Mong muốn 1 (7%), Ảnh hưởng MXH 1 (7%), Quảng cáo 0, Khác 0.
 - **Khung giờ:** Sáng 05–11h (2) · Trưa 11–14h (3) · Chiều 14–18h (2) · Tối 18–05h (8).
 - **Góc nhìn (3 câu):** "5 trong 15 khoản tháng này gắn với Khuyến mãi." · "8 trong 15 khoản được ghi sau 18:00." · "Cả 4 khoản Cảm xúc đều được ghi sau 22:00."
+
+### Dữ liệu mẫu – Danh sách mong muốn (Flow 6)
+
+| Món | Giá dự kiến | Động cơ | Ngày thêm | Ghi chú | Trạng thái |
+|---|---|---|---|---|---|
+| Bàn phím cơ | 650.000 ₫ | Khuyến mãi | 09/10 | "Thấy review trên TikTok, đang có giảm giá." | Đang cân nhắc → Bỏ qua (11c) hoặc Đã mua (11e) |
+| Áo khoác | 420.000 ₫ | Mong muốn | 10/10 | "Không chắc có thực sự cần hay không." | Đang cân nhắc |
+| Chuột công thái học | 520.000 ₫ | Tiện lợi | 11/10 | "Cổ tay hay mỏi khi code buổi tối." | Món thêm mới ở Flow 6 |
+| Bình giữ nhiệt | 180.000 ₫ | Nhu cầu | 05/10 (đã mua) | "Bình cũ bị nứt nắp." | Đã mua |
+
+Giá dự kiến không phải tiền đã chi: không cộng vào tổng tuần, không có câu "tiết kiệm được X đồng".
 
 ## Màu
 | Token | Giá trị | Dùng cho |
@@ -119,12 +134,17 @@ Màu động cơ (nền / chữ):
 - Mỗi màn hình có dữ liệu cần thiết kế đủ trạng thái: loading, trống, lỗi. Mỗi trạng thái là
   một khung riêng, giống hệt màn gốc (cùng app bar, thẻ, thứ tự, tab đang chọn), chỉ khác phần
   thay đổi; trong Figma dùng chung component.
+- Danh sách mong muốn không có thời gian chờ bắt buộc, đồng hồ đếm ngược hay nhật ký nhiều bước; nút "Ghi khoản mua" không bao giờ bị khóa vì thời gian.
+- Trạng thái món luôn là chip icon + chữ (Đang cân nhắc: bookmark · Đã mua: check-circle · Bỏ qua: archive).
+- "Không mua nữa" không phải hành động phá hủy: dialog dùng nút primary (không dùng màu error), và có snackbar hoàn tác 5 giây.
+- Tên món xuống tối đa 2 dòng; chỉ khi vượt 2 dòng mới cắt bằng "…" (thẻ Danh sách mong muốn).
 
 ## Danh sách màn hình
 01 Onboarding · 02 Trang chủ (Home Dashboard) · 03 Ghi khoản mua – Bước 1/2 (Add Purchase) ·
 04 Ghi khoản mua – Bước 2/2 (Purchase Reason) · 05 Chi tiết khoản mua (Purchase Detail) ·
 06 Lịch sử (Purchase History) · 07 Mô hình (Buying Patterns) · 08 Góc nhìn (Personal Insights) ·
 09 Chiêm nghiệm tháng (Monthly Reflection) · 10 Cá nhân (Profile & Settings)
+· 11 Danh sách mong muốn (Wishlist Overview) · 12 Thêm món mong muốn (Add Wishlist Item) · 13 Chi tiết món mong muốn (Wishlist Detail)
 
 **Khung trạng thái:** 02 trống · 02′ sau khi lưu · 02′ ngoại tuyến · 03 lỗi số tiền · 04 đang lưu ·
 05 dialog xóa · 06 không có kết quả · 06′ sau khi xóa · 07 đang tải · 07 lỗi · 07 chưa đủ dữ liệu.

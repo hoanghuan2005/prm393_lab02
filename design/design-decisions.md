@@ -73,6 +73,35 @@ Trong quá trình đồng sáng tạo với AI (Google Stitch & LLM Critique), n
 
 ---
 
+| # | Đề xuất của AI (Stitch, Flow 6) | Quyết định | Căn cứ chính |
+|---|---|---|---|
+| 6 | "Khoảng lặng 48h", "Còn 48h suy ngẫm", "Đã hạ nhiệt 40%", đồng hồ cát | **Từ chối** | Nielsen #3 (quyền kiểm soát); persona sợ bị phán xét; thông điệp "Hiểu trước khi thay đổi" |
+| 7 | "Nhật ký tâm lý" 3 bước (Bị cuốn hút → Tạm hoãn → Quyết định) ở màn chi tiết | **Từ chối** | Phạm vi lab; tăng ma sát, mâu thuẫn mục tiêu ghi nhanh; Nielsen #8 |
+| 8 | Stitch thiết kế lại Trang chủ quanh danh sách mong muốn, thêm thẻ trích dẫn "Khoảng lặng 24 giờ" | **Sửa** | Nielsen #4; một hành động chính mỗi màn; giữ Trang chủ và 5 tab của nhóm, chỉ thêm thẻ phụ |
+| 9 | Dialog "Không mua món này nữa?" | **Chấp nhận** (bổ sung hoàn tác, đổi kiểu nút) | Nielsen #3, #5; bỏ qua không phải xóa nên nút xác nhận dùng primary, không dùng màu error |
+| 10 | Bộ lọc trạng thái dạng chip cuộn ngang, chip cuối bị cắt ở 360 dp | **Sửa** | Accessibility (không cắt chữ, vùng chạm 48 dp); chip xuống hàng, giữ số lượng trong nhãn |
+
+### Quyết định 6 — TỪ CHỐI: thời gian chờ bắt buộc và chỉ số "hạ nhiệt"
+Stitch tự thêm chip "Khoảng lặng 48h", nhãn "Đang tĩnh tâm", dòng "Còn 48h suy ngẫm" và "Đã hạ nhiệt 40%". Các chi tiết này biến danh sách mong muốn thành công cụ ép người dùng ngừng mua. Điều đó trái Nielsen #3 (người dùng phải tự quyết định) và trái tông "không phán xét" trong DESIGN.md. Ngoài ra "40%" là con số ứng dụng không có cách đo. Bản Figma bỏ toàn bộ: nút "Ghi khoản mua" luôn bấm được, chỉ còn ngày thêm ("2 ngày trước") làm thông tin trung lập.
+
+| Trước | Sau |
+|---|---|
+| ![](../assets/stitch/flow6/f6-stitch-overview-add-detail.png) | ![](../assets/figma/13-wishlist-detail.png) |
+
+### Quyết định 7 — TỪ CHỐI: nhật ký tâm lý nhiều bước
+Thẻ "Nhật ký tâm lý · Bước 2/3" buộc người dùng đi qua các giai đoạn trước khi quyết định. Nó thêm thao tác, nằm ngoài phạm vi và lặp lại chức năng của Chiêm nghiệm tháng (09). Ghi chú tự do ở 12/13 đã đủ để ghi lại cảm xúc.
+
+### Quyết định 8 — SỬA: không thiết kế lại Trang chủ
+Bản Stitch của Trang chủ có bố cục khác 02 hiện tại, nhãn "Danh …" bị cắt và thêm thẻ trích dẫn mang giọng khuyên bảo. Figma giữ nguyên 02 của nhóm, chỉ chèn component "Wishlist entry" (thẻ trắng, cao 64 dp, chevron) dưới Tổng quan tuần. Nút "Ghi khoản mua" vẫn là hành động chính duy nhất.
+
+### Quyết định 9 — CHẤP NHẬN: dialog xác nhận bỏ qua, bổ sung hoàn tác
+Giữ nguyên câu chữ của Stitch ("Không mua món này nữa?" / "Món đồ sẽ được chuyển vào danh sách Bỏ qua. Bạn có thể xem lại sau."). Có ba thay đổi: dựng lại thành overlay thật trên khung 360 × 800 (Stitch đặt trong canvas ngang), đổi icon và nền sang primary vì không phải hành động phá hủy, và sau khi xác nhận hiện snackbar "Đã chuyển “Bàn phím cơ” vào Bỏ qua · Hoàn tác" (5 giây).
+
+### Quyết định 10 — SỬA: bộ lọc không bị cắt ở 360 dp
+Ở 360 dp, ba chip "Đang cân nhắc (2)", "Đã mua (1)", "Bỏ qua (0)" rộng khoảng 410 dp, nên bản Stitch cắt mất chip cuối. Figma cho chip xuống hàng (wrap). Số lượng vẫn nằm trong nhãn để không cần nhìn màu cũng biết đang lọc gì.
+
+---
+
 ## 2. Bằng chứng kiểm tra khả năng tiếp cận (Accessibility & Usability Verification)
 
 ### 2.1. Kiểm tra tỷ lệ tương phản màu sắc (WCAG 2.1 Contrast Check)
@@ -86,6 +115,11 @@ Tất cả các cặp màu chính trong ứng dụng đều được kiểm tra 
 | Chữ trắng trên Nút CTA Primary (`color-primary-500`) | `#FFFFFF` vs `#2D6A4F` | **7.8 : 1** | **AAA (Vượt chuẩn)** |
 | Điểm nhấn hổ phách (`color-secondary-500`) trên Nền trắng | `#DDA15E` vs `#FFFFFF` | **4.6 : 1** | **AA (Đạt chuẩn)** |
 | Nhãn báo lỗi (`color-semantic-error`) trên Nền Card | `#C53030` vs `#FFFFFF` | **6.2 : 1** | **AAA (Vượt chuẩn)** |
+| Chữ "Đang cân nhắc" trên chip trạng thái | `#2E4A9E` / `#E3E8F7` | 6.62 : 1 | Đạt (ngưỡng 4.5 : 1) |
+| Chữ "Đã mua" trên chip trạng thái | `#1A2320` / `#E8F0EB` | 13.86 : 1 | Đạt (ngưỡng 4.5 : 1) |
+| Chữ "Bỏ qua" (chip viền) trên thẻ trắng | `#545E59` / `#FFFFFF` | 6.73 : 1 | Đạt (ngưỡng 4.5 : 1) |
+| Chữ phụ trên thẻ intro (surface-container) | `#545E59` / `#E8F0EB` | 5.80 : 1 | Đạt (ngưỡng 4.5 : 1) |
+| Viền chip "Bỏ qua" | `#8A918A` / `#FFFFFF` | 3.23 : 1 | Đạt (ngưỡng 3 : 1) |
 
 > *Kết luận:* 100% các thành phần văn bản nội dung và điều khiển giao diện đều đạt chuẩn WCAG AA (≥ 4.5:1 cho body text và ≥ 3.0:1 cho UI components).
 
@@ -129,3 +163,13 @@ Hệ thống layout đã được kiểm thử trên hai kích thước màn hì
 | **Lưới Reason Cards** | 2 cột co giãn linh hoạt (`crossAxisSpacing: 12dp`) | 2 cột với khoảng cách thoải mái (`crossAxisSpacing: 16dp`) |
 | **Bàn phím hiển thị** | Bọc toàn bộ form trong `SingleChildScrollView` tránh lỗi RenderFlex Overflow | Hiển thị vừa vặn mà không cần cuộn trang |
 | **Biểu đồ Patterns** | Tự động tính toán đường kính Donut Chart theo chiều rộng khả dụng (`width * 0.65`) | Donut Chart hiển thị cố định đường kính 240 dp sắc nét |
+
+---
+
+### 2.6. Checklist accessibility – Flow 6
+
+- Phản hồi chạm: thẻ món có variant Pressed (nền surface-container), đã gắn "While pressing" trong prototype.
+- Vùng chạm: thẻ món, thẻ lối vào Trang chủ (64 dp), chip lọc (48 dp), nút Sửa trên app bar (48 × 48), nút "Không mua nữa" (48 dp) — đạt.
+- Không chỉ dùng màu: trạng thái món = icon + chữ; động cơ = icon + chữ; chip lọc đang chọn có dấu tích — đạt.
+- 360 dp và 412 dp: đã kiểm tra 11b, 12b, 13 ở 412 dp trên bản clone trong Figma — không vỡ bố cục, không cắt chữ. Tên dài "Bàn phím cơ không dây Bluetooth hỗ trợ kết nối nhiều thiết bị" xuống 2 dòng rồi "…".
+- Chữ nội dung ≥ 14 sp; chỉ ngày thêm và nhãn phụ dùng 12 sp.

@@ -18,6 +18,9 @@
 8. [Screen 08: Personal Insights Screen](#screen-08-personal-insights-screen)
 9. [Screen 09: Monthly Reflection Screen](#screen-09-monthly-reflection-screen)
 10. [Screen 10: Profile & Settings Screen](#screen-10-profile--settings-screen)
+11. [Screen 11: Wishlist Overview](#screen-11-wishlist-overview)
+12. [Screen 12: Add Wishlist Item](#screen-12-add-wishlist-item)
+13. [Screen 13: Wishlist Detail](#screen-13-wishlist-detail)
 
 ---
 
@@ -178,3 +181,46 @@
   * *Toggle Switches:* Bật (Sage Green) / Tắt (Muted Grey).
   * *Syncing:* Icon xoay tròn thể hiện trạng thái đồng bộ dữ liệu.
 * **Ràng buộc tương thích:** Thiết kế danh sách chuẩn `ListTile` của hệ thống, tuân thủ nghiêm ngặt chiều cao tối thiểu 56dp cho mỗi mục menu để dễ dàng thao tác bằng một tay.
+
+---
+
+### Screen 11: Wishlist Overview
+* **Mục đích:** Xem những món đang muốn mua và lý do muốn mua, lọc theo trạng thái. Thuộc Flow 6.
+* **Bố cục & Phân cấp thị giác:**
+  * **App Bar (Nested):** nút Back, tiêu đề "Danh sách mong muốn".
+  * **Intro:** thẻ nền surface-container, icon bookmark: "Ghi lại món bạn muốn mua và lý do. Bạn tự quyết định khi nào mua, bỏ qua hay cân nhắc thêm."
+  * **Bộ lọc:** 3 Filter chip "Đang cân nhắc (n)", "Đã mua (n)", "Bỏ qua (n)"; chip đang chọn có nền + dấu tích. Ở 360 dp chip xuống hàng (wrap) thay vì bị cắt.
+  * **Danh sách:** Wishlist item card (tên, giá dự kiến, chip động cơ, chip trạng thái, ghi chú, ngày thêm).
+  * **Thanh đáy:** nút chính "Thêm món" (icon +).
+* **Components:** App bar/Nested, Filter chip, Wishlist item card (Status × State Default/Pressed), Motive chip, Wishlist status chip, Empty state (Filter empty), Snackbar, Button/Primary.
+* **Trạng thái:** Có dữ liệu (11) · Trống hoàn toàn (11a: "Bạn chưa có món nào đang cân nhắc." + "Thêm món", ẩn thanh đáy) · Bộ lọc trống (11a: "Chưa có món nào trong danh mục này." + "Xem đang cân nhắc") · Đã lưu (11b) · Đã bỏ qua + Hoàn tác (11c) · Sau hoàn tác (11d) · Đã mua (11e). Không bao giờ hiển thị empty state cùng thẻ của bộ lọc khác.
+* **Ràng buộc:** số trên chip phải khớp số thẻ; không có nút mua hàng, giỏ hàng hay đồng hồ chờ.
+
+---
+
+### Screen 12: Add Wishlist Item
+* **Mục đích:** Lưu một món muốn mua kèm động cơ trong dưới 20 giây. Dùng lại cho "Sửa món mong muốn" (12c).
+* **Bố cục & Phân cấp thị giác:**
+  * **App Bar (Nested):** Back, "Thêm món mong muốn" (12c: "Sửa món mong muốn").
+  * **Thẻ thông tin:** Text field "Tên món đồ (bắt buộc)" (icon túi), Text field "Giá dự kiến (tùy chọn)" (icon hóa đơn), giá hiển thị "650.000 ₫".
+  * **Câu hỏi:** "Vì sao bạn muốn mua món này?" + "Chọn một lý do chính. Không có lựa chọn đúng hay sai."
+  * **Motive grid:** đúng 8 động cơ, 2 cột × 4 hàng, giống màn 04.
+  * **Ghi chú thêm (tùy chọn).**
+  * **Thanh đáy:** nút chính "Lưu món" (12c: "Lưu thay đổi").
+* **Components:** App bar/Nested, Text field (Default/Error), Motive grid, Button/Primary.
+* **Trạng thái:** Trống (12) · Lỗi (12a) · Đã điền hợp lệ (12b) · Sửa (12c).
+* **Validation:** tên trống hoặc chỉ khoảng trắng → "Vui lòng nhập tên món đồ để lưu." · giá đã nhập nhưng ≤ 0 → "Vui lòng nhập số tiền lớn hơn 0." · chưa chọn động cơ → "Vui lòng chọn lý do bạn muốn mua món này." Lỗi hiện ngay dưới trường, kèm icon; form hợp lệ không hiện lỗi.
+* **Ràng buộc:** nội dung cuộn, nút "Lưu món" luôn hiện trên bàn phím.
+
+---
+
+### Screen 13: Wishlist Detail
+* **Mục đích:** Nhìn lại lý do muốn mua và tự quyết định.
+* **Bố cục & Phân cấp thị giác:**
+  * **App Bar (Nested):** Back, "Chi tiết món mong muốn", icon Sửa (48 dp).
+  * **Thẻ tóm tắt:** "MÓN ĐANG CÂN NHẮC", tên món, giá dự kiến (lớn) + "Giá dự kiến · chưa tính vào chi tiêu", chip trạng thái, khối "Lý do muốn mua" với chip động cơ.
+  * **Thẻ chi tiết:** "Ngày thêm vào danh sách" (Thứ Sáu, 09/10/2026 · 2 ngày trước), "Ghi chú của bạn".
+  * **Thanh đáy:** nút chính "Ghi khoản mua"; nút văn bản "Không mua nữa".
+* **Components:** App bar/Nested, Motive chip, Wishlist status chip, Button/Primary, Button/Text, Dialog, Snackbar.
+* **Trạng thái:** Đang cân nhắc (13) · Dialog xác nhận bỏ qua (13a, overlay) · Sau khi sửa (13b, snackbar "Đã cập nhật “Bàn phím cơ”") · Đã bỏ qua (13c: overline "MÓN ĐÃ BỎ QUA", chip Bỏ qua, nút chính duy nhất "Đưa về Đang cân nhắc") · Đã mua (13d: overline "MÓN ĐÃ MUA", chip Đã mua, caption "Đã ghi khoản mua 650.000 ₫ vào Lịch sử", ngày mua; chỉ xem — ẩn nút đáy và nút Sửa).
+* **Ràng buộc:** không có đếm ngược 48h/72h, không có nhật ký tâm lý bắt buộc, không khóa nút vì thời gian.

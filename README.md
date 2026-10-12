@@ -80,9 +80,15 @@ prm393_lab02/
 9. **09. Monthly Reflection Screen:** Báo cáo chiêm nghiệm định kỳ hàng tháng, tự chấm điểm thỏa mãn (1–5 sao), đặt mục tiêu tháng mới.
 10. **10. Profile & Settings Screen:** Tùy chỉnh thông báo nhắc nhở nhẹ nhàng (Daily Mindful Nudges), bảo mật dữ liệu, xuất file.
 
+| # | Màn hình | Mục đích |
+|---|---|---|
+| 11 | Danh sách mong muốn | Món muốn mua theo trạng thái Đang cân nhắc / Đã mua / Bỏ qua |
+| 12 | Thêm món mong muốn | Tên, giá dự kiến, 1 trong 8 động cơ, ghi chú (dùng lại để sửa) |
+| 13 | Chi tiết món mong muốn | Ghi khoản mua, Không mua nữa (có xác nhận và hoàn tác); biến thể đã bỏ qua / đã mua |
+
 ---
 
-## 5. Ba luồng tương tác người dùng (Three User Flows)
+## 5. Sáu luồng tương tác người dùng (Six User Flows)
 
 * **Flow 1 – Ghi nhận giao dịch và động cơ (Record a Purchase):**  
   `Home Dashboard` → `Add Purchase (Step 1)` → `Purchase Reason (Step 2)` → `Purchase Detail (Optional Note)` → `Lưu thành công` → `Cập nhật Home`.  
@@ -91,6 +97,7 @@ prm393_lab02/
   `Home Dashboard` → `Tab Buying Patterns (Xem biểu đồ tâm lý)` → `Tab Personal Insights (Đọc gợi ý AI)` → `Mở Monthly Reflection` → `Tự đánh giá & Đặt cam kết`.
 * **Flow 3 – Xử lý lỗi & Phục hồi ngoại tuyến (Error & Recovery):**  
   `Add Purchase` → `Nhập lỗi/Số tiền 0đ` → `Inline Error & Auto-focus sửa lỗi` → `Lưu khi mất mạng` → `Tự động lưu Offline Local Draft & Hiện thông báo đồng bộ an toàn`.
+- **Flow 6 – Danh sách mong muốn:** 02 → 11 → 12 (lỗi → sửa) → 11b → 13 → mua (03 → 04 → 11e) / bỏ qua (dialog → 11c → hoàn tác 11d) / tiếp tục cân nhắc.
 
 ---
 
@@ -105,6 +112,12 @@ prm393_lab02/
   * `04 Design System` (Variables, Styles, Tokens)
   * `05 Components` (9 Component sets with states & Auto Layout)
   * `06 Prototype` (Interactive flows, dialog overlays, loading-to-result transitions)
+* **Flow 6 – Smart Wishlist (Figma):**
+  * [01 User Flow – Flow 6](https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=153-2)
+  * [02 Wireframe – Flow 6](https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=152-160)
+  * [03 Final UI – Flow 6](https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=149-2536)
+  * [05 Components – Flow 6](https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=148-455)
+  * [06 Prototype – Flow 6 (starting point)](https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=156-2259)
 
 ---
 
@@ -117,7 +130,7 @@ prm393_lab02/
 | **Vòng lặp AI & Phản biện UX** | **15** | [`ai/ai-design-log.md`](ai/ai-design-log.md) (≥5 lỗi UX chỉ ra theo Nielsen; 3 vòng lặp có mục tiêu riêng và Before/After). |
 | **Thiết kế UI/UX cuối cùng** | **20** | [`design/screen-spec.md`](design/screen-spec.md) (10 màn hình hoàn chỉnh, phân cấp thị giác rõ nét, đầy đủ states). |
 | **Design System & Components** | **15** | [`design/DESIGN.md`](design/DESIGN.md) (Đủ Color/Type/Spacing/Radius/Elevation tokens; 9 nhóm components). |
-| **Prototype tương tác** | **10** | Figma Page `06 Prototype` (Chạy trơn tru 3 flows, có dialog overlay, loading chuyển cảnh, không dead-end). |
+| **Prototype tương tác** | **10** | Figma Page `06 Prototype` (Chạy trơn tru 6 flows (mỗi flow có starting point), có dialog overlay, loading chuyển cảnh, không dead-end). |
 | **Flutter Handoff** | **10** | [`handoff/flutter-handoff.md`](handoff/flutter-handoff.md) (2 bảng ánh xạ Token→Flutter, Component→Widget; 6 phần/screen). |
 | **Tài liệu & AI Log** | **5** | Repository hoàn chỉnh, cấu trúc đúng chuẩn Slide 20, tài liệu Markdown chi tiết. |
 | **TỔNG ĐIỂM** | **100** | **Đáp ứng đầy đủ 100% yêu cầu đề bài và rubric Lab 2.** |

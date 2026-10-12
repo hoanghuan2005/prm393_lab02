@@ -19,6 +19,9 @@
 | 08 | Personal Insights | Tab 4 | Thanh điều hướng, 07 | Thẻ góc nhìn tổng hợp từ dữ liệu người dùng ghi |
 | 09 | Monthly Reflection | Lồng | 08 | Tự đánh giá mức hài lòng và đặt mục tiêu tháng |
 | 10 | Profile & Settings | Tab 5 | Thanh điều hướng, 09 | Nhắc nhở, xuất dữ liệu, cài đặt |
+| 11 | Wishlist Overview (Danh sách mong muốn) | Lồng | 02 (thẻ "Danh sách mong muốn") | Xem món muốn mua theo trạng thái Đang cân nhắc / Đã mua / Bỏ qua |
+| 12 | Add Wishlist Item (Thêm món mong muốn) | Lồng | 11 | Lưu một món muốn mua kèm 1 trong 8 động cơ; dùng lại để sửa món (12c) |
+| 13 | Wishlist Detail (Chi tiết món mong muốn) | Lồng | 11 | Xem lý do muốn mua; quyết định Ghi khoản mua / Không mua nữa / tiếp tục cân nhắc |
 
 Tám động cơ (dùng thống nhất trong toàn bộ dự án): Nhu cầu, Mong muốn, Khuyến mãi,
 Ảnh hưởng MXH, Quảng cáo, Cảm xúc, Tiện lợi, Khác.
@@ -38,9 +41,12 @@ flowchart TD
     S06 --> S05
     S07 --> S08
     S08 --> S09[09 Monthly Reflection]
+    S02 --> S11[11 Wishlist Overview] --> S12[12 Add Wishlist Item]
+    S11 --> S13[13 Wishlist Detail]
+    S13 --> S03
 ```
 
-Độ sâu tối đa: 2 lần chạm từ một tab (02 → 03 → 04).
+Độ sâu tối đa: 3 lần chạm từ một tab (02 → 11 → 13 → 03 khi mua từ danh sách mong muốn). Cấu trúc 5 tab giữ nguyên; Danh sách mong muốn là màn lồng, không thêm tab.
 
 ## 3. User flows
 
@@ -116,20 +122,79 @@ flowchart TD
     Snack -->|Hết 5 giây| Gone([Đã xóa khỏi lịch sử])
 ```
 
+### Flow 5 — Cá nhân & dữ liệu (cài nhắc nhở, xuất dữ liệu, xóa có xác nhận)
+- **Bắt đầu:** 10 Cá nhân (tab 5)
+- **Mục tiêu:** chủ động quản lý nhắc nhở và dữ liệu cá nhân
+- **Kết thúc:** nhắc nhở đã bật/tắt, có file CSV trong Tải xuống, hoặc dữ liệu đã xóa sau khi xác nhận
+
+```mermaid
+flowchart TD
+    Start([Mở tab Cá nhân]) --> S10[10 Cá nhân]
+    S10 --> Ch{Bạn muốn làm gì?}
+    Ch -->|Gạt công tắc nhắc nhở| Remind([Nhắc ghi khoản mua 21:00 / nhắc chiêm nghiệm hằng tháng đã bật hoặc tắt])
+    Ch -->|Xuất dữ liệu| Exp[10 Cá nhân – đã xuất dữ liệu: snackbar 'Đã lưu “whyibuy-10-2026.csv” vào Tải xuống']
+    Exp --> EndExp([Có file CSV trong Tải xuống])
+    Ch -->|Xóa toàn bộ dữ liệu| Dlg[10 Cá nhân – xác nhận xóa toàn bộ: 'Xóa toàn bộ dữ liệu?' · Không thể hoàn tác]
+    Dlg -->|Hủy| S10
+    Dlg -->|Xóa tất cả| Gone([Dữ liệu đã xóa, về 10 Cá nhân])
+```
+
+- **Happy path:** 10 → Xuất dữ liệu → 10 đã xuất dữ liệu → snackbar tự ẩn.
+- **Nhánh thay thế:** bật/tắt nhắc nhở ngay trên 10.
+- **Nhánh phòng ngừa lỗi:** xóa toàn bộ luôn qua dialog xác nhận, có "Hủy".
+
+### Flow 6 — Danh sách mong muốn: hiểu lý do trước khi mua (có nhánh lỗi, xác nhận và hoàn tác)
+- **Bắt đầu:** 02 Trang chủ, thẻ phụ "Danh sách mong muốn · 2 món đang cân nhắc"
+- **Mục tiêu:** lưu một món muốn mua kèm động cơ, rồi tự quyết định mua, bỏ qua hay tiếp tục cân nhắc. Không có thời gian chờ bắt buộc.
+- **Kết thúc:** món ở trạng thái Đã mua (khoản mua vào Lịch sử), Bỏ qua, hoặc vẫn Đang cân nhắc
+- **Ràng buộc dữ liệu:** lưu một món vào danh sách mong muốn KHÔNG tính vào chi tiêu, không đổi biểu đồ và Lịch sử. Món chỉ chuyển Đã mua khi khoản mua ở 04 được lưu thành công.
+
+```mermaid
+flowchart TD
+    Start([02 Trang chủ – lối vào Danh sách mong muốn]) --> S11[11 Danh sách mong muốn]
+    S11 -->|Lọc Bỏ qua 0| E11[11a Bỏ qua trống: 'Xem đang cân nhắc'] --> S11
+    S11 -->|Thêm món| S12[12 Thêm món mong muốn]
+    S12 --> V{Tên không trống và đã chọn động cơ? Giá nếu có thì lớn hơn 0?}
+    V -->|Không| Err[12a lỗi: thông báo ngay dưới trường gây lỗi] --> S12
+    V -->|Có| Saved[11b đã lưu: món mới ở đầu, snackbar 'Đã lưu món vào danh sách mong muốn.']
+    Saved -->|Chạm món| S13[13 Chi tiết món mong muốn]
+    S13 --> D{Bạn quyết định?}
+    D -->|Tiếp tục cân nhắc| Keep([Back về 11, món vẫn Đang cân nhắc])
+    D -->|Sửa| Edit[12c Sửa món mong muốn] --> Edited([13b sau khi sửa + snackbar 'Đã cập nhật …'])
+    D -->|Không mua nữa| Dlg[13a Dialog: 'Không mua món này nữa?']
+    Dlg -->|Hủy| S13
+    Dlg -->|Bỏ qua| Sk[11c đã bỏ qua + snackbar 'Đã chuyển … vào Bỏ qua · Hoàn tác']
+    Sk -->|Hoàn tác trong 5 giây| Undo([11d sau hoàn tác: món về Đang cân nhắc, không trùng lặp])
+    Sk -->|Hết 5 giây| Skipped([Món ở danh sách Bỏ qua])
+    Sk -->|Chạm món| S13c[13c Chi tiết – đã bỏ qua] -->|Đưa về Đang cân nhắc| Undo
+    D -->|Ghi khoản mua| P03[03 Ghi khoản mua – Bước 1/2, điền sẵn tên + giá]
+    P03 -->|Back, chưa lưu| S13
+    P03 --> P04[04 Ghi khoản mua – Bước 2/2, động cơ chọn sẵn, đổi được]
+    P04 --> Ld[04 đang lưu] --> Bought([11e đã mua: món chuyển Đã mua, khoản mua vào Lịch sử])
+    Bought -->|Chạm món| S13d([13d Chi tiết – đã mua: chỉ xem])
+```
+
+- **Happy path:** 02 → 11 → Thêm món → 12 (Chuột công thái học, 520.000 ₫, Tiện lợi) → Lưu → 11b → chạm "Bàn phím cơ" → 13 → Ghi khoản mua → 03 (650.000 ₫ điền sẵn) → 04 (Khuyến mãi chọn sẵn) → Lưu → 11e.
+- **Nhánh thay thế:** tiếp tục cân nhắc (Back từ 13); sửa ghi chú (12c → 13b); bỏ qua món (13a → 11c).
+- **Nhánh lỗi và phục hồi:** bấm Lưu khi chưa nhập tên và chưa chọn động cơ → 12a báo lỗi ngay dưới từng trường, sửa xong lưu được; bỏ qua nhầm → "Hoàn tác" trong 5 giây; thoát 03/04 trước khi lưu → món vẫn Đang cân nhắc.
+
 ## 4. Bảng ánh xạ flow → màn hình
 
-| Màn hình | Flow 1 | Flow 2 | Flow 3 |
-|---|:-:|:-:|:-:|
-| 01 Onboarding | ✓ (lần đầu) | | |
-| 02 Home Dashboard | ✓ bắt đầu, kết thúc | ✓ bắt đầu | |
-| 03 Add Purchase | ✓ bước 1, nhánh lỗi | ✓ từ trạng thái trống | |
-| 04 Purchase Reason | ✓ bước 2 | | |
-| 05 Purchase Detail | | | ✓ sửa, xóa |
-| 06 Purchase History | | | ✓ bắt đầu, kết thúc |
-| 07 Buying Patterns | | ✓ loading, lỗi, trống | |
-| 08 Personal Insights | | ✓ | |
-| 09 Monthly Reflection | | ✓ | |
-| 10 Profile & Settings | | ✓ bật nhắc | |
+| Màn hình | Flow 1 | Flow 2 | Flow 3 | Flow 5 | Flow 6 |
+|---|:-:|:-:|:-:|:-:|:-:|
+| 01 Onboarding | ✓ (lần đầu) | | | | |
+| 02 Home Dashboard | ✓ bắt đầu, kết thúc | ✓ bắt đầu | | | ✓ bắt đầu (thẻ Danh sách mong muốn) |
+| 03 Add Purchase | ✓ bước 1, nhánh lỗi | ✓ từ trạng thái trống | | | ✓ điền sẵn từ món mong muốn |
+| 04 Purchase Reason | ✓ bước 2 | | | | ✓ động cơ chọn sẵn, lưu → Đã mua |
+| 05 Purchase Detail | | | ✓ sửa, xóa | | |
+| 06 Purchase History | | | ✓ bắt đầu, kết thúc | | |
+| 07 Buying Patterns | | ✓ loading, lỗi, trống | | | |
+| 08 Personal Insights | | ✓ | | | |
+| 09 Monthly Reflection | | ✓ | | | |
+| 10 Profile & Settings | | ✓ bật nhắc | | ✓ bắt đầu, kết thúc | |
+| 11 Wishlist Overview | | | | | ✓ bắt đầu, kết thúc (11a–11e) |
+| 12 Add Wishlist Item | | | | | ✓ thêm, nhánh lỗi, sửa (12a–12c) |
+| 13 Wishlist Detail | | | | | ✓ quyết định, dialog bỏ qua (13a, 13b) |
 
 ## 5. Khung trạng thái theo flow
 
@@ -148,3 +213,20 @@ Mỗi trạng thái là một khung riêng, giống hệt màn gốc và chỉ k
 | Dialog xóa | 05 | Flow 3 | Nhấn icon xóa | "Hủy" → 05 · "Xóa" → 06 sau khi xóa |
 | Lịch sử – không có kết quả | 06 | Flow 3 | Bộ lọc không có khoản nào | "Xóa bộ lọc" |
 | Lịch sử sau khi xóa | 06 | Flow 3 | Xóa thành công | "Hoàn tác" trong 5 giây |
+| Cá nhân – đã xuất dữ liệu | 10 | Flow 5 | Bấm "Xuất dữ liệu" | Snackbar tự ẩn, về 10 |
+| Cá nhân – xác nhận xóa toàn bộ | 10 | Flow 5 | Bấm "Xóa toàn bộ dữ liệu" | "Hủy" → 10 · "Xóa tất cả" → 10 (đã xóa) |
+| Trang chủ – lối vào Danh sách mong muốn | 02 | Flow 6 | Có ≥ 1 món đang cân nhắc | Chạm thẻ → 11 |
+| Danh sách mong muốn – trống | 11 | Flow 6 | Chưa có món nào | "Thêm món" → 12 |
+| Danh sách mong muốn – Bỏ qua trống | 11 | Flow 6 | Lọc Bỏ qua khi chưa có món | "Xem đang cân nhắc" → 11 |
+| Danh sách mong muốn – đã lưu | 11 | Flow 6 | Lưu món thành công | Snackbar tự ẩn |
+| Danh sách mong muốn – đã bỏ qua | 11 | Flow 6 | Xác nhận Bỏ qua | "Hoàn tác" trong 5 giây |
+| Danh sách mong muốn – sau hoàn tác | 11 | Flow 6 | Bấm Hoàn tác | Món về Đang cân nhắc |
+| Danh sách mong muốn – đã mua | 11 | Flow 6 | Lưu khoản mua từ món | Kết thúc |
+| Thêm món mong muốn – lỗi | 12 | Flow 6 | Lưu khi tên trống / chưa chọn động cơ | Sửa trường lỗi rồi Lưu |
+| Thêm món mong muốn – đã điền | 12 | Flow 6 | Dữ liệu hợp lệ | "Lưu món" |
+| Sửa món mong muốn | 12 | Flow 6 | Nút Sửa ở 13 | "Lưu thay đổi" → 13b |
+| Chi tiết món – xác nhận bỏ qua | 13 | Flow 6 | "Không mua nữa" | "Hủy" → 13 · "Bỏ qua" → 11c |
+| Chi tiết món – sau khi sửa | 13 | Flow 6 | Lưu thay đổi | Snackbar tự ẩn |
+| Ghi khoản mua – Bước 1/2 và 2/2 (từ danh sách mong muốn) | 03, 04 | Flow 6 | "Ghi khoản mua" ở 13 | Lưu → 11e · Back → 13 |
+| Chi tiết món – đã bỏ qua | 13 | Flow 6 | Chạm món ở bộ lọc Bỏ qua | "Đưa về Đang cân nhắc" → 11d |
+| Chi tiết món – đã mua | 13 | Flow 6 | Chạm món ở bộ lọc Đã mua | Chỉ xem; Back → 11e |

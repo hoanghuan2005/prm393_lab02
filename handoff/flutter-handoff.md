@@ -34,6 +34,8 @@ Lập trình viên Flutter triển khai hệ thống token thông qua các class
 | `color-semantic-warning`| `#E07A5F` | `const Color(0xFFE07A5F)` | Màu đất nung cảnh báo chi tiêu cảm xúc |
 | `color-semantic-error`| `#C53030` | `const Color(0xFFC53030)` | Thông báo lỗi xác thực form, mất mạng |
 
+> Flow 6 không thêm token. Các token Flow 6 dùng: `color/primary` #2E4A9E, `color/primary-container` #E3E8F7, `color/surface` #FFFFFF, `color/surface-container` #E8F0EB, `color/on-surface` #1A2320, `color/on-surface-variant` #545E59, `color/outline` #8A918A, `color/error` #B3261E, 8 cặp `motive/*`, spacing 4/8/12/16, radius 16 (card) và full (chip), text style Subtitle 16/600, Body Small 14/400, Label 14/500, Caption 12/500, Elevation/1.
+
 ---
 
 ### 1.2. Typography Tokens Mapping
@@ -91,6 +93,13 @@ class AppRadius {
 | **Bottom Modal Sheet** | `showModalBottomSheet()` | Flutter Material 3 | `shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24)))`, `isScrollControlled: true` |
 | **Loading State** | `Shimmer.fromColors` | `shimmer: ^3.0.0` | `baseColor: AppColors.surfaceVariant`, `highlightColor: Colors.white` |
 | **Analytics Charts** | `PieChart` / `BarChart` | `fl_chart: ^0.68.0` | Donut chart có `sectionsSpace: 2`, `centerSpaceRadius: 48` |
+| **Wishlist item card** (Status: Đang cân nhắc / Đã mua / Bỏ qua × State: Default / Pressed) | `Card` + `InkWell` → `WishlistItemCard` | Flutter Material 3 | `padding: 16`, `borderRadius: 16`, `elevation: 1`; Pressed = `overlayColor` surface-container #E8F0EB; tên `maxLines: 2, overflow: TextOverflow.ellipsis`; ghi chú `maxLines: 2`; `Wrap(spacing: 8)` cho chip |
+| **Wishlist status chip** | `Container` + `Row(Icon, Text)` bọc `Semantics(label: 'Trạng thái: …')` | Flutter Material 3 | cao 24, `StadiumBorder`; Bỏ qua có `Border.all(outline)` |
+| **Wishlist entry** (Trang chủ) | `Card` + `ListTile` | Flutter Material 3 | `minVerticalPadding` đủ 64 dp; `leading` CircleAvatar 40 (primaryContainer); `trailing: Icon(Icons.chevron_right)` |
+| **Bộ lọc trạng thái** | `Wrap(spacing: 8, runSpacing: 8)` chứa 3 `FilterChip` | Flutter Material 3 | `showCheckmark: true`; nhãn kèm số lượng |
+| **Dialog bỏ qua** | `AlertDialog` qua `showDialog` | Flutter Material 3 | Nút "Hủy" `TextButton`, "Bỏ qua" `FilledButton` (màu primary, không phải error) |
+| **Snackbar hoàn tác** | `SnackBar` + `SnackBarAction('Hoàn tác')` | Flutter Material 3 | `duration: Duration(seconds: 5)`, `behavior: SnackBarBehavior.floating` |
+| **Giá dự kiến** | `TextFormField` | `intl` | `keyboardType: TextInputType.number`, `FilteringTextInputFormatter.digitsOnly` + formatter `NumberFormat('#,###', 'vi_VN')` → "650.000", hậu tố " ₫" |
 
 ---
 
@@ -183,3 +192,66 @@ Dưới đây là đặc tả chuẩn xác 6 phần cho các màn hình chủ ch
 6. **UI Constraints & Responsiveness:**
    * Kích thước bán kính biểu đồ Donut tính toán động theo bề rộng: `MediaQuery.of(context).size.width * 0.28`.
    * Đảm bảo không bị lỗi chữ chồng chéo khi người dùng bật chế độ chữ to trên hệ thống (Accessibility Font Scale 1.3x).
+
+---
+
+### Flow 6 — Mô hình dữ liệu và điều hướng
+
+```dart
+enum WishlistStatus { pending, purchased, skipped } // Đang cân nhắc / Đã mua / Bỏ qua
+
+class WishlistItem {
+  final String id;
+  final String name;            // bắt buộc, trim() khác rỗng, tối đa 60 ký tự
+  final int? estimatedPrice;    // VND, null = chưa biết; nếu có thì > 0
+  final Motive motive;          // 1 trong 8 động cơ hiện có (dùng lại enum Motive)
+  final String? note;           // tối đa 200 ký tự
+  final DateTime createdAt;
+  final WishlistStatus status;
+  final String? linkedPurchaseId; // gán khi khoản mua lưu thành công
+}
+```
+
+Routes: `/wishlist` (11), `/wishlist/add` (12), `/wishlist/:id` (13), `/wishlist/:id/edit` (12c).
+Mua từ món: `Navigator.pushNamed('/add-purchase', arguments: PurchaseDraft(name, amount: estimatedPrice, motive, fromWishlistId: id))`. Chỉ khi route trả về `Purchase` đã lưu mới gọi `markPurchased(id, purchase.id)`. Pop trả về `null` thì không đổi gì.
+
+Lưu `WishlistItem` không được ghi vào bảng `purchases`, không đổi tổng tuần và biểu đồ Mô hình.
+
+---
+
+### Màn hình: 11. Wishlist Overview
+
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Danh sách mong muốn") → `body: CustomScrollView` padding ngang 16, khoảng cách khối 12: thẻ Intro → `Wrap` 3 `FilterChip` → `SliverList` các `WishlistItemCard` (gap 12). `bottomNavigationBar`: `Padding(8, 16)` chứa `FilledButton.icon(+ "Thêm món")` cao 56. Không có `NavigationBar` (màn lồng).
+2. **Components:** App bar/Nested, Filter chip (Default/Selected), Wishlist item card (3 status), Motive chip, Wishlist status chip, Empty / Error state (Filter empty), Snackbar, Button/Primary/Large.
+3. **States:** populated (11) · empty toàn bộ (11a: icon bookmark, "Bạn chưa có món nào đang cân nhắc.", nút "Thêm món" trong empty state, ẩn nút đáy) · bộ lọc trống (11a: icon archive, "Chưa có món nào trong danh mục này.", nút tonal "Xem đang cân nhắc") · đã lưu (11b) · đã bỏ qua (11c) · sau hoàn tác (11d) · đã mua (11e). Loading: dùng `Skeleton` 2 thẻ như màn 06 (chưa vẽ khung riêng trong Figma).
+4. **Interactions:** chạm chip → đổi bộ lọc, giữ vị trí cuộn về đầu; chạm thẻ → 13 (món Bỏ qua → 13c, món Đã mua → 13d); "Thêm món" → 12; "Hoàn tác" (11c) → status về pending, cùng `id`, không tạo bản mới.
+5. **Navigation:** đến từ 02 (Wishlist entry); Back → 02; sau khi lưu ở 12 quay về 11 với bộ lọc "Đang cân nhắc"; sau khi mua ở 04 quay về 11 với bộ lọc "Đã mua".
+6. **Constraints:** thẻ có trạng thái Pressed khi chạm giữ; chip ≥ 48 dp, wrap khi thiếu chỗ; số trên chip luôn bằng số thẻ; tên món tối đa 2 dòng rồi "…"; snackbar nằm trên nút đáy (bottom offset 72 + 8). ≥ 600 dp: danh sách thành lưới 2 cột, nội dung tối đa 840 dp, căn giữa.
+
+---
+
+### Màn hình: 12. Add Wishlist Item (và 12c Sửa)
+
+1. **Layout:** `Scaffold(resizeToAvoidBottomInset: true)` → `AppBar` (Back, "Thêm món mong muốn" / "Sửa món mong muốn") → `Form` trong `SingleChildScrollView` padding 16, gap 12: `Card` (Tên món, Giá dự kiến) → câu hỏi (Subtitle + Body Small) → `GridView.count(crossAxisCount: 2, shrinkWrap: true)` 8 thẻ động cơ (giống 04) → TextFormField ghi chú (maxLines 3) → `bottomNavigationBar` nút "Lưu món" / "Lưu thay đổi".
+2. **Components:** App bar/Nested, Text field (Default/Focused/Error), Motive grid / Motive card (Default/Selected), Button/Primary/Large (Default/Loading).
+3. **States:** trống (12) · lỗi (12a) · đã điền (12b) · sửa (12c, điền sẵn dữ liệu món) · đang lưu: nút ở trạng thái Loading.
+4. **Interactions & validation (chạy khi bấm Lưu):** tên `trim().isEmpty` → "Vui lòng nhập tên món đồ để lưu."; giá có nhập và ≤ 0 → "Vui lòng nhập số tiền lớn hơn 0."; chưa chọn động cơ → "Vui lòng chọn lý do bạn muốn mua món này." (hiện dưới câu hỏi, màu error, icon cảnh báo). Cuộn tới và focus trường lỗi đầu tiên. Lỗi tự mất khi trường được sửa. Nhập giá `650000` → hiển thị `650.000 ₫`. Chỉ chọn được 1 động cơ.
+5. **Navigation:** từ 11 ("Thêm món") hoặc 13 (icon Sửa); lưu hợp lệ → `pop` về 11 + SnackBar "Đã lưu món vào danh sách mong muốn." (12c → về 13 + "Đã cập nhật “<tên>”"); Back khi đã nhập dữ liệu → dialog "Bỏ thay đổi?" (đề xuất, chưa vẽ trong Figma).
+6. **Constraints:** nút đáy luôn trên bàn phím; tên tối đa 60 ký tự, ghi chú 200; thẻ động cơ ≥ 72 dp cao; không có trường ảnh, URL hay người bán. ≥ 600 dp: form tối đa 600 dp, căn giữa; lưới động cơ 4 cột.
+
+---
+
+### Màn hình: 13. Wishlist Detail
+
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Chi tiết món mong muốn", `IconButton(Icons.edit)` có `tooltip: 'Sửa món'`) → `SingleChildScrollView` padding 16, gap 12: `Card` tóm tắt (overline, tên Title, giá Display màu primary, caption "Giá dự kiến · chưa tính vào chi tiêu", chip trạng thái, khối "Lý do muốn mua" + chip động cơ) → `Card` chi tiết (ngày thêm, ghi chú dạng trích dẫn) → `bottomNavigationBar`: `Column(FilledButton "Ghi khoản mua", TextButton.icon "Không mua nữa")`.
+2. **Components:** App bar/Nested (icon Sửa), Motive chip, Wishlist status chip, Button/Primary/Large, Button/Text/Medium, Dialog, Snackbar.
+3. **States:** đang cân nhắc (13) · dialog xác nhận (13a) · sau khi sửa (13b) · đã bỏ qua (13c: chỉ một nút "Đưa về Đang cân nhắc" → status pending, về 11 + snackbar "Đã đưa “<tên>” về Đang cân nhắc") · đã mua (13d: chỉ xem, ẩn `bottomNavigationBar` và icon Sửa).
+4. **Interactions:** "Ghi khoản mua" → 03 điền sẵn; "Không mua nữa" → `showDialog`: "Hủy" đóng dialog, "Bỏ qua" → status skipped, về 11 (bộ lọc Bỏ qua) + SnackBar 5 giây có "Hoàn tác"; icon Sửa → 12c.
+5. **Navigation:** từ 11; Back → 11 (món vẫn pending = "tiếp tục cân nhắc"); từ 03/04 Back khi chưa lưu → quay lại 13, không đổi status.
+6. **Constraints:** không khóa nút theo thời gian, không đếm ngược; icon Sửa 48 × 48; tên dài xuống dòng, giá không xuống dòng. ≥ 600 dp: nội dung tối đa 600 dp; 2 nút đáy nằm ngang.
+
+---
+
+### Thay đổi ở màn có sẵn
+- **02 Trang chủ:** chèn `WishlistEntry` ngay dưới Tổng quan tuần, chỉ hiện khi có ≥ 1 món; subtitle "n món đang cân nhắc". Không thêm tab.
+- **03/04 Ghi khoản mua:** nhận `PurchaseDraft`. Có `fromWishlistId` thì: 03 hiện banner primary-container "Điền sẵn từ Danh sách mong muốn: “<tên>”…", số tiền và tên điền sẵn (sửa được); 04 chọn sẵn động cơ cũ, câu phụ "Lúc thêm vào danh sách, bạn chọn <động cơ>. Đổi nếu lý do bây giờ đã khác."
