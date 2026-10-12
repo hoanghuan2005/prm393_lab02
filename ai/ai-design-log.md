@@ -6,7 +6,7 @@
 ## Khai báo công cụ AI
 | Công cụ | Mục đích |
 |---|---|
-| Claude (claude.ai) | Soạn nháp persona, user flow, DESIGN.md, prompt Stitch; giao diện tham chiếu; hỗ trợ nhận xét output Stitch |
+| Claude (claude.ai, Cowork) | Soạn nháp persona, user flow, DESIGN.md, prompt Stitch; giao diện tham chiếu; soạn prompt tinh chỉnh R1–R3 và hỗ trợ đối chiếu ảnh khi nhận xét output Stitch (tôi kiểm tra lại và tự quyết định từng mục) |
 | Google Stitch | Sinh UI ban đầu và các vòng lặp |
 
 ---
@@ -38,7 +38,7 @@ Constraints: all UI text in Vietnamese; exactly one primary action per screen; t
 
 | Màn hình | Ảnh |
 |---|---|
-| Toàn cảnh | ![](../assets/stitch/stitch 1/v1-00-overview.png) |
+| Toàn cảnh | ![](../assets/stitch/stitch1/Screenshot%202026-10-11%20140005.png) |
 | Design system do Stitch tạo | ![](../assets/stitch/stitch1/v1-00-design-system.png) |
 | 01 Onboarding | ![](../assets/stitch/stitch1/v1-01-onboarding.png) |
 | 02 Home Dashboard | ![](../assets/stitch/stitch1/v1-02-home.png) |
@@ -115,13 +115,12 @@ Using the same style and design system as the existing screens, add these screen
 |---|---|
 | Toàn cảnh | ![](../assets/stitch/stitch2/v2-00-overview.png) |
 | 06 Purchase History | ![](../assets/stitch/stitch2/v2-06-history.png) |
-| 06 Purchase History (trống, nằm cuối khung 06) | ![](../assets/stitch/stitch2/v2-06b-history-empty.png) |
+| 06 Purchase History (trống, phần cuối của cùng khung 06) | ![](../assets/stitch/stitch2/v2-06-history.png) |
 | 06 Purchase History (sau khi xóa) | ![](../assets/stitch/stitch2/v2-06c-history-undo.png) |
 | 05 Purchase Detail | ![](../assets/stitch/stitch2/v2-05-detail.png) |
 | 05 Dialog xác nhận xóa | ![](../assets/stitch/stitch2/v2-05b-delete-dialog.png) |
 | 07 Buying Patterns | ![](../assets/stitch/stitch2/v2-07-patterns.png) |
-| 07 Buying Patterns (loading, nằm cuối khung 07) | ![](../assets/stitch/stitch2/v2-07b-patterns-loading.png) |
-| 07 Buying Patterns (lỗi, nằm cuối khung 07) | ![](../assets/stitch/stitch2/v2-07c-patterns-error.png) |
+| 07 Buying Patterns (skeleton loading và lỗi, phần cuối khung 07) | ![](../assets/stitch/stitch2/v2-07-patterns2.png) |
 | 08 Personal Insights | ![](../assets/stitch/stitch2/v2-08-insights.png) |
 | 09 Monthly Reflection | ![](../assets/stitch/stitch2/v2-09-reflection.png) |
 | 10 Profile & Settings | ![](../assets/stitch/stitch2/v2-10-settings.png) |
@@ -209,7 +208,18 @@ Using the same style and design system as the existing screens, add these screen
   - Tên món tiếp tục bị cắt nhiều ở 06 ("Trà sữa nướng & Bá…", "Sách Tâm lý học v…"); dãy chip lọc bị cắt ở mép phải.
   - Nhiều chữ phụ trông nhỏ hơn 14sp (mô tả dưới thẻ, chú thích biểu đồ, dòng phụ ở 10); các màn dài hơn nhiều so với khung 800dp.
 
-## R1 — Tinh chỉnh: Nhất quán 
+---
+
+## Ghi chú: chuyển sang project remix
+**Ngày:** 11/10/2026
+
+Project gốc chứa P1, P2 chỉ còn xem được ở chế độ preview, không prompt tiếp được, nên tôi remix sang một project mới để chạy các vòng tinh chỉnh R1–R3. Ảnh "trước" của mỗi vòng lấy từ kết quả của vòng liền trước.
+
+Nhìn lại P1, P2, nhiều lỗi có chung một nguyên nhân: prompt chưa cho Stitch bảng từ vựng, dữ liệu mẫu và danh sách ngoài phạm vi, nên Stitch tự đặt tên, tự bịa số liệu và tự thêm tính năng. P2 chỉ ghi "same constraints" nên Stitch bỏ sót ràng buộc (mất dấu, chữ nhỏ). Vì vậy từ R1, mọi prompt đều ghi đích danh từ vựng, dữ liệu mẫu và lặp lại đầy đủ khối ràng buộc. Sau R3, các phần này được ghi chính thức vào `design/DESIGN.md`.
+
+---
+
+## R1 — Tinh chỉnh: Nhất quán (Nielsen #4)
 **Ngày:** 11/10/2026
 **Công cụ:** Google Stitch, chế độ Mobile, project remix
 **Mục tiêu:** Cùng một khái niệm chỉ có một tên, cùng một bộ dữ liệu, cùng một bố cục cho các trạng thái của một màn. Không thay đổi phong cách thị giác.
@@ -305,9 +315,14 @@ Keep all constraints from the original brief:
   - Dialog xóa bỏ được câu tự mâu thuẫn "không làm mất dữ liệu vĩnh viễn" của P2.
 - Chưa được:
   - 03 và 04 vẫn có tiêu đề "Ghi Nhận Chi Tiêu" trong khi nút bấm ở Trang chủ là "Ghi khoản mua" → người dùng bấm một tên, sang màn khác tên.
-  - Chữ "động lực" còn ở 6 chỗ trên 5 màn (02, 03, 05, 06, 07) dù prompt cấm rõ ràng,
+  - Chữ "động lực" còn ở 6 chỗ trên 5 màn (02, 03, 05, 06, 07) dù prompt cấm rõ ràng.
   - 02' và 06' vẫn là hai màn khác hẳn 02 và 06, và đều không có snackbar dù Stitch nói đã thêm. Hai trạng thái này là điểm cuối của Flow 1 và Flow 3, nên thiếu snackbar thì cả hai flow không có phản hồi sau khi lưu/xóa
   - 09 Chiêm nghiệm tháng mang nhầm tiêu đề "Ghi Nhận Chi Tiêu" kèm nút Back, giống màn ghi khoản mua → người dùng không biết mình đang ở đâu. Đây là lỗi mới do R1 gây ra.
+  - Các khối trạng thái trống, skeleton và lỗi mà P2 đặt ở cuối khung 06 và 07 bị mất sau R1 → đây là lý do có vòng R3.
+
+**Hướng xử lý:** Giữ dữ liệu mẫu, bộ 8 động cơ, chữ đủ dấu và xưng "bạn" làm nền cho các vòng sau. Các lỗi câu chữ (tiêu đề "Ghi Nhận Chi Tiêu", chữ "động lực") và hai màn 02', 06' được ghi đích danh theo từng màn trong prompt R2, thay vì yêu cầu chung như R1.
+
+---
 
 ## R2 — Tinh chỉnh: Phù hợp persona Nam (dùng một tay, dễ đọc)
 **Ngày:** 11/10/2026
@@ -419,6 +434,14 @@ Keep all constraints from the original brief:
   - Mô hình định nghĩa khung "Tối" là 22h–04h, nhưng Góc nhìn ghi "8 trong 15 khoản được ghi sau 18:00" → hai màn hiểu cùng con số 8 theo hai cách (Nielsen #4).
   - Hai khung của Bước 1/2 dùng nhãn khác nhau cho cùng một trường, lặp lại đúng lỗi "hai trạng thái của một màn không giống nhau".
   - Onboarding không được sửa.
+
+**Hướng xử lý:**
+- Chấp nhận: nút chính ghim ở thanh đáy; khung lỗi riêng của Bước 1/2; lưới động cơ chỉ còn icon + tên; dialog xóa nêu tên khoản mua và 5 giây hoàn tác.
+- Chấp nhận nút "Hoàn tác" trên snackbar sau khi lưu: Stitch tự thêm ở cả R1 và R2, và hợp lý vì Nam ghi nhanh bằng một tay nên dễ chọn nhầm động cơ (Nielsen #3). Flow 1 trong `ux/user-flow.md` được cập nhật theo.
+- Thống nhất khung giờ "Tối" là 18–05h để Mô hình khớp với câu "8 trong 15 khoản được ghi sau 18:00" ở Góc nhìn.
+- Các lỗi còn lại (câu khuyên bảo Stitch tự thêm, 02' và 06' sai bố cục, sai ngày và số liệu, nhãn hai khung Bước 1/2, Onboarding) được thử đưa vào R3 lần 1; lần đó thất bại nên chuyển sang sửa trong Figma.
+
+---
 
 ## R3 — Tinh chỉnh: Trạng thái hệ thống và phục hồi lỗi (Nielsen #1, #9)
 **Mục tiêu:** Người dùng luôn biết app đang làm gì và cách phục hồi khi có sự cố. Tạo các khung trạng thái trống, đang lưu, đang tải, lỗi và chưa đủ dữ liệu từ chính các màn đã có, mỗi trạng thái một khung riêng, để dùng cho nhánh lỗi và nhánh trống của 3 flow.
@@ -586,3 +609,25 @@ Constraints (same as before): Android 360x800 dp, Material 3, light theme. All t
   - Trang chủ – trống được tạo từ phiên bản trước khi sửa chip ngày, nên vẫn hiện "Tuần 41" thay vì "Hôm nay, 11/10" như Trang chủ.
   - Hai khung lỗi và chưa đủ dữ liệu của Mô hình trình bày khác nhau (một có thẻ bao, một không), nút chính không ghim đáy, và khung ngắn hơn 800dp.
 
+**Hướng xử lý:** Chấp nhận 6 khung trạng thái làm cơ sở cho Final UI và Prototype. Phần còn thiếu sửa trong Figma: chip "Quảng cáo (0)" ở trạng thái được chọn và bỏ câu phụ có chữ "động lực"; làm mờ lưới động cơ khi đang lưu; dùng chung component thẻ "Tổng quan tuần" cho Trang chủ và Trang chủ – trống; dùng chung component trạng thái lỗi/trống cho Mô hình, ghim nút ở đáy và đặt mọi khung 360 × 800.
+
+---
+
+## Tổng kết các vòng tinh chỉnh
+
+| Vòng | Mục tiêu | Kết quả chính từ Stitch | Chuyển sang sửa trong Figma |
+|---|---|---|---|
+| R1 | Nhất quán (Nielsen #4) | 8 động cơ thống nhất, mỗi dòng 1 chip; dữ liệu mẫu liền mạch giữa các màn; chữ đủ dấu; xưng "bạn" | Bố cục 02' và 06' |
+| R2 | Phù hợp persona Nam: dùng một tay, dễ đọc, không phán xét | Nút chính ghim đáy; khung lỗi riêng cho Bước 1/2; lưới động cơ icon + tên; bỏ ảnh trang trí; Góc nhìn còn 3 câu quan sát; Chiêm nghiệm và Cá nhân đúng nguyên văn | Câu khuyên bảo Stitch tự thêm; 02' và 06'; sai ngày và số liệu; nhãn Bước 1/2; Onboarding |
+| R3 | Trạng thái hệ thống và phục hồi lỗi (Nielsen #1, #9) | Lần 1 thất bại (giao diện bị đơn giản hóa). Lần 2: 6 khung trạng thái trống, đang lưu, đang tải, lỗi, chưa đủ dữ liệu | Chip lọc được chọn; lưới động cơ khi đang lưu; ghim nút trên các khung của Mô hình |
+
+Các quyết định chấp nhận / sửa / từ chối quan trọng nhất được phân tích trong [`design/design-decisions.md`](../design/design-decisions.md).
+
+**Điều rút ra khi làm việc với Stitch:**
+- Prompt phải lặp lại đầy đủ ràng buộc mỗi lần; ghi "same constraints" là Stitch bỏ sót.
+- Phải cho sẵn từ vựng và dữ liệu mẫu, nếu không Stitch tự đặt tên và tự bịa số liệu.
+- Yêu cầu chung ("dùng 'động cơ' ở mọi nơi") dễ bị bỏ sót; liệt kê đích danh từng chỗ thì hiệu quả hơn. Những gì ghi nguyên văn trong prompt (dialog, 3 câu Góc nhìn) ra đúng gần như tuyệt đối.
+- Xóa một câu khuyên bảo thì Stitch thường sinh câu khác cùng kiểu; quy tắc giọng văn phải được giữ bằng tay trong Figma.
+- Stitch sinh mỗi khung độc lập nên không giữ được bố cục giữa các trạng thái của cùng một màn; phần này làm bằng component trong Figma.
+- Prompt dài, sửa nhiều màn cùng lúc làm Stitch sinh lại toàn bộ và đánh mất những gì đã sửa (R3 lần 1). Prompt ngắn, ít màn, có khối khóa phong cách và ảnh ví dụ đúng/sai cho kết quả tốt (R3 lần 2).
+- Phần tự báo cáo của Stitch không đáng tin (R1: 4/7 khẳng định sai so với ảnh), mọi kết quả phải đối chiếu với ảnh.

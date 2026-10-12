@@ -47,27 +47,32 @@ flowchart TD
 ### Flow 1 — Ghi nhanh một khoản mua (có nhánh lỗi và phục hồi)
 - **Bắt đầu:** 02 Home Dashboard (lần đầu: 01 Onboarding)
 - **Mục tiêu:** ghi một khoản mua kèm động cơ trong ≤ 25 giây
-- **Kết thúc:** quay về 02 với snackbar "Đã lưu", khoản mới hiện ở mục Gần đây
+- **Kết thúc:** quay về 02 với snackbar "Đã lưu “Trà sữa nướng”" kèm "Hoàn tác", khoản mới ở đầu mục Khoản mua gần đây
 
 ```mermaid
 flowchart TD
-    First([Mở app lần đầu]) --> S01[01 Onboarding] --> Start
-    Start([02 Home Dashboard]) --> Add[Nhấn 'Ghi khoản mua']
-    Add --> S03[03 Add Purchase: nhập số tiền, tên món]
-    S03 --> Valid{Số tiền hợp lệ?}
-    Valid -->|Không| Err[Lỗi dưới ô nhập, tự focus ô số tiền] --> S03
-    Valid -->|Có| S04[04 Purchase Reason: chọn 1 trong 8 động cơ]
+    First([Mở app lần đầu]) --> S01[01 Onboarding] --> Empty[02 Trang chủ – trống]
+    Empty --> Add
+    Start([02 Trang chủ]) --> Add[Nhấn 'Ghi khoản mua']
+    Add --> S03[03 Ghi khoản mua – Bước 1/2: số tiền, tên món, thời điểm]
+    S03 --> Valid{Số tiền lớn hơn 0?}
+    Valid -->|Không| Err[03 lỗi: báo lỗi dưới ô số tiền, nút 'Tiếp tục' bị khóa] --> S03
+    Valid -->|Có| S04[04 Ghi khoản mua – Bước 2/2: chọn 1 trong 8 động cơ]
     S04 --> Note{Thêm ghi chú?}
     Note -->|Có| Write[Nhập ghi chú ngay trong 04] --> Save
-    Note -->|Không| Save[Nhấn 'Lưu', nút chuyển sang loading]
+    Note -->|Không| Save[Nhấn 'Lưu' → 04 đang lưu: spinner 'Đang lưu…']
     Save --> Net{Có mạng?}
-    Net -->|Có| Done([02 Home + snackbar 'Đã lưu'])
-    Net -->|Không| Offline[Lưu trên máy + banner 'Sẽ đồng bộ khi có mạng'] --> Done
+    Net -->|Có| Done[02 sau khi lưu + snackbar 'Đã lưu … · Hoàn tác']
+    Net -->|Không| Offline[02 sau khi lưu + snackbar 'Đã lưu trên máy. Sẽ đồng bộ khi có mạng.']
+    Done --> Undo{Bấm 'Hoàn tác' trong 5 giây?}
+    Offline --> Undo
+    Undo -->|Có| Back([Gỡ khoản vừa lưu, 02 trở lại như trước])
+    Undo -->|Không| End([Khoản mới ở đầu mục Khoản mua gần đây])
 ```
 
-- **Happy path:** 02 → 03 (nhập "Trà sữa", 45.000 ₫) → 04 (chọn Cảm xúc) → Lưu → 02.
+- **Happy path:** 02 → 03 (nhập "Trà sữa nướng", 45.000 ₫) → 04 (chọn Cảm xúc) → Lưu → 04 đang lưu → 02 sau khi lưu.
 - **Nhánh thay thế:** thêm ghi chú "Mệt sau giờ làm đồ án" trong 04 trước khi lưu.
-- **Nhánh lỗi:** nhập 0 ₫ → báo lỗi, sửa lại; hoặc mất mạng → lưu trên máy, không mất dữ liệu.
+- **Nhánh lỗi và phục hồi:** nhập 0 ₫ → báo lỗi, nút "Tiếp tục" bị khóa đến khi sửa; mất mạng → vẫn lưu trên máy, không mất dữ liệu; chọn nhầm động cơ → bấm "Hoàn tác" trên snackbar trong 5 giây.
 
 ### Flow 2 — Khám phá mô hình và chiêm nghiệm tháng
 - **Bắt đầu:** 02 Home Dashboard
@@ -77,10 +82,10 @@ flowchart TD
 ```mermaid
 flowchart TD
     Start([02 Home Dashboard]) --> S07[07 Buying Patterns]
-    S07 --> Load[Skeleton loading]
+    S07 --> Load[07 Mô hình – đang tải: skeleton]
     Load --> Res{Kết quả tải}
-    Res -->|Lỗi| Error[Trạng thái lỗi: nguyên nhân + 'Thử lại'] --> Load
-    Res -->|Chưa đủ 5 khoản| Empty[Trạng thái trống: 'Ghi thêm vài khoản'] --> Go03([03 Add Purchase])
+    Res -->|Lỗi| Error[07 Mô hình – lỗi: 'Không tải được mô hình' + 'Thử lại'] --> Load
+    Res -->|Chưa đủ 5 khoản| Empty[07 Mô hình – chưa đủ dữ liệu: 'Ghi thêm 2 khoản để xem mô hình'] --> Go03([03 Ghi khoản mua])
     Res -->|Đủ dữ liệu| View[Xem tỷ lệ động cơ và khung giờ]
     View --> Period[Đổi Tuần / Tháng] --> View
     View --> S08[08 Personal Insights: đọc thẻ góc nhìn]
@@ -100,13 +105,13 @@ flowchart TD
 ```mermaid
 flowchart TD
     Start([06 Purchase History]) --> Filter{Lọc theo động cơ}
-    Filter -->|Không có kết quả| Empty[Trạng thái trống: 'Xóa bộ lọc'] --> Start
+    Filter -->|Không có kết quả| Empty[06 Lịch sử – không có kết quả: 'Xóa bộ lọc'] --> Start
     Filter -->|Có kết quả| S05[05 Purchase Detail]
     S05 --> Choice{Người dùng}
     Choice -->|Sửa| Edit[Sửa động cơ hoặc ghi chú, lưu] --> S05
     Choice -->|Xóa| Dialog[Dialog: 'Xóa khoản mua này?']
     Dialog -->|Hủy| S05
-    Dialog -->|Xóa| Snack[06 + snackbar 'Đã xóa · Hoàn tác']
+    Dialog -->|Xóa| Snack[06 sau khi xóa + snackbar 'Đã xóa … · Hoàn tác']
     Snack -->|Hoàn tác trong 5 giây| Restored([Khoản mua được khôi phục])
     Snack -->|Hết 5 giây| Gone([Đã xóa khỏi lịch sử])
 ```
@@ -125,3 +130,21 @@ flowchart TD
 | 08 Personal Insights | | ✓ | |
 | 09 Monthly Reflection | | ✓ | |
 | 10 Profile & Settings | | ✓ bật nhắc | |
+
+## 5. Khung trạng thái theo flow
+
+Mỗi trạng thái là một khung riêng, giống hệt màn gốc và chỉ khác phần thay đổi (xem `design/DESIGN.md`).
+
+| Khung trạng thái | Màn gốc | Flow | Khi nào xuất hiện | Hành động tiếp theo |
+|---|---|---|---|---|
+| Trang chủ – trống | 02 | Flow 1 | Lần đầu dùng, tuần chưa có khoản mua | "Ghi khoản mua" → 03 |
+| Ghi khoản mua – lỗi số tiền | 03 | Flow 1 | Số tiền bằng 0 | Sửa số tiền, nút "Tiếp tục" mở lại |
+| Ghi khoản mua – đang lưu | 04 | Flow 1 | Sau khi nhấn "Lưu" | Tự chuyển sang 02 sau khi lưu |
+| Trang chủ sau khi lưu | 02 | Flow 1 | Lưu thành công | "Hoàn tác" trong 5 giây |
+| Trang chủ sau khi lưu – ngoại tuyến | 02 | Flow 1 | Lưu khi mất mạng | Tự đồng bộ khi có mạng |
+| Mô hình – đang tải | 07 | Flow 2 | Mở tab Mô hình | Tự chuyển sang kết quả |
+| Mô hình – lỗi | 07 | Flow 2 | Không tải được dữ liệu | "Thử lại" |
+| Mô hình – chưa đủ dữ liệu | 07 | Flow 2 | Ít hơn 5 khoản | "Ghi khoản mua" → 03 (Flow 1) |
+| Dialog xóa | 05 | Flow 3 | Nhấn icon xóa | "Hủy" → 05 · "Xóa" → 06 sau khi xóa |
+| Lịch sử – không có kết quả | 06 | Flow 3 | Bộ lọc không có khoản nào | "Xóa bộ lọc" |
+| Lịch sử sau khi xóa | 06 | Flow 3 | Xóa thành công | "Hoàn tác" trong 5 giây |
