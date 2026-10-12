@@ -621,8 +621,289 @@ Constraints (same as before): Android 360x800 dp, Material 3, light theme. All t
 
 **Prompt Stitch (nguyên văn):**
 
+*Lần 1 — Prompt đầu tiên (Trang chủ có lối vào, 11, 12, 13):*
+
 ```
-[CẦN ĐIỀN – dán nguyên văn từng prompt đã dùng trong Stitch cho Flow 6, mỗi lần tinh chỉnh một khối riêng]
+Design an extension to an EXISTING mobile app called "Why I Buy?" – a mindful spending and purchase-reflection application inspired by "The Psychology of Money".
+Feature name: Smart Wishlist – Flow 6
+This is NOT a standalone shopping application. It is a new feature inside an existing Android mobile app.
+Existing product context: The app currently allows users to record purchases, select psychological buying motives, view purchase history, analyze spending patterns, and reflect on their behavior.
+The new Wishlist must extend that product by helping users understand why they WANT to buy something BEFORE actually buying it.
+Target user: Nam, 22, a Vietnamese final-year IT student and intern. He often discovers products through TikTok, Shopee, social media, and flash sales. He wants to make more mindful purchasing decisions without judgment or pressure. He uses his phone one-handed and needs readable text and large touch targets.
+Design system – strictly follow:
+
+
+Platform: Android, Material Design 3.
+
+Mobile frame: 360 × 800 dp.
+
+Light theme.
+
+Font: Be Vietnam Pro.
+
+Background: #F5F6F2.
+
+Primary: #2E4A9E.
+
+Primary container: #E3E8F7.
+
+Surface: #FFFFFF.
+
+Primary text: #1A2320.
+
+Secondary text: #545E59.
+
+Error: #B3261E, only for actual errors.
+
+Spacing: 4, 8, 12, 16, 24, 32 dp.
+
+Horizontal screen padding: 16 dp.
+
+Card radius: 16 dp.
+
+Input radius: 12 dp.
+
+Button height: 56 dp.
+
+Touch targets: at least 48 × 48 dp.
+
+Body text: at least 14 sp.
+
+Text contrast: at least 4.5:1.
+
+All user-facing text must be in natural Vietnamese.
+Existing navigation: Trang chủ, Lịch sử, Mô hình, Góc nhìn, Cá nhân.
+Do NOT add a sixth bottom navigation tab. Wishlist is a nested feature accessible from Trang chủ.
+Create four visual designs:
+
+
+Home Dashboard – Wishlist Entry Variant Preserve the existing weekly summary, recent purchases, bottom navigation, and primary "Ghi khoản mua" button. Introduce a compact, clearly discoverable secondary entry named "Danh sách mong muốn" without replacing the existing primary action.
+
+Screen 11 – Wishlist Overview Title: "Danh sách mong muốn". Show a short, warm, non-judgmental explanation. Display wishlist items with name, estimated price, psychological motive (icon + label), and status. Provide filter choices: "Đang cân nhắc", "Đã mua", "Bỏ qua". Primary button: "+ Thêm món". Example items:
+
+
+Bàn phím cơ – 650.000 ₫ – Khuyến mãi
+
+Áo khoác – 420.000 ₫ – Mong muốn Also create an empty state.
+
+Screen 12 – Add Wishlist Item Title: "Thêm món mong muốn". Fields:
+
+
+Tên món đồ (required)
+
+Giá dự kiến (optional, positive VND if supplied)
+
+"Vì sao bạn muốn mua món này?" (required)
+
+Ghi chú thêm (optional) Show exactly eight psychological motives in a 2-column grid: Nhu cầu, Mong muốn, Khuyến mãi, Ảnh hưởng MXH, Quảng cáo, Cảm xúc, Tiện lợi, Khác. Use exactly the same icon and motive color system as the existing Purchase Reason screen. Primary button: "Lưu món". Include an inline validation error variant.
+
+Screen 13 – Wishlist Detail Display item name, estimated price, motive, note, creation date, and status. Primary button: "Ghi khoản mua". Secondary action: "Không mua nữa". Provide a small edit action. "Ghi khoản mua" connects conceptually to the EXISTING Add Purchase flow with prefilled information. "Không mua nữa" archives the wishlist item, rather than permanently deleting it. Include a confirmation dialog and success snackbar with an Undo option.
+Design behavior and constraints:
+
+
+No mandatory 72-hour waiting period.
+
+Do not add payment, checkout, shopping cart, product marketplace, or price tracking.
+
+Do not create new psychological motive categories.
+
+Do not use guilt-inducing wording.
+
+Do not describe skipped purchases as guaranteed monetary savings.
+
+Maintain one clear primary action per screen.
+
+Use bottom-positioned actions suitable for one-handed use.
+
+Make all screens visually consistent with the existing "Why I Buy?" Figma screenshots.
+
+Keep reusable components visually identical to existing Button, Text field, Motive card, Dialog and Snackbar.
+
+Avoid oversized illustrations, unnecessary decorative sections, or excessive whitespace.
+Generate a cohesive, production-ready mobile UI concept suitable for rebuilding with Figma Auto Layout, Variables, Components, and Variants.
+Do not redesign the existing application or change its navigation architecture.
+```
+
+*Lần 2 — Tinh chỉnh 4 màn chính:*
+
+```
+Refine the four existing Smart Wishlist screens. Do not regenerate the application from scratch.
+The overall visual direction is acceptable, but several UX problems must be corrected.
+1. Home Dashboard
+
+
+Preserve the original Why I Buy? Home Dashboard layout.
+
+Keep the original "Tổng quan tuần" card, recent purchases section, five-tab navigation, and main "Ghi khoản mua" button.
+
+Add a compact secondary entry point labeled "Danh sách mong muốn".
+
+Do not redesign existing Home content, rename existing sections, or introduce unrelated quotes.
+2. Wishlist Overview
+
+
+Keep the existing list layout and status filters.
+
+Remove the empty-state illustration and "Chưa có món nào trong danh mục này" message when wishlist items exist.
+
+Create a SEPARATE empty-state variant to be shown only when the selected category contains no items.
+
+Remove mandatory countdown timers or time-based purchase restrictions from all cards.
+
+Each card should clearly display the item name, estimated price, psychological motive, and status.
+
+Keep the "+ Thêm món" button accessible at the bottom.
+3. Add Wishlist Item
+
+
+Keep the existing two-column psychological motive grid with exactly eight motives.
+
+If the item name is valid, do not display a validation error.
+
+Create a separate error-state variant for an empty name or an invalid estimated price.
+
+Estimated price is optional.
+
+Preserve inline form validation and make the primary save action clear.
+
+Reuse the same motive icons, colors, and component styles as the original Add Purchase flow.
+4. Wishlist Detail
+
+
+REMOVE the mandatory 48-hour cooling-off period.
+
+REMOVE the psychological journal timeline and multi-stage psychological tracking.
+
+REMOVE any countdown or locked decision behavior.
+
+Replace them with a straightforward detail layout showing:
+
+
+Item name
+
+Estimated price
+
+Psychological buying motive
+
+Personal note
+
+Date added
+
+Current wishlist status
+
+Primary action: "Ghi khoản mua".
+
+Secondary action: "Không mua nữa".
+
+Small edit action in the app bar.
+
+Both primary and secondary decisions must be available immediately, with no waiting requirement.
+
+The "Ghi khoản mua" action should lead to the existing Add Purchase flow with prefilled item information.
+
+"Không mua nữa" should move the item to the Skipped status, not permanently delete it.
+
+Add a confirmation dialog for skipping an item, with Cancel and Confirm.
+
+After confirmation, display an Undo snackbar.
+5. Maintain strict consistency with the existing Figma design system
+
+
+Android 360 × 800 dp.
+
+Material Design 3, light theme.
+
+Be Vietnam Pro font.
+
+Primary #2E4A9E.
+
+Background #F5F6F2.
+
+Surface #FFFFFF.
+
+Primary text #1A2320.
+
+Minimum 14sp body text.
+
+Minimum 48 × 48dp touch targets.
+
+Five existing bottom navigation tabs only.
+
+All visible text in Vietnamese.
+
+Avoid excessive text, unnecessary illustrations, overly complex cards, and feature expansion.
+The goal is a simple, practical Smart Wishlist that helps users understand WHY they want to buy something, not a shopping marketplace or forced waiting system.
+Update the existing designs while preserving their overall visual consistency and reusable components.
+```
+
+*Lần 3 — Bổ sung trạng thái và tương tác còn thiếu:*
+
+```
+Continue refining Flow 6 – Smart Wishlist of the existing Why I Buy? mobile application.
+The main Wishlist Overview, Add Wishlist Item, and Wishlist Detail screens are now approved. Do not redesign them from scratch.
+Please complete these missing states and interaction designs:
+1. Skip Confirmation Dialog
+
+
+Based on the existing Wishlist Detail screen.
+
+Open a centered modal overlay.
+
+Title: "Không mua món này nữa?"
+
+Description: "Món đồ sẽ được chuyển vào danh sách Bỏ qua. Bạn có thể xem lại sau."
+
+Actions: "Hủy" and "Bỏ qua".
+
+Use the existing Why I Buy? Dialog component style.
+2. Wishlist – Skipped State
+
+
+After confirmation, navigate to Wishlist Overview.
+
+The item should appear under the "Bỏ qua" filter.
+
+The item must no longer be marked "Đang cân nhắc".
+
+Show a snackbar: "Đã chuyển món vào Bỏ qua" with "Hoàn tác".
+
+Undo restores the item to "Đang cân nhắc".
+3. Wishlist – Saved State
+
+
+Show Wishlist Overview after a new item has been added successfully.
+
+The newly added item must appear in the "Đang cân nhắc" list.
+
+Display a success snackbar: "Đã lưu món vào danh sách mong muốn".
+4. Mobile Empty and Error States
+
+
+Ensure Wishlist Empty and Add Wishlist Error are designed as separate 360 × 800 dp Android mobile screens, not desktop or landscape layouts.
+
+On a filtered empty state, provide a useful action such as "Xem đang cân nhắc" when appropriate.
+
+Preserve existing inline validation patterns.
+5. Purchase Integration
+
+
+When pressing "Ghi khoản mua" in Wishlist Detail, the user should enter the existing Add Purchase flow.
+
+Prefill the item name, estimated price if available, and original motive, but allow the user to edit them.
+
+The wishlist item is marked "Đã mua" only after the purchase is successfully saved.
+Strictly reuse the existing Material Design 3 system, Be Vietnam Pro font, primary #2E4A9E, and the same existing components.
+Do not introduce mandatory waiting periods, countdown timers, payment features, or additional bottom navigation tabs.
+All user-facing text must be Vietnamese.
+Generate only the missing states and interaction variants. Do not regenerate the main four screens.
+
+Với "Danh sách mong muốn - Trống" và "Thêm món mong muốn - Báo lỗi" hình như đang bị to quá hay gì á. Làm cho giống các màn khác luôn
+```
+
+*Lần 4 — Yêu cầu thêm về kích thước khung:*
+
+```
+toàn bộ mấy này làm theo 360x800
 ```
 
 **Kết quả:**
