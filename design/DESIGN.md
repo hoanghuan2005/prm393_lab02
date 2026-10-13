@@ -86,11 +86,11 @@ Giá dự kiến không phải tiền đã chi: không cộng vào tổng tuần
 | surface | #FFFFFF | Card, ô nhập |
 | on-surface | #1A2320 | Chữ chính |
 | on-surface-variant | #545E59 | Chữ phụ |
-| surface-container | #E8F0EB | Nền ô nhập (tonal), chip mặc định, khối tóm tắt |
+| surface-container | #E8F0EB | Nền ô nhập (tonal), chip mặc định, khối tóm tắt, nền bàn phím số, đoạn trống của thanh độ mạnh mật khẩu |
 | outline | #8A918A | Viền ô nhập trên thẻ trắng, chip "Bỏ qua", viền switch tắt |
 | outline-strong | #7A817B | Viền ô nhập đặt thẳng trên nền #F5F6F2 (≥ 3 : 1, PB-5) |
 | error | #B3261E | Lỗi nhập liệu, hành động xóa |
-| error-container | #F9DEDC | Nền ô nhập khi lỗi, nền icon trong dialog xóa |
+| error-container | #F9DEDC | Nền ô nhập khi lỗi, vòng tròn icon trong dialog nguy hiểm |
 
 Màu động cơ (nền / chữ):
 | Động cơ | Nền | Chữ |
@@ -105,17 +105,17 @@ Màu động cơ (nền / chữ):
 | Khác | #ECEEE8 | #3E4743 |
 
 ## Typography (Be Vietnam Pro)
-| Style | Cỡ / dòng (sp) | Độ đậm |
-|---|---|---|
-| Display | 28 / 36 | 700 |
-| Title | 20 / 28 | 600 |
-| Subtitle | 16 / 24 | 600 |
-| Body | 16 / 24 | 400 |
-| Body small | 14 / 20 | 400 |
-| Label | 14 / 20 | 500 (chip, nút chữ, nhãn ô nhập) |
-| Overline | 14 / 20 | 500, viết hoa (nhãn phía trên tiêu đề / thẻ) |
-| Caption | 12 / 16 | 500 (chỉ nhãn tab chưa chọn và mốc giờ phụ) |
-| Caption strong | 12 / 16 | 700 (nhãn tab đang chọn) |
+| Style | Cỡ / dòng (sp) | Độ đậm | Dùng cho |
+|---|---|---|---|
+| Display | 28 / 36 | 700 | Tiêu đề lớn (Đăng nhập, Xin quyền thông báo), số tiền |
+| Title | 20 / 28 | 600 | Tiêu đề app bar, tiêu đề dialog |
+| Subtitle | 16 / 24 | 600 | Tiêu đề thẻ |
+| Body | 16 / 24 | 400 | Nội dung chính |
+| Body Small | 14 / 20 | 400 | Mô tả phụ, ghi chú, dòng lỗi |
+| Label | 14 / 20 | 500 | Nhãn ô nhập, link, chữ trên nút |
+| Overline | 14 / 20 | 500, viết hoa | Tiêu đề nhóm cài đặt (CÀI ĐẶT NHẮC NHỞ…) |
+| Caption | 12 / 16 | 500 | **Chỉ** nhãn thanh tab và mốc thời gian |
+| Caption Strong | 12 / 16 | 700 | Nhãn tab đang chọn |
 
 ## Khoảng cách, bo góc, elevation
 - Spacing: 4 · 8 · 12 · 16 · 24 · 32 dp; lề màn hình 16 dp.
@@ -123,9 +123,10 @@ Màu động cơ (nền / chữ):
 - Elevation: 1 = bóng nhẹ cho card · 2 = dialog, snackbar.
 
 ## Quy tắc component
-- Mỗi màn hình chỉ có **một** nút chính (filled, primary, cao 56 dp), ghim ở thanh đáy
-  ngay trên thanh điều hướng vì Nam thao tác một tay. Nội dung cuộn phía sau, nút luôn hiện
-  trong khung 800 dp.
+- Mỗi màn hình có **tối đa một** nút chính (filled, primary, cao 56 dp), ghim ở thanh đáy
+  ngay trên thanh điều hướng vì Nam thao tác một tay. Màn chỉ để xem (Lịch sử, Mô hình, Cá nhân)
+  có thể không có nút chính. Hành động phụ dùng nút Tonal (nền nhạt), Text hoặc viền, không tô đặc.
+  Nội dung cuộn phía sau, nút luôn hiện trong khung 800 dp.
 - Vùng chạm tối thiểu 48 × 48 dp; chữ nội dung tối thiểu 14 sp.
 - Độ tương phản chữ tối thiểu 4.5:1 (Nam cận và hay dùng trong phòng tối).
 - Động cơ luôn hiển thị **icon + tên**, không chỉ dùng màu.
@@ -145,15 +146,56 @@ Màu động cơ (nền / chữ):
 - "Không mua nữa" không phải hành động phá hủy: dialog dùng nút primary (không dùng màu error), và có snackbar hoàn tác 5 giây.
 - Tên món xuống tối đa 2 dòng; chỉ khi vượt 2 dòng mới cắt bằng "…" (thẻ Danh sách mong muốn).
 
-## Danh sách màn hình
-00a Đăng nhập · 00b Đăng ký · 01 Onboarding · 02 Trang chủ (Home Dashboard) · 03 Ghi khoản mua – Bước 1/2 (Add Purchase) ·
-04 Ghi khoản mua – Bước 2/2 (Purchase Reason) · 05 Chi tiết khoản mua (Purchase Detail) ·
-06 Lịch sử (Purchase History) · 07 Mô hình (Buying Patterns) · 08 Góc nhìn (Personal Insights) ·
-09 Chiêm nghiệm tháng (Monthly Reflection) · 10 Cá nhân (Profile & Settings)
-· 11 Danh sách mong muốn (Wishlist Overview) · 12 Thêm món mong muốn (Add Wishlist Item) · 13 Chi tiết món mong muốn (Wishlist Detail)
+## Bổ sung theo checklist.design/mobile (13/10/2026)
 
-**Khung trạng thái:** 02 trống · 02′ sau khi lưu · 02′ ngoại tuyến · 03 lỗi số tiền · 04 đang lưu ·
-05 dialog xóa · 06 không có kết quả · 06′ sau khi xóa · 07 đang tải · 07 lỗi · 07 chưa đủ dữ liệu.
+Nhóm đối chiếu thiết kế với checklist.design/mobile và chỉ làm phần lớn các mục áp dụng được
+(kết quả review: 98,2%, xem báo cáo). Các quy ước mới:
+
+**Icon mới** (24 × 24, nét 2 px, màu color/on-surface): `eye`, `eye-off` (hiện / ẩn mật khẩu),
+`logout` (Đăng xuất).
+
+**Component mới / thay đổi**
+- **Password strength**: 3 mức Yếu / Trung bình / Mạnh, đặt ngay dưới ô Mật khẩu (Đăng ký,
+  Đổi mật khẩu). Màu đoạn: Yếu = error, Trung bình = motive/khuyen-mai/on, Mạnh = primary.
+  Luôn có nhãn chữ "Độ mạnh: …", không chỉ dựa vào màu.
+- **Dialog** có 2 loại: *Danger* (xóa, không hoàn tác; icon và nút màu error) và *Default*
+  (xác nhận thường như Đăng xuất; icon và nút màu primary). Luôn có nút "Hủy" dạng text.
+- **Text field**: ô mật khẩu ẩn icon bên trái, icon bên phải là eye-off / eye. Dòng lỗi ở
+  trạng thái Error tự xuống hàng, đi kèm icon cảnh báo.
+- **App icon**: adaptive icon 108 dp, vùng an toàn 66 dp, nền primary, ký hiệu chart-search
+  màu trắng. Hai dạng: vuông bo góc và tròn. Dùng chung cho icon app, Splash và mẫu thông báo.
+
+**Quy tắc**
+- **Splash** chỉ có logo và tên app trên nền primary, không có nút, tự chuyển sau khoảng 0,8 giây.
+- **Xin quyền thông báo**: không hỏi lúc mở app. Chỉ hỏi sau khi người dùng lưu khoản mua đầu
+  tiên, trên một màn riêng (05a), có mẫu thông báo thật và nút "Để sau". Nếu người dùng từ chối,
+  Cá nhân hiện dòng "Chưa cấp quyền thông báo · Mở cài đặt".
+- **Tài khoản**:
+  - Muốn đổi mật khẩu phải nhập mật khẩu hiện tại. Nút "Lưu" bị khóa đến khi nhập đủ 3 ô.
+  - "Xóa tài khoản" nằm ở nhóm riêng cuối màn Tài khoản, chữ đỏ, có dialog Danger.
+    Thao tác này khác "Xóa toàn bộ dữ liệu" ở Cá nhân (chỉ xóa khoản mua, giữ tài khoản).
+- **Cá nhân**: thẻ tài khoản ở đầu màn. Cuối màn có nhóm "Hỗ trợ & thông tin" (Gửi góp ý,
+  Điều khoản sử dụng, Chính sách quyền riêng tư), nút "Đăng xuất" (Tonal) và dòng "Phiên bản 1.0.0".
+- **Thanh tab** ẩn ở màn cấp sâu: Ghi khoản mua, Chi tiết, Tài khoản, Đổi mật khẩu,
+  Xin quyền thông báo.
+- **Chính tả**: dùng "Xóa" (không dùng "Xoá") cho thống nhất toàn bộ giao diện.
+
+## Danh sách màn hình
+00 Splash · 01 Onboarding · 00a Đăng nhập · 00b Đăng ký · Quên mật khẩu · 00 Trang chủ tổng hợp (Hub) ·
+02 Trang chủ · 03 Ghi khoản mua – Bước 1/2 · 04 Ghi khoản mua – Bước 2/2 · 05 Chi tiết khoản mua ·
+05a Xin quyền thông báo · 06 Lịch sử · 07 Mô hình · 08 Góc nhìn · 09 Chiêm nghiệm tháng ·
+10 Cá nhân · 10a Tài khoản · 10b Đổi mật khẩu · 11–13 Danh sách mong muốn · 14–18 Trước khi mua (AI)
+
+Trong Figma, Splash và Trang chủ tổng hợp cùng mang số 00. Khi nhắc tới, luôn ghi kèm tên
+("00 Splash", "00 Hub") để không nhầm. Mã 05a, 10a, 10b chỉ dùng cho màn mới (Xin quyền thông báo,
+Tài khoản, Đổi mật khẩu). Các khung trạng thái cũ gọi theo tên khung Figma, ví dụ
+"05 Chi tiết khoản mua – dialog xóa", "10 Cá nhân – xác nhận xóa toàn bộ".
+
+**Khung trạng thái:** 02 trống · 02 sau khi lưu · 02 ngoại tuyến · 02 vừa tạo tài khoản ·
+Hub chưa ghi hôm nay · 03 lỗi số tiền · 03 đang nhập số tiền (bàn phím số) · 04 đang lưu ·
+05 dialog xóa · 06 không có kết quả · 06 sau khi xóa · 07 đang tải · 07 lỗi · 07 chưa đủ dữ liệu ·
+Đăng nhập – lỗi · 10 chưa cấp quyền thông báo · 10 xác nhận đăng xuất · 10 xác nhận xóa toàn bộ ·
+10a xác nhận xóa tài khoản · 10b đã đổi mật khẩu.
 
 ## Lịch sử cập nhật
 - 11/10/2026: bản đầu tiên, dùng làm brief cho prompt P1.
@@ -164,3 +206,6 @@ Màu động cơ (nền / chữ):
 - 12/10/2026 (sau Flow 6 và vòng phản biện PB): đồng bộ thang chữ với Figma (Label 14 sp, thêm Overline,
   Caption, Caption strong; đã sửa 33 lớp chữ 12 → 14 sp); thêm token surface-container, error-container,
   outline-strong (PB-5); thêm màn 00a Đăng nhập, 00b Đăng ký (Flow 7); thống nhất mốc "sau 22h" với persona (PB-14).
+- 13/10/2026: đối chiếu checklist.design/mobile; thêm Splash, icon app, Xin quyền thông báo,
+  Tài khoản / Đổi mật khẩu / Xóa tài khoản / Đăng xuất, trạng thái lỗi đăng nhập, Password strength,
+  Dialog Default; quy tắc "tối đa một nút chính"; đồng bộ bảng typography và màu với Figma.

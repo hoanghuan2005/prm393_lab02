@@ -9,18 +9,24 @@
 
 | # | Màn hình | Cấp | Truy cập từ | Mục đích |
 |---|---|---|---|---|
-| 00a | Đăng nhập | Điểm vào | 01 ("Bắt đầu"), 00b, Đăng xuất ở 10 | Vào tài khoản để đồng bộ dữ liệu |
+| 00 | Splash | Điểm vào (mọi lần mở app) | Mở app | Logo khoảng 0,8 giây, kiểm tra đã đăng nhập hay chưa |
+| 00a | Đăng nhập | Điểm vào | 00 Splash (chưa đăng nhập), 01 ("Bắt đầu"), 00b, Đăng xuất ở 10, Xóa tài khoản ở 10a | Vào tài khoản để đồng bộ dữ liệu; báo lỗi sai thông tin ngay dưới ô |
 | 00b | Đăng ký | Điểm vào | 00a ("Đăng ký") | Tạo tài khoản mới |
-| 01 | Onboarding | Điểm vào (lần đầu mở app) | Mở app | Giới thiệu thông điệp "Hiểu trước khi thay đổi" |
+| — | Quên mật khẩu | Điểm vào | 00a ("Quên mật khẩu?") | Gửi liên kết đặt lại mật khẩu |
+| 01 | Onboarding | Điểm vào (lần đầu mở app) | 00 Splash | Giới thiệu thông điệp "Hiểu trước khi thay đổi" |
+| 00 Hub | Trang chủ tổng hợp | Tab 1 (sau khi đăng nhập) | 00 Splash (đã đăng nhập), 00a, thanh điều hướng | Tổng quan tuần, lối vào Danh sách mong muốn, thẻ "Trước khi mua", nút "Ghi khoản mua" |
 | 02 | Home Dashboard | Tab 1 | Thanh điều hướng, sau 01 | Tổng quan tuần, nút "Ghi khoản mua", khoản gần đây |
 | 03 | Add Purchase | Lồng – bước 1/2 | 02, trạng thái trống của 07 | Nhập số tiền, tên món, thời điểm |
 | 04 | Purchase Reason | Lồng – bước 2/2 | 03 | Chọn 1 trong 8 động cơ, ghi chú tùy chọn, lưu |
 | 05 | Purchase Detail | Lồng | 02 (mục Gần đây), 06 | Xem, sửa hoặc xóa một khoản mua |
+| 05a | Xin quyền thông báo | Lồng | 05 Khoản mua đã lưu (lần đầu), 10 "Mở cài đặt" | Xin quyền gửi nhắc nhở 21:00, có "Để sau" |
 | 06 | Purchase History | Tab 2 | Thanh điều hướng | Danh sách khoản mua theo ngày, lọc theo động cơ |
 | 07 | Buying Patterns | Tab 3 | Thanh điều hướng | Tỷ lệ động cơ, khung giờ hay mua |
 | 08 | Personal Insights | Tab 4 | Thanh điều hướng, 07 | Thẻ góc nhìn tổng hợp từ dữ liệu người dùng ghi |
 | 09 | Monthly Reflection | Lồng | 08 | Tự đánh giá mức hài lòng và đặt mục tiêu tháng |
 | 10 | Profile & Settings | Tab 5 | Thanh điều hướng, 09 | Nhắc nhở, xuất dữ liệu, cài đặt |
+| 10a | Tài khoản | Lồng | 10 (thẻ tài khoản) | Email, Đổi mật khẩu, Xóa tài khoản |
+| 10b | Đổi mật khẩu | Lồng | 10a | Đổi mật khẩu, phải nhập mật khẩu hiện tại |
 | 11 | Wishlist Overview (Danh sách mong muốn) | Lồng | 02 (thẻ "Danh sách mong muốn", luôn hiện, PB-1) | Xem món muốn mua theo trạng thái Đang cân nhắc / Đã mua / Bỏ qua |
 | 12 | Add Wishlist Item (Thêm món mong muốn) | Lồng | 11 | Lưu một món muốn mua kèm 1 trong 8 động cơ; dùng lại để sửa món (12c) |
 | 13 | Wishlist Detail (Chi tiết món mong muốn) | Lồng | 11 | Xem lý do muốn mua; quyết định Ghi khoản mua / Không mua nữa / tiếp tục cân nhắc |
@@ -32,27 +38,34 @@ Tám động cơ (dùng thống nhất trong toàn bộ dự án): Nhu cầu, Mo
 
 ```mermaid
 flowchart TD
-    S01[01 Onboarding] --> S00a[00a Đăng nhập]
-    S00a <--> S00b[00b Đăng ký]
-    S00a --> NAV{{Thanh điều hướng dưới - 5 tab}}
-    NAV --> S02[02 Home Dashboard]
-    NAV --> S06[06 Purchase History]
-    NAV --> S07[07 Buying Patterns]
-    NAV --> S08[08 Personal Insights]
-    NAV --> S10[10 Profile & Settings]
-    S02 --> S03[03 Add Purchase] --> S04[04 Purchase Reason]
-    S02 --> S05[05 Purchase Detail]
+    Open([Mở app]) --> S00[00 Splash]
+    S00 --> Logged{Đã đăng nhập?}
+    Logged -->|Chưa| S01[01 Onboarding] --> Login[00a Đăng nhập]
+    Login --> Reg[00b Đăng ký]
+    Login --> Forgot[Quên mật khẩu]
+    Logged -->|Có| NAV{{Thanh điều hướng - 5 tab}}
+    Login --> NAV
+    NAV --> S02[00 Trang chủ tổng hợp]
+    NAV --> S06[06 Lịch sử]
+    NAV --> S07[07 Mô hình]
+    NAV --> S08[08 Góc nhìn]
+    NAV --> S10[10 Cá nhân]
+    S02 --> S03[03 Ghi khoản mua] --> S04[04 Bước 2/2] --> S05s[05 Khoản mua đã lưu]
+    S05s --> S05a[05a Xin quyền thông báo]
+    S02 --> S05[05 Chi tiết khoản mua]
     S06 --> S05
     S07 --> S08
-    S08 --> S09[09 Monthly Reflection]
-    S02 --> S11[11 Wishlist Overview] --> S12[12 Add Wishlist Item]
-    S11 --> S13[13 Wishlist Detail]
+    S08 --> S09[09 Chiêm nghiệm tháng]
+    S02 --> S11[11 Danh sách mong muốn] --> S12[12 Thêm món mong muốn]
+    S11 --> S13[13 Chi tiết món mong muốn]
     S13 --> S03
     S06 -->|Xem mô hình tháng đang xem| S07
-    S10 -->|Đăng xuất| S00a
+    S10 --> S10a[10a Tài khoản] --> S10b[10b Đổi mật khẩu]
+    S10 --> Help[Hỗ trợ và thông tin]
+    S10 -->|Đăng xuất| Login
 ```
 
-Độ sâu tối đa: 3 lần chạm từ một tab (02 → 11 → 13 → 03 khi mua từ danh sách mong muốn). Cấu trúc 5 tab giữ nguyên; Danh sách mong muốn là màn lồng, không thêm tab.
+Độ sâu tối đa: 2–3 lần chạm từ một tab (ví dụ Cá nhân → Tài khoản → Đổi mật khẩu; 02 → 11 → 13 → 03 khi mua từ danh sách mong muốn). Cấu trúc 5 tab giữ nguyên; Danh sách mong muốn là màn lồng, không thêm tab.
 
 ## 3. User flows
 
@@ -65,26 +78,32 @@ flowchart TD
 flowchart TD
     First([Mở app lần đầu]) --> S01[01 Onboarding] --> Auth[00a Đăng nhập / 00b Đăng ký – Flow 7] --> Empty[02 Trang chủ – trống]
     Empty --> Add
-    Start([02 Trang chủ]) --> Add[Nhấn 'Ghi khoản mua']
-    Add --> S03[03 Ghi khoản mua – Bước 1/2: số tiền, tên món, thời điểm]
+    Start([Trang chủ]) --> Add[Nhấn Ghi khoản mua]
+    Add --> S03[03 Bước 1/2: số tiền, tên món, thời điểm]
     S03 --> Valid{Số tiền lớn hơn 0?}
-    Valid -->|Không| Err[03 lỗi: báo lỗi dưới ô số tiền, nút 'Tiếp tục' bị khóa] --> S03
-    Valid -->|Có| S04[04 Ghi khoản mua – Bước 2/2: chọn 1 trong 8 động cơ]
+    Valid -->|Không| Err[03 lỗi: báo lỗi dưới ô số tiền, nút Tiếp tục bị khóa] --> S03
+    Valid -->|Có| S04[04 Bước 2/2: chọn 1 trong 8 động cơ]
     S04 --> Note{Thêm ghi chú?}
     Note -->|Có| Write[Nhập ghi chú ngay trong 04] --> Save
-    Note -->|Không| Save[Nhấn 'Lưu' → 04 đang lưu: spinner 'Đang lưu…']
+    Note -->|Không| Save[Nhấn Lưu, 04 đang lưu]
     Save --> Net{Có mạng?}
-    Net -->|Có| Done[02 sau khi lưu + snackbar 'Đã lưu … · Hoàn tác']
-    Net -->|Không| Offline[02 sau khi lưu + snackbar 'Đã lưu trên máy. Sẽ đồng bộ khi có mạng.']
-    Done --> Undo{Bấm 'Hoàn tác' trong 5 giây?}
+    Net -->|Có| S05[05 Khoản mua đã lưu]
+    Net -->|Không| Offline[02 ngoại tuyến: Đã lưu trên máy, sẽ đồng bộ khi có mạng]
+    S05 --> FirstSave{Lần đầu lưu và chưa cấp quyền thông báo?}
+    FirstSave -->|Có| S05a[05a Xin quyền thông báo]
+    S05a -->|Bật nhắc nhở hoặc Để sau| Done[02 sau khi lưu + snackbar Đã lưu, Hoàn tác]
+    FirstSave -->|Không| Done
     Offline --> Undo
-    Undo -->|Có| Back([Gỡ khoản vừa lưu, 02 trở lại như trước])
-    Undo -->|Không| End([Khoản mới ở đầu mục Khoản mua gần đây])
+    Done --> Undo{Bấm Hoàn tác trong 5 giây?}
+    Undo -->|Có| Back([Gỡ khoản vừa lưu])
+    Undo -->|Không| End([Khoản mới ở đầu mục Gần đây])
 ```
 
 - **Happy path:** 02 → 03 (nhập "Trà sữa nướng", 45.000 ₫) → 04 (chọn Cảm xúc) → Lưu → 04 đang lưu → 02 sau khi lưu.
 - **Nhánh thay thế:** thêm ghi chú "Mệt sau giờ làm đồ án" trong 04 trước khi lưu.
 - **Nhánh lỗi và phục hồi:** nhập 0 ₫ → báo lỗi, nút "Tiếp tục" bị khóa đến khi sửa; mất mạng → vẫn lưu trên máy, không mất dữ liệu; chọn nhầm động cơ → bấm "Hoàn tác" trên snackbar trong 5 giây.
+- Lần lưu đầu tiên: hỏi quyền thông báo ở 05a. Chọn "Để sau" không chặn người dùng; Cá nhân sẽ
+  hiện "Chưa cấp quyền thông báo · Mở cài đặt" để bật lại sau.
 
 ### Flow 2 — Khám phá mô hình và chiêm nghiệm tháng
 - **Bắt đầu:** 02 Home Dashboard
@@ -209,45 +228,62 @@ flowchart TD
 - **Nhánh thay thế:** tiếp tục cân nhắc (Back từ 13); sửa ghi chú (12c → 13b); bỏ qua món (13a → 11c).
 - **Nhánh lỗi và phục hồi:** bấm Lưu khi chưa nhập tên và chưa chọn động cơ → 12a báo lỗi ngay dưới từng trường, sửa xong lưu được; bỏ qua nhầm → "Hoàn tác" trong 5 giây; thoát 03/04 trước khi lưu → món vẫn Đang cân nhắc.
 
-### Flow 7 — Đăng nhập và đăng ký
-- **Bắt đầu:** 00a Đăng nhập (sau 01 Onboarding, hoặc sau khi Đăng xuất ở 10)
-- **Mục tiêu:** vào app bằng tài khoản để dữ liệu được đồng bộ giữa các máy
-- **Kết thúc:** 02 Trang chủ
+### Flow 7 — Khởi động, đăng nhập và tài khoản
+- **Bắt đầu:** mở app
+- **Mục tiêu:** vào app, sửa lỗi đăng nhập, quản lý tài khoản (đổi mật khẩu, xóa tài khoản, đăng xuất)
+- **Kết thúc:** tới Trang chủ tổng hợp, hoặc quay về Đăng nhập sau khi đăng xuất / xóa tài khoản
 
 ```mermaid
 flowchart TD
-    Start([01 Onboarding → 'Bắt đầu']) --> S00a[00a Đăng nhập]
-    S00a --> Has{Đã có tài khoản?}
-    Has -->|Chưa| S00b[00b Đăng ký] --> Reg{Thông tin hợp lệ?}
-    Reg -->|Không| RegErr[Lỗi ngay dưới ô: email sai định dạng, mật khẩu < 8 ký tự] --> S00b
-    Reg -->|Có| Created[Tạo tài khoản] --> S00a
-    S00b -->|'Đã có tài khoản? Đăng nhập'| S00a
-    Has -->|Có| Login{Email và mật khẩu đúng?}
-    Login -->|Không| LoginErr[Lỗi dưới ô mật khẩu: 'Email hoặc mật khẩu chưa đúng.'] --> S00a
-    Login -->|Có| End([02 Trang chủ])
-    S00a -->|'Quay lại'| Back([01 Onboarding])
+    Open([Mở app]) --> S00[00 Splash, tự chuyển sau 0,8 giây]
+    S00 --> Logged{Đã đăng nhập?}
+    Logged -->|Có| Hub[00 Trang chủ tổng hợp]
+    Logged -->|Chưa| S01[01 Onboarding] --> Login[00a Đăng nhập]
+    Login --> Check{Thông tin đúng?}
+    Check -->|Sai| LErr[Đăng nhập – lỗi: viền đỏ, icon, câu hướng dẫn] --> Login
+    Check -->|Đúng| Hub
+    Login --> Forgot[Quên mật khẩu: gửi liên kết] --> Login
+    Login --> Reg[00b Đăng ký: 3 ô, độ mạnh mật khẩu, đồng ý điều khoản]
+    Reg --> NewHome[02 Trang chủ trống + snackbar Đã tạo tài khoản]
+    Hub --> Ca[10 Cá nhân]
+    Ca --> Acc[10a Tài khoản]
+    Acc --> Pw[10b Đổi mật khẩu] --> PwSaved[Đã đổi mật khẩu] --> Acc
+    Acc --> DelD{Dialog Xóa tài khoản?}
+    DelD -->|Hủy| Acc
+    DelD -->|Xóa| Login
+    Ca --> OutD{Dialog Đăng xuất?}
+    OutD -->|Hủy| Ca
+    OutD -->|Đăng xuất| Login
 ```
 
-- **Happy path:** 00a → nhập email, mật khẩu → "Đăng nhập" → 02.
-- **Nhánh thay thế:** 00a → "Đăng ký" → 00b → "Tạo tài khoản" → 00a → đăng nhập → 02.
-- **Nhánh lỗi:** email sai định dạng hoặc sai mật khẩu → lỗi hiện ngay dưới ô, giữ nguyên dữ liệu đã nhập. Khung lỗi chưa vẽ riêng trong Figma, dùng component Text field/Error.
+- **Happy path:** Splash → Onboarding → Đăng nhập → Trang chủ tổng hợp.
+- **Nhánh lỗi và phục hồi:** sai mật khẩu → báo ngay dưới ô Mật khẩu kèm gợi ý "Quên mật khẩu?";
+  sai email → "Email này chưa được đăng ký" ở ô Email.
+- **Nhánh phụ:** đổi mật khẩu (nút Lưu khóa đến khi nhập đủ 3 ô); xóa tài khoản và đăng xuất đều
+  có dialog với nút "Hủy".
 
 ## 4. Bảng ánh xạ flow → màn hình
 
 | Màn hình | Flow 1 | Flow 2 | Flow 3 | Flow 4 | Flow 5 | Flow 6 | Flow 7 |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 00a Đăng nhập | ✓ (lần đầu) | | | | ✓ sau Đăng xuất | | ✓ bắt đầu |
+| 00 Splash | | | | | | | ✓ bắt đầu |
+| 00 Hub | ✓ chưa ghi hôm nay | | | | | | ✓ kết thúc |
+| 00a Đăng nhập | ✓ (lần đầu) | | | | ✓ sau Đăng xuất | | ✓ nhánh lỗi, kết thúc sau đăng xuất / xóa tài khoản |
 | 00b Đăng ký | | | | | | | ✓ nhánh thay thế |
+| Quên mật khẩu | | | | | | | ✓ nhánh phục hồi |
 | 01 Onboarding | ✓ (lần đầu) | | | | | | ✓ trước bắt đầu |
 | 02 Home Dashboard | ✓ bắt đầu, kết thúc | ✓ bắt đầu | | | | ✓ bắt đầu (thẻ Danh sách mong muốn) | ✓ kết thúc |
 | 03 Add Purchase | ✓ bước 1, nhánh lỗi | ✓ từ trạng thái trống | ✓ sửa (03b) | | | ✓ điền sẵn từ món mong muốn | |
 | 04 Purchase Reason | ✓ bước 2, đang lưu, giải thích động cơ | | ✓ sửa (04c) | | | ✓ động cơ chọn sẵn, lưu → Đã mua | |
-| 05 Purchase Detail | | | ✓ sửa, xóa | | | | |
+| 05 Purchase Detail | ✓ khoản mua đã lưu | | ✓ sửa, xóa | | | | |
+| 05a Xin quyền thông báo | ✓ lần lưu đầu tiên | | | | ✓ "Mở cài đặt" | | |
 | 06 Purchase History | | | ✓ bắt đầu, kết thúc | ✓ bắt đầu, chọn tháng, tháng 9 | | | |
 | 07 Buying Patterns | | ✓ loading, lỗi, trống | | ✓ kết thúc (tháng 9, Tuần) | | | |
 | 08 Personal Insights | | ✓ (đã lưu chiêm nghiệm) | | | | | |
 | 09 Monthly Reflection | | ✓ | | | | | |
-| 10 Profile & Settings | | ✓ bật nhắc | | | ✓ bắt đầu, kết thúc | | |
+| 10 Profile & Settings | | ✓ bật nhắc | | | ✓ bắt đầu, kết thúc | | ✓ đăng xuất |
+| 10a Tài khoản | | | | | | | ✓ xóa tài khoản |
+| 10b Đổi mật khẩu | | | | | | | ✓ nhánh phụ |
 | 11 Wishlist Overview | | | | | | ✓ bắt đầu, kết thúc (11a–11e) | |
 | 12 Add Wishlist Item | | | | | | ✓ thêm, nhánh lỗi, sửa (12a–12c) | |
 | 13 Wishlist Detail | | | | | | ✓ quyết định, dialog bỏ qua (13a–13d) | |
@@ -295,3 +331,11 @@ Mỗi trạng thái là một khung riêng, giống hệt màn gốc và chỉ k
 | Ghi khoản mua – Bước 1/2 và 2/2 (từ danh sách mong muốn) | 03, 04 | Flow 6 | "Ghi khoản mua" ở 13 | Lưu → 11e · Back → 13 |
 | Chi tiết món – đã bỏ qua | 13 | Flow 6 | Chạm món ở bộ lọc Bỏ qua | "Đưa về Đang cân nhắc" → 11d |
 | Chi tiết món – đã mua | 13 | Flow 6 | Chạm món ở bộ lọc Đã mua | Chỉ xem; Back → 11e |
+| Đăng nhập – lỗi | Đăng nhập | Flow 7 | Sai email hoặc mật khẩu | Sửa lại, hoặc "Quên mật khẩu?" |
+| Trang chủ – vừa tạo tài khoản | 02 | Flow 7 | Tạo tài khoản thành công | "Ghi khoản mua" → 03 |
+| Trang chủ tổng hợp – chưa ghi hôm nay | 00 Hub | Flow 1 | Hôm nay chưa có khoản nào | "Ghi khoản mua" → 03 |
+| Ghi khoản mua – đang nhập số tiền | 03 | Flow 1 | Chạm ô số tiền | Bàn phím số, "Tiếp tục" nằm trên bàn phím |
+| Cá nhân – chưa cấp quyền thông báo | 10 | Flow 1, 5 | Đã chọn "Để sau" ở 05a | "Mở cài đặt" → 05a |
+| Cá nhân – xác nhận đăng xuất | 10 | Flow 7 | Nhấn "Đăng xuất" | "Hủy" → 10 · "Đăng xuất" → Đăng nhập |
+| Tài khoản – xác nhận xóa | 10a | Flow 7 | Nhấn "Xóa tài khoản" | "Hủy" → 10a · "Xóa tài khoản" → Đăng nhập |
+| Đổi mật khẩu – đã lưu | 10b | Flow 7 | Lưu mật khẩu mới | Tự về Tài khoản sau 2,5 giây |

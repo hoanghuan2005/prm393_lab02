@@ -4,7 +4,7 @@
 **Course:** PRM323 – Lab 2
 **Nguồn chuẩn:** token trong [`design/DESIGN.md`](../design/DESIGN.md) và page `04 Design System` của Figma; component ở page `05 Components`; màn hình ở page `03 Final UI`. Ảnh từng khung nằm trong [`assets/figma/`](../assets/figma/). Nếu tài liệu này và Figma khác nhau, lấy Figma.
 
-Cách đọc: phần 1–2 là hai bảng chung (token → Flutter, component → widget). Phần 3 là cấu trúc app và điều hướng. Phần 4 đặc tả từng màn theo 6 mục: Layout · Components · States · Interactions · Navigation · Constraints. Phần 5 là nhãn TalkBack, phần 6 là hành vi màn rộng. **Phần 7 liệt kê các thay đổi đã quyết sau phản biện bằng AI (PB-x); khi dựng, phần 7 ghi đè phần 4.**
+Cách đọc: phần 1–2 là hai bảng chung (token → Flutter, component → widget). Phần 3 là cấu trúc app và điều hướng. Phần 4 đặc tả từng màn theo 6 mục: Layout · Components · States · Interactions · Navigation · Constraints. Phần 5 là nhãn TalkBack, phần 6 là hành vi màn rộng. **Phần 7 liệt kê các thay đổi đã quyết sau phản biện bằng AI (PB-x); khi dựng, phần 7 ghi đè phần 4.** Phần 8 là ghi chú cho các màn bổ sung theo checklist.design/mobile (Splash, xin quyền thông báo, tài khoản).
 
 ---
 
@@ -228,7 +228,7 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 ### 05 Chi tiết khoản mua (`/purchase/:id`) — Flow 3
 1. **Layout:** `Scaffold` → `AppBar` (Back, "Chi tiết khoản mua", action thùng rác màu error) → `SingleChildScrollView` padding 16, gap 12: Card 1 (overline "MỤC ĐÃ CHI TIÊU" + icon hóa đơn, tên (Title), số tiền (Display, primary), khối surface-container "Động cơ" + `MotiveChip`) → Card 2 (dòng icon đồng hồ: "Thời gian ghi nhận", "Hôm qua 23:40", "Thứ Bảy, 10/10/2026"; dòng icon ghi chú: "Ghi chú của bạn" + khối trích dẫn). `bottomNavigationBar`: nút Primary Large "✎ Sửa".
 2. **Components:** App bar/Nested (action delete), Motive chip, Card, Button/Primary/Large, Dialog/Destructive.
-3. **States:** mặc định (`05`); dialog xóa (`05a`); không có ghi chú → ẩn dòng ghi chú; đang tải chi tiết → Skeleton 2 card.
+3. **States:** mặc định (`05`); dialog xóa (khung "05 Chi tiết khoản mua – dialog xóa"; không nhầm với màn 05a Xin quyền thông báo); không có ghi chú → ẩn dòng ghi chú; đang tải chi tiết → Skeleton 2 card.
 4. **Interactions:** thùng rác → `showDialog` "Xóa khoản mua này?" / "“Tai nghe Bluetooth” sẽ bị xóa khỏi lịch sử. Bạn có 5 giây để hoàn tác." — "Hủy" đóng dialog; "Xóa" → xóa mềm, pop về màn trước + snackbar "Đã xóa “…” · Hoàn tác"; hết 5 giây mới xóa hẳn. "Sửa" → 03b.
 5. **Navigation:** từ 02 (Gần đây) hoặc 06 (Lịch sử). Back → màn trước. Sau khi sửa → quay lại 05 + snackbar "Đã cập nhật “…”" (dùng Snackbar/Saved).
 6. **Constraints:** thùng rác 48 × 48, nhãn đọc "Xóa khoản mua Tai nghe Bluetooth"; ghi chú dài xuống dòng không giới hạn; số tiền không xuống dòng. ≥ 840 dp: hiển thị ở khung phải của Lịch sử (list-detail).
@@ -268,8 +268,8 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 ### 10 Cá nhân (`/profile`) — Flow 5
 1. **Layout:** `Scaffold` → `AppBar` (tab, "Cá nhân") → `ListView` padding 16, gap 12: Card "Bạn — Dữ liệu cá nhân trên máy này" → overline "CÀI ĐẶT NHẮC NHỞ" → Card 2 `SwitchListTile` ("Nhắc ghi khoản mua — … lúc 21:00 mỗi tối"; "Nhắc chiêm nghiệm hằng tháng — Ngày cuối tháng…") → overline "CÀI ĐẶT DỮ LIỆU" → Card 2 `ListTile` có chevron ("Xuất dữ liệu — … dưới dạng CSV"; "Xóa toàn bộ dữ liệu" chữ error) → ghi chú surface-container (icon khiên, "Dữ liệu được lưu trên máy và đồng bộ với tài khoản của bạn khi có mạng."). `NavigationBar` (Cá nhân).
 2. **Components:** Switch, Card, Dialog/Destructive, Snackbar/Exported, Navigation bar/Cá nhân.
-3. **States:** mặc định (`10`); xác nhận xóa toàn bộ (`10a`: "Xóa toàn bộ dữ liệu?" / "Mọi khoản mua và chiêm nghiệm đã lưu sẽ bị xóa vĩnh viễn khỏi máy và tài khoản. Không thể hoàn tác." / "Hủy" · "Xóa tất cả"); đã xuất (`10b`: snackbar "Đã lưu “whyibuy-10-2026.csv” vào Tải xuống").
-4. **Interactions:** gạt switch → lưu ngay + đặt / hủy lịch thông báo (`flutter_local_notifications`), xin quyền thông báo lần đầu; "Xuất dữ liệu" → tạo CSV (cột: ngày giờ, tên, số tiền, động cơ, ghi chú) vào Tải xuống; "Xóa toàn bộ dữ liệu" → dialog → "Xóa tất cả" xóa dữ liệu cục bộ và trên tài khoản, ở lại 10, các tab khác về trạng thái trống.
+3. **States:** mặc định (`10`); xác nhận xóa toàn bộ (khung "10 Cá nhân – xác nhận xóa toàn bộ": "Xóa toàn bộ dữ liệu?" / "Mọi khoản mua và chiêm nghiệm đã lưu sẽ bị xóa vĩnh viễn khỏi máy và tài khoản. Không thể hoàn tác." / "Hủy" · "Xóa tất cả"); đã xuất (khung "10 Cá nhân – đã xuất dữ liệu": snackbar "Đã lưu “whyibuy-10-2026.csv” vào Tải xuống"). Mã 10a / 10b nay là màn Tài khoản / Đổi mật khẩu (xem mục 8).
+4. **Interactions:** gạt switch → lưu ngay + đặt / hủy lịch thông báo (`flutter_local_notifications`); nếu chưa cấp quyền thông báo → mở 05a (xem mục 8.5); "Xuất dữ liệu" → tạo CSV (cột: ngày giờ, tên, số tiền, động cơ, ghi chú) vào Tải xuống; "Xóa toàn bộ dữ liệu" → dialog → "Xóa tất cả" xóa dữ liệu cục bộ và trên tài khoản, ở lại 10, các tab khác về trạng thái trống.
 5. **Navigation:** tab gốc; từ avatar ở các tab khác. Back → tab Trang chủ.
 6. **Constraints:** mỗi dòng cài đặt ≥ 56 dp; switch 52 × 48, nhãn đọc "Nhắc ghi khoản mua lúc 21 giờ, đang bật"; "Xóa toàn bộ" không có hoàn tác nên bắt buộc dialog. ≥ 600 dp: nội dung tối đa 600 dp.
 
@@ -375,11 +375,58 @@ Các mục dưới đây được chấp nhận ở vòng phản biện (bảng 
 | PB-10 | 12 | `hintStyle`: Body 16 w400, màu on-surface-variant |
 | PB-11 | 02, 07, 08 | 02: bỏ dòng "Nhiều nhất: …", dòng phụ chỉ "Tuần này: 5 khoản". 07: bỏ thẻ "Tổng quan chu kỳ", khung giờ đặt ngay sau danh sách động cơ. 08: bỏ tiêu đề "Góc nhìn" trong thân (giữ overline tháng) |
 | PB-12 | 13a | Nút xác nhận "Chuyển vào Bỏ qua"; nội dung "“<tên>” sẽ chuyển vào Bỏ qua. Bạn có 5 giây để hoàn tác." |
-| PB-13 | 10a | Nội dung: "Mọi khoản mua, món mong muốn, chiêm nghiệm và nhắc nhở sẽ bị xóa vĩnh viễn khỏi máy và tài khoản. Không thể hoàn tác." Nút "Hủy" là `TextButton` cao 48 |
-| PB-14 | 10 | Hàng "Nhắc ghi khoản mua" hiển thị giờ (mặc định 23:00); chạm vào chữ → `showTimePicker`; switch vẫn bật / tắt |
+| PB-13 | 10 – xác nhận xóa toàn bộ | Nội dung: "Mọi khoản mua, món mong muốn, chiêm nghiệm và nhắc nhở sẽ bị xóa vĩnh viễn khỏi máy và tài khoản. Không thể hoàn tác." Nút "Hủy" là `TextButton` cao 48 |
+| PB-14 | 10 | Hàng "Nhắc ghi khoản mua" hiển thị giờ (mặc định 21:00, khớp Figma ở 10 và 05a; người dùng đổi được); chạm vào chữ → `showTimePicker`; switch vẫn bật / tắt |
 | PB-15 | 01, 10, 00b | Câu lưu trữ chung: "Lưu trên máy, đồng bộ với tài khoản khi có mạng." 10 thêm Card "Tài khoản" (email, "Đăng xuất" → `/login`, xóa phiên). 00b chỉ còn Email + Mật khẩu (có `IconButton` hiện / ẩn, tooltip "Hiện mật khẩu") |
 | PB-16 | 03 | Nhãn "Bắt buộc" màu on-surface-variant (chỉ đổi sang error khi có lỗi) |
 | PB-17 | Icon | Biên lai không ký hiệu tiền (`Icons.receipt_long_outlined`), tên món `Icons.shopping_bag_outlined`, "Xóa bộ lọc" `Icons.filter_alt_off_outlined`, 08 dùng `Icons.calendar_month_outlined` |
 | PB-18 | 04, 12 | `TextButton` "Các động cơ nghĩa là gì?" dưới câu hỏi, mở bottom sheet giải thích động cơ |
 | PB-19 | 02a, 06a | 02a giữ chip "Hôm nay, 11/10" và ẩn "Xem tất cả" khi 0 khoản; 06a giữ thứ tự chip theo `Motive.values` |
 | PB-20 | Text button | Mọi link chữ ("Xem tất cả", "Quên mật khẩu?", "Đăng ký", "Để sau", "Hủy") dùng `TextButton` với `minimumSize: Size(48, 48)` |
+
+## 8. Ghi chú bàn giao Flutter – phần bổ sung checklist (13/10/2026)
+
+### 8.1. Đăng nhập / Đăng ký / Đổi mật khẩu
+- Bọc form trong `AutofillGroup`; ô Email: `autofillHints: [AutofillHints.email]`,
+  `keyboardType: TextInputType.emailAddress`, `textInputAction: TextInputAction.next`.
+- Ô Mật khẩu: `autofillHints: [AutofillHints.password]` (Đăng ký / Đổi mật khẩu dùng
+  `AutofillHints.newPassword`), `obscureText` bật/tắt bằng `suffixIcon` eye / eye-off,
+  `Semantics(label: 'Hiện mật khẩu' / 'Ẩn mật khẩu')`.
+- Lỗi đăng nhập: hiện ở `errorText` của ô sai (email: "Email này chưa được đăng ký";
+  mật khẩu: "Mật khẩu chưa đúng. Thử lại hoặc chọn Quên mật khẩu?"), kèm icon cảnh báo.
+- Password strength: tính lại sau mỗi lần gõ (onChanged), 3 mức; nhãn chữ luôn hiện.
+- Đổi mật khẩu: nút Lưu `onPressed: null` cho tới khi đủ 3 ô và ô mới trùng ô nhập lại;
+  lưu xong `Navigator.pop` về Tài khoản + SnackBar "Đã đổi mật khẩu".
+
+### 8.2. Ô số tiền
+- `keyboardType: TextInputType.number`, `inputFormatters: [FilteringTextInputFormatter.digitsOnly]`,
+  định dạng hiển thị 45.000 ₫. Nút "Tiếp tục" nằm trong `bottomNavigationBar`/`persistentFooterButtons`
+  để luôn nằm trên bàn phím (Scaffold `resizeToAvoidBottomInset: true`).
+
+### 8.3. Thanh tab và cử chỉ
+- Khi đổi tab: `HapticFeedback.selectionClick()`.
+- Back hệ thống (`PopScope`): ở màn cấp sâu thì quay về màn trước; ở tab gốc khác Trang chủ thì
+  về Trang chủ; ở Trang chủ thì thoát app.
+- Thanh tab ẩn ở: Ghi khoản mua, Chi tiết khoản mua, Tài khoản, Đổi mật khẩu, Xin quyền thông báo.
+
+### 8.4. Splash
+- Android 12+ dùng SplashScreen API (gói `flutter_native_splash`): nền #2E4A9E, icon app
+  ở giữa. Giữ splash chỉ trong lúc kiểm tra phiên đăng nhập (mục tiêu ≤ 0,8 giây), sau đó điều
+  hướng: đã đăng nhập → Trang chủ tổng hợp, chưa → Onboarding (lần đầu) hoặc Đăng nhập.
+- Icon app: adaptive icon (foreground ký hiệu chart-search trắng trong vùng 66 dp, background
+  #2E4A9E), tạo bằng `flutter_launcher_icons`.
+
+### 8.5. Quyền thông báo (nhắc nhở 21:00)
+- Android 13+ cần `POST_NOTIFICATIONS` trong AndroidManifest.
+- Chỉ hiện màn 05a sau lần lưu khoản mua đầu tiên. "Bật nhắc nhở" → gọi
+  `Permission.notification.request()` (`permission_handler`) → hệ thống hiện hộp thoại của Android.
+- "Để sau" hoặc bị từ chối → lưu cờ `notificationDenied = true`. Màn Cá nhân đọc cờ này để hiện
+  "Chưa cấp quyền thông báo · Mở cài đặt". Link gọi `openAppSettings()`.
+- Hẹn giờ nhắc bằng `flutter_local_notifications` (mặc định 21:00 mỗi ngày, đổi giờ ở Cá nhân theo PB-14); chạm thông báo mở thẳng
+  03 Ghi khoản mua.
+
+### 8.6. Tài khoản, đăng xuất, xóa
+- Đăng xuất: dialog loại Default. Dữ liệu đã đồng bộ vẫn giữ trên tài khoản; xóa phiên đăng nhập
+  rồi `pushNamedAndRemoveUntil` về Đăng nhập.
+- Xóa tài khoản: dialog loại Danger, xóa tài khoản và dữ liệu đã đồng bộ, rồi về Đăng nhập.
+  Khác với "Xóa toàn bộ dữ liệu" (chỉ xóa khoản mua, giữ tài khoản).

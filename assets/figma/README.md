@@ -28,6 +28,8 @@
 
 ## Khung trạng thái
 
+Lưu ý: tiền tố `05a`, `10a`, `10b` trong tên ảnh dưới đây chỉ là thứ tự sắp xếp, đặt từ trước ngày 13/10/2026. Nay các mã này thuộc màn mới trong Figma: 05a Xin quyền thông báo, 10a Tài khoản, 10b Đổi mật khẩu. Tên ảnh được giữ nguyên để không làm hỏng liên kết trong các tài liệu khác. Ảnh các màn bổ sung theo checklist (Splash, 05a, 10a, 10b, Đăng nhập – lỗi…) chưa được xuất vào thư mục này.
+
 | Ảnh | Khung Figma |
 |---|---|
 | `02a-home-empty.png` | 02 Trang chủ – trống |

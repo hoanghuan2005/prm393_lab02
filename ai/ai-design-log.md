@@ -10,6 +10,7 @@
 | Google Stitch | Sinh UI ban đầu và các vòng lặp |
 | Claude (claude.ai + Figma connector), 12/10/2026 | Phản biện ảnh Stitch của Flow 6; dựng Flow 6 trực tiếp trong file Figma (component, Final UI, wireframe, sơ đồ user flow, prototype) theo master prompt của tôi; soạn nội dung tài liệu Flow 6. Tôi kiểm tra lại từng màn và tự quyết định giữ / sửa / bỏ. |
 | Claude (Claude Code, desktop app), 12/10/2026 | Rà repo và file Figma theo đề bài; chụp lại toàn bộ khung Final UI từ Figma vào `assets/figma/`; chạy vòng phản biện bằng AI (mục PB bên dưới, một agent Claude riêng chỉ đọc ảnh và tài liệu); soạn lại `handoff/flutter-handoff.md`, `design/screen-spec.md`, `design/design-decisions.md`, README cho khớp Figma; soạn nháp quyết định cho từng phát hiện để tôi duyệt. |
+| Claude (Cowork, Figma MCP) | Đối chiếu checklist.design/mobile, lập kế hoạch prompt theo giai đoạn, dựng component/wireframe/Final UI/user flow/prototype trực tiếp trong Figma qua Plugin API, AI review theo checklist (nhóm duyệt và xác nhận từng giai đoạn) |
 
 ---
 
@@ -1069,3 +1070,81 @@ Các quyết định chấp nhận / sửa / từ chối quan trọng nhất đ�
 - Stitch sinh mỗi khung độc lập nên không giữ được bố cục giữa các trạng thái của cùng một màn; phần này làm bằng component trong Figma.
 - Prompt dài, sửa nhiều màn cùng lúc làm Stitch sinh lại toàn bộ và đánh mất những gì đã sửa (R3 lần 1). Prompt ngắn, ít màn, có khối khóa phong cách và ảnh ví dụ đúng/sai cho kết quả tốt (R3 lần 2).
 - Phần tự báo cáo của Stitch không đáng tin (R1: 4/7 khẳng định sai so với ảnh), mọi kết quả phải đối chiếu với ảnh.
+
+---
+
+## C — Bổ sung theo checklist.design/mobile (13/10/2026)
+
+**Bối cảnh:** nhóm trưởng yêu cầu tìm một checklist để AI review và giải quyết phần lớn vấn đề
+trước khi sang bước tiếp theo. Nhóm chọn checklist.design/mobile (25 checklist).
+
+### C0 – Đối chiếu và lập kế hoạch
+- Công cụ AI: Claude (Cowork, trình duyệt + Claude Docs)
+- Prompt: "Hãy check checklist này và kiểm tra xem hiện tại nhóm tôi đã làm đầy đủ các request về mobile chưa. Tạo 1 file docs liệt kê những gì đã hoàn thành và còn thiếu, gợi ý cho những cái thiếu" → sau đó "không nhất thiết hoàn thành 100%, chỉ cần phần lớn… gợi ý lại" → "tạo kế hoạch phát triển prompt từng giai đoạn".
+- Kết quả AI đưa ra: doc đối chiếu (3 đạt, 5 một phần, 5 chưa có, 12 không áp dụng); phạm vi rút gọn còn 57 mục, ước tính 44% → gói 8 khung để lên ~88%; kế hoạch prompt 9 giai đoạn (0–8), mỗi giai đoạn có tiêu chí "Xong khi".
+- Nhóm chỉnh sửa lại: loại các mục phụ thuộc backend và mua bán chưa chốt; chốt cách lưu dữ liệu "lưu trên máy, đồng bộ khi đăng nhập"; yêu cầu AI dừng sau mỗi giai đoạn để nhóm xác nhận.
+- Đánh giá: checklist giúp phát hiện phần "rìa ứng dụng" (tài khoản, khởi động, quyền) bị bỏ sót; AI ban đầu đếm cả mục không phù hợp, nhóm phải tự quyết phạm vi.
+
+### C1 – Giai đoạn 1: Chuẩn bị icon và component
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 1 trong kế hoạch bổ sung checklist Mobile
+- Kết quả AI đưa ra: icon eye/eye-off/logout (342:551, 342:558, 342:567); Dialog thành bộ Type=Danger/Default (343:600); component Password strength 3 mức (344:607); ví dụ ô Mật khẩu trong Text field (342:574)
+- Nhóm chỉnh sửa lại: không thêm icon search (Tìm kiếm ngoài phạm vi); Text field Error đã có sẵn nên chỉ bổ sung icon gợi ý; sửa dòng lỗi tự xuống hàng; đổi tên 12 ô icon bị đặt nhầm
+- Đánh giá: AI kiểm tra component có sẵn trước khi tạo nên không bị trùng; phải sửa lỗi chữ bị cắt và bố cục trang bị đè sau khi thêm khối mới
+
+### C2 – Giai đoạn 2: Wireframe 8 khung
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 2 trong kế hoạch bổ sung checklist Mobile
+- Kết quả AI đưa ra: section "Wireframe – Bổ sung checklist" (351:303) gồm 8 khung low-fi, mỗi khung có ghi chú mục checklist
+- Nhóm chỉnh sửa lại: giữ chính tả "Xóa" cho thống nhất với file; sửa tiêu đề App bar của 3 khung còn "Quay lại"; khung Cá nhân để cuộn dọc
+- Đánh giá: nhân bản wireframe cũ giữ đúng phong cách WF kit; vẫn phải kiểm tra bằng ảnh chụp vì có chỗ ghi đè chữ không ăn
+
+### C3 – Giai đoạn 3A–3C: Final UI
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 3A, 3B, 3C trong kế hoạch
+- Kết quả AI đưa ra: Đăng nhập – lỗi (353:4575), Đăng ký – bản sửa (353:4671); 7 khung Cá nhân & Tài khoản (359:4641, 359:4759, 359:4884, 359:4996, 359:5079, 359:5118, 359:5164); 00 Splash (366:4923), 05a Xin quyền thông báo (366:4930); component App icon (365:599) và khối Icon app ở page 04 (365:1160)
+- Nhóm chỉnh sửa lại: màn Flow 7 gốc dùng component từ thư viện đã publish (bản cũ, thiếu trạng thái Error) nên đổi sang component trong file cho khung mới; dùng nút Tonal thay nút viền (bộ Button không có kiểu viền); sửa màu các dòng bị đỏ do nhân bản, cỡ chữ ô mật khẩu, vị trí snackbar, bo góc icon cỡ nhỏ; dời section Flow 8–10 tránh đè
+- Đánh giá: dựng nhanh nhờ nhân bản màn có sẵn, nhưng nhân bản kéo theo kiểu chữ/màu của dòng gốc nên cần chụp ảnh kiểm tra từng lần
+
+### C4 – Giai đoạn 4: Cập nhật User Flow
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 4 trong kế hoạch
+- Kết quả AI đưa ra: IA thêm Splash và nhánh Tài khoản / Hỗ trợ & thông tin / Dialog đăng xuất; Flow 1 thêm quyết định "Lần đầu lưu & chưa cấp quyền?" và 05a; Flow 7 thêm Splash → "Đã đăng nhập?", vòng lỗi đăng nhập, hàng nhánh tài khoản
+- Nhóm chỉnh sửa lại: sửa chữ trong ô quyết định mới bị giữ chữ cũ; dời Flow 8–10 xuống vì Flow 7 cao thêm
+- Đánh giá: nhân bản khối có sẵn giữ đúng chú thích của page (liền = chính, đứt đỏ = lỗi, đứt xám = phụ)
+
+### C5 – Giai đoạn 5: Nối Prototype
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 5 trong kế hoạch
+- Kết quả AI đưa ra: section mới trên page 06 (377:4390) với 11 khung; luồng ★ bắt đầu ở Splash (After delay 0,8 giây); nối Đăng nhập → lỗi → Trang chủ, Đăng ký mới, 05 → 05a → Trang chủ, nhánh Tài khoản / Đổi mật khẩu / Xóa tài khoản / Đăng xuất; 16 tab Cá nhân dùng điều kiện theo biến thong-bao/da-tu-choi; luồng ★ đi tới 73/79 khung
+- Nhóm chỉnh sửa lại: sửa icon nút Đăng xuất (biến thể Tonal không nhận thuộc tính Icon); giữ nguyên 2 khung bản cũ; 3 mục Hỗ trợ & thông tin để ngoài phạm vi
+- Đánh giá: biến prototype giúp tab Cá nhân hiển thị đúng trạng thái đã từ chối quyền; AI tự kiểm tra khả năng đi tới của từng khung nên phát hiện khung bị bỏ sót
+
+### C6 – Giai đoạn 6: Sửa nhỏ
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 6 trong kế hoạch
+- Kết quả AI đưa ra: "Trước khi mua" chuyển sang nút Tonal (320:8840, 274:4524); khung Hub chưa ghi hôm nay (385:4946); Trang chủ vừa tạo tài khoản (385:5021); Bước 1/2 có bàn phím số (385:5079); quét 90 khung xác nhận không còn màn có 2 nút tô đặc
+- Nhóm chỉnh sửa lại: bottom sheet đã có thanh kéo sẵn nên bỏ qua; thêm phím "000" cho số tiền VNĐ
+- Đánh giá: kiểm tra trước khi sửa tránh làm trùng thứ đã có; quét tự động bắt cả trường hợp nút ẩn cần loại trừ
+
+### C7 – Giai đoạn 7: AI review theo checklist
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: Prompt Giai đoạn 7 trong kế hoạch
+- Kết quả AI đưa ra: bảng chấm 56 mục (10 checklist) kèm node ID; kiểm tra accessibility tự động 14 khung mới; lần 1: 94,6% CHƯA ĐẠT (thiếu ghi chú autofill, haptic); lần 2 sau khi thêm 2 ghi chú: 98,2% ĐẠT
+- Nhóm chỉnh sửa lại: thêm ghi chú autofill (354:4762) và haptic (mô tả 15:216); 2 mục Một phần để tuỳ chọn
+- Đánh giá: ngưỡng "không còn Chưa có ở Login/Settings/Account" giúp phát hiện mục nhỏ dễ bỏ sót; chấm bằng script đọc node khách quan hơn chấm bằng mắt
+
+### C8 – Giai đoạn 8: Cập nhật tài liệu
+- Công cụ AI: Claude (Cowork) soạn nội dung; Claude (Claude Code) dán vào repo và đối chiếu với file hiện có và với tên khung trong Figma
+- Prompt: Prompt Giai đoạn 8 trong kế hoạch → "làm đúng như hướng dẫn đi" → "sửa luôn" (sửa các điểm lệch AI báo lại sau khi dán)
+- Kết quả AI đưa ra: nội dung cập nhật DESIGN.md, user-flow.md (Flow 1, Flow 7, IA), ghi chú bàn giao Flutter, phần Phạm vi cho báo cáo, mục log này
+- Nhóm chỉnh sửa lại:
+  - Không thêm trùng 2 token `surface-container`, `error-container` (đã có), chỉ cập nhật cột "Dùng cho".
+  - Giữ mã 00a / 00b cho Đăng nhập / Đăng ký; thêm dòng riêng "Quên mật khẩu" và "00 Hub" vào bảng màn hình.
+  - Sơ đồ điều hướng mới bỏ sót Danh sách mong muốn (11–13), cạnh 06 → 07 và Đăng xuất, nên nhóm giữ lại các phần này. Sơ đồ Flow 1 mới giữ nhánh "Thêm ghi chú?" và lối vào lần đầu, vì phần mô tả vẫn nhắc tới.
+  - "Đổi mật khẩu – đã lưu" ghi màn gốc 10b (bản nháp ghi 10a). Thêm Splash, Hub, Quên mật khẩu, 05a, 10a, 10b vào bảng ánh xạ flow → màn hình.
+  - Ghi chú Flutter gộp vào `handoff/flutter-handoff.md` (mục 8) thay vì tạo file mới.
+  - Mã cũ 05a / 10a / 10b (dialog xóa, xác nhận xóa toàn bộ, đã xuất dữ liệu) trong handoff trùng với mã màn mới. Nhóm đổi sang tên khung Figma; tên file ảnh trong `assets/figma/` giữ nguyên, có ghi chú.
+  - Giờ nhắc: PB-14 từng chốt mặc định 23:00, nhưng Figma (10 Cá nhân, 05a) vẫn ghi 21:00 và cho đổi giờ ở Cá nhân. Theo quy ước "lệch thì lấy Figma", handoff ghi mặc định 21:00.
+  - Cập nhật README: công cụ AI, số màn hình (21), mô tả Flow 1 và Flow 7.
+- Đánh giá: bản nháp soạn từ tài liệu ngày 11–12/10 nên lệch với repo ở nhiều chỗ (token đã có, Flow 7 đã có, mã màn đã dùng). Dán nguyên văn sẽ gây trùng và mất nội dung. Đối chiếu từng mục với file thật và với tên khung trong Figma là bước bắt buộc. Flow 8–10 (Trước khi mua, AI) có trong Figma nhưng vẫn chưa có trong `user-flow.md`.
