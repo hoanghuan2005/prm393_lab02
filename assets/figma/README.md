@@ -1,33 +1,72 @@
-# Figma Design Assets & Exports
+# Ảnh Final UI từ Figma
 
-Thư mục này lưu trữ các ảnh chụp màn hình UI hoàn chỉnh (Final UI), Design System, Components và sơ đồ luồng người dùng được xuất từ file Figma dự án.
+Ảnh của mọi khung trên page `03 Final UI` (khung 360 × 800 dp), gồm màn chính và các khung trạng thái.
 
-## 1. Liên kết file Figma chính thức
+- **File Figma:** https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled (ai có link đều xem được)
+- **Page 03 Final UI:** https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=2-3
+- **Cách xuất:** 9 ảnh Flow 6 (11, 12a, 13, 13a, 13c, 13d và 3 khung chi tiết theo dữ liệu) là PNG 2× export trực tiếp từ Figma. Các ảnh còn lại là bản render khung từ Figma prototype viewer, độ phân giải 1.5–2×.
 
-* **Figma File Link:** `https://www.figma.com/design/<FIGMA_FILE_ID>/PRM323_Lab2_WhyIBuy_PsychologyOfMoney` *(Thay thế bằng link file Figma có quyền xem của nhóm)*
-* **Quyền truy cập:** View-only (Bất kỳ ai có liên kết đều có thể xem).
+## Màn chính
 
-## 2. Cấu trúc 6 Pages chuẩn trong Figma
+| Ảnh | Khung Figma | Flow |
+|---|---|---|
+| `00a-login.png` | Đăng nhập | 7 |
+| `00b-register.png` | Đăng ký | 7 |
+| `01-onboarding.png` | 01 Onboarding | 1, 7 |
+| `02-home.png` | 02 Trang chủ | 1, 2 |
+| `03-add-purchase-step1.png` | 03 Ghi khoản mua – Bước 1/2 | 1 |
+| `04-purchase-reason.png` | 04 Ghi khoản mua – Bước 2/2 | 1 |
+| `05-purchase-detail.png` | 05 Chi tiết khoản mua | 3 |
+| `06-history.png` | 06 Lịch sử | 3, 4 |
+| `07-patterns.png` | 07 Mô hình | 2, 4 |
+| `08-insights.png` | 08 Góc nhìn | 2 |
+| `09-monthly-reflection.png` | 09 Chiêm nghiệm tháng | 2 |
+| `10-profile.png` | 10 Cá nhân | 5 |
+| `11-wishlist-overview.png` | 11 Danh sách mong muốn | 6 |
+| `12-add-item.png` | 12 Thêm món mong muốn | 6 |
+| `13-wishlist-detail.png` | 13 Chi tiết món mong muốn (Bàn phím cơ) | 6 |
 
-File Figma được thiết kế đúng theo chuẩn 6 trang bắt buộc của đề bài Lab 2:
-1. `01 User Flow`: Sơ đồ 3 user flows và Sitemap phân tầng.
-2. `02 Wireframe`: Bản vẽ khung dây low-fi đối chiếu trước khi hoàn thiện.
-3. `03 Final UI`: Toàn bộ 10 màn hình hoàn chỉnh độ phân giải cao (High-Fidelity).
-4. `04 Design System`: Color tokens, Typography scale, Spacing, Radius, Elevation variables.
-5. `05 Components`: 9 nhóm components có đầy đủ variants, states và Auto Layout.
-6. `06 Prototype`: Bản mẫu tương tác có liên kết chuyển động, dialog overlay và feedback state.
+## Khung trạng thái
 
-## 3. Danh mục ảnh xuất (Exported PNGs)
-
-| Tên tệp ảnh | Nội dung |
-| :--- | :--- |
-| `figma-01-onboarding.png` | Màn hình Onboarding hoàn thiện |
-| `figma-02-home-dashboard.png` | Màn hình Home Dashboard hoàn thiện |
-| `figma-03-add-purchase.png` | Màn hình Bước 1: Nhập số tiền & Tên món hàng |
-| `figma-04-purchase-reason.png` | Màn hình Bước 2: Chọn 8 lý do tâm lý mua sắm |
-| `figma-05-purchase-detail.png` | Màn hình Chi tiết giao dịch & Nhật ký cảm xúc |
-| `figma-06-purchase-history.png`| Màn hình Lịch sử & Bộ lọc tâm lý |
-| `figma-07-buying-patterns.png` | Màn hình Phân tích mô hình hành vi (Donut chart & Trigger) |
-| `figma-08-personal-insights.png`| Màn hình Góc nhìn sâu sắc AI |
-| `figma-09-monthly-reflection.png`| Màn hình Báo cáo chiêm nghiệm tháng |
-| `figma-10-profile-settings.png` | Màn hình Cài đặt & Tùy chọn nhắc nhở |
+| Ảnh | Khung Figma |
+|---|---|
+| `02a-home-empty.png` | 02 Trang chủ – trống |
+| `02b-home-saved.png` | 02 Trang chủ – sau khi lưu |
+| `02c-home-offline.png` | 02 Trang chủ – ngoại tuyến |
+| `02d-home-wishlist-entry.png` | 02 Trang chủ – lối vào Danh sách mong muốn |
+| `03a-add-purchase-error.png` | 03 Ghi khoản mua – Bước 1/2 (lỗi) |
+| `03b-edit-purchase-step1.png` | 03 Sửa khoản mua – Bước 1/2 |
+| `03c-add-purchase-from-wishlist.png` | 03 Ghi khoản mua – Bước 1/2 (từ danh sách mong muốn) |
+| `04a-purchase-reason-saving.png` | 04 Ghi khoản mua – Bước 2/2 (đang lưu) |
+| `04b-motive-guide-sheet.png` | 04 Ghi khoản mua – giải thích động cơ |
+| `04c-edit-purchase-step2.png` | 04 Sửa khoản mua – Bước 2/2 |
+| `04d-purchase-reason-from-wishlist.png` | 04 Ghi khoản mua – Bước 2/2 (từ danh sách mong muốn) |
+| `05a-delete-dialog.png` | 05 Chi tiết khoản mua – dialog xóa |
+| `06a-history-no-result.png` | 06 Lịch sử – không có kết quả |
+| `06b-history-after-delete.png` | 06 Lịch sử – sau khi xóa |
+| `06c-history-month-picker.png` | 06 Lịch sử – chọn tháng |
+| `06d-history-sep-2026.png` | 06 Lịch sử – tháng 9/2026 |
+| `07a-patterns-loading.png` | 07 Mô hình – đang tải |
+| `07b-patterns-error.png` | 07 Mô hình – lỗi |
+| `07c-patterns-insufficient.png` | 07 Mô hình – chưa đủ dữ liệu |
+| `07d-patterns-sep-2026.png` | 07 Mô hình – tháng 9/2026 |
+| `07e-patterns-week.png` | 07 Mô hình – Tuần |
+| `08a-insights-reflection-saved.png` | 08 Góc nhìn – đã lưu chiêm nghiệm |
+| `10a-profile-delete-all-dialog.png` | 10 Cá nhân – xác nhận xóa toàn bộ |
+| `10b-profile-exported.png` | 10 Cá nhân – đã xuất dữ liệu |
+| `11a-wishlist-empty.png` | 11a Danh sách mong muốn – trống |
+| `11a-wishlist-skipped-empty.png` | 11a Danh sách mong muốn – Bỏ qua trống |
+| `11b-wishlist-saved.png` | 11b Danh sách mong muốn – đã lưu |
+| `11c-wishlist-skipped.png` | 11c Danh sách mong muốn – đã bỏ qua |
+| `11d-wishlist-undo.png` | 11d Danh sách mong muốn – sau hoàn tác |
+| `11e-wishlist-purchased.png` | 11e Danh sách mong muốn – đã mua |
+| `12a-add-item-error.png` | 12a Thêm món mong muốn – lỗi tên trống và chưa chọn động cơ |
+| `12b-add-item-filled.png` | 12b Thêm món mong muốn – đã điền |
+| `12c-edit-item.png` | 12c Sửa món mong muốn |
+| `13-wishlist-detail-ao-khoac.png` | 13 Chi tiết – Áo khoác, Đang cân nhắc |
+| `13-wishlist-detail-chuot-cong-thai-hoc.png` | 13 Chi tiết – Chuột công thái học, Đang cân nhắc (vừa thêm) |
+| `13a-skip-dialog.png` | 13a Dialog "Không mua món này nữa?" |
+| `13b-wishlist-detail-edited.png` | 13b Chi tiết món mong muốn – sau khi sửa |
+| `13c-wishlist-detail-skipped.png` | 13c Chi tiết – Bàn phím cơ, đã bỏ qua |
+| `13d-wishlist-detail-purchased.png` | 13d Chi tiết – Bàn phím cơ, đã mua |
+| `13d-wishlist-detail-purchased-binh-giu-nhiet.png` | 13d Chi tiết – Bình giữ nhiệt, đã mua |

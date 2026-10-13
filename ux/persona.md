@@ -48,6 +48,8 @@ By nudging users to log the emotional and contextual reasons behind each transac
 3. **Tự phản chiếu không phán xét (Non-judgmental Reflection):** Muốn nhìn lại lịch sử mua sắm với tâm thế tự khám phá bản thân chứ không phải bị ứng dụng "la mắng" hay hiện cảnh báo đỏ tiêu cực.
 4. **Hình thành thói quen tài chính lành mạnh:** Nhận diện các "pattern" chi tiêu theo cảm xúc để đưa ra quyết định lý trí hơn trong các lần tiếp theo.
 
+- Muốn có chỗ ghi lại món đang thèm mua (thường thấy qua TikTok, flash sale) kèm lý do, để nhìn lại trước khi bấm thanh toán — nhưng không muốn bị ép chờ hay bị nhắc nhở như một lỗi.
+
 ---
 
 ## 4. Frustrations & Pain Points
@@ -79,3 +81,22 @@ By nudging users to log the emotional and contextual reasons behind each transac
    * *Mục tiêu:* **≥ 70%** người dùng hoạt động chủ động truy cập tab **Patterns** và **Insights** ít nhất 2 lần/tuần để xem báo cáo phân tích tâm lý.
 4. **Mức độ giảm thiểu cảm xúc hối tiếc (Regret Reduction Score):**
    * *Mục tiêu:* Điểm hài lòng sau mua sắm tự đánh giá tăng **30%** sau 30 ngày sử dụng ứng dụng thông qua việc nhận diện các "bẫy cảm xúc" (Emotional & Discount Triggers).
+
+- Nam thêm một món vào danh sách mong muốn (tên + động cơ) trong dưới 20 giây.
+
+### Bối cảnh hằng ngày
+- 8:30–17:30: thực tập ở công ty, ăn trưa đặt ShopeeFood cùng đồng nghiệp.
+- 19:00–23:00: làm đồ án tốt nghiệp ở nhà trọ hoặc quán cà phê.
+- Sau 22:00: lướt TikTok để giải tỏa căng thẳng, đây là lúc hay đặt đồ ăn khuya
+  và chốt đơn flash sale.
+
+### Thói quen dùng thiết bị
+- Điện thoại Android màn hình 6.5 inch, thường dùng **một tay** khi đang đi
+  hoặc nằm, ngón cái chỉ với tới nửa dưới màn hình.
+- Mở điện thoại ngay sau khi thanh toán để kiểm tra thông báo đơn hàng.
+- Tắt phần lớn thông báo, chỉ giữ thông báo từ các app dùng hằng ngày.
+
+### Nhu cầu accessibility
+- Cận 2 độ, hay dùng điện thoại trong phòng tối hoặc dưới nắng
+  → cần độ tương phản cao và chữ không quá nhỏ.
+- Thao tác một tay khi mệt → nút chính đặt ở nửa dưới màn hình, vùng chạm lớn.
