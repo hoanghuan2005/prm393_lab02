@@ -6,7 +6,7 @@
 
 ---
 
-## 1. Mười quyết định quan trọng nhất
+## 1. Mười hai quyết định quan trọng nhất
 
 | # | Đề xuất của AI | Quyết định | Căn cứ chính | Nằm ở đâu trong Figma |
 |---|---|---|---|---|
@@ -20,6 +20,8 @@
 | 8 | Stitch thiết kế lại Trang chủ quanh danh sách mong muốn | **Sửa** | Nielsen #4; một hành động chính mỗi màn | Wishlist entry; màn 02 |
 | 9 | Dialog "Không mua món này nữa?" | **Chấp nhận** (bổ sung hoàn tác, đổi kiểu nút) | Nielsen #3, #5; bỏ qua không phải xóa | màn 13a, 11c |
 | 10 | Chip lọc trạng thái cuộn ngang, chip cuối bị cắt ở 360 dp | **Sửa** | Accessibility (không cắt chữ, vùng chạm 48 dp) | màn 11 |
+| 11 | Bảng màu: màu chính và màu cảnh báo (kiểm chứng bằng research) | **Chấp nhận** primary indigo, đỏ chỉ cho lỗi | INS2 (MÔ PHỎNG); I1 | 04 Design System – Màu |
+| 12 | Bước 2/2 chọn sẵn động cơ (kiểm thử phát hiện F1) | **Sửa** (R4-1) | Nielsen #5; F1 (MÔ PHỎNG, lỗi có thật trong Figma) | màn 04 (chưa chọn động cơ) |
 
 ---
 
@@ -128,6 +130,20 @@ Giữ nguyên câu chữ của Stitch ("Không mua món này nữa?" / "Món đ�
 
 ### Quyết định 10 — SỬA: bộ lọc không bị cắt ở 360 dp
 Ở 360 dp, ba chip "Đang cân nhắc (2)", "Đã mua (1)", "Bỏ qua (0)" rộng khoảng 410 dp, nên bản Stitch cắt mất chip cuối. Figma cho chip xuống hàng (wrap). Số lượng vẫn nằm trong nhãn để không cần nhìn màu cũng biết đang lọc gì.
+
+### Quyết định 11 — CHẤP NHẬN: màu chính indigo, đỏ chỉ dành cho lỗi
+**Căn cứ:** INS2 ([`ux/research.md`](../ux/research.md)): nhóm 18–25 chấm cảnh báo đỏ 1,79/5 (MÔ PHỎNG); I1 "thấy màu đỏ là tắt app".
+**Quyết định:** primary #2E4A9E (indigo, trung tính, không mang nghĩa khen hay chê như xanh lá / đỏ). Đỏ #B3261E chỉ dùng cho lỗi nhập liệu và hành động xóa. 8 động cơ mỗi cái một cặp nền nhạt và chữ đậm cùng tông (6,66–9,43 : 1), luôn kèm icon và tên.
+**Kiểm tra:** bảng 2.1 – mọi cặp chữ ≥ 4,5 : 1.
+
+### Quyết định 12 — SỬA: Bước 2/2 không chọn sẵn động cơ (R4-1)
+**Căn cứ:** kiểm thử F1 ([`ux/usability-test.md`](../ux/usability-test.md)): 3/5 người lưu theo lựa chọn có sẵn mà không biết (MÔ PHỎNG; lỗi có thật trong Figma).
+**Quyết định:** bước 2 mở ra không có thẻ nào được chọn; nút "Lưu" khóa kèm dòng "Chọn một động cơ để lưu". Không làm chậm luồng chính (thời gian chuẩn KLM vẫn 16,5 giây vì đã tính một chạm chọn động cơ).
+**Nguyên tắc:** Nielsen #5 Phòng ngừa lỗi; mục tiêu cốt lõi của app là ghi đúng động cơ.
+
+| Trước | Sau (chưa chọn) | Sau (đã chọn) |
+|---|---|---|
+| ![](../assets/figma/r4-truoc-04-purchase-reason.png) | ![](../assets/figma/r4-sau-04-chua-chon.png) | ![](../assets/figma/r4-sau-04-da-chon.png) |
 
 > Các phát hiện của vòng phản biện bằng AI (Nielsen + accessibility + persona) và quyết định cho từng phát hiện được ghi ở mục **"Phản biện bằng AI"** trong [`ai/ai-design-log.md`](../ai/ai-design-log.md).
 

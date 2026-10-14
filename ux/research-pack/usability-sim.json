@@ -1,0 +1,408 @@
+{
+ "klm": {
+  "T1": {
+   "M": 4,
+   "P": 5,
+   "K": 21,
+   "R": 1.2
+  },
+  "T2": {
+   "M": 3,
+   "P": 5,
+   "K": 14,
+   "R": 0
+  },
+  "T3": {
+   "M": 2,
+   "P": 1,
+   "K": 0,
+   "R": 0
+  },
+  "T4": {
+   "M": 1,
+   "P": 2,
+   "K": 8,
+   "R": 0
+  },
+  "T5": {
+   "M": 2,
+   "P": 2,
+   "K": 0,
+   "R": 0
+  }
+ },
+ "base": {
+  "T1": 16.53,
+  "T2": 11.67,
+  "T3": 3.3,
+  "T4": 5.19,
+  "T5": 3.9
+ },
+ "participants": {
+  "U1": {
+   "hs": "Nam, 22, SV năm cuối, dùng Shopee hằng ngày",
+   "gan": "P1",
+   "f": 1.15
+  },
+  "U2": {
+   "hs": "Nữ, 26, nhân viên văn phòng",
+   "gan": "P2",
+   "f": 1.25
+  },
+  "U3": {
+   "hs": "Nam, 19, SV năm 2",
+   "gan": "P3",
+   "f": 1.2
+  },
+  "U4": {
+   "hs": "Nữ, 30, kế toán, có con nhỏ, test bằng một tay",
+   "gan": "P4",
+   "f": 1.35
+  },
+  "U5": {
+   "hs": "Nam, 28, làm tự do, ít dùng app tài chính",
+   "gan": "P1/P2",
+   "f": 1.45
+  }
+ },
+ "rows": [
+  {
+   "u": "U1",
+   "t": "T1",
+   "time": 19.0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U1",
+   "t": "T2",
+   "time": 13.1,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U1",
+   "t": "T3",
+   "time": 3.2,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U1",
+   "t": "T4",
+   "time": 6.5,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U1",
+   "t": "T5",
+   "time": 4.6,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U2",
+   "t": "T1",
+   "time": 20.3,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U2",
+   "t": "T2",
+   "time": 14.3,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U2",
+   "t": "T3",
+   "time": 4.8,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U2",
+   "t": "T4",
+   "time": 6.0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U2",
+   "t": "T5",
+   "time": 5.7,
+   "ok": true,
+   "note": "F4: chạm công tắc → sang 05a, dừng lại đọc vì tưởng công tắc bật ngay"
+  },
+  {
+   "u": "U3",
+   "t": "T1",
+   "time": 24.9,
+   "ok": true,
+   "note": "F2: phân vân Mong muốn / Cảm xúc, không thấy nút ?"
+  },
+  {
+   "u": "U3",
+   "t": "T2",
+   "time": 17.2,
+   "ok": true,
+   "note": "Cuộn tìm ô giá, hỏi có bắt buộc không"
+  },
+  {
+   "u": "U3",
+   "t": "T3",
+   "time": 3.7,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U3",
+   "t": "T4",
+   "time": 6.5,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U3",
+   "t": "T5",
+   "time": 4.8,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U4",
+   "t": "T1",
+   "time": 21.7,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U4",
+   "t": "T2",
+   "time": 15.4,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U4",
+   "t": "T3",
+   "time": 8.8,
+   "ok": true,
+   "note": "F3: dùng chip kỳ, mở sheet chọn tháng (cách đúng thứ hai)"
+  },
+  {
+   "u": "U4",
+   "t": "T4",
+   "time": 7.5,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U4",
+   "t": "T5",
+   "time": 7.0,
+   "ok": true,
+   "note": "F4: chạm công tắc → sang 05a, dừng lại đọc vì tưởng công tắc bật ngay"
+  },
+  {
+   "u": "U5",
+   "t": "T1",
+   "time": 31.1,
+   "ok": true,
+   "note": "F2: dừng ở bước 2, đọc lần lượt 8 thẻ"
+  },
+  {
+   "u": "U5",
+   "t": "T2",
+   "time": 17.2,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U5",
+   "t": "T3",
+   "time": 12.4,
+   "ok": true,
+   "note": "F3: vào tab Lịch sử trước rồi mới quay lại"
+  },
+  {
+   "u": "U5",
+   "t": "T4",
+   "time": 7.7,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "u": "U5",
+   "t": "T5",
+   "time": 8.8,
+   "ok": true,
+   "note": "F4: đọc dòng chữ nhỏ, không chắc bấm vào đâu, chạm công tắc → sang 05a"
+  }
+ ],
+ "f1": {
+  "U1": true,
+  "U2": true,
+  "U3": false,
+  "U4": true,
+  "U5": false
+ },
+ "seq": {
+  "U1": [
+   7,
+   7,
+   6,
+   7,
+   6
+  ],
+  "U2": [
+   6,
+   6,
+   6,
+   7,
+   5
+  ],
+  "U3": [
+   5,
+   6,
+   6,
+   7,
+   5
+  ],
+  "U4": [
+   6,
+   6,
+   5,
+   6,
+   5
+  ],
+  "U5": [
+   5,
+   6,
+   4,
+   6,
+   5
+  ]
+ },
+ "sus_raw": {
+  "U1": [
+   5,
+   1,
+   5,
+   1,
+   4,
+   2,
+   5,
+   1,
+   4,
+   1
+  ],
+  "U2": [
+   4,
+   2,
+   4,
+   1,
+   4,
+   2,
+   5,
+   2,
+   4,
+   2
+  ],
+  "U3": [
+   4,
+   2,
+   4,
+   2,
+   4,
+   2,
+   4,
+   2,
+   4,
+   1
+  ],
+  "U4": [
+   4,
+   2,
+   4,
+   1,
+   3,
+   2,
+   4,
+   2,
+   4,
+   2
+  ],
+  "U5": [
+   3,
+   2,
+   4,
+   2,
+   3,
+   3,
+   4,
+   2,
+   3,
+   2
+  ]
+ },
+ "sus": {
+  "U1": 92.5,
+  "U2": 80.0,
+  "U3": 77.5,
+  "U4": 75.0,
+  "U5": 65.0
+ },
+ "sus_mean": 78.0,
+ "summary": {
+  "T1": {
+   "base": 16.53,
+   "ok": "5/5",
+   "mean": 23.4,
+   "median": 21.7,
+   "min": 19.0,
+   "max": 31.1,
+   "dat_muc_tieu": "4/5",
+   "seq_tb": 5.8
+  },
+  "T2": {
+   "base": 11.67,
+   "ok": "5/5",
+   "mean": 15.4,
+   "median": 15.4,
+   "min": 13.1,
+   "max": 17.2,
+   "dat_muc_tieu": "5/5",
+   "seq_tb": 6.2
+  },
+  "T3": {
+   "base": 3.3,
+   "ok": "5/5",
+   "mean": 6.6,
+   "median": 4.8,
+   "min": 3.2,
+   "max": 12.4,
+   "seq_tb": 5.4
+  },
+  "T4": {
+   "base": 5.19,
+   "ok": "5/5",
+   "mean": 6.8,
+   "median": 6.5,
+   "min": 6.0,
+   "max": 7.7,
+   "seq_tb": 6.6
+  },
+  "T5": {
+   "base": 3.9,
+   "ok": "5/5",
+   "mean": 6.2,
+   "median": 5.7,
+   "min": 4.6,
+   "max": 8.8,
+   "seq_tb": 5.2
+  }
+ }
+}

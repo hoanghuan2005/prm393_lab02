@@ -1148,3 +1148,55 @@ trước khi sang bước tiếp theo. Nhóm chọn checklist.design/mobile (25 
   - Giờ nhắc: PB-14 từng chốt mặc định 23:00, nhưng Figma (10 Cá nhân, 05a) vẫn ghi 21:00 và cho đổi giờ ở Cá nhân. Theo quy ước "lệch thì lấy Figma", handoff ghi mặc định 21:00.
   - Cập nhật README: công cụ AI, số màn hình (21), mô tả Flow 1 và Flow 7.
 - Đánh giá: bản nháp soạn từ tài liệu ngày 11–12/10 nên lệch với repo ở nhiều chỗ (token đã có, Flow 7 đã có, mã màn đã dùng). Dán nguyên văn sẽ gây trùng và mất nội dung. Đối chiếu từng mục với file thật và với tên khung trong Figma là bước bắt buộc. Flow 8–10 (Trước khi mua, AI) có trong Figma nhưng vẫn chưa có trong `user-flow.md`.
+
+---
+
+## RS — Research kiểm chứng (MÔ PHỎNG bằng AI)
+
+**Bối cảnh:** sau buổi góp ý, thầy yêu cầu persona phải đến từ research và mỗi bước có bằng chứng; cho phép dùng người dùng mô phỏng nếu trình bày rõ câu hỏi và quy trình. Nhóm không đủ thời gian khảo sát người thật nên chọn mô phỏng, ghi nhãn rõ.
+
+### RS-1 – Kế hoạch research và desk research
+- Công cụ AI: Claude (Cowork, tìm kiếm web)
+- Prompt: "Lập kế hoạch research: 5 câu hỏi nghiên cứu, phương pháp, số người; tìm nguồn thật về hành vi mua online và mua bốc đồng của người trẻ Việt Nam và các app quản lý chi tiêu."
+- Kết quả AI đưa ra: RQ1–RQ5; nguồn D1 (YouNet ECI 2025), D2 (HUTECH 2026), D3 (blog MoMo); bảng 4 app C1–C4
+- Nhóm chỉnh sửa lại: ghi D3 là nguồn quảng bá, diễn đạt "theo mô tả của nhà phát hành"; tự cài app để chụp màn hình
+- Đánh giá: nguồn thật cho căn cứ chọn nhóm tuổi (Gen Z 53,4% người mua online hằng tuần) và cơ chế FOMO → mua bốc đồng
+
+### RS-2 – Khảo sát mô phỏng (n = 30)
+- Công cụ AI: Claude (Cowork, Python)
+- Prompt: "Soạn bộ 15 câu khảo sát theo RQ1–RQ5 rồi viết script sinh 30 người trả lời, mỗi nhóm tuổi một bộ xác suất, ghi rõ giả định nào có nguồn, giả định nào chưa; chốt seed trước khi chạy; vẽ biểu đồ có nhãn MÔ PHỎNG."
+- Kết quả AI đưa ra: `survey_sim.py` (seed 2026), `survey-mo-phong.csv`, 5 biểu đồ, bảng so sánh theo nhóm tuổi
+- Nhóm chỉnh sửa lại: giữ nguyên kết quả lệch giả định ("Ảnh hưởng MXH" chỉ 4/30), không chạy lại seed; quyết định giữ động cơ này dựa trên nguồn thật D1
+- Đánh giá: kết quả trùng với giả định chưa có nguồn chỉ phản ánh lại giả định, không phải bằng chứng; cần khảo sát thật để thay
+
+### RS-3 – Phỏng vấn mô phỏng (5 người)
+- Công cụ AI: Claude (Cowork)
+- Prompt: prompt đóng vai nguyên văn ở `research.md` mục 5.3, hồ sơ lấy từ dòng khảo sát (S02/S12, S10/S17, S03/S14, S20/S21, S29/S30)
+- Kết quả AI đưa ra: 5 transcript (I1–I5)
+- Nhóm chỉnh sửa lại: đổi hồ sơ I4 sang nhóm 26–30 cho khớp dòng khảo sát; giữ câu trả lời "không đúng ý" của I5 (thích cảnh báo đỏ) làm căn cứ cho anti-persona
+- Đánh giá: phỏng vấn mô phỏng cho câu trích sinh động nhưng không có hành vi bất ngờ như người thật
+
+### RS-4 – Affinity, insight và 5 persona
+- Công cụ AI: Claude (Cowork)
+- Prompt: "Gom dữ liệu D, C, Q, I thành affinity map; rút insight, mỗi insight ghi mã nguồn và hệ quả thiết kế; viết lại 5 persona (1 chính, 3 phụ, 1 anti-persona) theo cùng một mẫu, có nguồn dữ liệu cho từng persona."
+- Kết quả AI đưa ra: 8 nhóm affinity, 7 insight (INS1–INS7), bảng đối chiếu giả định, 5 persona, ma trận persona → flow
+- Nhóm chỉnh sửa lại: bỏ ảnh stock; bỏ các chỉ tiêu không đo được trong Lab 2 và số "> 60 giây" không có nguồn; đổi tuổi P4 thành 29 để không mâu thuẫn với dữ liệu nhóm 31+
+- Đánh giá: nhờ dữ liệu so sánh theo tuổi, câu "vì sao không làm cho người lớn tuổi" có câu trả lời bằng số liệu
+
+## UT — Kiểm thử khả dụng (MÔ PHỎNG bằng AI)
+- Công cụ AI: Claude (Cowork, Figma MCP, Python)
+- Prompt: prompt đi qua nhiệm vụ nguyên văn ở `usability-test.md` mục 2; thời gian tính bằng KLM (`usability_sim.py`, seed 393)
+- Kết quả AI đưa ra: T1 4/5 đạt ≤ 25 giây (trung vị 21,7 giây); T2 5/5 < 20 giây; T5 5/5 hoàn thành (bản đầu ghi 4/5, đã sửa); SUS 78,0; 5 phát hiện F1–F5
+- Nhóm chỉnh sửa lại: đối chiếu F1 và F4 trực tiếp trong Figma (thẻ Cảm xúc ở trạng thái Selected tại 04 Bước 2/2; khối "Mở cài đặt" cao 44 dp); xếp F3, F5 vào "không sửa". Khi rà lại prototype ở vòng R4, phát hiện công tắc nhắc nhở có mở 05a, trái với giả định của bản mô phỏng đầu (1 người bỏ cuộc ở T5) → tính lại T5, hạ F4 từ mức 3 xuống 2
+- Đánh giá: F1 là lỗi thật trong file mà tự nhóm review không thấy; AI nhìn ảnh tĩnh không biết chỗ nào có tương tác, nên kết quả mô phỏng phải đối chiếu với prototype; số thời gian chỉ là ước lượng, cần test người thật
+
+## R4 — Sửa sau kiểm thử
+- Công cụ AI: Claude (Figma MCP, Plugin API)
+- Prompt: "Sửa Figma R4 trước đi" (R4-1, R4-2, R4-3 theo `usability-test.md` mục 8)
+- Kết quả AI đưa ra:
+  - R4-1: khung "04 Ghi khoản mua – Bước 2/2 (chưa chọn động cơ)" ở 03 Final UI (biến thể Motive grid "Selected=Không", nút Lưu Disabled, dòng "Chọn một động cơ để lưu"); ở 06 Prototype, khung 04 (63:2483) mở ra chưa chọn, 2 biến `dongCo/daChon`, `dongCo/chuaChon` bật nút Lưu khi chạm thẻ bất kỳ; "Tiếp tục" ở bước 1 và nền mờ của sheet giải thích đặt lại trạng thái
+  - R4-2: thẻ "Thông báo đang tắt" + nút Tonal "Mở cài đặt" 48 dp → 05a ở "10 Cá nhân – chưa cấp quyền thông báo" (Final UI 359:4759, Prototype 377:4525); bỏ dòng chữ nhỏ 44 dp
+  - R4-3: nút chữ "Giải thích động cơ" cạnh câu "Vì sao bạn mua?" ở 16 khung Bước 2/2, mở sheet giải thích; câu phụ rút còn 1 dòng, khoảng cách khối 12 → 8 dp
+  - Sửa thêm: biến thể nút Disabled dùng độ mờ của lớp (38%) cho chữ và icon, vì độ mờ của màu bị mất ở instance
+- Nhóm chỉnh sửa lại: bỏ R4-4 vì thiết kế đã có mũi tên 48 dp và chip "Tháng 10/2026 ▾"; giữ chọn sẵn ở khung Sửa và khung từ danh sách mong muốn vì động cơ do người dùng chọn trước đó; dời section Flow 8–10 xuống 200 px vì section Flow 7 cao thêm
+- Đánh giá: ảnh trước `assets/figma/r4-truoc-04-purchase-reason.png`, ảnh sau `r4-sau-04-chua-chon.png`, `r4-sau-04-da-chon.png`, `r4-sau-10-ca-nhan.png` (cùng thư mục); cần chạy lại T1 và T5 với người thật để xác nhận

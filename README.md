@@ -3,7 +3,8 @@
 
 | | |
 |---|---|
-| **Sinh viên / nhóm** | `[Điền họ tên – MSSV]` |
+| **Nhóm** | Group 7 – Lab 2: The Psychology of Money |
+| **Thành viên** | Đào Tâm Hoàng – SE194103 · Nguyễn Đình Ngọc Ân – SE196654 · Huỳnh Đăng Khoa – SE193040 · Ngô Gia Kiệt – SE183268 · Hồ Hữu Hoàng Huân – SE192248 |
 | **Lớp** | `[Điền mã lớp]` |
 | **Học kỳ** | Fall 2026 |
 
@@ -26,7 +27,7 @@
 | 04 Design System | https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=2-4 |
 | 05 Components | https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=2-5 |
 | 06 Prototype | https://www.figma.com/design/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=2-6 |
-| Chạy prototype (danh sách flow ở cột trái) | https://www.figma.com/proto/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=63-2429&show-proto-sidebar=1&scaling=scale-down |
+| Chạy prototype (bắt đầu từ Splash, danh sách flow ở cột trái) | https://www.figma.com/proto/jCQEcxnXTYJ9b27pdsfFfS/Untitled?node-id=377-4391&show-proto-sidebar=1&scaling=scale-down |
 
 Dự án Google Stitch (Flow 6): https://stitch.withgoogle.com/projects/1668611817022706714
 
@@ -39,6 +40,7 @@ Dự án Google Stitch (Flow 6): https://stitch.withgoogle.com/projects/16686118
 | Claude (claude.ai + Figma connector) | Phản biện ảnh Stitch của Flow 6; dựng Flow 6 trong Figma theo prompt của nhóm |
 | Claude (Claude Code) | Phản biện Final UI theo 10 heuristic Nielsen, accessibility và persona (mục PB trong log); rà tài liệu theo đề bài, soạn lại handoff, screen-spec, design-decisions cho khớp Figma |
 | Claude (Cowork, Figma MCP) | Đối chiếu với checklist.design/mobile, lập kế hoạch prompt theo giai đoạn, dựng thêm component / wireframe / Final UI / user flow / prototype trong Figma, AI review theo checklist (mục C trong log) |
+| Claude (Cowork) | Mô phỏng khảo sát (n = 30, script Python, seed 2026) và 5 phỏng vấn để kiểm chứng persona; mô phỏng kiểm thử khả dụng 5 người (cognitive walkthrough + KLM); tổng hợp affinity và insight. Mọi dữ liệu mô phỏng đều có nhãn "MÔ PHỎNG" (mục RS, UT trong log) |
 
 Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ chối kèm lý do trong `ai/ai-design-log.md` và `design/design-decisions.md`.
 
@@ -46,12 +48,14 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 
 | Sản phẩm (theo đề) | File | Nội dung chính |
 |---|---|---|
-| Vấn đề và persona | [`ux/persona.md`](ux/persona.md) | Persona Nam, bối cảnh hằng ngày, pain point, thói quen thiết bị, nhu cầu accessibility, câu phát biểu vấn đề, tiêu chí thành công |
-| IA và user flow | [`ux/user-flow.md`](ux/user-flow.md) | 21 màn hình, sơ đồ điều hướng, 7 flow (Mermaid, có nhánh lỗi / phục hồi), bảng ánh xạ flow → màn hình, bảng khung trạng thái |
+| Research | [`ux/research.md`](ux/research.md) | 5 câu hỏi nghiên cứu, desk research (thật), rà 4 app tương tự (thật), khảo sát n = 30 và 5 phỏng vấn (MÔ PHỎNG bằng AI), affinity → 7 insight, hạn chế. Dữ liệu và biểu đồ trong `ux/research-pack/` |
+| Vấn đề và persona | [`ux/persona.md`](ux/persona.md) | 5 persona (1 chính, 3 phụ, 1 anti-persona) rút từ research, lý do chọn persona chính, ma trận persona → flow, phát biểu vấn đề, tiêu chí đo được |
+| IA và user flow | [`ux/user-flow.md`](ux/user-flow.md) | 21 màn hình, sơ đồ điều hướng, 10 flow (Flow 1–7 bằng Mermaid trong file, có nhánh lỗi / phục hồi; Flow 8–10 về AI và Trước khi mua có trong Figma page 01), bảng ánh xạ flow → màn hình, bảng khung trạng thái |
+| Kiểm thử khả dụng | [`ux/usability-test.md`](ux/usability-test.md) | Kịch bản 5 nhiệm vụ, thời gian chuẩn KLM, kết quả 5 người (MÔ PHỎNG), SEQ, SUS, 5 phát hiện, vòng sửa R4, phiếu ghi cho test thật |
 | Bản mô tả thiết kế | [`design/DESIGN.md`](design/DESIGN.md) | Brief cho Stitch: màu, chữ, khoảng cách, giọng văn, từ vựng thống nhất, quy tắc component, dữ liệu mẫu |
 | Đặc tả màn hình | [`design/screen-spec.md`](design/screen-spec.md) | Mỗi màn dùng để làm gì, hiển thị gì, thuộc flow nào, các trạng thái |
-| Quyết định thiết kế | [`design/design-decisions.md`](design/design-decisions.md) | 10 quyết định quan trọng nhất + kết quả checklist accessibility (contrast, vùng chạm, cỡ chữ, không chỉ dùng màu, 360 / 412 dp) |
-| Nhật ký AI | [`ai/ai-design-log.md`](ai/ai-design-log.md) | Prompt nguyên văn, kết quả, nhận xét, R1–R3, F6, phản biện bằng AI (PB), bổ sung theo checklist.design/mobile (C0–C8) và quyết định |
+| Quyết định thiết kế | [`design/design-decisions.md`](design/design-decisions.md) | 12 quyết định quan trọng nhất + kết quả checklist accessibility (contrast, vùng chạm, cỡ chữ, không chỉ dùng màu, 360 / 412 dp) |
+| Nhật ký AI | [`ai/ai-design-log.md`](ai/ai-design-log.md) | Prompt nguyên văn, kết quả, nhận xét, R1–R3, F6, phản biện bằng AI (PB), bổ sung theo checklist.design/mobile (C0–C8), research mô phỏng (RS), kiểm thử khả dụng (UT), vòng sửa R4 và quyết định |
 | Ảnh Stitch | [`assets/stitch/`](assets/stitch/) | Mọi phiên bản Stitch: P1, P2, R1, R2, R3, Flow 6 |
 | Ảnh Figma | [`assets/figma/`](assets/figma/) | Ảnh tất cả khung Final UI (màn chính và trạng thái) |
 | Flutter handoff | [`handoff/flutter-handoff.md`](handoff/flutter-handoff.md) | Token → Flutter, component → widget, đặc tả 6 mục cho từng màn, nhãn TalkBack, hành vi ≥ 600 dp |
@@ -99,8 +103,11 @@ Sign up, Onboarding, Settings, Account, Splash Screen, Push Notification Opt-in.
 ```text
 ├── README.md
 ├── ux/
+│   ├── research.md
 │   ├── persona.md
-│   └── user-flow.md
+│   ├── user-flow.md
+│   ├── usability-test.md
+│   └── research-pack/  (script mô phỏng, CSV khảo sát, biểu đồ)
 ├── design/
 │   ├── DESIGN.md
 │   ├── screen-spec.md
