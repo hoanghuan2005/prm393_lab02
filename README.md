@@ -50,11 +50,11 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 |---|---|---|
 | Research | [`ux/research.md`](ux/research.md) | 5 câu hỏi nghiên cứu, desk research (thật), rà 4 app tương tự (thật), khảo sát n = 30 và 5 phỏng vấn (MÔ PHỎNG bằng AI), affinity → 7 insight, hạn chế. Dữ liệu và biểu đồ trong `ux/research-pack/` |
 | Vấn đề và persona | [`ux/persona.md`](ux/persona.md) | 5 persona (1 chính, 3 phụ, 1 anti-persona) rút từ research, lý do chọn persona chính, ma trận persona → flow, phát biểu vấn đề, tiêu chí đo được |
-| IA và user flow | [`ux/user-flow.md`](ux/user-flow.md) | 21 màn hình, sơ đồ điều hướng, 10 flow (Flow 1–7 bằng Mermaid trong file, có nhánh lỗi / phục hồi; Flow 8–10 về AI và Trước khi mua có trong Figma page 01), bảng ánh xạ flow → màn hình, bảng khung trạng thái |
+| IA và user flow | [`ux/user-flow.md`](ux/user-flow.md) | 28 màn hình, sơ đồ điều hướng, 10 flow, Flow 1–10 bằng Mermaid trong file (có nhánh lỗi / phục hồi), bảng ánh xạ flow → màn hình, bảng khung trạng thái |
 | Kiểm thử khả dụng | [`ux/usability-test.md`](ux/usability-test.md) | Kịch bản 5 nhiệm vụ, thời gian chuẩn KLM, kết quả 5 người (MÔ PHỎNG), SEQ, SUS, 5 phát hiện, vòng sửa R4, phiếu ghi cho test thật |
 | Bản mô tả thiết kế | [`design/DESIGN.md`](design/DESIGN.md) | Brief cho Stitch: màu, chữ, khoảng cách, giọng văn, từ vựng thống nhất, quy tắc component, dữ liệu mẫu |
 | Đặc tả màn hình | [`design/screen-spec.md`](design/screen-spec.md) | Mỗi màn dùng để làm gì, hiển thị gì, thuộc flow nào, các trạng thái |
-| Quyết định thiết kế | [`design/design-decisions.md`](design/design-decisions.md) | 12 quyết định quan trọng nhất + kết quả checklist accessibility (contrast, vùng chạm, cỡ chữ, không chỉ dùng màu, 360 / 412 dp) |
+| Quyết định thiết kế | [`design/design-decisions.md`](design/design-decisions.md) | 10 quyết định quan trọng nhất + kết quả checklist accessibility (contrast, vùng chạm, cỡ chữ, không chỉ dùng màu, 360 / 412 dp) |
 | Nhật ký AI | [`ai/ai-design-log.md`](ai/ai-design-log.md) | Prompt nguyên văn, kết quả, nhận xét, R1–R3, F6, phản biện bằng AI (PB), bổ sung theo checklist.design/mobile (C0–C8), research mô phỏng (RS), kiểm thử khả dụng (UT), vòng sửa R4 và quyết định |
 | Ảnh Stitch | [`assets/stitch/`](assets/stitch/) | Mọi phiên bản Stitch: P1, P2, R1, R2, R3, Flow 6 |
 | Ảnh Figma | [`assets/figma/`](assets/figma/) | Ảnh tất cả khung Final UI (màn chính và trạng thái) |
@@ -62,7 +62,7 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 
 ## 5. Màn hình và flow
 
-**21 màn hình:** 00 Splash · 00a Đăng nhập · 00b Đăng ký · Quên mật khẩu · 01 Onboarding · 00 Trang chủ tổng hợp (Hub) · 02 Trang chủ · 03 Ghi khoản mua – Bước 1/2 · 04 Ghi khoản mua – Bước 2/2 · 05 Chi tiết khoản mua · 05a Xin quyền thông báo · 06 Lịch sử · 07 Mô hình · 08 Góc nhìn · 09 Chiêm nghiệm tháng · 10 Cá nhân · 10a Tài khoản · 10b Đổi mật khẩu · 11 Danh sách mong muốn · 12 Thêm món mong muốn · 13 Chi tiết món mong muốn. Thanh điều hướng 5 tab: Trang chủ, Lịch sử, Mô hình, Góc nhìn, Cá nhân.
+**28 màn hình:** 00 Splash · 00a Đăng nhập · 00b Đăng ký · Quên mật khẩu · 01 Onboarding · 00 Trang chủ tổng hợp (Hub) · 02 Trang chủ · 03 Ghi khoản mua – Bước 1/2 · 04 Ghi khoản mua – Bước 2/2 · 05 Chi tiết khoản mua · 05 Khoản mua đã lưu · 05a Xin quyền thông báo · 06 Lịch sử · 07 Mô hình · 08 Góc nhìn · 08b Chi tiết mô hình mua sắm · 08c Nhận định AI về khoản mua · 09 Chiêm nghiệm tháng · 10 Cá nhân · 10a Tài khoản · 10b Đổi mật khẩu · 11 Danh sách mong muốn · 12 Thêm món mong muốn · 13 Chi tiết món mong muốn · 14 Trước khi mua – Bước 1/3 · 15 Trước khi mua – Bước 2/3 · 16 Trước khi mua – Bước 3/3 · 18 Nhận định trước khi mua. 07 và 08 hiện dùng phiên bản có AI; 08a và 17 là trạng thái đang tải. Thanh điều hướng 5 tab: Trang chủ, Lịch sử, Mô hình, Góc nhìn, Cá nhân.
 
 | Flow | Bắt đầu → kết thúc | Nhánh lỗi / phục hồi |
 |---|---|---|
@@ -73,6 +73,9 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 | 5 – Cá nhân & dữ liệu | 10 → nhắc nhở / xuất CSV / xóa toàn bộ | Xóa toàn bộ qua dialog có "Hủy" |
 | 6 – Danh sách mong muốn | 02 → 11 → 12 → 11 → 13 → mua / bỏ qua / cân nhắc tiếp | 12a lỗi tại trường; bỏ qua có dialog + Hoàn tác |
 | 7 – Khởi động, đăng nhập & tài khoản | Mở app → 00 Splash → (01 → 00a ↔ 00b) → 00 Hub; 10 → 10a → 10b | Sai email / mật khẩu → lỗi dưới ô kèm "Quên mật khẩu?"; xóa tài khoản và đăng xuất qua dialog có "Hủy" |
+| 8 – Nhận định AI sau khi lưu | 04 → 05 Khoản mua đã lưu → 08a → 08c → 00 Hub (hoặc 07, 08b) | Lỗi AI: Error state có "Thử lại" (đề xuất, chưa có khung) |
+| 9 – Trước khi mua | 00 Hub → 14 → 15 → (16 nếu chọn Khuyến mãi) → 17 → 18 → về Trang chủ hoặc 03 | Không tạo khoản mua nếu không chọn "Vẫn mua"; lỗi AI: "Thử lại" (đề xuất) |
+| 10 – AI phân tích mô hình | 07 (có AI) → 08a → 08b → 07; 08 (có AI) → 08c / 08b / 09 | Lỗi AI: "Thử lại" như 07 Mô hình – lỗi (đề xuất) |
 
 ## 6. Phạm vi so với checklist.design/mobile
 

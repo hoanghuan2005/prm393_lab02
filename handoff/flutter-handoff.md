@@ -130,6 +130,10 @@ abstract class AppSize {
 | **Wishlist item card** — Status × Pressed | `WishlistItemCard` (Card + InkWell) | Tên (Subtitle, 2 dòng) + giá; `Wrap(spacing: 8)` chip động cơ + chip trạng thái; ghi chú 2 dòng; ngày (Caption) |
 | **Wishlist status chip** | `Container` + `Row(Icon, Text)` | Cao 24, `StadiumBorder`; Đang cân nhắc: bookmark, nền primary-container; Đã mua: check_circle, nền surface-container; Bỏ qua: archive, viền outline |
 | **Wishlist entry** (Trang chủ) | `Card` + `ListTile` | Cao 64; leading tròn 40 primary-container + bookmark; trailing `chevron_right` |
+| **Before You Buy entry** (Trang chủ) | `Card` + `FilledButton.tonal` | Tiêu đề "Trước khi mua", mô tả, dòng "Hiểu trước khi thay đổi.", nút Tonal Medium cao 48 "Trước khi mua"; không cạnh tranh với nút chính "Ghi khoản mua" |
+| **AI analysis state** | `AiAnalysisState` = `Column` (tiêu đề, mô tả, dòng ngữ cảnh, khối `SkeletonBox`, dòng trạng thái) | Bọc `Semantics(liveRegion: true)`; dùng cho 08a (2 khung) và 17; tự chuyển sang màn kết quả khi có dữ liệu (prototype: 1,5 giây) |
+| **AI pattern card** | `Card` + danh sách `ListTile` động cơ + `TextButton` | Mỗi dòng: icon động cơ + tên + số đếm ("5/15"); `TextButton` "Xem mô hình của tôi" → 08b. Dùng ở 08 Góc nhìn (có AI) |
+| **Step header** | `Column(Text overline, Text Title)` | Overline "BƯỚC n/3" (`AppTextStyles.overline`) + tiêu đề Title; dùng ở 14, 15, 16 |
 
 ---
 
@@ -167,8 +171,18 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 | `/purchase/:id/edit` → `/purchase/:id/edit/reason` | 03 / 04 Sửa | push |
 | `/reflection/:yyyy-MM` | 09 Chiêm nghiệm tháng | push |
 | `/wishlist`, `/wishlist/add`, `/wishlist/:id`, `/wishlist/:id/edit` | 11, 12, 13, 12c | push |
+| `/splash` | 00 Splash | gốc, thay thế bằng màn đích *(đề xuất)* |
+| `/forgot-password` | Quên mật khẩu | push từ Đăng nhập *(đề xuất)* |
+| `/home` | 00 Trang chủ tổng hợp (Hub) | tab 1; Hub là phiên bản hiện tại của 02, dùng chung route `/home` *(đề xuất)* |
+| `/notifications/permission` | 05a Xin quyền thông báo | push trên root navigator *(đề xuất)* |
+| `/profile/account` → `/profile/account/password` | 10a Tài khoản → 10b Đổi mật khẩu | push trên root navigator *(đề xuất)* |
+| `/purchase/:id/saved` | 05 Khoản mua đã lưu | `pushReplacement` từ 04 *(đề xuất)* |
+| `/purchase/:id/ai` | 08c Nhận định AI về khoản vừa lưu (Flow 8) | push *(đề xuất)* |
+| `/insights/ai/:purchaseId` | 08c Nhận định AI về khoản mua (Flow 10) | push *(đề xuất)* |
+| `/patterns/ai` | 08b Chi tiết mô hình mua sắm | push *(đề xuất)* |
+| `/before-buy/item` → `/before-buy/questions` → `/before-buy/discount` → `/before-buy/result` | 14 → 15 → 16 → 18 | push; bỏ qua `/before-buy/discount` khi câu 2 ở 15 không chọn Khuyến mãi *(đề xuất)* |
 
-- **Màn lồng** (03, 04, 05, 09, 11, 12, 13) không có thanh điều hướng, có nút Back ở app bar.
+- **Màn lồng** (03, 04, 05, 05 Khoản mua đã lưu, 08b, 08c, 09, 10a, 10b, 11, 12, 13, 14, 15, 16, 18) không có thanh điều hướng, có nút Back ở app bar. 05a cũng ẩn thanh điều hướng (mục 8.3).
 - **Back hệ thống** ở màn lồng = nút Back trên app bar. Ở tab khác Trang chủ, Back → về tab Trang chủ; ở Trang chủ, Back → thoát app.
 - Avatar trên app bar của 4 tab Trang chủ, Lịch sử, Mô hình, Góc nhìn → chuyển sang tab Cá nhân (không push).
 - Snackbar sau khi lưu / xóa hiện ở **màn đích** (dùng `ScaffoldMessenger` gốc), nổi phía trên nút đáy.
@@ -176,6 +190,14 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 ---
 
 ## 4. Đặc tả từng màn (6 mục)
+
+### 00 Splash (`/splash`, đề xuất) — Flow 7
+1. **Layout:** splash gốc của Android (mục 8.4), tiếp nối bằng `Scaffold(backgroundColor: colorScheme.primary)` → `Center` → `Column(mainAxisSize: min)`: App icon + wordmark "Why I Buy?". Không app bar, không thanh điều hướng, không cuộn.
+2. **Components:** App icon.
+3. **States:** chỉ một trạng thái (khung `00 Splash`, node 366:4923).
+4. **Interactions:** không có phần tử bấm được. Trong lúc hiện splash: đọc phiên đăng nhập và cờ `onboardingDone`.
+5. **Navigation:** đã đăng nhập → `go('/home')` (00 Hub); chưa đăng nhập, lần đầu → `/onboarding`; chưa đăng nhập, đã xem onboarding → `/login`. Prototype: sau 0,8 giây chuyển Dissolve 300 ms sang 01 Onboarding.
+6. **Constraints:** chỉ giữ trong lúc kiểm tra phiên (mục tiêu ≤ 0,8 giây, mục 8.4); không xin quyền ở màn này (quyền thông báo hỏi ở 05a); nền #2E4A9E trùng màu nền của splash gốc để không bị nháy.
 
 ### Đăng nhập (`/login`) — Flow 7
 1. **Layout:** `Scaffold` → `SafeArea` → `SingleChildScrollView` padding 16: hàng "← Quay lại" (TextButton.icon) → logo 40 + "Why I Buy?" (Subtitle) → gap 24 → "Chào bạn trở lại" (Display) → mô tả (Body Small, on-surface-variant) → gap 24 → `Form`: nhãn "Email" + TextFormField → gap 16 → "Mật khẩu" + TextFormField → "Quên mật khẩu?" căn phải (TextButton) → gap 16 → nút Primary Large "Đăng nhập" → "Chưa có tài khoản? Đăng ký" căn giữa → `Spacer` → thẻ primary-container (icon bóng đèn, "Hiểu mình, không phán xét", "Mỗi khoản mua là một dịp để lắng nghe chính bạn."). Cả màn cuộn khi bàn phím mở.
@@ -193,6 +215,14 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 5. **Navigation:** đến từ Đăng nhập. Tạo thành công → quay về Đăng nhập (đúng như prototype Flow 7). "Đăng nhập" / Back → Đăng nhập.
 6. **Constraints:** như Đăng nhập; `autofillHints` cho email / mật khẩu mới. ≥ 600 dp: form tối đa 400 dp.
 
+### Quên mật khẩu (`/forgot-password`, đề xuất) — Flow 7
+1. **Layout:** như Đăng nhập: `Scaffold` → `SafeArea` → `SingleChildScrollView` padding 16: TextButton.icon "Quay lại" → wordmark "Why I Buy?" → "Quên mật khẩu" (Display) → mô tả "Nhập email bạn dùng để đăng ký. Chúng mình sẽ gửi liên kết để bạn đặt lại mật khẩu." (Body Small, on-surface-variant) → nhãn "Email" + TextFormField (hint "Nhập email của bạn") → nút Primary Large "Gửi liên kết đặt lại" → TextButton "Quay lại Đăng nhập" → `Spacer` → thẻ "Hiểu mình, không phán xét" / "Mỗi khoản mua là một dịp để lắng nghe chính bạn." (giống Đăng nhập).
+2. **Components:** Button/Text (Quay lại, Quay lại Đăng nhập), Text field/Default–Focused, Button/Primary/Large.
+3. **States:** mặc định (khung `Quên mật khẩu`, node 320:8025); Focused khi chạm ô Email. *(Đề xuất, chưa có khung trong Figma)*: lỗi email dùng cùng mẫu với `Đăng nhập – lỗi`; đang gửi: nút Loading; đã gửi: snackbar "Đã gửi liên kết tới email của bạn".
+4. **Interactions:** ô Email theo mục 8.1 (`AutofillHints.email`, `keyboardType: emailAddress`), `textInputAction: done` → gửi form. Validation *(đề xuất)*: email trống → "Vui lòng nhập email."; sai định dạng → "Email chưa đúng định dạng." (giống Đăng nhập).
+5. **Navigation:** đến từ "Quên mật khẩu?" ở Đăng nhập. "Quay lại", "Quay lại Đăng nhập", Back → Đăng nhập. "Gửi liên kết đặt lại" → Đăng nhập (đúng như prototype).
+6. **Constraints:** nút và link ≥ 48 dp; email tối đa 254 ký tự; bàn phím không che nút (cuộn). ≥ 600 dp: form tối đa 400 dp, căn giữa.
+
 ### 01 Onboarding (`/onboarding`) — Flow 1, Flow 7
 1. **Layout:** `Scaffold` → `SafeArea` → `Column` padding 16: `Spacer` → icon app trong tròn 112 (primary-container) → gap 24 → overline "NHẬT KÝ ĐỘNG CƠ MUA SẮM" (primary) → "Why I Buy?" (Display) → mô tả 3 dòng (Body, on-surface-variant) → gap 24 → Card trắng gồm 3 dòng (icon tròn 40 + Body): ghi số tiền / xem theo tuần, tháng / đọc quan sát → `Spacer` → nút Primary Large "→ Bắt đầu" → caption "Dữ liệu được lưu trên máy của bạn." Không app bar, không thanh điều hướng, không cuộn ở 360 × 800.
 2. **Components:** Button/Primary/Large, Card.
@@ -200,6 +230,14 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 4. **Interactions:** chạm "Bắt đầu" → đánh dấu `onboardingDone = true`.
 5. **Navigation:** chỉ hiện lần đầu mở app. "Bắt đầu" → Đăng nhập. Back hệ thống → thoát app.
 6. **Constraints:** nếu chiều cao < 700 dp thì cho `SingleChildScrollView`; mô tả không cắt chữ. ≥ 600 dp: nội dung tối đa 480 dp, căn giữa.
+
+### 00 Trang chủ tổng hợp – Hub (`/home`) — Flow 1, 6, 7, 8, 9
+1. **Layout:** như 02 Trang chủ (mục dưới): `Scaffold` → `AppBar` (tab: logo, "Trang chủ", avatar) → `CustomScrollView` padding 16, gap 12: "Chào bạn," → `WeeklySummaryCard` ("TỔNG QUAN TUẦN", chip "Hôm nay, 11/10", "817.000 ₫", "Tuần này: 5 khoản · 817.000 ₫", "Nhiều nhất: Khuyến mãi (2/5)", "Động cơ chính · 40% do Khuyến mãi") → `WishlistEntry` ("Danh sách mong muốn" / "2 món đang cân nhắc") → `BeforeYouBuyEntry` ("Trước khi mua", "Dừng lại một chút. Vài câu hỏi nhanh giúp bạn hiểu điều gì đứng sau một lần mua.", "Hiểu trước khi thay đổi.", `FilledButton.tonal` "Trước khi mua") → hàng "Khoản mua gần đây" + badge 3 + "Xem tất cả ›" → Card 3 `PurchaseRow` (Cơm tấm · Tiện lợi · Hôm nay 12:15 · 40.000 ₫ / Tai nghe Bluetooth · Khuyến mãi · Hôm qua 23:40 · 389.000 ₫ / Sách “Tâm lý học về tiền” · Mong muốn · 08/10 20:05 · 159.000 ₫). `bottomNavigationBar`: nút Primary Large "Ghi khoản mua" + `NavigationBar` (Trang chủ).
+2. **Components:** App bar/Tab, Weekly summary card, Wishlist entry, Before You Buy entry, Button/Tonal/Medium, Button/Primary/Large, Purchase row, Motive chip, Navigation bar/Trang chủ.
+3. **States:** có dữ liệu (khung `00 Trang chủ tổng hợp (Hub)`, node 320:8064); chưa ghi hôm nay (`00 Trang chủ (Hub) – chưa ghi hôm nay`, node 385:4946: "Hôm nay bạn chưa ghi khoản nào"). Trống, sau khi lưu, ngoại tuyến, loading lần đầu: dùng các trạng thái của 02 (`02a`–`02c`).
+4. **Interactions:** `WishlistEntry` → 11; "Trước khi mua" → 14 Trước khi mua – Bước 1/3; "Xem tất cả" → tab Lịch sử; chạm `PurchaseRow` → 05 Chi tiết khoản mua của đúng khoản đó; "Ghi khoản mua" → 03; avatar → tab Cá nhân; "Hoàn tác" và kéo để làm mới như 02.
+5. **Navigation:** tab gốc. Đến từ Splash (đã đăng nhập), Đăng nhập, "Đã hiểu" ở 08c (Flow 8), "Để mình nghĩ thêm" ở 18 (Flow 9). Back → thoát app.
+6. **Constraints:** như 02. "Ghi khoản mua" là nút chính duy nhất; "Trước khi mua" dùng Tonal Medium 48 để không cạnh tranh; nội dung cuộn phía sau thanh đáy, nút luôn hiện.
 
 ### 02 Trang chủ (`/home`) — Flow 1, 2, 6
 1. **Layout:** `Scaffold` → `AppBar` (tab: logo, "Trang chủ", avatar) → `CustomScrollView` padding 16, gap 12: "Chào bạn," (Subtitle) → `WeeklySummaryCard` → (`WishlistEntry` nếu có ≥ 1 món đang cân nhắc) → hàng tiêu đề "Khoản mua gần đây" + badge số + "Xem tất cả ›" → Card chứa tối đa 3 `PurchaseRow` (ngăn bằng `Divider`). `bottomNavigationBar`: `Column(Padding(16,8) FilledButton.icon "Ghi khoản mua" cao 56, NavigationBar)`. Nội dung cuộn phía sau, nút luôn hiện.
@@ -232,6 +270,14 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 4. **Interactions:** thùng rác → `showDialog` "Xóa khoản mua này?" / "“Tai nghe Bluetooth” sẽ bị xóa khỏi lịch sử. Bạn có 5 giây để hoàn tác." — "Hủy" đóng dialog; "Xóa" → xóa mềm, pop về màn trước + snackbar "Đã xóa “…” · Hoàn tác"; hết 5 giây mới xóa hẳn. "Sửa" → 03b.
 5. **Navigation:** từ 02 (Gần đây) hoặc 06 (Lịch sử). Back → màn trước. Sau khi sửa → quay lại 05 + snackbar "Đã cập nhật “…”" (dùng Snackbar/Saved).
 6. **Constraints:** thùng rác 48 × 48, nhãn đọc "Xóa khoản mua Tai nghe Bluetooth"; ghi chú dài xuống dòng không giới hạn; số tiền không xuống dòng. ≥ 840 dp: hiển thị ở khung phải của Lịch sử (list-detail).
+
+### 05a Xin quyền thông báo (`/notifications/permission`, đề xuất) — Flow 1, 5
+1. **Layout:** `Scaffold` → `SafeArea` → `Column` padding 16: icon trong vòng tròn → tiêu đề "Để Why I Buy? nhắc bạn mỗi tối?" (Display) → mô tả "Một lời nhắc lúc 21:00 giúp bạn ghi lại khoản mua trong ngày khi còn nhớ rõ lý do." → Card xem trước thông báo (App icon, "Why I Buy? · 21:00", "Hôm nay bạn có mua gì không? Ghi lại trong 10 giây.") → `Spacer` → khối hành động: nút Primary Large "Bật nhắc nhở" → TextButton "Để sau" → caption "Bạn có thể đổi giờ nhắc trong Cá nhân." Không có thanh điều hướng (mục 8.3).
+2. **Components:** App icon, Card, Button/Primary/Large, Button/Text/Medium.
+3. **States:** một khung (`05a Xin quyền thông báo`, node 366:4930). Sau khi bấm "Bật nhắc nhở", hộp thoại xin quyền là của hệ thống Android, không vẽ trong Figma.
+4. **Interactions:** theo mục 8.5: "Bật nhắc nhở" → `Permission.notification.request()`; được cấp → hẹn nhắc 21:00 bằng `flutter_local_notifications`; "Để sau" hoặc bị từ chối → lưu `notificationDenied = true` (prototype dùng biến `thong-bao/da-tu-choi`). Nếu quyền đã bị từ chối vĩnh viễn thì `request()` không hiện hộp thoại nữa; khi đó "Bật nhắc nhở" gọi `openAppSettings()` như mục 8.5 *(đề xuất)*.
+5. **Navigation:** đến sau lần lưu khoản mua đầu tiên (từ 05 Khoản mua đã lưu, Flow 1) hoặc từ nút Tonal "Mở cài đặt" trong thẻ "Thông báo đang tắt" ở `10 Cá nhân – chưa cấp quyền thông báo` (R4-2). Sau khi chọn: Flow 1 → 02 sau khi lưu; khi đến từ 10 → `pop` về 10 *(đề xuất)*.
+6. **Constraints:** một màn chỉ xin một quyền; không hỏi lúc mở app; "Để sau" ≥ 48 dp và không chặn người dùng. Android 13+ cần `POST_NOTIFICATIONS` (mục 8.5); dưới Android 13 không cần hỏi quyền nên bỏ qua 05a *(đề xuất)*.
 
 ### 06 Lịch sử (`/history`) — Flow 3, 4
 1. **Layout:** `Scaffold` → `AppBar` (tab: logo, "Lịch sử", avatar) → `CustomScrollView` padding 16, gap 12: `PeriodSwitcher` (mặc định "Tuần này") → hàng `FilterChip` cuộn ngang ("Tất cả (6)" + 8 động cơ có số lượng) → (banner primary-container "Xem mô hình động cơ tháng 9 ›" khi đang xem một tháng) → mỗi ngày một Card: tiêu đề ngày ("Hôm nay, 11/10/2026") + tổng ngày (primary) + các `PurchaseRow`. `NavigationBar` (Lịch sử).
@@ -272,6 +318,22 @@ Khung giờ dùng chung cho Mô hình và Góc nhìn: Sáng 05–11h · Trưa 11
 4. **Interactions:** gạt switch → lưu ngay + đặt / hủy lịch thông báo (`flutter_local_notifications`); nếu chưa cấp quyền thông báo → mở 05a (xem mục 8.5); "Xuất dữ liệu" → tạo CSV (cột: ngày giờ, tên, số tiền, động cơ, ghi chú) vào Tải xuống; "Xóa toàn bộ dữ liệu" → dialog → "Xóa tất cả" xóa dữ liệu cục bộ và trên tài khoản, ở lại 10, các tab khác về trạng thái trống.
 5. **Navigation:** tab gốc; từ avatar ở các tab khác. Back → tab Trang chủ.
 6. **Constraints:** mỗi dòng cài đặt ≥ 56 dp; switch 52 × 48, nhãn đọc "Nhắc ghi khoản mua lúc 21 giờ, đang bật"; "Xóa toàn bộ" không có hoàn tác nên bắt buộc dialog. ≥ 600 dp: nội dung tối đa 600 dp.
+
+### 10a Tài khoản (`/profile/account`, đề xuất) — Flow 7
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Tài khoản") → `ListView` padding 16, gap 12: Card 2 `ListTile` ("Email" · "minhanh@gmail.com", chỉ hiển thị; "Đổi mật khẩu" · "Cập nhật mật khẩu đăng nhập" + `chevron_right`) → khoảng trống → Card riêng ở cuối màn (nhóm nguy hiểm): `ListTile` icon thùng rác + "Xóa tài khoản" · "Xóa vĩnh viễn tài khoản và mọi khoản mua đã đồng bộ", chữ và icon màu error.
+2. **Components:** App bar/Nested, Card, Dialog/Danger, Button/Text/Medium, Button/Danger/Medium, Snackbar/Saved.
+3. **States:** mặc định (`10a Tài khoản`, node 359:4884); xác nhận xóa (`10a Tài khoản – xác nhận xóa`, node 359:5118: scrim 40% + dialog "Xóa tài khoản?" / "Tài khoản và toàn bộ khoản mua của bạn sẽ bị xóa vĩnh viễn, không thể khôi phục." / TextButton "Hủy" · nút Danger "Xóa tài khoản" bên phải); sau khi đổi mật khẩu (khung tên `10b Đổi mật khẩu – đã lưu`, node 359:5079: nội dung 10a + snackbar "Đã đổi mật khẩu").
+4. **Interactions:** "Đổi mật khẩu" → 10b; "Xóa tài khoản" → `showDialog` (Danger): "Hủy" đóng dialog; "Xóa tài khoản" → xóa tài khoản và dữ liệu đã đồng bộ (mục 8.6). Dòng Email không bấm được.
+5. **Navigation:** đến từ thẻ tài khoản ở 10 Cá nhân. Back → 10. Xóa tài khoản xong → `pushNamedAndRemoveUntil('/login')` (mục 8.6).
+6. **Constraints:** mỗi dòng ≥ 56 dp; nhóm nguy hiểm tách riêng ở cuối màn; không có hoàn tác nên bắt buộc dialog; "Xóa tài khoản" khác "Xóa toàn bộ dữ liệu" ở 10 (chỉ xóa khoản mua, giữ tài khoản). ≥ 600 dp: nội dung tối đa 600 dp.
+
+### 10b Đổi mật khẩu (`/profile/account/password`, đề xuất) — Flow 7
+1. **Layout:** `Scaffold(resizeToAvoidBottomInset: true)` → `AppBar` (Back, "Đổi mật khẩu") → `Form` trong `SingleChildScrollView` padding 16: TextFormField "Mật khẩu hiện tại" (hint "Nhập mật khẩu đang dùng") → "Mật khẩu mới" → `PasswordStrength` → "Nhập lại mật khẩu mới". `bottomNavigationBar`: nút Primary Large "Lưu".
+2. **Components:** App bar/Nested, Text field (ô mật khẩu có icon eye / eye-off), Password strength (Yếu / Trung bình / Mạnh), Button/Primary/Large (Default, Disabled).
+3. **States:** đang nhập (`10b Đổi mật khẩu`, node 359:4996: độ mạnh "Độ mạnh: Trung bình · Thêm ký tự để mạnh hơn", nút "Lưu" Disabled); đã lưu (về 10a + snackbar "Đã đổi mật khẩu"). *(Đề xuất, chưa có khung trong Figma)*: đang lưu (nút Loading); lỗi "Mật khẩu hiện tại chưa đúng." dưới ô thứ nhất, "Mật khẩu nhập lại chưa khớp." dưới ô thứ ba.
+4. **Interactions:** theo mục 8.1: bọc `AutofillGroup`; ô mới dùng `AutofillHints.newPassword`; `obscureText` bật / tắt bằng eye / eye-off; độ mạnh tính lại sau mỗi lần gõ; nút "Lưu" `onPressed: null` cho tới khi đủ 3 ô và ô mới trùng ô nhập lại. Mật khẩu mới tối thiểu 8 ký tự như Đăng ký *(đề xuất)*.
+5. **Navigation:** đến từ 10a. Back → 10a. Lưu thành công → `Navigator.pop` về 10a + SnackBar "Đã đổi mật khẩu" (mục 8.1).
+6. **Constraints:** nút đáy luôn trên bàn phím; nhãn độ mạnh luôn có chữ, không chỉ dựa vào màu; không hiện mật khẩu dạng chữ thường khi chưa bấm eye. ≥ 600 dp: form tối đa 400 dp, căn giữa.
 
 ---
 
@@ -324,6 +386,93 @@ Lưu `WishlistItem` không được ghi vào bảng `purchases`, không đổi t
 ### Thay đổi ở màn có sẵn do Flow 6
 - **02 Trang chủ:** chèn `WishlistEntry` ngay dưới Tổng quan tuần, chỉ hiện khi có ≥ 1 món; subtitle "n món đang cân nhắc". Không thêm tab.
 - **03/04 Ghi khoản mua:** nhận `PurchaseDraft`. Có `fromWishlistId` thì: 03 hiện banner primary-container "Điền sẵn từ Danh sách mong muốn: “<tên>”…", số tiền và tên điền sẵn (sửa được); 04 chọn sẵn động cơ cũ, câu phụ "Lúc thêm vào danh sách, bạn chọn <động cơ>. Đổi nếu lý do bây giờ đã khác."
+
+### Flow 8–10 — Mô hình dữ liệu và điều hướng
+
+Các màn nằm ở section "Flow 8–10 – AI (Góc nhìn AI, Trước khi mua)" của page `03 Final UI`. Route xem mục 3.2 (đều là đề xuất).
+
+```dart
+// (đề xuất) Phiên "Trước khi mua": chỉ giữ trong bộ nhớ, không ghi vào purchases hay wishlist
+enum Influence { promo, social, ads, none }   // câu 2 ở 15: Khuyến mãi / Ảnh hưởng MXH / Quảng cáo / Không có
+enum WithoutPromo { yes, unsure, no }         // 16: Có, vẫn muốn / Chưa chắc / Không
+
+class BeforeBuySession {
+  final String name;                // bắt buộc
+  final int? estimatedPrice;        // VND, null = không nhập
+  final Motive reason;              // câu 1 ở 15: need | want | emotion | other
+  final Influence influence;
+  final WithoutPromo? withoutPromo; // chỉ có khi influence == promo
+}
+```
+
+**Ràng buộc chung cho nội dung AI** (áp dụng cho 08b, 08c, 18; nhắc lại ở mục Constraints của từng màn):
+- Chỉ nêu quan sát từ dữ liệu người dùng đã ghi hoặc vừa trả lời, kèm số liệu khi có (ví dụ "5/15").
+- Luôn có một câu "Gợi mở".
+- Không khuyên, không phán xét, không dự đoán. Có câu chốt kiểu "Đây là gợi ý để nhìn lại, không phải chẩn đoán hay phán xét."
+- Trạng thái đang tải tối đa khoảng 1,5 giây trong prototype.
+- Lỗi hoặc mất mạng: Error state có "Thử lại" *(đề xuất, chưa có khung trong Figma)*.
+
+### 05 Khoản mua đã lưu (`/purchase/:id/saved`, đề xuất) — Flow 1, 8
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Đã lưu khoản mua") → `SingleChildScrollView` padding 16, gap 12: "Khoản mua đã được lưu" → "Một khoảnh khắc để nhận biết." → Card `PurchaseRow` (Trà sữa nướng · Cảm xúc · Hôm nay · 45.000 ₫) → "Động cơ đã chọn: Cảm xúc" → Card "Nhận định của bạn ở Góc nhìn" / "Nhận định AI và chiêm nghiệm nằm ở Góc nhìn. Xem điều gì đúng với bạn." → "Hiểu trước khi thay đổi." `bottomNavigationBar`: `Column(FilledButton "Mở Góc nhìn" cao 56, FilledButton.tonal "Về Trang chủ" cao 48)`.
+2. **Components:** App bar/Nested, Purchase row, Motive chip, Button/Primary/Large, Button/Tonal/Medium.
+3. **States:** một khung (node 320:8703).
+4. **Interactions:** "Mở Góc nhìn" → 08a AI đang phân tích – khoản vừa lưu → 08c; "Về Trang chủ" → 02 sau khi lưu + snackbar "Đã lưu". Lần lưu đầu tiên và chưa cấp quyền thông báo → 05a trước khi về Trang chủ (Flow 1).
+5. **Navigation:** đến từ 04 sau khi lưu (thay cho việc pop thẳng về 02, xem "Thay đổi ở màn có sẵn do Flow 8–10"). Back hệ thống = "Về Trang chủ" *(đề xuất)*.
+6. **Constraints:** không khen, không đánh giá khoản vừa lưu, chỉ nhắc lại động cơ người dùng đã chọn; "Mở Góc nhìn" là nút chính duy nhất, "Về Trang chủ" là Tonal. ≥ 600 dp: nội dung tối đa 600 dp.
+
+### 08b Chi tiết mô hình mua sắm (`/patterns/ai`, đề xuất) — Flow 8, 9, 10
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Chi tiết mô hình") → `CustomScrollView` padding 16, gap 12: "Mô hình mua sắm của bạn" + "Tháng 10/2026 · 15 khoản" → Card overline "ĐỘNG CƠ PHỔ BIẾN NHẤT" + "Khuyến mãi · 5/15" + "Khuyến mãi là động cơ bạn chọn nhiều nhất, chiếm khoảng một phần ba số khoản trong tháng." → 3 `InsightCard` (Khuyến mãi 5/15; Cảm xúc 4/15; Nhu cầu 2 · Tiện lợi 2) → dòng "Mong muốn: 1 · Ảnh hưởng MXH: 1 · Quảng cáo: 0. Đây là động cơ bạn đã ghi, không phải dự đoán về bạn." → khối "Gợi mở": "Điều gì khiến một ưu đãi có giá trị với bạn?". `bottomNavigationBar`: nút Primary Large "Xem mô hình của tôi".
+2. **Components:** App bar/Nested, AI analysis state, Skeleton, Insight card, Button/Primary/Large.
+3. **States:** đang tải (`08a AI đang phân tích – mô hình`, node 320:8385: "AI đang phân tích", "Đang xem kỹ hơn", "Đang tổng hợp các động cơ bạn đã ghi trong tháng này.", "Tháng 10/2026 · 15 khoản", skeleton, "Đang so sánh các động cơ bạn đã chọn…", tự chuyển); có kết quả (`08b`, node 320:8503). Lỗi hoặc mất mạng *(đề xuất, chưa có khung trong Figma)*: `StateMessage` loại Error có "Thử lại", giống `07 Mô hình – lỗi`.
+4. **Interactions:** các thẻ chỉ để đọc; "Xem mô hình của tôi" → 07 Mô hình (có AI).
+5. **Navigation:** từ "Để AI phân tích" ở 07 Mô hình (có AI), qua 08a; từ "Xem mô hình của tôi" ở thẻ "Mô hình mua sắm (AI)" của 08 (vào thẳng, không qua 08a); chạm thẻ nhận định ở 08c hoặc 18. Back → màn trước.
+6. **Constraints:** theo "Ràng buộc chung cho nội dung AI": chỉ số đếm từ dữ liệu đã ghi ("5/15"); luôn có "Gợi mở"; không khuyên, không phán xét, không dự đoán ("không phải dự đoán về bạn"); đang tải ≤ 1,5 giây trong prototype; lỗi có "Thử lại" *(đề xuất)*. Đang tải bọc `Semantics(liveRegion: true)`. ≥ 840 dp: 3 thẻ thành lưới 2 cột.
+
+### 08c Nhận định AI về khoản mua (`/purchase/:id/ai`, `/insights/ai/:purchaseId`, đề xuất) — Flow 8, 10
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Nhận định AI về khoản mua") → `SingleChildScrollView` padding 16, gap 12: "AI nhận thấy" → Card `PurchaseRow` (Trà sữa nướng · Cảm xúc · 45.000 ₫) → "Bạn đã chọn Cảm xúc." → "Một món quen thuộc đôi khi giúp tâm trạng khá hơn một chút. Điều đó có thể đúng với khoản này — hoặc không. Chỉ bạn biết lúc đó thế nào." → 2 `InsightCard` ("Bạn gắn ly trà này với cảm xúc lúc đó, hơn là một nhu cầu thiết thực." – tag "Động cơ bạn chọn"; "Sự quen thuộc có thể là một phần khiến món này hấp dẫn." – tag "Một tín hiệu dễ chịu có thể có") → khối "Gợi mở": "Bạn mong ly trà giúp mình cảm thấy thế nào?" → "Đây là gợi ý để nhìn lại, không phải chẩn đoán hay phán xét." `bottomNavigationBar`: `Column(FilledButton "Đã hiểu" cao 56, FilledButton.tonal "Xem mô hình của tôi" cao 48)`.
+2. **Components:** App bar/Nested, AI analysis state, Skeleton, Purchase row, Motive chip, Insight card, Button/Primary/Large, Button/Tonal/Medium.
+3. **States:** đang tải, chỉ ở Flow 8 (`08a AI đang phân tích – khoản vừa lưu`, node 320:8747: "AI đang phân tích", "Đang xem kỹ hơn", "Đang nhìn lại động cơ bạn chọn: Cảm xúc.", "Trà sữa nướng · 45.000 ₫", skeleton, "Đang xem động cơ bạn đã chọn…", "Hiểu trước khi thay đổi.", tự chuyển sau 1,5 giây); có kết quả: 2 khung cùng nội dung, khác điểm vào (`08c Nhận định AI về khoản vừa lưu` node 320:8775; `08c Nhận định AI về khoản mua` node 320:8552). Lỗi hoặc mất mạng *(đề xuất, chưa có khung trong Figma)*: Error state có "Thử lại".
+4. **Interactions:** "Đã hiểu" → đóng màn; "Xem mô hình của tôi" → 07 Mô hình (có AI); chạm thẻ nhận định → 08b.
+5. **Navigation:** Flow 8: từ "Mở Góc nhìn" ở 05 Khoản mua đã lưu, qua 08a; "Đã hiểu" → 00 Hub. Flow 10: từ "Xem chi tiết" ở thẻ "AI nhận thấy" của 08; "Đã hiểu" → 08 Góc nhìn. Back → màn trước.
+6. **Constraints:** theo "Ràng buộc chung cho nội dung AI": chỉ dựa trên động cơ người dùng đã chọn; luôn có "Gợi mở"; không khuyên, không phán xét, không dự đoán, giữ câu chốt "không phải chẩn đoán hay phán xét"; đang tải ≤ 1,5 giây trong prototype; lỗi có "Thử lại" *(đề xuất)*. ≥ 600 dp: nội dung tối đa 600 dp.
+
+### 14 Trước khi mua – Bước 1/3 (`/before-buy/item`, đề xuất) — Flow 9
+1. **Layout:** `Scaffold(resizeToAvoidBottomInset: true)` → `AppBar` (Back, "Trước khi mua") → `Form` trong `SingleChildScrollView` padding 16, gap 12: `StepHeader` ("BƯỚC 1/3", "Bạn đang cân nhắc món gì?") + "Bắt đầu với món bạn đang cân nhắc. Bước này không ghi khoản mua." → TextFormField "Tên món" (Tai nghe Bluetooth) → TextFormField "Giá dự kiến (không bắt buộc)" (389.000 ₫) → Card "Một chút để hiểu mình" / "Tiếp theo, bạn sẽ xem vì sao mình muốn món này và điều gì thu hút bạn. Không có câu trả lời đúng hay sai." → "AI chỉ gợi ý để nhìn lại. Quyết định vẫn là của bạn." `bottomNavigationBar`: nút Primary Large "Tiếp tục".
+2. **Components:** App bar/Nested, Step header, Text field, Button/Primary/Large.
+3. **States:** đã điền (node 320:8963). *(Đề xuất, chưa có khung trong Figma)*: tên trống → nút "Tiếp tục" Disabled, lỗi dưới ô theo Text field/Error.
+4. **Interactions:** tên bắt buộc, `trim()` khác rỗng, tối đa 60 ký tự *(đề xuất, giống `WishlistItem`)*; giá dùng bàn phím số và định dạng như mục 8.2, nếu có thì > 0; "Tiếp tục" → 15 mang theo `BeforeBuySession`.
+5. **Navigation:** đến từ nút "Trước khi mua" ở 00 Hub hoặc `02 Trang chủ – lối vào Trước khi mua`. Back → Trang chủ, không lưu gì.
+6. **Constraints:** không tạo `Purchase` hay `WishlistItem`; giá dự kiến không cộng vào chi tiêu; nút đáy luôn trên bàn phím. ≥ 600 dp: form tối đa 600 dp.
+
+### 15 Trước khi mua – Bước 2/3 (`/before-buy/questions`, đề xuất) — Flow 9
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Câu hỏi nhanh") → `SingleChildScrollView` padding 16, gap 12: `StepHeader` ("BƯỚC 2/3", "Điều gì đứng sau lựa chọn?") + "Tai nghe Bluetooth · 389.000 ₫" → câu 1 "Vì sao bạn muốn món này?" + "Chọn động cơ gần nhất với cảm nhận của bạn." + 4 Motive card (Nhu cầu, Mong muốn, Cảm xúc, Khác) → câu 2 "Điều gì tác động đến lần mua này?" + "Chọn tác động rõ nhất." + 4 Motive card (Khuyến mãi, Ảnh hưởng MXH, Quảng cáo, Không có) → "Không có câu trả lời đúng hay sai." `bottomNavigationBar`: nút Primary Large "Tiếp tục".
+2. **Components:** App bar/Nested, Step header, Motive card (Default / Selected), Button/Primary/Large.
+3. **States:** khung mẫu đang chọn Mong muốn + Khuyến mãi (node 320:9009). Chưa chọn đủ 2 câu → nút "Tiếp tục" Disabled *(đề xuất, chưa có khung trong Figma)*.
+4. **Interactions:** mỗi câu chọn đúng 1 thẻ (chạm thẻ khác thì đổi).
+5. **Navigation:** từ 14. "Tiếp tục" → 16 nếu câu 2 chọn Khuyến mãi; nếu không → 17 AI đang phân tích – trước khi mua → 18. Back → 14, giữ dữ liệu đã nhập.
+6. **Constraints:** thẻ có icon + tên, thẻ được chọn có nền, viền và dấu tích (không chỉ đổi màu); thẻ ≥ 72 dp cao như Motive card; nhãn đọc "Mong muốn, đã chọn". ≥ 600 dp: nội dung tối đa 600 dp.
+
+### 16 Trước khi mua – Bước 3/3 (`/before-buy/discount`, đề xuất) — Flow 9
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Câu hỏi về khuyến mãi") → `SingleChildScrollView` padding 16, gap 12: `StepHeader` ("BƯỚC 3/3", "Thử bỏ qua ưu đãi") → "Tai nghe Bluetooth" + "389.000 ₫ · Mong muốn + Khuyến mãi" → câu hỏi "Không có khuyến mãi, bạn vẫn muốn món này chứ?" + "Hãy nghĩ về món đồ, tách khỏi ưu đãi." → 3 lựa chọn dạng Motive card ("Có, vẫn muốn", "Chưa chắc", "Không") → "Chưa chắc cũng không sao. Câu trả lời giúp gợi ý sát hơn." `bottomNavigationBar`: nút Primary Large "Xem nhận định".
+2. **Components:** App bar/Nested, Step header, Motive card, Button/Primary/Large.
+3. **States:** một khung (node 320:9091). Chỉ hiện khi câu 2 ở 15 chọn Khuyến mãi.
+4. **Interactions:** chọn đúng 1 trong 3 lựa chọn; "Xem nhận định" → 17 → 18.
+5. **Navigation:** từ 15. Back → 15.
+6. **Constraints:** "Chưa chắc" là lựa chọn hợp lệ, không bị coi là sai; lựa chọn được chọn không chỉ đổi màu. ≥ 600 dp: nội dung tối đa 600 dp.
+
+### 18 Nhận định trước khi mua (`/before-buy/result`, đề xuất) — Flow 9
+1. **Layout:** `Scaffold` → `AppBar` (Back, "Nhận định trước khi mua") → `SingleChildScrollView` padding 16, gap 12: "Rõ hơn một chút trước khi mua" → "Tai nghe Bluetooth" + "389.000 ₫ · Dựa trên câu trả lời của bạn" → 2 `InsightCard` ("Bạn chọn Mong muốn: món này hấp dẫn bạn, hơn là một nhu cầu bạn đã xác định." – tag Mong muốn; "Bạn chọn Khuyến mãi và chưa chắc sẽ muốn nó khi đủ giá. Ưu đãi là một phần sức hút." – tag Khuyến mãi) → "Câu trả lời cho thấy cả món đồ lẫn ưu đãi đều quan trọng với bạn. Đây là gợi ý từ điều bạn chia sẻ, không phải dự đoán việc bạn sẽ làm." → khối "Gợi mở": "Không có khuyến mãi, điều gì khiến tai nghe này đáng mua với bạn?" → "Không có lựa chọn đúng hay sai. Quyết định là của bạn." `bottomNavigationBar`: `Column(FilledButton "Để mình nghĩ thêm" cao 56, FilledButton.tonal "Vẫn mua" cao 48)`.
+2. **Components:** App bar/Nested, AI analysis state, Skeleton, Insight card, Button/Primary/Large, Button/Tonal/Medium.
+3. **States:** đang tải (`17 AI đang phân tích – trước khi mua`, node 320:9139: "AI đang phân tích", "Đang xem kỹ hơn", "Đang nhìn lại Mong muốn, Khuyến mãi và câu trả lời “Chưa chắc”.", "Tai nghe Bluetooth · 389.000 ₫", skeleton, "Đang kết nối các câu trả lời của bạn…", tự chuyển sau 1,5 giây); có kết quả (node 320:9167). Lỗi hoặc mất mạng *(đề xuất, chưa có khung trong Figma)*: Error state có "Thử lại".
+4. **Interactions:** "Để mình nghĩ thêm" → `go('/home')`, không ghi gì; "Vẫn mua" → `/purchase/new` (03 Ghi khoản mua – Bước 1/2, sang Flow 1), điền sẵn tên và giá dự kiến như khi mua từ Danh sách mong muốn *(đề xuất)*; chạm thẻ nhận định → 08b.
+5. **Navigation:** từ 15 (không chọn Khuyến mãi) hoặc 16, qua 17. Back → bước trước.
+6. **Constraints:** theo "Ràng buộc chung cho nội dung AI": chỉ dựa trên câu trả lời người dùng vừa chọn; luôn có "Gợi mở"; không khuyên nên mua hay không, không dự đoán ("không phải dự đoán việc bạn sẽ làm"); đang tải ≤ 1,5 giây trong prototype; lỗi có "Thử lại" *(đề xuất)*. Flow 9 không tạo `Purchase` nếu người dùng không chọn "Vẫn mua". ≥ 600 dp: 2 nút đáy nằm ngang.
+
+### Thay đổi ở màn có sẵn do Flow 8–10
+- **00 Hub / 02 Trang chủ:** thêm `BeforeYouBuyEntry` (nút Tonal "Trước khi mua" → 14). Khung `02 Trang chủ – lối vào Trước khi mua` là biến thể của 02: giống Hub nhưng không có `WishlistEntry`.
+- **04 Ghi khoản mua – Bước 2/2:** "Lưu" thành công → 05 Khoản mua đã lưu (Flow 1, Flow 8 trên Figma), thay vì pop thẳng về 02.
+- **07 Mô hình (có AI):** phiên bản hiện tại của 07, thêm nút Primary "Để AI phân tích" → 08a → 08b.
+- **08 Góc nhìn (có AI):** phiên bản hiện tại của 08, gồm dòng mạch "Dữ liệu mua sắm → Nhận định AI → Chiêm nghiệm", thẻ "AI nhận thấy" (nút chữ "Xem chi tiết" → 08c), `AiPatternCard` "Mô hình mua sắm (AI)" ("Xem mô hình của tôi" → 08b) và thẻ "Chiêm nghiệm tháng" ("Mở chiêm nghiệm tháng" → 09). Sau khi lưu chiêm nghiệm: khung `08 Góc nhìn – đã lưu chiêm nghiệm (có AI)` với snackbar "Đã lưu chiêm nghiệm tháng 10".
 
 ---
 

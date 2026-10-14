@@ -1,0 +1,14 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python (research-pack)
+__pycache__/
+*.pyc
+.venv/

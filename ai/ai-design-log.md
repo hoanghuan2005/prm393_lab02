@@ -929,14 +929,14 @@ toàn bộ mấy này làm theo 360x800
 |---|---|---|---|---|
 | 1 | Wishlist Detail | Chip "Khoảng lặng 48h", "Đang tĩnh tâm"; ép chờ trước khi mua | #3 User control; persona không phán xét | Từ chối (QĐ 6) |
 | 2 | Wishlist Overview | "Còn 48h suy ngẫm", "Đã hạ nhiệt 40%" + đồng hồ cát: số liệu ứng dụng không đo được, gây áp lực | #2 Match real world; #8 | Từ chối (QĐ 6) |
-| 3 | Wishlist Detail | Thẻ "Nhật ký tâm lý · Bước 2/3" bắt buộc qua nhiều giai đoạn | #8 Minimalist; phạm vi | Từ chối (QĐ 7) |
-| 4 | Home – Wishlist Entry | Trang chủ bị thiết kế lại; nhãn "Danh …" bị cắt; thẻ "Khoảng lặng 24 giờ" mang giọng khuyên bảo | #4 Consistency; DESIGN.md tone | Sửa (QĐ 8) |
+| 3 | Wishlist Detail | Thẻ "Nhật ký tâm lý · Bước 2/3" bắt buộc qua nhiều giai đoạn | #8 Minimalist; phạm vi | Từ chối (QĐ 6) |
+| 4 | Home – Wishlist Entry | Trang chủ bị thiết kế lại; nhãn "Danh …" bị cắt; thẻ "Khoảng lặng 24 giờ" mang giọng khuyên bảo | #4 Consistency; DESIGN.md tone | Sửa (QĐ 7) |
 | 5 | Add Wishlist Item | Báo lỗi "Vui lòng nhập tên món đồ để lưu" trong khi ô tên đã có "Bàn phím cơ không dây" | #9 Recover from errors; #1 | Sửa: tách khung lỗi riêng (12a), form hợp lệ không báo lỗi |
 | 6 | Add Wishlist Item | Thẻ "Không gian trì hoãn lành mạnh" và dòng "Món đồ chỉ thực sự đáng mua khi nó vẫn hữu ích sau 30 ngày." | DESIGN.md: không khuyên bảo | Từ chối |
 | 7 | Wishlist Overview | Thẻ món và khung "Chưa có món nào trong danh mục này" hiện cùng lúc | #1 Visibility of status | Sửa: empty state chỉ khi bộ lọc trống |
-| 8 | Wishlist Overview / Empty | Chip "Bỏ qua" bị cắt ở mép phải; số lượng giữa các khung không khớp (Đã mua 3 / 0) | Accessibility; #4 | Sửa (QĐ 10), thống nhất dữ liệu mẫu |
+| 8 | Wishlist Overview / Empty | Chip "Bỏ qua" bị cắt ở mép phải; số lượng giữa các khung không khớp (Đã mua 3 / 0) | Accessibility; #4 | Sửa (QĐ 8), thống nhất dữ liệu mẫu |
 | 9 | Saved / Skipped | Snackbar bị cắt chữ ("Đã lưu món vào danh sách mon…"), nhãn hành động viết hoa "ĐÓNG" | #1; tone | Sửa: message 2 dòng, bỏ "Đóng", giữ "Hoàn tác" |
-| 10 | Skip Confirmation | Dialog nằm trong canvas ngang, màn nền không phải 360 × 800 | Ràng buộc nền tảng | Chấp nhận nội dung, dựng lại overlay (QĐ 9) |
+| 10 | Skip Confirmation | Dialog nằm trong canvas ngang, màn nền không phải 360 × 800 | Ràng buộc nền tảng | Chấp nhận nội dung, dựng lại overlay (QĐ 3) |
 | 11 | Add Purchase prefilled | Nhãn "Từ Mong muốn" + ghi chú "Động cơ ban đầu: Khuyến mãi (có thể chọn lại ở Bước 2/2)" | #6 Recognition | Chấp nhận, đổi thành banner "Điền sẵn từ Danh sách mong muốn" |
 
 **Chuyển sang Figma (làm tay / bằng Claude, không qua Stitch):** 3 component mới (Wishlist status chip, Wishlist item card có State Default/Pressed, Wishlist entry) và 2 icon (bookmark, archive); 22 khung Final UI (thêm 13c đã bỏ qua, 13d đã mua, và 3 khung chi tiết theo dữ liệu: Áo khoác, Chuột công thái học, Bình giữ nhiệt); 6 wireframe; sơ đồ Flow 6 ở trang 01; prototype 17 khung + overlay + chuyển cảnh đang lưu → đã mua.

@@ -19,10 +19,13 @@
 | 03 | Add Purchase | Lồng – bước 1/2 | 02, trạng thái trống của 07 | Nhập số tiền, tên món, thời điểm |
 | 04 | Purchase Reason | Lồng – bước 2/2 | 03 | Chọn 1 trong 8 động cơ, ghi chú tùy chọn, lưu |
 | 05 | Purchase Detail | Lồng | 02 (mục Gần đây), 06 | Xem, sửa hoặc xóa một khoản mua |
+| 05 | Khoản mua đã lưu | Lồng | 04 (sau khi lưu) | Xác nhận khoản vừa lưu; mở Góc nhìn để xem nhận định AI, hoặc về Trang chủ |
 | 05a | Xin quyền thông báo | Lồng | 05 Khoản mua đã lưu (lần đầu), 10 "Mở cài đặt" | Xin quyền gửi nhắc nhở 21:00, có "Để sau" |
 | 06 | Purchase History | Tab 2 | Thanh điều hướng | Danh sách khoản mua theo ngày, lọc theo động cơ |
 | 07 | Buying Patterns | Tab 3 | Thanh điều hướng | Tỷ lệ động cơ, khung giờ hay mua |
 | 08 | Personal Insights | Tab 4 | Thanh điều hướng, 07 | Thẻ góc nhìn tổng hợp từ dữ liệu người dùng ghi |
+| 08b | Chi tiết mô hình mua sắm | Lồng | 07 Mô hình (có AI) "Để AI phân tích", 08 "Xem mô hình của tôi", thẻ nhận định ở 08c và 18 | Đọc phân tích AI về các động cơ đã ghi trong tháng |
+| 08c | Nhận định AI về khoản mua | Lồng | 05 Khoản mua đã lưu "Mở Góc nhìn", 08 "Xem chi tiết" | Đọc nhận định AI về một khoản mua cụ thể |
 | 09 | Monthly Reflection | Lồng | 08 | Tự đánh giá mức hài lòng và đặt mục tiêu tháng |
 | 10 | Profile & Settings | Tab 5 | Thanh điều hướng, 09 | Nhắc nhở, xuất dữ liệu, cài đặt |
 | 10a | Tài khoản | Lồng | 10 (thẻ tài khoản) | Email, Đổi mật khẩu, Xóa tài khoản |
@@ -30,6 +33,12 @@
 | 11 | Wishlist Overview (Danh sách mong muốn) | Lồng | 02 (thẻ "Danh sách mong muốn", luôn hiện, PB-1) | Xem món muốn mua theo trạng thái Đang cân nhắc / Đã mua / Bỏ qua |
 | 12 | Add Wishlist Item (Thêm món mong muốn) | Lồng | 11 | Lưu một món muốn mua kèm 1 trong 8 động cơ; dùng lại để sửa món (12c) |
 | 13 | Wishlist Detail (Chi tiết món mong muốn) | Lồng | 11 | Xem lý do muốn mua; quyết định Ghi khoản mua / Không mua nữa / tiếp tục cân nhắc |
+| 14 | Trước khi mua – Bước 1/3 | Lồng – bước 1/3 | 00 Hub, 02 – lối vào Trước khi mua ("Trước khi mua") | Ghi tên món và giá dự kiến; không ghi khoản mua |
+| 15 | Trước khi mua – Bước 2/3 | Lồng – bước 2/3 | 14 | Chọn vì sao muốn món và điều gì tác động đến lần mua |
+| 16 | Trước khi mua – Bước 3/3 | Lồng – bước 3/3 | 15 (chỉ khi chọn Khuyến mãi) | Tự hỏi nếu không có khuyến mãi thì có còn muốn món này |
+| 18 | Nhận định trước khi mua | Lồng | 16, hoặc 15 khi không chọn Khuyến mãi (qua 17 đang tải) | Đọc nhận định AI, rồi tự quyết định "Để mình nghĩ thêm" hoặc "Vẫn mua" |
+
+Ghi chú về Flow 8–10: `07 Mô hình (có AI)` và `08 Góc nhìn (có AI)` là **phiên bản hiện tại** của 07, 08 (không tính là màn mới). `08a AI đang phân tích` (2 khung) và `17 AI đang phân tích – trước khi mua` là trạng thái đang tải. `02 Trang chủ – lối vào Trước khi mua` là biến thể của 02. Tên màn giữ đúng tên khung Figma; có 2 màn mang số 05 (Chi tiết khoản mua, Khoản mua đã lưu), luôn ghi kèm tên.
 
 Tám động cơ (dùng thống nhất trong toàn bộ dự án): Nhu cầu, Mong muốn, Khuyến mãi,
 Ảnh hưởng MXH, Quảng cáo, Cảm xúc, Tiện lợi, Khác.
@@ -63,9 +72,19 @@ flowchart TD
     S10 --> S10a[10a Tài khoản] --> S10b[10b Đổi mật khẩu]
     S10 --> Help[Hỗ trợ và thông tin]
     S10 -->|Đăng xuất| Login
+    S05s -->|Mở Góc nhìn| S08c[08c Nhận định AI về khoản mua]
+    S08 -->|Xem chi tiết| S08c
+    S07 -->|Để AI phân tích| S08b[08b Chi tiết mô hình mua sắm]
+    S08 -->|Xem mô hình của tôi| S08b
+    S08c --> S08b
+    S02 -->|Trước khi mua| S14[14 Trước khi mua – Bước 1/3] --> S15[15 Bước 2/3]
+    S15 -->|Chọn Khuyến mãi| S16[16 Bước 3/3] --> S18[18 Nhận định trước khi mua]
+    S15 -->|Không chọn Khuyến mãi| S18
+    S18 -->|Vẫn mua| S03
+    S18 --> S08b
 ```
 
-Độ sâu tối đa: 2–3 lần chạm từ một tab (ví dụ Cá nhân → Tài khoản → Đổi mật khẩu; 02 → 11 → 13 → 03 khi mua từ danh sách mong muốn). Cấu trúc 5 tab giữ nguyên; Danh sách mong muốn là màn lồng, không thêm tab.
+Độ sâu tối đa: 2–3 lần chạm từ một tab (ví dụ Cá nhân → Tài khoản → Đổi mật khẩu; 02 → 11 → 13 → 03 khi mua từ danh sách mong muốn). Riêng Flow 9 là chuỗi bước nối tiếp (14 → 15 → 16 → 18) có nhãn "BƯỚC n/3" để người dùng biết còn bao nhiêu bước. Cấu trúc 5 tab giữ nguyên; Danh sách mong muốn và Trước khi mua là màn lồng, không thêm tab.
 
 ## 3. User flows
 
@@ -262,31 +281,107 @@ flowchart TD
 - **Nhánh phụ:** đổi mật khẩu (nút Lưu khóa đến khi nhập đủ 3 ô); xóa tài khoản và đăng xuất đều
   có dialog với nút "Hủy".
 
+### Flow 8 — Nhận định AI sau khi lưu khoản mua
+- **Bắt đầu:** 05 Khoản mua đã lưu (ngay sau khi lưu ở 04, Flow 1)
+- **Mục tiêu:** đọc nhận định AI về khoản vừa lưu, dựa trên động cơ người dùng đã chọn
+- **Kết thúc:** về 00 Trang chủ tổng hợp, hoặc sang 07 Mô hình (có AI) / 08b Chi tiết mô hình
+
+```mermaid
+flowchart TD
+    Save([04 Lưu khoản mua – Flow 1]) --> S05[05 Khoản mua đã lưu]
+    S05 -->|Mở Góc nhìn| Load[08a AI đang phân tích – khoản vừa lưu]
+    Load -->|Tự chuyển sau 1,5 giây| S08c[08c Nhận định AI về khoản vừa lưu]
+    S05 -->|Về Trang chủ| Home([02 Trang chủ – sau khi lưu + snackbar Đã lưu])
+    S08c -->|Đã hiểu| Hub([00 Trang chủ tổng hợp])
+    S08c -->|Xem mô hình của tôi| S07([07 Mô hình có AI – sang Flow 10])
+    S08c -->|Chạm thẻ nhận định| S08b[08b Chi tiết mô hình mua sắm]
+```
+
+- **Happy path:** 04 Lưu → 05 Khoản mua đã lưu → "Mở Góc nhìn" → 08a AI đang phân tích (1,5 giây) → 08c Nhận định AI về khoản vừa lưu → "Đã hiểu" → 00 Trang chủ tổng hợp.
+- **Nhánh thay thế:** "Về Trang chủ" ở 05 → 02 sau khi lưu; "Xem mô hình của tôi" ở 08c → 07 Mô hình (có AI); chạm thẻ nhận định → 08b.
+- **Nhánh lỗi và phục hồi:** Figma chưa có khung lỗi cho AI (mất mạng, AI không trả lời). *(Đề xuất, chưa có khung trong Figma)*: dùng Empty / Error state có nút "Thử lại", giống "07 Mô hình – lỗi". Khoản mua đã được lưu trước khi AI phân tích, nên lỗi AI không làm mất dữ liệu.
+
+### Flow 9 — Trước khi mua: 3 câu hỏi nhanh
+- **Bắt đầu:** 00 Trang chủ tổng hợp, nút Tonal "Trước khi mua"
+- **Mục tiêu:** hiểu điều gì đứng sau một lần mua trước khi quyết định
+- **Kết thúc:** 18 Nhận định trước khi mua → về Trang chủ (không ghi gì) hoặc sang 03 Ghi khoản mua (Flow 1)
+
+```mermaid
+flowchart TD
+    Start([00 Trang chủ tổng hợp]) -->|Trước khi mua| S14[14 Bước 1/3: tên món, giá dự kiến]
+    S14 -->|Tiếp tục| S15[15 Bước 2/3: vì sao muốn, điều gì tác động]
+    S15 -->|Tiếp tục| Promo{Câu 2 chọn Khuyến mãi?}
+    Promo -->|Có| S16[16 Bước 3/3: Thử bỏ qua ưu đãi]
+    S16 -->|Xem nhận định| Load[17 AI đang phân tích – trước khi mua]
+    Promo -->|Không| Load
+    Load -->|Tự chuyển sau 1,5 giây| S18[18 Nhận định trước khi mua]
+    S18 -->|Để mình nghĩ thêm| Home([Về Trang chủ, không ghi gì])
+    S18 -->|Vẫn mua| S03([03 Ghi khoản mua – Bước 1/2, sang Flow 1])
+    S18 -->|Chạm thẻ nhận định| S08b[08b Chi tiết mô hình mua sắm]
+```
+
+- **Happy path:** 00 Hub → "Trước khi mua" → 14 (Tai nghe Bluetooth, 389.000 ₫) → 15 (Mong muốn + Khuyến mãi) → 16 ("Chưa chắc") → 17 AI đang phân tích → 18 → "Để mình nghĩ thêm" → về Trang chủ.
+- **Nhánh thay thế:** câu 2 không chọn Khuyến mãi → bỏ qua 16, đi thẳng tới 17 (quy tắc trên sơ đồ Figma: "16: hiện khi chọn Khuyến mãi"); "Vẫn mua" → 03 (Flow 1); chạm thẻ nhận định → 08b.
+- **Ràng buộc:** Flow 9 **không tạo khoản mua** nếu người dùng không chọn "Vẫn mua".
+- **Nhánh lỗi và phục hồi:** Figma chưa có khung lỗi cho AI. *(Đề xuất, chưa có khung trong Figma)*: dùng Empty / Error state có nút "Thử lại", giống "07 Mô hình – lỗi"; tên món trống ở 14 thì nút "Tiếp tục" bị khóa.
+
+### Flow 10 — AI phân tích mô hình
+- **Bắt đầu:** tab Mô hình, hoặc tab Góc nhìn
+- **Mục tiêu:** đọc phân tích AI về các động cơ đã ghi trong tháng, rồi chiêm nghiệm tháng
+- **Kết thúc:** quay lại 07 Mô hình (có AI), hoặc 08 Góc nhìn – đã lưu chiêm nghiệm
+
+```mermaid
+flowchart TD
+    TabP([Tab Mô hình]) --> Load7[07 Mô hình – đang tải: skeleton]
+    Load7 -->|Tự chuyển| S07[07 Mô hình có AI]
+    S07 -->|Để AI phân tích| Load8[08a AI đang phân tích – mô hình]
+    Load8 -->|Tự chuyển| S08b[08b Chi tiết mô hình mua sắm]
+    S08b -->|Xem mô hình của tôi| S07
+    TabG([Tab Góc nhìn]) --> S08[08 Góc nhìn có AI]
+    S08 -->|Xem chi tiết| S08c[08c Nhận định AI về khoản mua]
+    S08c -->|Đã hiểu| S08
+    S08c -->|Chạm thẻ nhận định| S08b
+    S08 -->|Xem mô hình của tôi| S08b
+    S08 -->|Mở chiêm nghiệm tháng| S09[09 Chiêm nghiệm tháng]
+    S09 -->|Lưu| Saved([08 Góc nhìn – đã lưu chiêm nghiệm + snackbar])
+```
+
+- **Happy path:** tab Mô hình → 07 đang tải → 07 Mô hình (có AI) → "Để AI phân tích" → 08a → 08b → "Xem mô hình của tôi" → 07.
+- **Nhánh thay thế:** tab Góc nhìn → 08 Góc nhìn (có AI) → "Xem chi tiết" → 08c → "Đã hiểu" → 08; "Xem mô hình của tôi" → 08b; "Mở chiêm nghiệm tháng" → 09 → "Lưu" → 08 Góc nhìn – đã lưu chiêm nghiệm.
+- **Nhánh lỗi và phục hồi:** Figma chưa có khung lỗi cho AI. *(Đề xuất, chưa có khung trong Figma)*: dùng Empty / Error state có nút "Thử lại", giống "07 Mô hình – lỗi" (khung lỗi đã có của Flow 2).
+
 ## 4. Bảng ánh xạ flow → màn hình
 
-| Màn hình | Flow 1 | Flow 2 | Flow 3 | Flow 4 | Flow 5 | Flow 6 | Flow 7 |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 00 Splash | | | | | | | ✓ bắt đầu |
-| 00 Hub | ✓ chưa ghi hôm nay | | | | | | ✓ kết thúc |
-| 00a Đăng nhập | ✓ (lần đầu) | | | | ✓ sau Đăng xuất | | ✓ nhánh lỗi, kết thúc sau đăng xuất / xóa tài khoản |
-| 00b Đăng ký | | | | | | | ✓ nhánh thay thế |
-| Quên mật khẩu | | | | | | | ✓ nhánh phục hồi |
-| 01 Onboarding | ✓ (lần đầu) | | | | | | ✓ trước bắt đầu |
-| 02 Home Dashboard | ✓ bắt đầu, kết thúc | ✓ bắt đầu | | | | ✓ bắt đầu (thẻ Danh sách mong muốn) | ✓ kết thúc |
-| 03 Add Purchase | ✓ bước 1, nhánh lỗi | ✓ từ trạng thái trống | ✓ sửa (03b) | | | ✓ điền sẵn từ món mong muốn | |
-| 04 Purchase Reason | ✓ bước 2, đang lưu, giải thích động cơ | | ✓ sửa (04c) | | | ✓ động cơ chọn sẵn, lưu → Đã mua | |
-| 05 Purchase Detail | ✓ khoản mua đã lưu | | ✓ sửa, xóa | | | | |
-| 05a Xin quyền thông báo | ✓ lần lưu đầu tiên | | | | ✓ "Mở cài đặt" | | |
-| 06 Purchase History | | | ✓ bắt đầu, kết thúc | ✓ bắt đầu, chọn tháng, tháng 9 | | | |
-| 07 Buying Patterns | | ✓ loading, lỗi, trống | | ✓ kết thúc (tháng 9, Tuần) | | | |
-| 08 Personal Insights | | ✓ (đã lưu chiêm nghiệm) | | | | | |
-| 09 Monthly Reflection | | ✓ | | | | | |
-| 10 Profile & Settings | | ✓ bật nhắc | | | ✓ bắt đầu, kết thúc | | ✓ đăng xuất |
-| 10a Tài khoản | | | | | | | ✓ xóa tài khoản |
-| 10b Đổi mật khẩu | | | | | | | ✓ nhánh phụ |
-| 11 Wishlist Overview | | | | | | ✓ bắt đầu, kết thúc (11a–11e) | |
-| 12 Add Wishlist Item | | | | | | ✓ thêm, nhánh lỗi, sửa (12a–12c) | |
-| 13 Wishlist Detail | | | | | | ✓ quyết định, dialog bỏ qua (13a–13d) | |
+| Màn hình | Flow 1 | Flow 2 | Flow 3 | Flow 4 | Flow 5 | Flow 6 | Flow 7 | Flow 8 | Flow 9 | Flow 10 |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 00 Splash | | | | | | | ✓ bắt đầu | | | |
+| 00 Hub | ✓ chưa ghi hôm nay | | | | | | ✓ kết thúc | ✓ "Đã hiểu" ở 08c | ✓ bắt đầu | |
+| 00a Đăng nhập | ✓ (lần đầu) | | | | ✓ sau Đăng xuất | | ✓ nhánh lỗi, kết thúc sau đăng xuất / xóa tài khoản | | | |
+| 00b Đăng ký | | | | | | | ✓ nhánh thay thế | | | |
+| Quên mật khẩu | | | | | | | ✓ nhánh phục hồi | | | |
+| 01 Onboarding | ✓ (lần đầu) | | | | | | ✓ trước bắt đầu | | | |
+| 02 Home Dashboard | ✓ bắt đầu, kết thúc | ✓ bắt đầu | | | | ✓ bắt đầu (thẻ Danh sách mong muốn) | ✓ kết thúc | ✓ "Về Trang chủ" (sau khi lưu) | ✓ biến thể lối vào Trước khi mua | |
+| 03 Add Purchase | ✓ bước 1, nhánh lỗi | ✓ từ trạng thái trống | ✓ sửa (03b) | | | ✓ điền sẵn từ món mong muốn | | | ✓ "Vẫn mua" | |
+| 04 Purchase Reason | ✓ bước 2, đang lưu, giải thích động cơ | | ✓ sửa (04c) | | | ✓ động cơ chọn sẵn, lưu → Đã mua | | ✓ lưu → 05 Khoản mua đã lưu | | |
+| 05 Purchase Detail | | | ✓ sửa, xóa | | | | | | | |
+| 05 Khoản mua đã lưu | ✓ sau khi lưu | | | | | | | ✓ bắt đầu | | |
+| 05a Xin quyền thông báo | ✓ lần lưu đầu tiên | | | | ✓ "Mở cài đặt" | | | | | |
+| 06 Purchase History | | | ✓ bắt đầu, kết thúc | ✓ bắt đầu, chọn tháng, tháng 9 | | | | | | |
+| 07 Buying Patterns | | ✓ loading, lỗi, trống | | ✓ kết thúc (tháng 9, Tuần) | | | | ✓ "Xem mô hình của tôi" | | ✓ bắt đầu, kết thúc (có AI) |
+| 08 Personal Insights | | ✓ (đã lưu chiêm nghiệm) | | | | | | | | ✓ bắt đầu (có AI), đã lưu chiêm nghiệm |
+| 08b Chi tiết mô hình mua sắm | | | | | | | | ✓ chạm thẻ nhận định | ✓ chạm thẻ nhận định | ✓ AI phân tích (08a đang tải) |
+| 08c Nhận định AI về khoản mua | | | | | | | | ✓ khoản vừa lưu (08a đang tải) | | ✓ "Xem chi tiết" ở 08 |
+| 09 Monthly Reflection | | ✓ | | | | | | | | ✓ "Mở chiêm nghiệm tháng" |
+| 10 Profile & Settings | | ✓ bật nhắc | | | ✓ bắt đầu, kết thúc | | ✓ đăng xuất | | | |
+| 10a Tài khoản | | | | | | | ✓ xóa tài khoản | | | |
+| 10b Đổi mật khẩu | | | | | | | ✓ nhánh phụ | | | |
+| 11 Wishlist Overview | | | | | | ✓ bắt đầu, kết thúc (11a–11e) | | | | |
+| 12 Add Wishlist Item | | | | | | ✓ thêm, nhánh lỗi, sửa (12a–12c) | | | | |
+| 13 Wishlist Detail | | | | | | ✓ quyết định, dialog bỏ qua (13a–13d) | | | | |
+| 14 Trước khi mua – Bước 1/3 | | | | | | | | | ✓ bước 1 | |
+| 15 Trước khi mua – Bước 2/3 | | | | | | | | | ✓ bước 2 | |
+| 16 Trước khi mua – Bước 3/3 | | | | | | | | | ✓ khi chọn Khuyến mãi | |
+| 18 Nhận định trước khi mua | | | | | | | | | ✓ kết thúc (17 đang tải) | |
 
 Mọi màn hình đều thuộc ít nhất một flow. Mỗi flow có starting point riêng ở page `06 Prototype` của Figma.
 
@@ -338,4 +433,9 @@ Mỗi trạng thái là một khung riêng, giống hệt màn gốc và chỉ k
 | Cá nhân – chưa cấp quyền thông báo | 10 | Flow 1, 5 | Đã chọn "Để sau" ở 05a | "Mở cài đặt" → 05a |
 | Cá nhân – xác nhận đăng xuất | 10 | Flow 7 | Nhấn "Đăng xuất" | "Hủy" → 10 · "Đăng xuất" → Đăng nhập |
 | Tài khoản – xác nhận xóa | 10a | Flow 7 | Nhấn "Xóa tài khoản" | "Hủy" → 10a · "Xóa tài khoản" → Đăng nhập |
-| Đổi mật khẩu – đã lưu | 10b | Flow 7 | Lưu mật khẩu mới | Tự về Tài khoản sau 2,5 giây |
+| Đổi mật khẩu – đã lưu | 10a (khung Figma tên "10b Đổi mật khẩu – đã lưu") | Flow 7 | Lưu mật khẩu mới | Tự về Tài khoản sau 2,5 giây |
+| AI đang phân tích – khoản vừa lưu | 08c (khung 08a) | Flow 8 | "Mở Góc nhìn" ở 05 Khoản mua đã lưu | Tự chuyển sang 08c sau 1,5 giây |
+| AI đang phân tích – mô hình | 08b (khung 08a) | Flow 10 | "Để AI phân tích" ở 07 Mô hình (có AI) | Tự chuyển sang 08b |
+| AI đang phân tích – trước khi mua | 18 (khung 17) | Flow 9 | "Xem nhận định" ở 16, hoặc "Tiếp tục" ở 15 khi không chọn Khuyến mãi | Tự chuyển sang 18 sau 1,5 giây |
+| Góc nhìn – đã lưu chiêm nghiệm (có AI) | 08 | Flow 10 | "Lưu" ở 09 | Snackbar "Đã lưu chiêm nghiệm tháng 10" tự ẩn |
+| Trang chủ – lối vào Trước khi mua | 02 | Flow 9 | Biến thể của 02: giống Hub nhưng không có thẻ Danh sách mong muốn | "Trước khi mua" → 14 |

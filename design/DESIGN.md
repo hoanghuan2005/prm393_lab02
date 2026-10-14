@@ -183,8 +183,10 @@ Nhóm đối chiếu thiết kế với checklist.design/mobile và chỉ làm p
 ## Danh sách màn hình
 00 Splash · 01 Onboarding · 00a Đăng nhập · 00b Đăng ký · Quên mật khẩu · 00 Trang chủ tổng hợp (Hub) ·
 02 Trang chủ · 03 Ghi khoản mua – Bước 1/2 · 04 Ghi khoản mua – Bước 2/2 · 05 Chi tiết khoản mua ·
-05a Xin quyền thông báo · 06 Lịch sử · 07 Mô hình · 08 Góc nhìn · 09 Chiêm nghiệm tháng ·
-10 Cá nhân · 10a Tài khoản · 10b Đổi mật khẩu · 11–13 Danh sách mong muốn · 14–18 Trước khi mua (AI)
+05 Khoản mua đã lưu · 05a Xin quyền thông báo · 06 Lịch sử · 07 Mô hình (có AI) · 08 Góc nhìn (có AI) ·
+08b Chi tiết mô hình mua sắm · 08c Nhận định AI về khoản mua · 09 Chiêm nghiệm tháng ·
+10 Cá nhân · 10a Tài khoản · 10b Đổi mật khẩu · 11–13 Danh sách mong muốn ·
+14–16 Trước khi mua – Bước 1/3 đến 3/3 · 18 Nhận định trước khi mua
 
 Trong Figma, Splash và Trang chủ tổng hợp cùng mang số 00. Khi nhắc tới, luôn ghi kèm tên
 ("00 Splash", "00 Hub") để không nhầm. Mã 05a, 10a, 10b chỉ dùng cho màn mới (Xin quyền thông báo,
@@ -195,7 +197,9 @@ Tài khoản, Đổi mật khẩu). Các khung trạng thái cũ gọi theo tên
 Hub chưa ghi hôm nay · 03 lỗi số tiền · 03 đang nhập số tiền (bàn phím số) · 04 đang lưu ·
 05 dialog xóa · 06 không có kết quả · 06 sau khi xóa · 07 đang tải · 07 lỗi · 07 chưa đủ dữ liệu ·
 Đăng nhập – lỗi · 10 chưa cấp quyền thông báo · 10 xác nhận đăng xuất · 10 xác nhận xóa toàn bộ ·
-10a xác nhận xóa tài khoản · 10b đã đổi mật khẩu.
+10a xác nhận xóa tài khoản · 10b đã đổi mật khẩu · 02 lối vào Trước khi mua ·
+08a AI đang phân tích – khoản vừa lưu · 08a AI đang phân tích – mô hình · 17 AI đang phân tích – trước khi mua ·
+08 đã lưu chiêm nghiệm (có AI).
 
 ## Lịch sử cập nhật
 - 11/10/2026: bản đầu tiên, dùng làm brief cho prompt P1.

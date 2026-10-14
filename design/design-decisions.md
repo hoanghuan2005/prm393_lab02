@@ -6,22 +6,20 @@
 
 ---
 
-## 1. Mười hai quyết định quan trọng nhất
+## 1. Mười quyết định quan trọng nhất
 
 | # | Đề xuất của AI | Quyết định | Căn cứ chính | Nằm ở đâu trong Figma |
 |---|---|---|---|---|
 | 1 | Thẻ nhắc nhở, khuyên bảo, khen ngợi trên màn ghi khoản mua và chi tiết | **Từ chối** | Persona (cảm giác tội lỗi); thông điệp "Hiểu trước khi thay đổi" | 03 Final UI – màn 03, 05 |
 | 2 | Thẻ động cơ có icon + tên + một dòng mô tả | **Sửa** | Khung 800 dp và chữ ≥ 14 sp; mục tiêu ghi ≤ 25 giây; Nielsen #6 | 05 Components – Motive card; màn 04 |
-| 3 | Dialog xác nhận xóa dạng overlay | **Chấp nhận** (bổ sung hoàn tác) | Nielsen #3, #5; Nam thao tác một tay dễ chạm nhầm | Dialog, Snackbar; màn 05, 06 |
+| 3 | Dialog xác nhận xóa dạng overlay; dialog "Không mua món này nữa?" | **Chấp nhận** (bổ sung hoàn tác 5 giây; bỏ qua đổi sang nút primary) | Nielsen #3, #5; Nam thao tác một tay dễ chạm nhầm; bỏ qua không phải xóa | Dialog, Snackbar; màn 05, 06, 13a, 11c |
 | 4 | Thẻ Góc nhìn chứa số liệu và diễn giải tâm lý | **Sửa** | Brief: insight là quan sát trung lập; Nielsen #2 | màn 07, 08 |
 | 5 | Màn lỗi và skeleton loading của Mô hình | **Chấp nhận** (chỉnh vị trí nút) | Nielsen #1, #9 | Skeleton, Empty / Error state; màn 07 |
-| 6 | "Khoảng lặng 48h", "Còn 48h suy ngẫm", "Đã hạ nhiệt 40%", đồng hồ cát (Flow 6) | **Từ chối** | Nielsen #3; persona sợ bị phán xét; con số không đo được | màn 11, 13 |
-| 7 | "Nhật ký tâm lý" 3 bước ở chi tiết món | **Từ chối** | Phạm vi; tăng ma sát; Nielsen #8 | màn 13 |
-| 8 | Stitch thiết kế lại Trang chủ quanh danh sách mong muốn | **Sửa** | Nielsen #4; một hành động chính mỗi màn | Wishlist entry; màn 02 |
-| 9 | Dialog "Không mua món này nữa?" | **Chấp nhận** (bổ sung hoàn tác, đổi kiểu nút) | Nielsen #3, #5; bỏ qua không phải xóa | màn 13a, 11c |
-| 10 | Chip lọc trạng thái cuộn ngang, chip cuối bị cắt ở 360 dp | **Sửa** | Accessibility (không cắt chữ, vùng chạm 48 dp) | màn 11 |
-| 11 | Bảng màu: màu chính và màu cảnh báo (kiểm chứng bằng research) | **Chấp nhận** primary indigo, đỏ chỉ cho lỗi | INS2 (MÔ PHỎNG); I1 | 04 Design System – Màu |
-| 12 | Bước 2/2 chọn sẵn động cơ (kiểm thử phát hiện F1) | **Sửa** (R4-1) | Nielsen #5; F1 (MÔ PHỎNG, lỗi có thật trong Figma) | màn 04 (chưa chọn động cơ) |
+| 6 | "Khoảng lặng 48h", "Còn 48h suy ngẫm", "Đã hạ nhiệt 40%", đồng hồ cát; "Nhật ký tâm lý" 3 bước ở chi tiết món (Flow 6) | **Từ chối** | Nielsen #3, #8; persona sợ bị phán xét; con số không đo được; phạm vi, tăng ma sát | màn 11, 13 |
+| 7 | Stitch thiết kế lại Trang chủ quanh danh sách mong muốn | **Sửa** | Nielsen #4; một hành động chính mỗi màn | Wishlist entry; màn 02 |
+| 8 | Chip lọc trạng thái cuộn ngang, chip cuối bị cắt ở 360 dp | **Sửa** | Accessibility (không cắt chữ, vùng chạm 48 dp) | màn 11 |
+| 9 | Bảng màu: màu chính và màu cảnh báo (kiểm chứng bằng research) | **Chấp nhận** primary indigo, đỏ chỉ cho lỗi | INS2 (MÔ PHỎNG); I1 | 04 Design System – Màu |
+| 10 | Bước 2/2 chọn sẵn động cơ (kiểm thử phát hiện F1) | **Sửa** (R4-1) | Nielsen #5; F1 (MÔ PHỎNG, lỗi có thật trong Figma) | màn 04 (chưa chọn động cơ) |
 
 ---
 
@@ -59,20 +57,28 @@
 
 ---
 
-### Quyết định 3 — CHẤP NHẬN: dialog xác nhận xóa, bổ sung hoàn tác 5 giây
+### Quyết định 3 — CHẤP NHẬN: dialog xác nhận và hoàn tác 5 giây cho mọi hành động "mất dữ liệu"
 
-**AI đề xuất:** Ở P2, Stitch làm dialog xóa dạng overlay trên nền tối, nút "Hủy" dạng chữ và nút "Xóa" màu đỏ có icon.
+**AI đề xuất:** Ở P2, Stitch làm dialog xóa khoản mua dạng overlay trên nền tối, nút "Hủy" dạng chữ và nút "Xóa" màu đỏ có icon. Ở Flow 6, Stitch làm dialog "Không mua món này nữa?" / "Món đồ sẽ được chuyển vào danh sách Bỏ qua. Bạn có thể xem lại sau." cho hành động bỏ qua món mong muốn.
 
 | P2 | Sau R2 | Figma cuối |
 |---|---|---|
 | ![](../assets/stitch/stitch2/v2-05b-delete-dialog.png) | ![](../assets/stitch/stitch%20refinement%202/r2-delete-dialog.png) | ![](../assets/figma/05a-delete-dialog.png) |
 
+| Stitch (Flow 6) | Figma cuối | Sau khi xác nhận |
+|---|---|---|
+| ![](../assets/stitch/flow6/f6-stitch-skip-dialog.png) | ![](../assets/figma/13a-skip-dialog.png) | ![](../assets/figma/11c-wishlist-skipped.png) |
+
 **Phân tích:**
 - **Nielsen #5 (phòng ngừa lỗi):** xóa là hành động khó đảo ngược, cần một bước xác nhận. Hai nút tách biệt, nút nguy hiểm có màu đỏ và icon, nên không chỉ dựa vào màu.
 - **Nielsen #3 (kiểm soát và tự do):** bản P2 hứa "có thể hoàn tác" nhưng màn sau khi xóa không có hoàn tác. Lời hứa này phải được thực hiện.
 - **Persona:** Nam dùng một tay, dễ chạm nhầm. Hoàn tác ngay sau khi xóa tốn ít công hơn nhập lại cả khoản mua.
+- **Bỏ qua món không phải hành động phá hủy:** món vẫn còn trong danh sách Bỏ qua và đưa về được. Vì vậy dialog bỏ qua không dùng màu đỏ, để màu đỏ chỉ báo những hành động thật sự mất dữ liệu.
 
-**Quyết định:** Chấp nhận dạng dialog. Sửa nội dung thành "“Tai nghe Bluetooth” sẽ bị xóa khỏi lịch sử. Bạn có 5 giây để hoàn tác." và thêm snackbar "Đã xóa … · Hoàn tác" ở màn Lịch sử (khung `06 Lịch sử – sau khi xóa`). Cùng kiểu snackbar dùng cho "Đã lưu … · Hoàn tác" sau khi ghi khoản mua.
+**Quyết định:** Chấp nhận dạng dialog cho cả hai hành động, cùng một quy tắc: xác nhận trước, hoàn tác 5 giây sau.
+- **Xóa khoản mua:** sửa nội dung thành "“Tai nghe Bluetooth” sẽ bị xóa khỏi lịch sử. Bạn có 5 giây để hoàn tác." và thêm snackbar "Đã xóa … · Hoàn tác" ở màn Lịch sử (khung `06 Lịch sử – sau khi xóa`). Cùng kiểu snackbar dùng cho "Đã lưu … · Hoàn tác" sau khi ghi khoản mua.
+- **Bỏ qua món mong muốn:** giữ nguyên câu chữ của Stitch. Có ba thay đổi: dựng lại thành overlay thật trên khung 360 × 800 (Stitch đặt trong canvas ngang), đổi icon và nền sang primary, và sau khi xác nhận hiện snackbar "Đã chuyển “Bàn phím cơ” vào Bỏ qua · Hoàn tác" (5 giây, [11c](../assets/figma/11c-wishlist-skipped.png)).
+- **Khác biệt:** xóa dùng nút Danger (màu error), bỏ qua dùng nút Primary vì không phải hành động phá hủy.
 
 ---
 
@@ -111,32 +117,32 @@
 
 ---
 
-### Quyết định 6 — TỪ CHỐI: thời gian chờ bắt buộc và chỉ số "hạ nhiệt"
+### Quyết định 6 — TỪ CHỐI: cơ chế ép chờ và nhật ký tâm lý nhiều bước ở Flow 6
 
-Stitch tự thêm chip "Khoảng lặng 48h", nhãn "Đang tĩnh tâm", dòng "Còn 48h suy ngẫm" và "Đã hạ nhiệt 40%". Các chi tiết này biến danh sách mong muốn thành công cụ ép người dùng ngừng mua. Điều đó trái Nielsen #3 (người dùng phải tự quyết định) và trái tông "không phán xét" trong DESIGN.md. Ngoài ra "40%" là con số ứng dụng không có cách đo. Bản Figma bỏ toàn bộ: nút "Ghi khoản mua" luôn bấm được, chỉ còn ngày thêm ("2 ngày trước") làm thông tin trung lập.
+Stitch tự thêm chip "Khoảng lặng 48h", nhãn "Đang tĩnh tâm", dòng "Còn 48h suy ngẫm", "Đã hạ nhiệt 40%" kèm đồng hồ cát, và thẻ "Nhật ký tâm lý · Bước 2/3" ở chi tiết món.
 
 | Trước | Sau |
 |---|---|
 | ![](../assets/stitch/flow6/f6-stitch-wishlist-detail.png) | ![](../assets/figma/13-wishlist-detail.png) |
 
-### Quyết định 7 — TỪ CHỐI: nhật ký tâm lý nhiều bước
-Thẻ "Nhật ký tâm lý · Bước 2/3" buộc người dùng đi qua các giai đoạn trước khi quyết định. Nó thêm thao tác, nằm ngoài phạm vi và lặp lại chức năng của Chiêm nghiệm tháng (09). Ghi chú tự do ở 12/13 đã đủ để ghi lại cảm xúc.
+**Phân tích:**
+- **Thời gian chờ và chỉ số "hạ nhiệt":** các chi tiết này biến danh sách mong muốn thành công cụ ép người dùng ngừng mua. Điều đó trái Nielsen #3 (người dùng phải tự quyết định) và trái tông "không phán xét" trong DESIGN.md. Ngoài ra "40%" là con số ứng dụng không có cách đo.
+- **Nhật ký tâm lý nhiều bước:** thẻ "Nhật ký tâm lý · Bước 2/3" buộc người dùng đi qua các giai đoạn trước khi quyết định. Nó thêm thao tác (Nielsen #8), nằm ngoài phạm vi và lặp lại chức năng của Chiêm nghiệm tháng (09).
 
-### Quyết định 8 — SỬA: không thiết kế lại Trang chủ
+**Quyết định:** Từ chối cả hai. Bản Figma bỏ toàn bộ: nút "Ghi khoản mua" luôn bấm được, chỉ còn ngày thêm ("2 ngày trước") làm thông tin trung lập. Ghi chú tự do ở 12/13 đã đủ để ghi lại cảm xúc.
+
+### Quyết định 7 — SỬA: không thiết kế lại Trang chủ
 Bản Stitch của Trang chủ có bố cục khác 02 hiện tại, nhãn "Danh …" bị cắt và thêm thẻ trích dẫn mang giọng khuyên bảo. Figma giữ nguyên 02 của nhóm, chỉ chèn component "Wishlist entry" (thẻ trắng, cao 64 dp, chevron) dưới Tổng quan tuần ([02d](../assets/figma/02d-home-wishlist-entry.png)). Nút "Ghi khoản mua" vẫn là hành động chính duy nhất.
 
-### Quyết định 9 — CHẤP NHẬN: dialog xác nhận bỏ qua, bổ sung hoàn tác
-Giữ nguyên câu chữ của Stitch ("Không mua món này nữa?" / "Món đồ sẽ được chuyển vào danh sách Bỏ qua. Bạn có thể xem lại sau."). Có ba thay đổi: dựng lại thành overlay thật trên khung 360 × 800 (Stitch đặt trong canvas ngang), đổi icon và nền sang primary vì không phải hành động phá hủy, và sau khi xác nhận hiện snackbar "Đã chuyển “Bàn phím cơ” vào Bỏ qua · Hoàn tác" (5 giây, [11c](../assets/figma/11c-wishlist-skipped.png)).
-
-### Quyết định 10 — SỬA: bộ lọc không bị cắt ở 360 dp
+### Quyết định 8 — SỬA: bộ lọc không bị cắt ở 360 dp
 Ở 360 dp, ba chip "Đang cân nhắc (2)", "Đã mua (1)", "Bỏ qua (0)" rộng khoảng 410 dp, nên bản Stitch cắt mất chip cuối. Figma cho chip xuống hàng (wrap). Số lượng vẫn nằm trong nhãn để không cần nhìn màu cũng biết đang lọc gì.
 
-### Quyết định 11 — CHẤP NHẬN: màu chính indigo, đỏ chỉ dành cho lỗi
+### Quyết định 9 — CHẤP NHẬN: màu chính indigo, đỏ chỉ dành cho lỗi
 **Căn cứ:** INS2 ([`ux/research.md`](../ux/research.md)): nhóm 18–25 chấm cảnh báo đỏ 1,79/5 (MÔ PHỎNG); I1 "thấy màu đỏ là tắt app".
 **Quyết định:** primary #2E4A9E (indigo, trung tính, không mang nghĩa khen hay chê như xanh lá / đỏ). Đỏ #B3261E chỉ dùng cho lỗi nhập liệu và hành động xóa. 8 động cơ mỗi cái một cặp nền nhạt và chữ đậm cùng tông (6,66–9,43 : 1), luôn kèm icon và tên.
 **Kiểm tra:** bảng 2.1 – mọi cặp chữ ≥ 4,5 : 1.
 
-### Quyết định 12 — SỬA: Bước 2/2 không chọn sẵn động cơ (R4-1)
+### Quyết định 10 — SỬA: Bước 2/2 không chọn sẵn động cơ (R4-1)
 **Căn cứ:** kiểm thử F1 ([`ux/usability-test.md`](../ux/usability-test.md)): 3/5 người lưu theo lựa chọn có sẵn mà không biết (MÔ PHỎNG; lỗi có thật trong Figma).
 **Quyết định:** bước 2 mở ra không có thẻ nào được chọn; nút "Lưu" khóa kèm dòng "Chọn một động cơ để lưu". Không làm chậm luồng chính (thời gian chuẩn KLM vẫn 16,5 giây vì đã tính một chạm chọn động cơ).
 **Nguyên tắc:** Nielsen #5 Phòng ngừa lỗi; mục tiêu cốt lõi của app là ghi đúng động cơ.
