@@ -72,8 +72,8 @@ Nhánh lỗi có điểm bắt đầu riêng trên page 06: F11b (19e link khôn
 
 | Hạng mục | Trạng thái | Bằng chứng |
 |---|---|---|
-| UI Flow 1–10 (ghi khoản mua, mô hình, wishlist v1, tài khoản, AI) | Đã thiết kế, có prototype | Figma page 03, 06; ảnh `assets/figma/`; log C5 |
-| UI F11–F13 (19–31, X2–X5, EXT-1…8) | Đã thiết kế trên Figma; F11–F13 đã nối prototype | Figma section "Flow 11–12…", "[MỚI · 18/10]…"; còn thiếu ảnh export |
+| UI Flow 1–10 (ghi khoản mua, mô hình, wishlist v1, tài khoản, AI) | Đã thiết kế, có prototype | Figma page 03, 06; ảnh hiện hành `assets/figma/ver2/` (bản cũ 14/10 ở `assets/figma/`); log C5 |
+| UI F11–F13 (19–31, X2–X5, EXT-1…8) | Đã thiết kế trên Figma; F11–F13 đã nối prototype | Figma section "Flow 11–12…", "[MỚI · 18/10]…"; ảnh 1× ở `assets/figma/ver2/` |
 | Wireframe cho 19–27 và EXT-1…8 | **Chưa có** | Page 02 chỉ có wireframe 28–31, X2–X5 |
 | Vòng Stitch cho hướng mới | **Chưa có bằng chứng** | Có bộ prompt `ai/stitch-prompts-why-i-buy.md`, chưa có ảnh kết quả |
 | Nghiên cứu người dùng | Chỉ có dữ liệu **mô phỏng** | `ux/research.md`; khảo sát 18/10 chưa xác minh nguồn gốc |
@@ -123,7 +123,7 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 | Nhật ký AI | [`ai/ai-design-log.md`](ai/ai-design-log.md) · [`ai/ai-design-log-v2.md`](ai/ai-design-log-v2.md) | Prompt nguyên văn, R1–R3, F6, PB, C0–C8, RS, UT, R4, R5 (đổi hướng 18/10); v2: session S1–S4 nghiên cứu hướng mới |
 | Prompt Stitch hướng mới | [`ai/stitch-prompts-why-i-buy.md`](ai/stitch-prompts-why-i-buy.md) | Bộ prompt F11–F13 (chưa có bằng chứng đã chạy) |
 | Ảnh Stitch | [`assets/stitch/`](assets/stitch/) | Mọi phiên bản Stitch: P1, P2, R1, R2, R3, Flow 6 |
-| Ảnh Figma | [`assets/figma/`](assets/figma/) | Ảnh Final UI của Flow 1–10 (file cũ) + checklist ảnh cần xuất từ Figma ver2 |
+| Ảnh Figma | [`assets/figma/ver2/`](assets/figma/ver2/) · [`assets/figma/`](assets/figma/) | **ver2/**: 157 ảnh của mọi khung Final UI trên Figma ver2 (18/10, có bảng tra cứu). Thư mục cha: ảnh Flow 1–10 từ file cũ (14/10) và ảnh trước / sau R4 |
 | Flutter handoff | [`handoff/flutter-handoff.md`](handoff/flutter-handoff.md) | Token → Flutter, component → widget, đặc tả 6 mục cho từng màn (kể cả F11–F13), mô hình dữ liệu, mã lỗi E01–E14 |
 | Báo cáo đồng bộ | [`docs/REPO_SYNC_REPORT_2026-10-18.md`](docs/REPO_SYNC_REPORT_2026-10-18.md) | Audit, bảng ánh xạ mã màn, xung đột nguồn, việc còn lại ở Figma/Stitch, kiểm tra Lab 2 |
 
@@ -160,8 +160,8 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 │   ├── user-flow.md
 │   ├── usability-test.md
 │   ├── research-pack/   (script mô phỏng, biểu đồ; không chứa dữ liệu khảo sát thô)
-│   ├── userflow/        (ảnh sơ đồ Flow 1–10 xuất từ Figma)
-│   └── wireframe/       (ảnh wireframe Flow 1–10)
+│   ├── userflow/        (ảnh sơ đồ IA, Flow 1–13 xuất từ Figma)
+│   └── wireframe/       (ảnh wireframe; 5_F11-F13-bo-sung-18-10/ = 28–31, X2–X5)
 ├── design/
 │   ├── DESIGN.md
 │   ├── screen-spec.md
@@ -172,7 +172,7 @@ Mọi đề xuất của AI đều được ghi Chấp nhận / Sửa / Từ ch�
 │   └── stitch-prompts-why-i-buy.md
 ├── assets/
 │   ├── stitch/          (ảnh chụp mọi phiên bản do Stitch tạo)
-│   └── figma/           (ảnh các màn hình cuối cùng)
+│   └── figma/           (ảnh các màn hình cuối cùng; ver2/ = Figma hiện hành 18/10)
 ├── handoff/
 │   └── flutter-handoff.md
 ├── archive/             (bản cũ giữ làm lịch sử, không dùng làm tài liệu hiện hành)

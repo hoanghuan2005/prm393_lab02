@@ -3,7 +3,7 @@
 **Project:** Why I Buy? – lấy cảm hứng từ "The Psychology of Money"
 **Course:** PRM323 – Lab 2
 
-> **Cập nhật 18/10/2026:** các màn F11–F13 (19–31, EXT, X2–X5) và bảng **ánh xạ mã màn đặc tả 17/10 ↔ Figma 18/10** ở cuối file, mục "Smart Shopping Companion – màn F11–F13". Figma hiện hành: `Why I Buy ver2` (`VaPYFxfpx14tnQmOMSgdjP`); ảnh trong `assets/figma/` là của file cũ (Flow 1–10).
+> **Cập nhật 18/10/2026:** các màn F11–F13 (19–31, EXT, X2–X5) và bảng **ánh xạ mã màn đặc tả 17/10 ↔ Figma 18/10** ở cuối file, mục "Smart Shopping Companion – màn F11–F13". Figma hiện hành: `Why I Buy ver2` (`VaPYFxfpx14tnQmOMSgdjP`). Ảnh hiện hành của mọi khung: [`assets/figma/ver2/`](../assets/figma/ver2/) (18/10); ảnh ở `assets/figma/` là của file cũ (Flow 1–10, 14/10).
 
 Mỗi màn hình: dùng để làm gì, hiển thị nội dung gì (từ trên xuống), thuộc flow nào, có những khung trạng thái nào, và ý đồ thiết kế. Nội dung khớp với page `03 Final UI` trong Figma; ảnh từng khung ở [`assets/figma/`](../assets/figma/). Token và quy tắc component xem [`DESIGN.md`](DESIGN.md); cách dựng bằng Flutter xem [`handoff/flutter-handoff.md`](../handoff/flutter-handoff.md).
 
@@ -40,7 +40,7 @@ Mỗi màn hình: dùng để làm gì, hiển thị nội dung gì (từ trên 
 | 16 | Trước khi mua – Bước 3/3 | Lồng | 9 | chỉ hiện khi chọn Khuyến mãi ở 15 | — |
 | 18 | Nhận định trước khi mua | Lồng | 9 | AI đang phân tích – trước khi mua (17) | — |
 
-Các màn chưa có ảnh trong `assets/figma/` xem trực tiếp ở page `03 Final UI` (Splash ở section "Màn hình chính"; Quên mật khẩu, Hub, 10a, 10b ở section "Flow 7 – Tài khoản"; 05a, 05 Khoản mua đã lưu, 08b, 08c, 14–18 ở section "Flow 8–10 – AI (Góc nhìn AI, Trước khi mua)").
+Ảnh của các màn này (xuất từ Figma ver2 ngày 18/10) ở [`assets/figma/ver2/`](../assets/figma/ver2/): `00-splash.png`, `quen-mat-khau.png`, `00-trang-chu-tong-hop-hub.png`, `05-khoan-mua-da-luu.png`, `05a-xin-quyen-thong-bao.png`, `08b-…`, `08c-…`, `10a-tai-khoan.png`, `10b-doi-mat-khau.png`, `14-…` đến `18-…`. Vị trí trên page `03 Final UI` (Splash ở section "Màn hình chính"; Quên mật khẩu, Hub, 10a, 10b ở section "Flow 7 – Tài khoản"; 05a, 05 Khoản mua đã lưu, 08b, 08c, 14–18 ở section "Flow 8–10 – AI (Góc nhìn AI, Trước khi mua)").
 
 Quy ước chung cho mọi màn: một nút chính (filled, cao 56 dp) ghim ở đáy, ngay trên thanh điều hướng; tab gốc có logo bên trái và avatar (→ Cá nhân) bên phải app bar; màn lồng có nút Back và không có thanh điều hướng.
 
@@ -331,7 +331,7 @@ Các màn dưới đây thuộc Flow 8–10 (AI và Trước khi mua), nằm ở
 
 ## Smart Shopping Companion – màn F11–F13 (Figma ver2, 18/10/2026)
 
-Nguồn: tên frame, chữ hiển thị và dây nối prototype đọc trực tiếp từ file Figma `VaPYFxfpx14tnQmOMSgdjP` ngày 18/10 (page 03, section "Flow 11–12 – Danh sách chờ v3…", "Extension trình duyệt – popup 8 trạng thái", "[MỚI · 18/10] Bổ sung theo đặc tả 11.3…"). Quy tắc sản phẩm theo đặc tả hợp nhất v1.0 (17/10). **Chưa có ảnh export** trong `assets/figma/` cho các màn này; chưa kiểm tra bố cục ở 412 dp.
+Nguồn: tên frame, chữ hiển thị và dây nối prototype đọc trực tiếp từ file Figma `VaPYFxfpx14tnQmOMSgdjP` ngày 18/10 (page 03, section "Flow 11–12 – Danh sách chờ v3…", "Extension trình duyệt – popup 8 trạng thái", "[MỚI · 18/10] Bổ sung theo đặc tả 11.3…"). Quy tắc sản phẩm theo đặc tả hợp nhất v1.0 (17/10). Ảnh 1× của mọi khung (kể cả biến thể) ở [`assets/figma/ver2/`](../assets/figma/ver2/) (xuất ngày 18/10); chưa kiểm tra bố cục ở 412 dp.
 
 ### Ánh xạ mã màn: đặc tả 17/10 ↔ Figma 18/10
 
@@ -366,26 +366,26 @@ Repo dùng **mã Figma** (nhóm chốt ngày 18/10, để khớp prototype); c�
 
 | Mã Figma | Màn hình | Cấp | Flow | Khung trạng thái | Ảnh |
 |---|---|---|---|---|---|
-| 11 v3 | Danh sách mong muốn – v3 | Lồng | F11, F12 | 11a v3 trống, 11f đang chờ | Chưa xuất |
-| 13 v3 | Chi tiết món – v3 | Lồng | F11, F12 | 13g cảnh báo giá gốc, 13h cần giá | Chưa xuất |
-| 19 | Lưu món – bottom sheet | Điểm vào (Android Share) | F11 | 19a–19g | Chưa xuất |
-| 20 | Lấy giá từ ảnh chụp | Lồng | F11 | 20a, 20b | Chưa xuất |
-| 21 | Danh sách cho đợt sale | Lồng | F12 | 21a | Chưa xuất |
-| 22 | Gói mua | Lồng | — (GĐ5) | 22a, 22b, 22c | Chưa xuất |
-| 23 | So sánh món cùng loại | Lồng | — (GĐ4) | — | Chưa xuất |
-| 24 | Đồ đang dùng | Lồng | — (GĐ4) | 24a thêm, 24b trống | Chưa xuất |
-| 25 | Liên kết extension | Lồng | F13 | 25c hết hạn, 25f xác nhận | Chưa xuất |
-| 25b | Thiết bị đã liên kết | Lồng | F13 | 25e dialog hủy liên kết | Chưa xuất |
-| 26 | Nhắc nhở & ngưỡng | Lồng | — | — | Chưa xuất |
-| 27 | Hỏi mức hài lòng (dialog trên Trang chủ) | Dialog | — (GĐ4) | 27a | Chưa xuất |
-| 28 | Decision Card | Lồng | F11, F12 | 28a, 28b, 28c, 29, 29a, 30, 30a | Chưa xuất |
-| 30b | Lịch sử giá | Lồng | F12 | — | Chưa xuất |
-| 31 | Ngân sách theo nhóm | Lồng | F11 (31c) | 31a, 31b, 31c | Chưa xuất |
-| EXT | Popup extension | Extension | F13 | EXT-1 … EXT-8 | Chưa xuất |
-| X2 | Extension – Trang danh sách | Extension | F13 | X2a lỗi đồng bộ | Chưa xuất |
-| X3 | Extension – Decision Card bảng cạnh | Extension | F13 | — | Chưa xuất |
-| X4 | Extension – Liên kết thiết bị | Extension | F13 | X4 mã sai, X4a thành công | Chưa xuất |
-| X5 | Extension – Cài đặt & quyền riêng tư | Extension | F13 | — | Chưa xuất |
+| 11 v3 | Danh sách mong muốn – v3 | Lồng | F11, F12 | 11a v3 trống, 11f đang chờ | [11 v3](../assets/figma/ver2/11-danh-sach-mong-muon-v3-nhan-gia-nhan-dinh.png) |
+| 13 v3 | Chi tiết món – v3 | Lồng | F11, F12 | 13g cảnh báo giá gốc, 13h cần giá | [13 v3](../assets/figma/ver2/13-chi-tiet-mon-v3-gia-nhan-dinh-mua-cho-bo.png) |
+| 19 | Lưu món – bottom sheet | Điểm vào (Android Share) | F11 | 19a–19g | [19](../assets/figma/ver2/19-luu-mon-bottom-sheet-tu-nut-chia-se.png) |
+| 20 | Lấy giá từ ảnh chụp | Lồng | F11 | 20a, 20b | [20](../assets/figma/ver2/20-lay-gia-tu-anh-chup-buoc-1-chon-anh.png) |
+| 21 | Danh sách cho đợt sale | Lồng | F12 | 21a | [21](../assets/figma/ver2/21-danh-sach-cho-dot-sale-11-11.png) |
+| 22 | Gói mua | Lồng | — (GĐ5) | 22a, 22b, 22c | [22](../assets/figma/ver2/22-goi-mua-ke-hoach-cho-11-11.png) |
+| 23 | So sánh món cùng loại | Lồng | — (GĐ4) | — | [23](../assets/figma/ver2/23-so-sanh-mon-cung-loai-3-tai-nghe.png) |
+| 24 | Đồ đang dùng | Lồng | — (GĐ4) | 24a thêm, 24b trống | [24](../assets/figma/ver2/24-do-dang-dung.png) |
+| 25 | Liên kết extension | Lồng | F13 | 25c hết hạn, 25f xác nhận | [25](../assets/figma/ver2/25-lien-ket-extension.png) |
+| 25b | Thiết bị đã liên kết | Lồng | F13 | 25e dialog hủy liên kết | [25b](../assets/figma/ver2/25b-thiet-bi-da-lien-ket.png) |
+| 26 | Nhắc nhở & ngưỡng | Lồng | — | — | [26](../assets/figma/ver2/26-nhac-nho-va-nguong.png) |
+| 27 | Hỏi mức hài lòng (dialog trên Trang chủ) | Dialog | — (GĐ4) | 27a | [27](../assets/figma/ver2/27-hoi-muc-hai-long-chua-chon.png) |
+| 28 | Decision Card | Lồng | F11, F12 | 28a, 28b, 28c, 29, 29a, 30, 30a | [28](../assets/figma/ver2/28-decision-card-du-du-lieu.png) |
+| 30b | Lịch sử giá | Lồng | F12 | — | [30b](../assets/figma/ver2/30b-lich-su-gia-nhieu-lan-ghi.png) |
+| 31 | Ngân sách theo nhóm | Lồng | F11 (31c) | 31a, 31b, 31c | [31](../assets/figma/ver2/31-ngan-sach-theo-nhom-chua-dat.png) |
+| EXT | Popup extension | Extension | F13 | EXT-1 … EXT-8 | [EXT](../assets/figma/ver2/ext-1-chua-lien-ket.png) |
+| X2 | Extension – Trang danh sách | Extension | F13 | X2a lỗi đồng bộ | [X2](../assets/figma/ver2/x2-extension-trang-danh-sach-mong-muon-chi-tren-may.png) |
+| X3 | Extension – Decision Card bảng cạnh | Extension | F13 | — | [X3](../assets/figma/ver2/x3-extension-decision-card-bang-canh-side-panel.png) |
+| X4 | Extension – Liên kết thiết bị | Extension | F13 | X4 mã sai, X4a thành công | [X4](../assets/figma/ver2/x4-extension-lien-ket-thiet-bi-ma-sai.png) |
+| X5 | Extension – Cài đặt & quyền riêng tư | Extension | F13 | — | [X5](../assets/figma/ver2/x5-extension-cai-dat-va-quyen-rieng-tu.png) |
 
 ### 19 Lưu món – bottom sheet (từ nút Chia sẻ)
 - **Mục đích:** lưu món đang xem trên app Shopee vào Smart Wishlist mà không mở cả app; mục tiêu dưới 20 giây (KPI-01). Thuộc F11.
