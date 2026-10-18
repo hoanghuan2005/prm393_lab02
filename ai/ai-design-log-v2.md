@@ -2,7 +2,7 @@
 
 **Project:** Why I Buy?
 **Course:** PRM323 – Cross-Platform Application Development
-**Giai đoạn:** 16/10/2026 – 17/10/2026 · tiếp nối `ai/ai-design-log.md` (v1 kết thúc ở mục R4)
+**Giai đoạn:** 16/10/2026 – 18/10/2026 · tiếp nối `ai/ai-design-log.md` (v1 kết thúc ở mục R4)
 
 > **Đọc trước:**
 > - File này gom các phần **UX research** trong 4 session Claude (Cowork). Nguồn là log do chính từng session tự rà lại và ghi vào Project PRM (`why-i-buy/session-log/`).
@@ -447,6 +447,61 @@ này thì sao
 
 ---
 
+## D1 — User flow F11–F13 và wireframe bổ sung (18/10/2026)
+
+- **Nguồn ảnh:** Figma **Why I Buy ver2** (`VaPYFxfpx14tnQmOMSgdjP`). Sơ đồ flow lấy từ page 01 (bản sắp xếp), wireframe lấy từ page 02. Xuất ngày 18/10 bằng Figma MCP, ảnh 1× (theo `assets/figma/README.md`).
+- **Vị trí:** `ux/userflow/Flow11_…`, `Flow12_…`, `Flow13_…` và `ux/wireframe/5_F11-F13-bo-sung-18-10/` (9 ảnh).
+- **Mô tả chi tiết từng flow** (mermaid, happy path, nhánh lỗi, lỗi prototype): `ux/user-flow.md` mục F11–F13, 4.2 và 5.2.
+- **Prompt (nguyên văn, nếu dựng bằng AI):**
+
+```text
+[Dán prompt đã dùng để dựng sơ đồ / wireframe trên Figma, nếu có]
+```
+
+### D1-1. User flow
+
+| Flow | Ảnh | Nội dung chính |
+|---|---|---|
+| **F11** – Lưu món từ Shopee bằng nút Chia sẻ | ![Flow 11](../ux/userflow/Flow11_Luu-mon-qua-nut-chia-se.png) | Shopee → Chia sẻ → Why I Buy? → 19 bottom sheet → Lưu → 19g snackbar, quay lại Shopee → mở món → 28 Decision Card. Bốn điểm rẽ: link không phải Shopee (19e, lưu thủ công, không nhắc sale), món đã lưu (19d, cập nhật giá, không tạo bản trùng), có đồ cùng loại (19f, nhắc nhẹ, không chặn), có giá ghi gần đây (19b xác nhận 1 chạm) / thiếu giá (19c → 20 Lấy giá từ ảnh do người dùng chọn). Giá luôn không bắt buộc |
+| **F12** – Ngày sale: cập nhật giá và quyết định | ![Flow 12](../ux/userflow/Flow12_Ngay-sale-cap-nhat-gia-quyet-dinh.png) | Thông báo 20:00 tối 10/11 → 21 Danh sách cho 11/11 (trống: 21a, không gửi nhắc) → mở món trên Shopee → 30 Cập nhật giá → 28 Decision Card → Mua (03–04 điền sẵn → Đã mua, 7 ngày sau 27 Hỏi mức hài lòng) / Chờ (29 → nhắc lại đợt sau) / Bỏ qua (13a xác nhận → 11c có Hoàn tác, không tạo khoản chi). Nhánh 22 Gói mua khi có ≥ 2 món có giá mới. Ghi rõ "Không nhắc lúc 0h, không đếm ngược" |
+| **F13** – Liên kết extension bằng mã 6 số | ![Flow 13](../ux/userflow/Flow13_Lien-ket-extension.png) | 10 Cá nhân → 25 Liên kết extension (mã 6 số, hết hạn 5 phút) → gõ mã ở trang extension X4 → 25f xác nhận thiết bị trên điện thoại → 25b Thiết bị đã liên kết; trang extension sang X2 / X3 / X5. Nhánh: mã hết hạn (25c Tạo mã mới), nhập sai (X4, sai quá 5 lần thì khóa mã), từ chối (mã bị hủy), hủy liên kết (25e → extension về EXT-8 "Chưa liên kết") |
+
+### D1-2. Wireframe bổ sung (`5_F11-F13-bo-sung-18-10/`)
+
+**App Android (360 × 800):**
+
+| Mã | Ảnh | Nội dung |
+|---|---|---|
+| WF28 Decision Card | ![WF28](../ux/wireframe/5_F11-F13-bo-sung-18-10/WF28_Decision-Card.png) | Tên món + "Đang cân nhắc · đã lưu 2 ngày"; khối Giá (ngày ghi, nguồn, phân loại, nhãn so với lúc lưu); Ngân sách nhóm (% phần khả dụng, "Vì sao con số này?"); đồ cùng loại đã ghi; đợt sale; 3 nút Mua · Chờ · Bỏ qua |
+| WF29 Chờ – chọn thời điểm | ![WF29](../ux/wireframe/5_F11-F13-bo-sung-18-10/WF29_Cho-chon-thoi-diem.png) | Bottom sheet: Sau 3 ngày (mặc định) · Đến đợt sale đã xác nhận · Tự chọn ngày (1–14); công tắc gửi thông báo khi đến hẹn; nút "Đặt nhắc" |
+| WF30 Cập nhật giá | ![WF30](../ux/wireframe/5_F11-F13-bo-sung-18-10/WF30_Cap-nhat-gia.png) | Bottom sheet: giá ghi gần đây + phân loại, "Đúng giá bạn đang thấy không?" → "Đúng giá này"; phụ: "Lấy từ ảnh chụp", "Gõ giá"; ghi "Giá không bắt buộc" |
+| WF30b Lịch sử giá | ![WF30b](../ux/wireframe/5_F11-F13-bo-sung-18-10/WF30b_Lich-su-gia.png) | Tóm tắt Lúc lưu · Mới nhất · Thấp nhất; danh sách từng lần ghi kèm ngày, loại giá, nguồn |
+| WF31 Ngân sách theo nhóm | ![WF31](../ux/wireframe/5_F11-F13-bo-sung-18-10/WF31_Ngan-sach-theo-nhom.png) | Mỗi nhóm: đã chi / hạn mức, thanh tiến độ, "Còn lại · khả dụng cho danh sách chờ"; nhóm chưa đặt hạn mức → "Đặt hạn mức"; "Vì sao con số này?"; "Thêm nhóm" |
+
+**Chrome extension (trang 960 × 640):**
+
+| Mã | Ảnh | Nội dung |
+|---|---|---|
+| WFX2 Trang danh sách | ![WFX2](../ux/wireframe/5_F11-F13-bo-sung-18-10/WFX2_Extension-Trang-danh-sach.png) | Menu trái (Danh sách mong muốn · Liên kết thiết bị · Cài đặt & quyền riêng tư); nhãn "[Chỉ trên máy]"; mỗi món: tên, ngày lưu, ngày ghi giá, giá + nhãn; "Liên kết với app", "Xuất dữ liệu" |
+| WFX3 Decision Card bảng cạnh | ![WFX3](../ux/wireframe/5_F11-F13-bo-sung-18-10/WFX3_Extension-Decision-Card-bang-canh.png) | Trang sản phẩm bên trái, bảng cạnh bên phải: Giá + nhãn, Ngân sách, Thời điểm; "Mua · mở form trên điện thoại", Chờ, Bỏ qua |
+| WFX4 Liên kết thiết bị | ![WFX4](../ux/wireframe/5_F11-F13-bo-sung-18-10/WFX4_Extension-Lien-ket-thiet-bi.png) | "Liên kết với app Android", hướng dẫn lấy mã trong app, 6 ô nhập mã, dòng thông báo lỗi / thành công; "Liên kết", "Tôi chưa có mã" |
+| WFX5 Cài đặt & quyền riêng tư | ![WFX5](../ux/wireframe/5_F11-F13-bo-sung-18-10/WFX5_Extension-Cai-dat-quyen-rieng-tu.png) | "Extension đọc gì? Chỉ trang sản phẩm đang mở, khi bạn bấm icon"; công tắc Đồng bộ với app, Lưu ảnh sản phẩm; Xuất dữ liệu, Xóa dữ liệu trên máy |
+
+### D1-3. Đối chiếu với `design/DESIGN.md` (rà ngày 18/10)
+
+| # | Chỗ | Vấn đề | Đề xuất |
+|---|---|---|---|
+| 1 | WF28, WFX3 | Nút "Mua" là nút filled, "Chờ" và "Bỏ qua" là nút viền. Trái nguyên tắc 1 của DESIGN.md: ba nút Mua · Chờ · Bỏ qua **bằng nhau về độ nổi** | Ba nút cùng kiểu, cùng cỡ (như prompt Stitch bản 3) |
+| 2 | WF28 | Dòng "Đợt sale đã xác nhận còn N ngày" là cách nói đếm ngược | Chỉ ghi ngày: "Đợt sale 11.11 · Thứ Tư 11/11 · Đã xác nhận" |
+| 3 | WF28 | Tiêu đề "Cân nhắc trước khi mua" khác tên dùng ở Figma / spec ("Decision Card", "Cân nhắc món này") | Thống nhất một tên hiển thị |
+| 4 | WF29 | "Tự chọn ngày (1–14)", trong khi DESIGN.md ghi thời gian cân nhắc chỉnh được 0–14 | Thống nhất khoảng |
+| 5 | Flow 13 | Sơ đồ bắt đầu từ mục "Liên kết extension" trong 10 Cá nhân, nhưng màn 10 trên Figma chưa có hàng này (`ux/user-flow.md` F13) | Thêm hàng vào màn 10, hoặc ghi chú trong sơ đồ |
+| 6 | Wireframe | Chưa có wireframe cho 19–27 và popup EXT-1…8 (theo `assets/figma/README.md`) | Bổ sung, hoặc ghi rõ các màn này đi thẳng từ Final UI |
+
+- **Nhóm chỉnh sửa lại:** _(điền sau khi nhóm duyệt từng mục)_
+
+---
+
 ## Tổng hợp insight → quyết định (cả 4 session)
 
 | # | Insight / quyết định | Từ | Loại | Trạng thái |
@@ -476,6 +531,7 @@ này thì sao
 - [ ] Nghe lại bản ghi âm ở 00:32, 07:53 (có phải thầy yêu cầu làm lại user research?), 09:35, 12:21.
 - [ ] Quyết định có thêm addlivetag (nguồn `"ben_thu_ba"`) và cách "nghe dữ liệu trang tự tải về" của extension không.
 - [ ] Chốt các con số AI tự đặt (ngưỡng điểm, nguội 7 ngày, biên độ 10%, mức loại giá lệch).
+- [ ] Sửa các điểm D1-3 trên wireframe 28, 29, X3 và sơ đồ Flow 13; bổ sung wireframe 19–27, EXT-1…8.
 - [ ] Đối chiếu persona S3 với P1–P5; thêm câu hỏi về Shopee (điện thoại hay máy tính, có chờ ngày sale không) vào khảo sát thật.
 
 ## Phụ lục: tài liệu 16/10 có sẵn trước 4 session
