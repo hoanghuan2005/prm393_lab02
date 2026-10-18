@@ -1,7 +1,9 @@
 # Information Architecture & User Flows
 
-**Project:** Why I Buy? – lấy cảm hứng từ "The Psychology of Money"
+**Project:** Why I Buy? – Smart Shopping Companion (lấy cảm hứng từ "The Psychology of Money")
 **Course:** PRM323 – Cross-Platform Application Development
+
+> **Cập nhật 18/10/2026.** Flow 1–10 giữ nguyên (thiết kế đến 14/10). F11–F13 của hướng mới được thêm ở mục 1.2, 2.2, 3 (cuối), 4.2 và 5.2. Tên và mã màn của F11–F13 lấy **đúng theo tên frame trên Figma "Why I Buy ver2"** (đọc ngày 18/10); mã này khác bảng mã trong đặc tả hợp nhất ngày 17/10 — bảng ánh xạ ở [`design/screen-spec.md`](../design/screen-spec.md) mục "Ánh xạ mã màn". Dây nối prototype của F11–F13 đã được đọc trực tiếp bằng Figma Plugin API; chưa có người thật bấm thử.
 
 ---
 
@@ -42,6 +44,36 @@ Ghi chú về Flow 8–10: `07 Mô hình (có AI)` và `08 Góc nhìn (có AI)` 
 
 Tám động cơ (dùng thống nhất trong toàn bộ dự án): Nhu cầu, Mong muốn, Khuyến mãi,
 Ảnh hưởng MXH, Quảng cáo, Cảm xúc, Tiện lợi, Khác.
+
+### 1.2. Màn hình hướng Smart Shopping Companion (Figma ver2, 18/10)
+
+Chỉ liệt kê **màn** (không tính biến thể trạng thái, bottom sheet và dialog). Cột "Giai đoạn" theo đặc tả hợp nhất: MVP là GĐ1–GĐ3, các màn GĐ4–GĐ5 được vẽ để minh họa lộ trình.
+
+| Mã Figma | Màn hình | Cấp | Truy cập từ (theo prototype / thiết kế) | Mục đích | Giai đoạn |
+|---|---|---|---|---|---|
+| 11 v3 | Danh sách mong muốn – v3 | Lồng | 19g (chạm snackbar), 21a, 28 "Bỏ qua" | Món đang cân nhắc kèm nhãn giá, ngày, động cơ, ưu tiên; lọc theo trạng thái | GĐ1 |
+| 13 v3 | Chi tiết món – v3 | Lồng | 11 v3 (thiết kế; prototype F11 đi thẳng 11 → 28) | Giá, lịch sử, nhận định, ba nút Mua · Chờ · Bỏ qua | GĐ1 |
+| 19 | Lưu món – bottom sheet (từ nút Chia sẻ) | Điểm vào (Android Share) | App Shopee → Chia sẻ → Why I Buy? | Lưu tên, link, giá tùy chọn, động cơ, nhóm, ưu tiên | GĐ1 |
+| 20 | Lấy giá từ ảnh chụp | Lồng – 2 bước | 19, 30 (nút "Lấy giá từ ảnh chụp") | OCR ảnh do người dùng chọn, luôn hỏi xác nhận | GĐ4 (tùy chọn) |
+| 21 | Danh sách cho đợt sale – 11/11 | Lồng | Thông báo đẩy 20:00 tối trước đợt sale | Các món đang chờ cho một đợt sale đã công bố; cập nhật giá từng món | GĐ4 |
+| 22 | Gói mua – Kế hoạch cho 11/11 | Lồng | 21 "Gợi ý gói mua", 11 v3 "Lập kế hoạch mua" (chưa nối prototype) | Gợi ý gói mua vừa ngân sách khi người dùng yêu cầu | GĐ5 |
+| 23 | So sánh món cùng loại | Lồng | 11 v3 "So sánh?", 28c "So sánh 3 món" (chưa nối prototype) | Đặt các món cùng nhóm cạnh nhau | GĐ4 |
+| 24 | Đồ đang dùng | Lồng | **Chưa có lối vào trên Figma** (đặc tả: từ 10 Cá nhân) | Khai báo đồ đang có để Decision Card nhắc món trùng | GĐ4 |
+| 25 | Liên kết extension | Lồng | **Chưa có lối vào trên Figma** (màn 25 ghi "Mở app → Cá nhân → Liên kết extension") | Tạo mã ghép 6 số, xác nhận thiết bị | GĐ3 |
+| 25b | Thiết bị đã liên kết | Lồng | 25f "Đồng ý" | Danh sách trình duyệt đã liên kết, hủy liên kết | GĐ3 |
+| 26 | Nhắc nhở & ngưỡng | Lồng | **Chưa có lối vào trên Figma** | Mức nhắc sale, thời gian chờ, biên độ an toàn, thu nhập mỗi giờ | GĐ4 |
+| 28 | Decision Card | Lồng | 11 v3 (chạm món), 30, 30a | Giá có nguồn và ngày, ngân sách, đồ đang có, đợt sale; Mua · Chờ · Bỏ qua | GĐ1 |
+| 30b | Lịch sử giá | Lồng | 28 (chạm khối Giá) | Các lần ghi giá; chỉ so khi "so được" | GĐ4 |
+| 31 | Ngân sách theo nhóm | Lồng | 28 "Vì sao con số này?" mở 31c; **lối vào 31 chưa có trên Figma** | Hạn mức tự đặt theo nhóm hàng, phần khả dụng | GĐ1 |
+| EXT | Popup extension (360 × 560) | Extension | Bấm icon Why I Buy? trên trình duyệt | Lưu nhanh món đang xem; 8 trạng thái EXT-1…EXT-8 | GĐ2 |
+| X2 | Extension – Trang danh sách mong muốn | Extension (960 × 640) | X4a "Mở danh sách", X3, X5 | Wishlist cục bộ, trạng thái đồng bộ | GĐ2–GĐ3 |
+| X3 | Extension – Decision Card bảng cạnh | Extension | X2 (chạm món) | Cân nhắc nhẹ trên máy tính | GĐ4 |
+| X4 | Extension – Liên kết thiết bị | Extension | Prototype bắt đầu ở trạng thái "mã sai" | Nhập mã 6 số từ app | GĐ3 |
+| X5 | Extension – Cài đặt & quyền riêng tư | Extension | X2 | Extension đọc gì; bật/tắt đồng bộ; xuất, xóa dữ liệu | GĐ2 |
+
+Khung khác trên Figma: `27 Hỏi mức hài lòng` là dialog đè lên Trang chủ (GĐ4); `Thông báo đẩy – 3 mẫu (Android)` là mẫu thông báo hệ thống. Các biến thể 19a–19g, 20a–20b, 21a, 22a–22c, 24a–24b, 25c, 25e, 25f, 28a–28c, 29, 29a, 30, 30a, 31a–31c, X2a, X4a ở mục 5.2.
+
+**Ứng với yêu cầu Lab 2 ("dialog và biến thể không tính là màn riêng"):** F11–F13 thêm khoảng 19 màn khác nhau như bảng trên. Tổng số màn của dự án vẫn vượt xa mức tối thiểu 8.
 
 ## 2. Cấu trúc điều hướng
 
@@ -85,6 +117,39 @@ flowchart TD
 ```
 
 Độ sâu tối đa: 2–3 lần chạm từ một tab (ví dụ Cá nhân → Tài khoản → Đổi mật khẩu; 02 → 11 → 13 → 03 khi mua từ danh sách mong muốn). Riêng Flow 9 là chuỗi bước nối tiếp (14 → 15 → 16 → 18) có nhãn "BƯỚC n/3" để người dùng biết còn bao nhiêu bước. Cấu trúc 5 tab giữ nguyên; Danh sách mong muốn và Trước khi mua là màn lồng, không thêm tab.
+
+### 2.2. Cấu trúc điều hướng hướng mới (F11–F13)
+
+Nét liền: cạnh đã nối trong prototype (đọc ngày 18/10). Nét đứt: có frame trên Figma nhưng **chưa nối** prototype, hoặc lối vào theo đặc tả chưa được vẽ.
+
+```mermaid
+flowchart TD
+    Share([App Shopee: Chia sẻ → Why I Buy?]) --> S19[19 Lưu món – bottom sheet]
+    S19 --> S11[11 Danh sách mong muốn v3]
+    S11 --> S28[28 Decision Card]
+    S11 -.-> S13[13 Chi tiết món v3]
+    S11 -.-> S23[23 So sánh món cùng loại]
+    S11 -.-> S22[22 Gói mua]
+    S28 --> S30b[30b Lịch sử giá]
+    S28 --> S31c[31c Vì sao con số này?]
+    S28 --> S03[03 Ghi khoản mua – Flow 1]
+    S19 --> S20[20 Lấy giá từ ảnh chụp]
+    Notif([Thông báo 20:00 trước đợt sale]) --> S21[21 Danh sách cho đợt sale]
+    S21 --> S28
+    S21 -.-> S22
+    NAV{{Thanh điều hướng – tab Cá nhân}} --> S10[10 Cá nhân]
+    S10 -.->|lối vào chưa vẽ| S31[31 Ngân sách theo nhóm]
+    S10 -.->|lối vào chưa vẽ| S24[24 Đồ đang dùng]
+    S10 -.->|lối vào chưa vẽ| S25[25 Liên kết extension]
+    S10 -.->|lối vào chưa vẽ| S26[26 Nhắc nhở & ngưỡng]
+    S25 --> S25b[25b Thiết bị đã liên kết]
+    Icon([Icon extension trên Chrome]) -.-> EXT[EXT Popup lưu nhanh]
+    X4[X4 Extension – Liên kết thiết bị] --> X2[X2 Extension – Danh sách]
+    X2 --> X3[X3 Decision Card bảng cạnh]
+    X2 --> X5[X5 Cài đặt & quyền riêng tư]
+```
+
+Độ sâu: từ lúc chia sẻ đến Decision Card là 3 lần chạm (Lưu → chạm snackbar → chạm món). Các màn cài đặt mới (24, 25, 26, 31) chưa có đường vào từ 10 Cá nhân trên Figma; đây là khoảng trống IA cần vẽ thêm.
 
 ## 3. User flows
 
@@ -350,6 +415,115 @@ flowchart TD
 - **Nhánh thay thế:** tab Góc nhìn → 08 Góc nhìn (có AI) → "Xem chi tiết" → 08c → "Đã hiểu" → 08; "Xem mô hình của tôi" → 08b; "Mở chiêm nghiệm tháng" → 09 → "Lưu" → 08 Góc nhìn – đã lưu chiêm nghiệm.
 - **Nhánh lỗi và phục hồi:** Figma chưa có khung lỗi cho AI. *(Đề xuất, chưa có khung trong Figma)*: dùng Empty / Error state có nút "Thử lại", giống "07 Mô hình – lỗi" (khung lỗi đã có của Flow 2).
 
+---
+
+**F11–F13 (hướng Smart Shopping Companion, Figma ver2 ngày 18/10).** Nét liền là cạnh đã nối trong prototype; nét đứt là frame có trên Figma nhưng chưa nối. Mỗi flow có starting point riêng trên page 06, kèm một starting point riêng cho nhánh lỗi.
+
+### F11 — Android Share → Smart Wishlist → Decision Card
+- **Bắt đầu:** đang xem sản phẩm trên app Shopee, bấm Chia sẻ → Why I Buy? (prototype bắt đầu ở `19a`)
+- **Mục tiêu:** lưu món vào Smart Wishlist trong dưới 20 giây (KPI-01), rồi cân nhắc bằng Decision Card
+- **Kết thúc:** món ở trạng thái Đang cân nhắc; người dùng tự chọn Mua (sang Flow 1), Chờ (đặt nhắc xem lại) hoặc Bỏ qua
+
+```mermaid
+flowchart TD
+    Start([App Shopee: Chia sẻ → Why I Buy?]) --> S19a[19a Lưu món – đang lấy thông tin]
+    S19a -->|Tự chuyển 1,2 giây| S19[19 Lưu món – bottom sheet]
+    S19 -->|Lấy giá từ ảnh chụp| S20[20 Lấy giá từ ảnh – chọn ảnh]
+    S20 -->|Chọn ảnh| S20a[20a Đã nhận giá – chọn số đúng]
+    S20a -->|Dùng giá này| S19
+    S20a -.-> S20b[20b Không tìm thấy giá → Gõ giá]
+    S19 -.-> S19b[19b Có giá ghi gần đây – xác nhận 1 chạm]
+    S19 -.-> S19c[19c Thiếu giá – vẫn lưu được]
+    S19 -.-> S19d[19d Món đã lưu – cập nhật giá, không tạo bản trùng]
+    S19 -->|Lưu| S19g[19g Đã lưu – snackbar, quay lại Shopee]
+    S19g -->|Chạm snackbar| S11[11 Danh sách mong muốn v3]
+    S11 -->|Chạm món| S28[28 Decision Card]
+    S28 -->|Vì sao con số này?| S31c[31c Ngân sách – bottom sheet] -->|Đóng| S28
+    S28 -.-> S28a[28a Chưa thiết lập ngân sách]
+    S28 -->|Mua| S03([03 Ghi khoản mua – Bước 1/2, sang Flow 1])
+    S28 -->|Chờ| S29[29 Chờ – chọn thời điểm xem lại]
+    S29 -->|Xác nhận| S29a([29a Đã đặt nhắc xem lại])
+    S28 -->|Bỏ qua| S11
+    Err([Link không phải Shopee – starting point F11b]) --> S19e[19e Hiện chỉ hỗ trợ Shopee – lưu thủ công]
+    S19e --> S19g
+```
+
+- **Happy path:** 19a → 19 (Tai nghe Bluetooth TWS chống ồn, giá để trống hoặc nhập) → Lưu → 19g → 11 v3 → 28 → Chờ → 29 "Sau 3 ngày" → 29a.
+- **Nhánh thay thế:** lấy giá từ ảnh chụp (20 → 20a → quay lại 19); Mua → 03 (Flow 1); Bỏ qua → 11 v3; mở "Vì sao con số này?" (31c).
+- **Nhánh lỗi và phục hồi:** link không phải Shopee → 19e cho lưu thủ công, không nhắc sale, không so giá (E14); thiếu giá vẫn lưu được (19c, E02); món đã lưu → 19d cập nhật giá, không tạo bản trùng (E03); OCR không đọc được → 20b "Gõ giá" (E10). 19b, 19c, 19d, 20b có frame nhưng chưa nối prototype.
+- **Lỗi đã phát hiện trong prototype (18/10):**
+  - Nút Mua ở 28 (món Tai nghe Bluetooth) dẫn tới `03 … (từ danh sách mong muốn) – Bàn phím cơ`, sai món.
+  - Bỏ qua về thẳng 11 v3, không có snackbar Hoàn tác 5 giây (đặc tả A-07).
+  - Ở 19e, lớp được nối sang 19g có tên "Button – Lấy giá từ ảnh chụp"; cần kiểm tra nút "Lưu thủ công" có được nối không.
+  - 29a chỉ có nút Back.
+
+### F12 — Wishlist → Chờ → nhắc đợt sale → Quyết định
+- **Bắt đầu:** thông báo đẩy 20:00 tối trước đợt sale đã xác nhận ("Mai là 11/11"), chỉ khi danh sách có món
+- **Mục tiêu:** cập nhật giá các món đang chờ bằng giá người dùng thấy, rồi tự quyết định
+- **Kết thúc:** người dùng chọn Mua (sang Flow 1), Chờ tiếp hoặc Bỏ qua cho từng món
+
+```mermaid
+flowchart TD
+    N([Thông báo 20:00: Mai là 11/11]) --> S21[21 Danh sách cho 11/11]
+    S21 -->|Cập nhật giá| S30[30 Cập nhật giá – xác nhận giá gần đây]
+    S30 -->|Đúng giá này| S28[28 Decision Card]
+    S30 -->|Gõ giá| S30a[30a Gõ giá – chọn loại giá] -->|Lưu giá| S28
+    S30 -.->|Lấy giá từ ảnh chụp| S20[20 Lấy giá từ ảnh]
+    S28 -->|Chạm khối Giá| S30b[30b Lịch sử giá] -->|Back| S28
+    S28 -.-> S28b[28b Giá cũ – Xác nhận lại giá]
+    S28 -->|Mua| S03([03 Ghi khoản mua, sang Flow 1])
+    S28 -->|Chờ| S29[29 Chờ] -->|Xác nhận| S29a([29a Đã đặt nhắc])
+    S28 -->|Bỏ qua| S11([11 Danh sách mong muốn v3])
+    S21 -.->|Gợi ý gói mua – GĐ5| S22[22 Gói mua]
+    E([Danh sách trống – starting point F12b]) --> S21a[21a Chưa có món cho đợt 11/11]
+    S21a -->|Mở danh sách mong muốn| S11
+```
+
+- **Happy path:** thông báo → 21 → "Cập nhật giá" cho Tai nghe → 30 "Đúng giá này" → 28 → chạm Giá → 30b → Back → Chờ hoặc Mua.
+- **Nhánh thay thế:** gõ giá mới (30a, chọn loại giá); mở lịch sử giá (30b); gợi ý gói mua (22, GĐ5, chưa nối).
+- **Nhánh lỗi và phục hồi:** chưa có món cho đợt sale → 21a, app không gửi nhắc khi danh sách trống; giá cũ hơn 3 ngày → 28b "Cần cập nhật giá", không tính phần trăm tăng/giảm (E09); chưa cấp quyền thông báo → mục "Cần xem lại" trong app (E12, chưa vẽ).
+- **Ràng buộc:** ngày sale chỉ là sự kiện đã công bố, **không phải dự đoán giá giảm**. Giá cộng đồng không có trong flow này và không gửi đẩy.
+- **Lỗi đã phát hiện:** câu thông báo "Bạn có 3 món đang chờ, có thể được giảm giá" gần với hứa giảm giá, cần chỉnh theo đặc tả 8.2 ("Bạn có 3 món trong danh sách. Mở xem nhé?"). Lỗi Mua → "Bàn phím cơ" và Bỏ qua không có Hoàn tác giống F11.
+
+### F13 — Chrome Extension → Lưu món → Ghép thiết bị → Đồng bộ
+- **Bắt đầu:** trên app: màn 25 Liên kết extension (prototype). Trên máy tính: trang Liên kết thiết bị của extension (X4)
+- **Mục tiêu:** ghép extension với tài khoản bằng mã 6 số có xác nhận trên điện thoại, rồi thấy món lưu trên máy tính trong danh sách
+- **Kết thúc:** 25b hiện "Chrome – Windows"; X4a "Đã liên kết… 2 món đang chờ đã được đồng bộ"; hoặc hủy liên kết quay về 25
+
+```mermaid
+flowchart TD
+    subgraph App Android
+    A0([10 Cá nhân – lối vào chưa vẽ]) -.-> S25[25 Liên kết extension – mã 482 913, hết hạn 5 phút]
+    S25 -->|Tự chuyển 3 giây: máy tính đã nhập mã| S25f[25f Xác nhận thiết bị]
+    S25f -->|Từ chối| S25
+    S25f -->|Đồng ý| S25b[25b Thiết bị đã liên kết]
+    S25b -->|Huỷ liên kết| D25e{{25e Dialog huỷ liên kết – overlay}}
+    D25e -->|Giữ liên kết| S25b
+    D25e -->|Huỷ liên kết| S25
+    S25 -.-> S25c[25c Mã đã hết hạn – Tạo mã mới]
+    end
+    subgraph Extension trên máy tính
+    P([Icon extension]) -.-> EXT[EXT-1…EXT-8 Popup lưu nhanh]
+    X4[X4 Liên kết thiết bị – mã sai, còn 3 lần thử] -->|Liên kết| X4a[X4a Đã liên kết]
+    X4a -->|Mở danh sách| X2[X2 Danh sách – chỉ trên máy]
+    X2 -->|Chạm món| X3[X3 Decision Card bảng cạnh]
+    X3 -->|Mua / Chờ / Bỏ qua| X2
+    X2 -->|Cài đặt & quyền riêng tư| X5[X5 Cài đặt]
+    X5 -->|Danh sách| X2
+    X2 -.-> X2a[X2a Lỗi đồng bộ – Thử lại, món vẫn giữ trên máy]
+    end
+```
+
+- **Happy path (app):** 25 hiện mã → máy tính nhập mã → 25f "Liên kết với Chrome trên Windows?" → Đồng ý → 25b.
+- **Happy path (extension):** X4 nhập mã → Liên kết → X4a → Mở danh sách → X2 → chạm món → X3.
+- **Nhánh thay thế:** hủy liên kết từ 25b qua dialog overlay 25e; mở X5 xem extension đọc gì.
+- **Nhánh lỗi và phục hồi:** mã sai → X4 báo "Mã không đúng hoặc đã hết hạn. Bạn còn 3 lần thử." rồi nhập lại (E05); từ chối ở 25f → quay về 25; mã hết hạn → 25c "Tạo mã mới" (chưa nối); lỗi đồng bộ → X2a "Thử lại", món vẫn ở trên máy (E07, chưa nối); liên kết bị hủy → EXT-8 (E06, chưa nối).
+- **Lỗi và khoảng trống đã phát hiện:**
+  - Popup EXT-1…EXT-8 chưa nối prototype.
+  - EXT-1 "Chưa liên kết" chỉ có nút Liên kết, tức là **chặn việc lưu**, trái đặc tả 5.2 (chưa liên kết vẫn phải lưu được ngay).
+  - Prototype X4 bắt đầu thẳng ở trạng thái mã sai, chưa có trạng thái nhập mã ban đầu.
+  - Màn 10 Cá nhân chưa có hàng "Liên kết extension".
+
 ## 4. Bảng ánh xạ flow → màn hình
 
 | Màn hình | Flow 1 | Flow 2 | Flow 3 | Flow 4 | Flow 5 | Flow 6 | Flow 7 | Flow 8 | Flow 9 | Flow 10 |
@@ -383,7 +557,40 @@ flowchart TD
 | 16 Trước khi mua – Bước 3/3 | | | | | | | | | ✓ khi chọn Khuyến mãi | |
 | 18 Nhận định trước khi mua | | | | | | | | | ✓ kết thúc (17 đang tải) | |
 
-Mọi màn hình đều thuộc ít nhất một flow. Mỗi flow có starting point riêng ở page `06 Prototype` của Figma.
+Mọi màn hình của Flow 1–10 đều thuộc ít nhất một flow. Mỗi flow có starting point riêng ở page `06 Prototype` của Figma.
+
+### 4.2. Bảng ánh xạ F11–F13 → màn hình
+
+● = có trong prototype của flow · ○ = có frame, chưa nối prototype · trống = không dùng.
+
+| Màn (mã Figma) | F11 | F12 | F13 |
+|---|:-:|:-:|:-:|
+| 19a, 19, 19g Lưu món | ● | | |
+| 19b, 19c, 19d, 19f Lưu món – biến thể | ○ | | |
+| 19e Lưu món – link không phải Shopee | ● (F11b) | | |
+| 20, 20a Lấy giá từ ảnh chụp | ● | ○ | |
+| 20b Không tìm thấy giá | ○ | | |
+| 11 v3 Danh sách mong muốn | ● | ● | |
+| 13 v3, 13g, 13h Chi tiết món | ○ | ○ | |
+| 28 Decision Card | ● | ● | |
+| 28a, 28b, 28c Decision Card – biến thể | ○ | ○ | |
+| 29, 29a Chờ | ● | ● | |
+| 30, 30a Cập nhật giá | | ● | |
+| 30b Lịch sử giá | | ● | |
+| 31c Ngân sách – Vì sao con số này? | ● | | |
+| 31, 31a, 31b Ngân sách theo nhóm | ○ | | |
+| Thông báo đẩy – 3 mẫu | | ● | |
+| 21 Danh sách cho đợt sale | | ● | |
+| 21a Chưa có món | | ● (F12b) | |
+| 22, 22a–c Gói mua | | ○ | |
+| 03 Ghi khoản mua (sang Flow 1) | ● | ● | |
+| 25, 25f, 25b, 25e Liên kết extension (app) | | | ● |
+| 25c Mã hết hạn | | | ○ |
+| X4, X4a, X2, X3, X5 Extension | | | ● (F13b) |
+| X2a Lỗi đồng bộ | | | ○ |
+| EXT-1…EXT-8 Popup | | | ○ |
+
+**Màn chưa thuộc flow nào trên prototype:** 23 So sánh, 24/24a/24b Đồ đang dùng, 26 Nhắc nhở & ngưỡng, 27 Hỏi mức hài lòng. Đề Lab 2 yêu cầu mọi màn được ít nhất một flow sử dụng: nhóm cần nối các màn này vào một flow, hoặc ghi rõ chúng là màn minh họa lộ trình (GĐ4–GĐ5), không tính vào bài nộp.
 
 ## 5. Khung trạng thái theo flow
 
@@ -439,3 +646,42 @@ Mỗi trạng thái là một khung riêng, giống hệt màn gốc và chỉ k
 | AI đang phân tích – trước khi mua | 18 (khung 17) | Flow 9 | "Xem nhận định" ở 16, hoặc "Tiếp tục" ở 15 khi không chọn Khuyến mãi | Tự chuyển sang 18 sau 1,5 giây |
 | Góc nhìn – đã lưu chiêm nghiệm (có AI) | 08 | Flow 10 | "Lưu" ở 09 | Snackbar "Đã lưu chiêm nghiệm tháng 10" tự ẩn |
 | Trang chủ – lối vào Trước khi mua | 02 | Flow 9 | Biến thể của 02: giống Hub nhưng không có thẻ Danh sách mong muốn | "Trước khi mua" → 14 |
+
+### 5.2. Khung trạng thái F11–F13 (Figma ver2)
+
+| Khung trạng thái | Màn gốc | Flow | Khi nào xuất hiện | Hành động tiếp theo |
+|---|---|---|---|---|
+| 19a Lưu món – đang lấy thông tin | 19 | F11 | Vừa nhận link từ Chia sẻ | Tự chuyển sang 19 (prototype 1,2 giây) |
+| 19b Lưu món – có giá ghi gần đây | 19 | F11 | Đã có giá ghi ≤ 3 ngày cho cùng món | "Đúng giá này" · "Không, sửa giá" |
+| 19c Lưu món – thiếu giá | 19 | F11 | Chưa có giá | "Lưu" vẫn được; "Lấy giá từ ảnh chụp" |
+| 19d Lưu món – món đã lưu | 19 | F11 | Cùng sản phẩm, cùng phân loại đã lưu | "Cập nhật giá" · "Xem món trong danh sách" |
+| 19e Lưu món – link không phải Shopee | 19 | F11 | Link ngoài Shopee (ví dụ Lazada) | "Lưu thủ công" |
+| 19f Lưu món – nhắc món tương tự | 19 | F11 | Đã ghi đồ tương tự trong Đồ đang dùng | Lưu hoặc đóng (xem xung đột câu chữ ở `design/design-decisions.md`) |
+| 19g Lưu món – đã lưu | 19 | F11 | Lưu thành công | Snackbar "Đã lưu vào danh sách mong muốn · Hoàn tác"; quay lại Shopee |
+| 20a Đã nhận giá | 20 | F11 | OCR đọc được số tiền | Chọn số đúng → "Dùng giá này" |
+| 20b Không tìm thấy giá | 20 | F11 | Ảnh không có giá | "Chọn ảnh khác" · "Gõ giá" |
+| 11a v3 Danh sách – trống | 11 v3 | F11 | Chưa có món | "Thêm món"; gợi ý dùng nút Chia sẻ |
+| 11f v3 Món đang trong thời gian chờ | 11 v3 | F11 | Món mới lưu chưa hết thời gian chờ | Xem món |
+| 13g Chi tiết – cảnh báo giá gốc | 13 v3 | F12 | Giá gạch ngang cao hơn mức thường thấy, đủ ≥ 3 lần ghi | Mua · Chờ · Bỏ qua |
+| 13h Chi tiết – cần giá | 13 v3 | F12 | Chưa có giá trong 3 ngày | "Mở trên Shopee" · "Cập nhật giá" |
+| 28a Decision Card – chưa thiết lập ngân sách | 28 | F11 | Nhóm chưa có hạn mức | "Thiết lập" · "Để sau"; không tính phần trăm |
+| 28b Decision Card – giá cũ | 28 | F12 | Giá ghi > 3 ngày | "Xác nhận lại giá" · "Mở link" |
+| 28c Decision Card – có món cùng nhóm | 28 | F11 | Đang cân nhắc thêm món cùng nhóm | "So sánh 3 món" → 23 |
+| 29 Chờ – chọn thời điểm (bottom sheet) | 28 | F11, F12 | Bấm "Chờ" | "Sau 3 ngày" · "Đến đợt sale 11.11" |
+| 29a Decision Card – đã đặt nhắc | 28 | F11, F12 | Xác nhận Chờ | Snackbar "Đã đặt nhắc xem lại 21/10 · Hoàn tác" |
+| 30 Cập nhật giá – xác nhận (bottom sheet) | 28 | F12 | "Cập nhật giá" ở 21 | "Đúng giá này" · "Lấy giá từ ảnh chụp" · "Gõ giá" |
+| 30a Cập nhật giá – gõ giá (bottom sheet) | 28 | F12 | "Gõ giá" | Nhập số, chọn loại giá → "Lưu giá" |
+| 31a Ngân sách – đã đặt | 31 | — | Có hạn mức | "Vì sao con số này?" |
+| 31b Ngân sách – đã vượt | 31 | — | Đã chi > hạn mức | Chữ trung tính "Đã vượt … App không chặn mua." |
+| 31c Ngân sách – Vì sao con số này? | 31 | F11 | Chạm "Vì sao con số này?" | Đóng sheet |
+| 21a Danh sách cho đợt sale – chưa có món | 21 | F12 | Không có món chọn "Chờ · đến đợt sale" | "Mở danh sách mong muốn" |
+| 22a, 22b, 22c Gói mua | 22 | — | Đổi phương án / chưa đủ món có giá | "Về Danh sách cho 11/11" (22c) |
+| 24a, 24b Đồ đang dùng | 24 | — | Thêm đồ / chưa có đồ | "Lưu" · "Thêm đồ" |
+| 25c Liên kết – mã hết hạn | 25 | F13 | Quá 5 phút | "Tạo mã mới" |
+| 25f Liên kết – xác nhận thiết bị | 25 | F13 | Máy tính vừa nhập mã | "Từ chối" · "Đồng ý" |
+| 25e Huỷ liên kết (dialog overlay) | 25b | F13 | Bấm "Huỷ liên kết" | "Giữ liên kết" · "Huỷ liên kết" → 25 |
+| 27a Hỏi mức hài lòng – sau khi chọn | 27 | — | Chọn số sao | "Xong" |
+| X2a Extension – lỗi đồng bộ | X2 | F13 | Mất kết nối khi đồng bộ | "Thử lại"; món vẫn ở trên máy |
+| X4 Extension – mã sai | X4 | F13 | Mã sai hoặc hết hạn | Nhập lại (còn 3 lần) · "Tôi chưa có mã" |
+| X4a Extension – liên kết thành công | X4 | F13 | Mã đúng, điện thoại đồng ý | "Mở danh sách" · "Huỷ liên kết" |
+| EXT-1 … EXT-8 Popup | EXT | F13 | Chưa liên kết · không phải trang sản phẩm · đang đọc · đủ thông tin · thiếu giá · đã lưu trước đó · đã lưu · liên kết bị hủy | Theo từng trạng thái (chưa nối prototype) |

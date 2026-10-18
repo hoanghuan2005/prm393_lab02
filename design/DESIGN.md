@@ -3,22 +3,29 @@
 Tài liệu gốc cho cả prompt Google Stitch và file Figma. Mục "Lịch sử cập nhật" ở cuối ghi lại những gì được bổ sung sau các vòng tinh chỉnh.
 
 ## Sản phẩm
-Why I Buy? — ứng dụng di động giúp người trẻ ghi nhanh khoản mua và gắn động cơ
-tâm lý, lấy cảm hứng từ "The Psychology of Money" (Morgan Housel).
-Thông điệp: "Hiểu trước khi thay đổi".
+Why I Buy? – **Smart Shopping Companion**: trợ lý mua sắm có ý thức trên Android. Giúp người trẻ
+lưu món đang thích, cân nhắc với ngân sách tự đặt, đồ đang có và thời điểm sale, tự chọn
+**Mua · Chờ · Bỏ qua**, rồi nhìn lại vì sao mình mua. Lấy cảm hứng từ "The Psychology of Money"
+(Morgan Housel). Thông điệp: "Hiểu trước khi thay đổi".
+
+*Cập nhật 18/10/2026 theo đặc tả hợp nhất v1.0 (17/10). Bản đầu (đến 14/10) chỉ gồm ghi khoản mua
+kèm động cơ và nhìn lại; các quy tắc của bản đầu vẫn áp dụng cho Flow 1–10 trừ khi mục
+"Smart Shopping Companion" bên dưới ghi khác.*
 
 ## Người dùng
-Nguyễn Hải Nam, 22 tuổi, sinh viên năm cuối ngành CNTT kiêm thực tập sinh,
-thu nhập 6–9 triệu/tháng. Hay đặt đồ ăn khuya và chốt flash sale sau 22h,
-dùng điện thoại một tay, cận 2 độ. Đã bỏ các app chi tiêu vì nhập lâu và
-cảm giác tội lỗi khi thấy cảnh báo đỏ.
+Persona chính (proto-persona, giả định chưa kiểm chứng – xem `ux/persona.md`): Nguyễn Hải Nam,
+22 tuổi, sinh viên năm cuối CNTT kiêm thực tập, xem Shopee trên Android, hay gặp flash sale buổi tối,
+dùng điện thoại một tay, cận 2 độ, ngại nhập nhiều và không muốn bị phán xét.
+Persona phụ: P3 Huy (ngân sách, so sánh, chờ sale), P2 Linh (nhìn lại sau mua), P4 Mai (bị gián đoạn).
 
 ## Nền tảng
-Android, khung 360 × 800 dp, Material Design 3, light theme.
+Android, khung 360 × 800 dp, Material Design 3, light theme. Kênh phụ: Chrome Extension
+(popup 360 × 560 px, trang extension 960 × 640 px trên Figma).
 
 ## Tone & giọng văn
 - Bình tĩnh, ấm áp, trung lập, không phán xét.
-- Không cảnh báo đỏ, không "vượt ngân sách", không chấm điểm người dùng.
+- Không cảnh báo đỏ, không chấm điểm người dùng. Ngân sách là mốc tham chiếu người dùng tự đặt; khi
+  vượt chỉ ghi chữ trung tính ("Đã vượt 90.000 ₫ so với mốc bạn đặt. App không chặn mua."), không tô đỏ.
 - Insight viết dạng quan sát, chỉ dùng số liệu lấy từ dữ liệu người dùng đã ghi: "5 trong 15 khoản tháng này gắn với Khuyến mãi."
 - Không thêm thẻ, câu nhắc nhở, khen ngợi hay suy diễn tâm lý ("Bạn có đang thật sự cần?", "Bạn nhận diện được… kịp thời", "Tâm trí bạn…").
 - Không dùng ảnh minh họa trang trí.
@@ -34,14 +41,23 @@ Android, khung 360 × 800 dp, Material Design 3, light theme.
 | Danh sách món muốn mua | "Danh sách mong muốn" | "Wishlist", "giỏ hàng" (trên giao diện) |
 | Một mục trong danh sách | "món" | "sản phẩm", "đơn hàng" |
 | Không mua món nữa | "Bỏ qua" / "Không mua nữa" | "Xóa", "Hủy món" |
-| Trạng thái | "Đang cân nhắc" · "Đã mua" · "Bỏ qua" | "Chờ", "Hạ nhiệt", "Đang tĩnh tâm" |
+| Trạng thái | "Đang cân nhắc" · "Đã mua" · "Bỏ qua" | "Hạ nhiệt", "Đang tĩnh tâm" |
+| Ba quyết định (từ 18/10) | **"Mua" · "Chờ" · "Bỏ qua"**, ba nút bình đẳng | "Vẫn mua", "Để sau", "Để mình nghĩ thêm", "Mua ngay" |
+| Chờ | Hành động, **không phải trạng thái**: món vẫn Đang cân nhắc, có thêm ngày xem lại ("Đang chờ · xem lại 21/10") | "Khoảng lặng", đếm ngược bắt buộc |
+| Giá của món chưa mua | "giá đã ghi", "giá lúc lưu", "giá ghi gần đây", luôn kèm ngày | "giá hiện tại", "giá realtime" |
+| Số tiền khi mua | "giá thực trả" / "số tiền thực chi" | "giá sau voucher" (như giá dùng chung) |
+| Ngân sách | "ngân sách nhóm", "hạn mức tháng", "phần khả dụng", "mốc bạn đặt" | "số dư", "bạn không đủ tiền" |
+| Đợt sale | "đợt sale đã công bố", "đợt sale tiếp theo: 11/11" | "sắp giảm giá", "chắc chắn rẻ hơn" |
+| Món đã quyết định không mua | "giá trị món đã quyết định không mua" (GĐ4, tùy chọn) | "tiền đã giữ lại", "tiết kiệm được" |
 
 - **8 động cơ** (đúng tên, đúng thứ tự): Nhu cầu, Mong muốn, Khuyến mãi, Ảnh hưởng MXH, Quảng cáo, Cảm xúc, Tiện lợi, Khác. Không dùng "Giảm giá". Mỗi khoản mua chỉ có **một** chip động cơ, không thêm nhãn phụ.
 - **Tiêu đề app bar** (chỉ viết hoa chữ đầu): Trang chủ · Ghi khoản mua (Bước 1/2, Bước 2/2) · Chi tiết khoản mua · Lịch sử · Mô hình · Góc nhìn · Chiêm nghiệm tháng · Cá nhân.
 
 ## Phạm vi
 - **Trong phạm vi:** ghi khoản mua (số tiền, tên món, thời điểm, động cơ, ghi chú), xem/sửa/xóa, lọc theo động cơ, mô hình theo động cơ và khung giờ, góc nhìn, chiêm nghiệm tháng, nhắc nhở, xuất và xóa dữ liệu.
-- **Ngoài phạm vi:** ngân sách và cảnh báo vượt mức, chấm điểm người dùng, lời khuyên, "khoảng hạ nhiệt", ảnh hóa đơn hoặc ảnh khoản mua, danh mục chi tiêu, so sánh với người khác, chuỗi ngày (streak), mã giao dịch.
+  **Thêm từ 18/10:** Smart Wishlist lưu qua Android Share / nhập tay / Chrome Extension; Decision Card; Mua · Chờ · Bỏ qua; ngân sách theo nhóm hàng (tùy chọn); nhắc xem lại; giá đã ghi có nguồn và ngày; ghép extension bằng mã 6 số. Các phần GĐ4–GĐ5 (lịch sale, lịch sử giá, so sánh, đồ đang dùng, OCR, gói mua, AI diễn giải) được thiết kế để minh họa lộ trình.
+- **Ngoài phạm vi:** cảnh báo đỏ và chặn mua khi vượt ngân sách, chấm điểm người dùng, lời khuyên "nên / không nên mua", "khoảng hạ nhiệt" và đếm ngược bắt buộc, ảnh hóa đơn, danh mục chi tiêu kiểu sổ thu chi, so sánh với người khác, chuỗi ngày (streak), mã giao dịch, đồng bộ ngân hàng, cào dữ liệu Shopee, đọc tài khoản / giỏ hàng / kho voucher Shopee, tự áp mã giảm giá, giá thời gian thực, dự đoán giá, tìm shop rẻ nhất.
+- *[Đã thay thế 18/10]* Bản trước ghi "ngân sách" là ngoài phạm vi. Theo góp ý của giảng viên (04:40 trong bản ghi) và đặc tả mục 1.5 #6, ngân sách được đưa vào phạm vi dưới dạng tùy chọn, không cảnh báo đỏ.
 
 ## Lưu trữ dữ liệu
 Dữ liệu được lưu trên máy và đồng bộ với tài khoản của người dùng khi có mạng. Mất mạng khi lưu → vẫn lưu trên máy và báo "Đã lưu trên máy. Sẽ đồng bộ khi có mạng." Màn Mô hình cần mạng để tổng hợp, nên có trạng thái lỗi "Không tải được mô hình".
@@ -146,6 +162,86 @@ Màu động cơ (nền / chữ):
 - "Không mua nữa" không phải hành động phá hủy: dialog dùng nút primary (không dùng màu error), và có snackbar hoàn tác 5 giây.
 - Tên món xuống tối đa 2 dòng; chỉ khi vượt 2 dòng mới cắt bằng "…" (thẻ Danh sách mong muốn).
 
+## Smart Shopping Companion – quy tắc thiết kế (18/10/2026)
+
+Nguồn: đặc tả hợp nhất v1.0 mục 1.3, 4, 6.5, 7, 8, 10.2. Token màu, chữ, khoảng cách, bo góc giữ nguyên như các mục trên; không thêm màu cảnh báo.
+
+### Nguyên tắc
+1. **Người dùng luôn là người quyết định.** Quy tắc và AI chỉ nêu dữ kiện, nói rõ khi thiếu dữ liệu, không nói "nên" hay "không nên mua". Ba nút Mua · Chờ · Bỏ qua **bằng nhau về độ nổi bật**, luôn hiện và luôn bấm được.
+2. **Wishlist ≠ chi tiêu.** Chỉ khoản mua đã lưu (giá thực trả) mới được cộng vào "đã chi". "Mua" là ý định; món chỉ thành Đã mua khi khoản mua lưu thành công. Chờ và Bỏ qua không tạo khoản chi.
+3. **Không thúc ép mua.** Không chặn mua, không đếm ngược bắt buộc, không "Mua ngay kẻo lỡ", không đỏ làm cảnh báo đạo đức. Thời gian cân nhắc **gợi ý mặc định 3 ngày** (chỉnh 0–14), không khóa nút Mua, bỏ qua với động cơ Nhu cầu.
+4. **Mọi mức giá có nguồn, ngày, phân loại và trạng thái xác nhận.** Không hứa món sẽ giảm, không quảng bá giá thời gian thực.
+5. **Thu thập tối thiểu, minh bạch.** Không cào Shopee, không đọc cookie, giỏ hàng, kho voucher hay đơn mua. Người dùng xuất và xóa được dữ liệu.
+
+### Smart Wishlist
+- Ba trạng thái Đang cân nhắc · Đã mua · Bỏ qua; lọc theo trạng thái; Hoàn tác 5 giây khi Bỏ qua.
+- Mỗi thẻ món hiện: tên (tối đa 2 dòng), giá đã ghi kèm ngày, nhãn so giá (Price tag), động cơ, ưu tiên (sao), "Lúc lưu … · đã chờ n ngày".
+- Nhãn nguồn lưu: chia sẻ từ Shopee · máy tính (extension) · nhập tay. Giá luôn **không bắt buộc**; không bao giờ điền 0 ₫ thay cho "chưa có giá".
+- Món trùng (cùng sản phẩm, cùng phân loại) không tạo bản mới, chỉ "Cập nhật giá" (19d).
+
+### Ngân sách theo nhóm
+- Nhóm ngân sách là **nhóm hàng**, tách khỏi 8 động cơ. Mặc định 6 nhóm: Ăn uống, Thời trang, Công nghệ, Làm đẹp, Học tập, Khác; người dùng đổi tên, thêm, bớt.
+- Hạn mức tháng do người dùng tự khai, bỏ qua được. **Không đồng bộ ngân hàng.**
+- Đã chi = tổng giá thực trả của khoản mua đã ghi trong nhóm, trong tháng. Còn lại = hạn mức − đã chi.
+- Phần khả dụng cho Wishlist: `khaDung = max(0, conLai − duPhong) × (1 − bienDo)`; biên độ an toàn mặc định 10%. Người mới chưa đủ 30 ngày dữ liệu: `duPhong = 0` kèm ghi chú.
+- Luôn có "Vì sao con số này?" hiện đúng công thức với số của người dùng (31c).
+- Thanh ngân sách dùng màu trung tính; "đã vượt" là chữ, không tô đỏ (31b).
+
+### Decision Card
+| Khối | Nội dung | Khi thiếu dữ liệu |
+|---|---|---|
+| Giá | Giá mới nhất + nguồn + ngày + phân loại; so với giá lúc lưu nếu "so được" | "Cần cập nhật giá" + Xác nhận lại giá · Mở link (28b) |
+| Ngân sách | "Món này chiếm khoảng 44% phần khả dụng (864.000 ₫)" | "Chưa thiết lập ngân sách… App không tính phần trăm khi chưa có hạn mức" + Thiết lập · Để sau (28a) |
+| Đồ đang có | "Bạn đã ghi có 1 tai nghe đang dùng" | Ẩn khối |
+| Món cùng nhóm | "Bạn đang cân nhắc thêm 2 món cùng nhóm" + So sánh | Ẩn khối |
+| Thời điểm | "Đợt 11.11 còn 4 ngày (đã xác nhận)"; chỉ đợt đã công bố | Ẩn khối |
+| Quyết định | Mua (ghi khoản mua điền sẵn) · Chờ (3 ngày · đến đợt sale · tự chọn) · Bỏ qua (Hoàn tác 5 giây) | Luôn hiện và luôn bấm được |
+
+**Nhãn tóm tắt** (Rules Engine v1, đặc tả 7.4): chỉ dùng các nhãn trung tính "Cần giá gần đây", "Có thể chờ", "Vượt phần khả dụng", "Có thể cân nhắc bỏ", "Trong ngân sách", "Chưa đủ dữ liệu". **Không có nhãn "Nên mua", "Nên chờ", "Hợp lý để mua".** *(Figma 18/10 đang dùng "Hợp lý để mua", "Nên chờ", "Cân nhắc bỏ" ở Verdict tag – xem `design-decisions.md` QĐ-N3.)*
+
+### Giá, voucher và dữ liệu
+**Ba loại giá** (đặc tả 10.2):
+
+| Loại | Lưu ở | Dùng cho | Không dùng cho |
+|---|---|---|---|
+| Giá tham khảo | Bản ghi giá (PriceSnapshot) mới nhất | Decision Card, so sánh, thông báo | Không cộng vào chi tiêu |
+| Giá lịch sử | Chuỗi bản ghi giá | Lịch sử giá, "thấp nhất đã ghi" | Không coi là giá hiện tại |
+| Giá thực trả | Khoản mua (đã trừ voucher, không gồm phí vận chuyển) | Đã chi, ngân sách, Lịch sử, Mô hình | — |
+
+**So sánh giá:**
+- Lõi là giá **người dùng ghi hoặc xác nhận**. Mỗi bản ghi có: loại giá (giá đơn · khoảng giá · Flash Sale), phân loại (ví dụ "Đen"), nguồn (bạn gõ · chia sẻ · ảnh chụp · extension), ngày ghi, trạng thái xác nhận. Giá tự động ở trạng thái "chưa xác nhận" cho tới khi người dùng xác nhận một chạm.
+- **Độ mới:** ≤ 3 ngày là "mới" (được dùng để so, thông báo, Decision Card); 4–7 ngày hiện kèm ngày; > 7 ngày là "cũ", hiện nhãn ngày và nút "Xác nhận lại".
+- **Chỉ so khi "so được":** cùng loại giá (Flash Sale chỉ so với Flash Sale), cùng phân loại, giá đơn không so với khoảng giá.
+- Đây là **so lịch sử giá của cùng một món**, không phải tìm shop rẻ nhất.
+- **Dữ liệu bất thường phải kiểm tra, không tự loại:** không tự xem mọi mức chênh hơn 30% là giá sai (Flash Sale có thể chênh nhiều). Ngưỡng 30% chỉ áp cho giá người khác ghi ở GĐ5.
+- **Giá người khác ghi (giá cộng đồng):** chỉ là định hướng GĐ5 – ẩn danh, có đồng ý, cùng phân loại, ≤ 3 ngày, ≥ 2 người. Chỉ hiện nhãn tham khảo, người dùng phải xác nhận. **Không gửi thông báo đẩy dựa trên giá cộng đồng.**
+
+**Voucher:**
+- App **không đọc** tài khoản hay kho voucher Shopee, **không tự áp mã**, không có ô nhập mã.
+- Khi Mua: ghi **giá thực trả** + chip **"Có dùng mã giảm giá"**. App chỉ nói "bạn trả thấp hơn giá lúc lưu X%", không đánh giá người dùng đã dùng mã tối ưu chưa.
+- **Nhóm chốt 18/10 (QĐ-N5):** lịch sử giá **có** loại giá "Sau voucher" (Figma 30a, 30b), bên cạnh Giá niêm yết và Flash Sale. Giá sau voucher là giá **cá nhân**: hiển thị song song với giá niêm yết; **không** tính vào "Thấp nhất", **không** dùng để so tăng/giảm với giá niêm yết, **không** dùng làm mức giá chung và **không bao giờ** đưa vào giá cộng đồng. Đây là điểm khác với đặc tả hợp nhất 6.5 (chỉ có giá đơn · khoảng giá · Flash Sale), theo đề xuất trong báo cáo của Khoa.
+- Gợi ý voucher nâng cao là roadmap, chưa hứa hoạt động.
+
+**Quy đổi giá ra giờ làm (nhóm chốt giữ, 18/10):** người dùng có thể tự nhập "Thu nhập mỗi giờ (không bắt buộc)" ở 26 Nhắc nhở & ngưỡng; khi có, Chi tiết món (13 v3) hiện thêm dòng trung tính "≈ 9 giờ làm việc · Bạn là người quyết định." Không nhập thì ẩn dòng này. Con số chỉ là phép chia giá cho thu nhập mỗi giờ người dùng tự khai, không suy đoán thu nhập, không đánh giá "đắt" hay "rẻ". Không có trong đặc tả hợp nhất v1.0 – là quyết định bổ sung của nhóm.
+
+**Kiến trúc** (đặc tả mục 3, 6): app Flutter là sản phẩm chính; Chrome Extension là kênh phụ; backend đề xuất Firebase. Không dựa vào cào dữ liệu, API Shopee chưa được cấp quyền hay dữ liệu giả. Rules Engine tính con số; AI chỉ diễn giải ở giai đoạn sau và không được tạo số mới.
+
+### Ngôn ngữ (microcopy)
+- **Dùng:** "Bạn đã ghi…", "Giá ghi ngày…", "Có thể…", "Chưa đủ dữ liệu", "Đợt sale đã công bố", "Bạn là người quyết định".
+- **Tránh:** "Nên mua", "Nên chờ", "Không nên mua", "Mua ngay kẻo lỡ", "Chắc chắn giảm", "Giá đang realtime", "Tiết kiệm được" / "Tiền đã giữ lại" (khi chỉ là bỏ món), "Bạn có thật sự cần không?".
+- Thông báo đẩy: không emoji, không dấu "!", không gửi 22:00–08:00 và lúc 0:00; tối đa 1 thông báo mỗi món mỗi ngày, 3 mỗi người mỗi ngày; gom nhiều món vào một thông báo.
+
+### Trạng thái bắt buộc cho màn mới
+- **Thiếu dữ liệu:** thiếu giá (19c, 13h, 28b), thiếu ngân sách (28a, 31), chưa có món (11a v3, 21a, 24b), chưa đủ dữ liệu cho gói mua (22c).
+- **Lỗi:** link không phải Shopee (19e), OCR không đọc được (20b), mã ghép sai / hết hạn (X4, 25c), liên kết bị hủy (EXT-8).
+- **Offline và đồng bộ:** "Đã lưu trên máy; sẽ đồng bộ khi có mạng"; extension "Chỉ trên máy · chưa liên kết" (X2), "Chưa đồng bộ được 1 món… Thử lại" (X2a). Chỉ báo "đã đồng bộ" khi server xác nhận.
+- **Đang tải → kết quả:** 19a → 19; EXT-3 "Đang đọc trang…".
+- Mọi trạng thái có icon và chữ, không chỉ dùng màu. Mọi lỗi có lối ra và không làm mất thông tin đã nhập.
+
+### Dữ liệu mô phỏng cho màn mới
+Mọi màn có số liệu giá, ngân sách, mã ghép phải có nhãn **"Dữ liệu mô phỏng"**. Đặc tả mục 11.5 đề xuất một bộ dữ liệu dùng chung: tai nghe Bluetooth 420.000 ₫ (Công nghệ, Khuyến mãi), áo Lovito 250.000 ₫ (Thời trang, Đen – M), kính cường lực 180.000 ₫; ngân sách Công nghệ 1.000.000 ₫/tháng; đợt 11.11 đã xác nhận; mã ghép 482 913.
+*Hiện trạng Figma 18/10:* cùng món "Tai nghe Bluetooth" đang có giá khác nhau giữa các màn (225.000 ₫ lúc lưu 250.000 ₫ ở 11 v3, 13 v3, 19d, EXT; 378.000 ₫ lúc lưu 420.000 ₫ ở 28–30b, X2, X3); nhãn "Dữ liệu mô phỏng" mới có ở 28–31, 30b, X2, X3. Cần thống nhất trên Figma.
+
 ## Bổ sung theo checklist.design/mobile (13/10/2026)
 
 Nhóm đối chiếu thiết kế với checklist.design/mobile và chỉ làm phần lớn các mục áp dụng được
@@ -201,6 +297,24 @@ Hub chưa ghi hôm nay · 03 lỗi số tiền · 03 đang nhập số tiền (b
 08a AI đang phân tích – khoản vừa lưu · 08a AI đang phân tích – mô hình · 17 AI đang phân tích – trước khi mua ·
 08 đã lưu chiêm nghiệm (có AI).
 
+**Màn hướng Smart Shopping Companion (Figma ver2, 18/10; mã theo tên frame Figma):**
+11 v3 Danh sách mong muốn · 13 v3 Chi tiết món · 19 Lưu món (bottom sheet từ Chia sẻ) · 20 Lấy giá từ ảnh chụp ·
+21 Danh sách cho đợt sale · 22 Gói mua · 23 So sánh món cùng loại · 24 Đồ đang dùng · 25 Liên kết extension ·
+25b Thiết bị đã liên kết · 26 Nhắc nhở & ngưỡng · 27 Hỏi mức hài lòng (dialog) · 28 Decision Card · 30b Lịch sử giá ·
+31 Ngân sách theo nhóm · EXT Popup extension (EXT-1…EXT-8) · X2 Trang danh sách · X3 Decision Card bảng cạnh ·
+X4 Liên kết thiết bị · X5 Cài đặt & quyền riêng tư.
+
+**Khung trạng thái mới:** 11a v3 trống · 11f đang trong thời gian chờ · 13g cảnh báo giá gốc · 13h cần giá ·
+19a đang lấy thông tin · 19b có giá ghi gần đây · 19c thiếu giá · 19d món đã lưu · 19e link không phải Shopee ·
+19f nhắc món tương tự · 19g đã lưu · 20a đã nhận giá · 20b không tìm thấy giá · 21a chưa có món · 22a–22c phương án gói mua ·
+24a thêm đồ · 24b trống · 25c mã hết hạn · 25e dialog hủy liên kết · 25f xác nhận thiết bị · 27a sau khi chọn ·
+28a chưa thiết lập ngân sách · 28b giá cũ · 28c có món cùng nhóm · 29 Chờ (bottom sheet) · 29a đã đặt nhắc ·
+30 xác nhận giá (bottom sheet) · 30a gõ giá (bottom sheet) · 31a đã đặt · 31b đã vượt · 31c "Vì sao con số này?" ·
+X2a lỗi đồng bộ · X4 mã sai · X4a liên kết thành công.
+
+Mã màn trên Figma (18/10) khác bảng mã của đặc tả hợp nhất (17/10) và vẫn dùng hậu tố chữ thay cho số phân cấp
+(02.1, 19.1); bảng ánh xạ ở `design/screen-spec.md` mục "Ánh xạ mã màn". **Nhóm chốt 18/10: dùng mã màn theo tên frame Figma** (19a, 28, 31c…) trong repo, slide và prototype; bảng mã của đặc tả 17/10 chỉ dùng để đối chiếu. Có thể đổi lại nếu giảng viên yêu cầu cách đánh mã phân cấp.
+
 ## Lịch sử cập nhật
 - 11/10/2026: bản đầu tiên, dùng làm brief cho prompt P1.
 - 12/10/2026: sau R1–R3, bổ sung từ vựng thống nhất, phạm vi, lưu trữ dữ liệu, dữ liệu mẫu và khung giờ;
@@ -213,3 +327,7 @@ Hub chưa ghi hôm nay · 03 lỗi số tiền · 03 đang nhập số tiền (b
 - 13/10/2026: đối chiếu checklist.design/mobile; thêm Splash, icon app, Xin quyền thông báo,
   Tài khoản / Đổi mật khẩu / Xóa tài khoản / Đăng xuất, trạng thái lỗi đăng nhập, Password strength,
   Dialog Default; quy tắc "tối đa một nút chính"; đồng bộ bảng typography và màu với Figma.
+- 18/10/2026: chuyển định vị sang Smart Shopping Companion theo đặc tả hợp nhất v1.0; đưa ngân sách vào phạm vi
+  (tùy chọn, không cảnh báo đỏ); thêm từ vựng Mua · Chờ · Bỏ qua, giá đã ghi / giá thực trả; thêm mục quy tắc
+  Smart Wishlist, ngân sách, Decision Card, giá – voucher – dữ liệu, microcopy, trạng thái bắt buộc; liệt kê màn F11–F13
+  theo Figma ver2. Token không đổi. Figma ver2 có thêm biến `price/lower/bg`, `price/lower/on` (chưa đo tương phản).

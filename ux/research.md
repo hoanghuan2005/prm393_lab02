@@ -1,11 +1,14 @@
 # Research – Why I Buy?
 
-> **Đọc trước:** tài liệu này có hai loại dữ liệu, ghi rõ ở từng mục.
+> **Đọc trước:** tài liệu này có ba loại dữ liệu, ghi rõ ở từng mục.
 >
 > - **THẬT:** desk research (D1–D3) và rà app tương tự (C1–C4). Mọi số liệu đều có nguồn công khai, link ở cuối mỗi mục.
-> - **MÔ PHỎNG bằng AI:** khảo sát n = 30 (S01–S30) và 5 phỏng vấn (I1–I5). Làm theo hướng dẫn của thầy: được dùng người dùng mô phỏng nếu trình bày rõ câu hỏi nghiên cứu và quy trình. Prompt, script, seed và file dữ liệu đều nằm trong `research-pack/` để tái lập.
+> - **MÔ PHỎNG bằng AI (14/10/2026):** khảo sát n = 30 (S01–S30) và 5 phỏng vấn (I1–I5), phục vụ hướng cũ (ghi khoản mua kèm động cơ). Làm theo hướng dẫn của thầy: được dùng người dùng mô phỏng nếu trình bày rõ câu hỏi nghiên cứu và quy trình. Script và seed nằm trong `research-pack/`. 30 dòng mô phỏng sau đó được nhập vào Google Form (biểu đồ ghi "Khảo sát MÔ PHỎNG (S01–S30, đã nhập vào Google Form)").
+> - **CHƯA XÁC MINH NGUỒN GỐC (18/10/2026):** bảng câu trả lời 30 dòng cho bộ câu hỏi mới (hướng Smart Shopping Companion). Dấu thời gian cho thấy cả 30 câu trả lời được gửi trong 112 giây, cách nhau đều 3,7–4,1 giây. **Không được xem là khảo sát người dùng thật** cho đến khi nhóm xác nhận cách thu thập. Chỉ dùng số liệu tổng hợp (mục 9).
 >
-> Dữ liệu mô phỏng **không chứng minh** điều gì về người thật. Nó dùng để chạy đủ quy trình research → insight → persona và tạo hồ sơ cho phỏng vấn. Mọi con số mô phỏng khi đưa lên slide phải kèm nhãn "MÔ PHỎNG".
+> Dữ liệu mô phỏng **không chứng minh** điều gì về người thật. Nó dùng để chạy đủ quy trình research → insight → persona và tạo hồ sơ cho phỏng vấn. Mọi con số mô phỏng khi đưa lên slide phải kèm nhãn "MÔ PHỎNG". Bảng tách các loại kết luận ở mục 10.
+>
+> **Cập nhật 18/10/2026:** sản phẩm đã chuyển sang hướng *Smart Shopping Companion* (đặc tả hợp nhất v1.0, 17/10). Một số hệ quả thiết kế ở mục 3 và 6 (ví dụ "ngân sách ngoài phạm vi") **đã được thay thế**; các chỗ đó có ghi chú *[Đã thay thế 18/10]*. Persona hiện hành ở [`persona.md`](persona.md) không còn dùng dữ liệu mục 4–5 làm bằng chứng.
 
 ## 1. Kế hoạch research
 
@@ -36,7 +39,7 @@ Kiểm chứng các giả định đứng sau thiết kế Why I Buy?:
 |---|---|---|---|---|
 | 1 | Desk research: báo cáo thị trường, bài nghiên cứu khoa học | **THẬT** | 2 nguồn chính (D1, D2) | Mục 2 |
 | 2 | Rà app tương tự từ nguồn công khai | **THẬT** | 4 app (C1–C4) | Mục 3 |
-| 3 | Khảo sát 15 câu | **MÔ PHỎNG** (script Python, seed 2026) | n = 30 | Mục 4, `survey-mo-phong.csv`, 5 biểu đồ |
+| 3 | Khảo sát 15 câu | **MÔ PHỎNG** (script Python, seed 2026) | n = 30 | Mục 4; biểu đồ trong `research-pack/` (file CSV đã gỡ khỏi repo ngày 14/10) |
 | 4 | Phỏng vấn bán cấu trúc, khoảng 15 phút/người | **MÔ PHỎNG** (AI đóng vai theo hồ sơ khảo sát) | 5 người (I1–I5) | Mục 5 |
 | 5 | Affinity mapping → insight | Tổng hợp từ bước 1–4 | 7 insight | Mục 6 |
 
@@ -74,7 +77,7 @@ Nguồn:
 **Khoảng trống cơ hội:**
 
 1. Các app trên trả lời câu hỏi **"tiêu bao nhiêu, vào danh mục nào"**. Theo nguồn D3, không app nào hỏi **"vì sao mua"**. Why I Buy? lấy chỗ trống này làm trọng tâm.
-2. Cơ chế chung là **ngân sách và cảnh báo vượt mức**. Q12 và I1, I2 cho thấy nhóm 18–25 tuổi khó chịu với cảnh báo (INS2). Vì vậy Why I Buy? để ngân sách và cảnh báo ra ngoài phạm vi.
+2. Cơ chế chung là **ngân sách và cảnh báo vượt mức**. Q12 và I1, I2 (mô phỏng) cho thấy nhóm 18–25 tuổi khó chịu với cảnh báo (INS2). Vì vậy bản đầu của Why I Buy? để ngân sách và cảnh báo ra ngoài phạm vi. *[Đã thay thế 18/10]* Sau góp ý của giảng viên, ngân sách được đưa vào phạm vi dưới dạng **tùy chọn, mốc tham chiếu tự đặt, màu trung tính, không chặn mua** (đặc tả mục 1.5 #6, 7.1); vẫn không có cảnh báo đỏ.
 3. App tự ghi (C1, C4) chỉ thấy giao dịch qua ví hoặc ngân hàng của chính nó, không biết khoản trả tiền mặt hay trả qua app khác. App nhập tay (C2, C3) thì tốn thời gian (Q9). Why I Buy? chọn cách nhập tay nhưng rút xuống 2 bước, mục tiêu ≤ 25 giây.
 
 > 👥 **Nhóm cần làm thêm (10 phút):** cài thử Money Lover và MISA Sổ Thu Chi, chụp màn hình thêm một khoản chi và màn ngân sách. Ghép ảnh vào slide 4 để bảng này có bằng chứng hình ảnh. D3 là bài quảng bá của MoMo, nên khi nói hãy dùng cách diễn đạt "theo mô tả của nhà phát hành".
@@ -85,7 +88,7 @@ Nguồn:
 
 1. Nhóm soạn 15 câu hỏi (mục 4.2). Bộ câu hỏi này dùng nguyên được cho Google Form thật.
 2. Viết script `survey_sim.py` sinh 30 người trả lời (S01–S30), `random.seed(2026)`. Mỗi nhóm tuổi có một bộ xác suất trả lời riêng, đặt theo giả định ở bảng 4.1.
-3. Xuất `survey-mo-phong.csv`, rồi vẽ 5 biểu đồ bằng `charts.py`. Mỗi biểu đồ có dòng chú thích "Khảo sát MÔ PHỎNG bằng AI, n = 30 (seed 2026)".
+3. Xuất `survey-mo-phong.csv` (đã gỡ khỏi repo ngày 14/10), rồi vẽ 5 biểu đồ bằng `charts.py`. Mỗi biểu đồ có dòng chú thích "Khảo sát MÔ PHỎNG bằng AI, n = 30 (seed 2026)".
 4. Seed được chốt **trước** khi chạy. Không chạy lại để "chọn" kết quả đẹp. Kết quả lệch giả định cũng được giữ nguyên (mục 4.5).
 
 **Phân bố mẫu theo tuổi:** 18–21: 8 · 22–25: 11 · 26–30: 6 · 31–40: 3 · 41+: 2.
@@ -284,7 +287,7 @@ Mỗi ghi chú lấy từ một nguồn có mã (D = desk research, C = rà app,
 | Mã | Insight | Bằng chứng | Hệ quả thiết kế (đã có trong Figma) |
 |---|---|---|---|
 | INS1 | Người trẻ bỏ app chi tiêu vì **quên** và vì **nhập lâu**, không phải vì không muốn biết | Q9 (12/16, 10/16), Q10 (22/30 ≤ 30 giây), I1, I2, I4, C2–C3 | Ghi khoản mua 2 bước, mục tiêu ≤ 25 giây; chip số tiền nhanh; thời điểm điền sẵn; nhắc lúc 21:00 (05a) |
-| INS2 | Cảnh báo đỏ tạo cảm giác **tội lỗi** ở nhóm 18–25, khiến họ né app | Q12 (1,79 ở 18–25; 18/30 chọn 1–2), Q9 (10/16), I1, I2 | Không ngân sách, không cảnh báo đỏ; màu đỏ chỉ dành cho lỗi nhập liệu và xóa; giọng văn trung lập |
+| INS2 | Cảnh báo đỏ tạo cảm giác **tội lỗi** ở nhóm 18–25, khiến họ né app | Q12 (1,79 ở 18–25; 18/30 chọn 1–2), Q9 (10/16), I1, I2 | Không cảnh báo đỏ; màu đỏ chỉ dành cho lỗi nhập liệu và xóa; giọng văn trung lập. *[Đã thay thế 18/10]* "Không ngân sách" → ngân sách tùy chọn, màu trung tính (31, 31b) |
 | INS3 | Mua ngoài dự định chủ yếu do **khuyến mãi** và **cảm xúc**, dồn vào **buổi tối và khuya** | Q7 (21, 14), Q6 (26/30), D2, I1, I2 | 8 động cơ, trong đó có Khuyến mãi và Cảm xúc; Mô hình theo động cơ và khung giờ (Flow 2, 4) |
 | INS4 | Họ muốn hiểu "vì sao" nhưng **không muốn bị giảng giải** | Q11 (24/30 chọn 4–5), I2, I3 | Góc nhìn viết dạng quan sát có số liệu, không lời khuyên (Flow 2, 8, 10) |
 | INS5 | Bạn bè, KOL và mạng xã hội là tác nhân lớn, dù khảo sát mô phỏng ra thấp | D1 (51%, 55%), I3, I2. Q7 chỉ 4/30 (lệch, mục 4.5) | Giữ động cơ "Ảnh hưởng MXH"; cần khảo sát thật để kiểm lại |
@@ -307,13 +310,89 @@ Mỗi ghi chú lấy từ một nguồn có mã (D = desk research, C = rà app,
 3. **D3 là nguồn quảng bá** của MoMo. Cần cài thử app để xác nhận.
 4. **Câu hỏi tự báo cáo** (Q7, Q14) dễ lệch vì người trả lời ít nhận mình bị KOL ảnh hưởng. Có thể đây là một lý do khiến Q7 cho kết quả MXH thấp.
 5. Việc nên làm nếu còn thời gian: gửi Google Form thật (bộ câu ở mục 4.2) cho 15–30 người, rồi thay số mô phỏng ở mục 4.3–4.4 bằng số thật.
+6. *(18/10)* Hướng sản phẩm đã đổi. Theo yêu cầu của giảng viên (07:53 trong bản ghi: đổi hướng thì phải research lại), nhóm cần nghiên cứu lại cho hướng mới (mục 11). Dữ liệu mục 4–5 giữ nguyên làm lịch sử, luôn ghi [Mô phỏng], không trộn với kết quả mới.
 
 ## 8. Tệp đi kèm (`research-pack/`)
 
 | Tệp | Nội dung |
 |---|---|
 | `survey_sim.py` | Script sinh khảo sát mô phỏng (seed 2026), chứa toàn bộ giả định |
-| `survey-mo-phong.csv` | 30 dòng S01–S30, 15 câu |
-| `charts.py` | Script vẽ biểu đồ |
-| `chart-q6-khung-gio.png`, `chart-q7-ly-do-mua.png`, `chart-q9-ly-do-bo-app.png`, `chart-q10-thoi-gian.png`, `chart-q12-canh-bao-do.png` | 5 biểu đồ, đều có nhãn "MÔ PHỎNG" |
+| `charts.py` | Script vẽ biểu đồ. Script đọc `survey-summary.json`, file này **không có trong repo**, nên hiện không vẽ lại được biểu đồ từ repo |
+| `chart-q1-tuoi.png` … `chart-q15-danh-sach.png` (16 ảnh, Q1–Q15 và `chart-q12-phan-bo.png`) | Biểu đồ khảo sát 14/10, ghi nhãn "Khảo sát MÔ PHỎNG (S01–S30, đã nhập vào Google Form)". Số trên biểu đồ có thể khác bảng 4.3 nếu nhóm đã vẽ lại từ bảng Google Form; **cần nhóm đối chiếu** |
 | `usability_sim.py`, `usability-sim.json` | Số liệu kiểm thử mô phỏng (xem `usability-test.md`) |
+
+**Không có trong repo (cố ý):** `survey-mo-phong.csv` (gỡ ngày 14/10) và các file `.xlsx` câu trả lời Google Form. File `.xlsx` của khảo sát 14/10 từng được commit (`35b981c`) và được bỏ theo dõi ngày 18/10; file vẫn còn trong lịch sử git. Dữ liệu thô không đưa lên GitHub công khai (`.gitignore` chặn `*.xlsx`, `*.csv`).
+
+## 9. Khảo sát ngày 18/10/2026 – CHƯA XÁC MINH NGUỒN GỐC
+
+### 9.1. Cấu trúc
+
+Bảng câu trả lời Google Form *"Bạn mua sắm vì điều gì? – Khảo sát cho ứng dụng Why I Buy?"*, nhóm cung cấp ngày 18/10. 30 dòng, 1 cột dấu thời gian và 26 câu hỏi. **Không có cột định danh** (không email, tên, số điện thoại). File gốc không đưa vào repo.
+
+Bộ câu hỏi bám theo hướng mới: thiết bị mua Shopee (điện thoại / máy tính), nơi lưu món "để xem lại", có quay lại xem không, muốn danh sách "để đó suy nghĩ thêm", nhắc trước đợt sale, sẵn sàng tự ghi giá, hạn mức theo nhóm, so sánh hai câu chữ Decision Card, chia sẻ giá ẩn danh, sẵn sàng thử prototype.
+
+### 9.2. Kiểm tra nguồn gốc (chạy ngày 18/10)
+
+| Kiểm tra | Kết quả | Ý nghĩa |
+|---|---|---|
+| Thời điểm gửi | Cả 30 câu trả lời nằm trong 18/10/2026 12:46–12:47, tổng **111,6 giây** | Không phải thời gian thu thập tự nhiên từ 30 người |
+| Khoảng cách giữa hai lần gửi | Nhỏ nhất 3,7 s · trung vị 3,8 s · lớn nhất 4,1 s | Nhịp đều như script gửi tự động hoặc nhập lại dữ liệu có sẵn |
+| So với file 14/10 | File 14/10 (15 câu, đã ghi là MÔ PHỎNG) cũng có 30 dòng trong 82 giây, cách nhau 2,6–3,3 s; hai file không trùng dòng nào | Cùng kiểu nhập; file 18/10 là bộ câu hỏi khác |
+| Câu trả lời tự do (cột cuối) | Nhiều câu gần như trùng lời pain point của persona ("Thấy màu đỏ cảnh báo là muốn tắt app.", "Đang nhập thì bị gọi, quay lại mất hết.") | Dấu hiệu dữ liệu được dựng theo persona |
+| Mẫu | 18–25 tuổi: 12/30; 26–30: 11/30; trên 30: 7/30 | Nhóm mục tiêu 18–25 chỉ chiếm 40% |
+
+**Kết luận:** chưa có bằng chứng về quá trình thu thập. Dữ liệu này được xếp **NEEDS VERIFICATION, nhiều khả năng là mô phỏng nhập vào Google Form**. Đây không phải kết luận gian lận. Nhóm cần ghi lại: ai tạo các câu trả lời, bằng công cụ gì, có người thật nào trả lời không. Nếu là mô phỏng, đổi nhãn thành [Mô phỏng] như mục 4.
+
+### 9.3. Số liệu tổng hợp (chỉ mô tả, không phải bằng chứng về người dùng thật)
+
+n = 30 dòng. Câu chọn nhiều đáp án có tổng lớn hơn 30.
+
+| Chủ đề | Kết quả tổng hợp |
+|---|---|
+| Thiết bị mua Shopee | Chủ yếu điện thoại, đôi khi máy tính 14 · Chỉ điện thoại 11 · Không dùng Shopee 3 · Chủ yếu máy tính 1 · Cả hai như nhau 1 |
+| Khi thấy món muốn mua nhưng chưa chắc | Thêm vào giỏ, xem lại sau 12 · Chụp màn hình 6 · Mua luôn 5 · Bấm thích/lưu 4 · Bỏ qua 3 |
+| Nơi lưu món "để xem lại" (chọn nhiều) | Giỏ hàng Shopee 18 · Ảnh chụp màn hình 11 · Nhắn cho chính mình 5 · Mục Thích 4 · Không lưu 4 · Ghi chú 3 |
+| Có quay lại xem món đã lưu | Hiếm khi 12 · Thỉnh thoảng 7 · Hay quên mất 7 · Hay quay lại 4 |
+| Muốn danh sách "để đó suy nghĩ thêm" (1–5) | 5: 8 · 4: 13 · 3: 6 · 2: 3 · 1: 0 |
+| Nhắc trước đợt sale có thật (1–5) | 5: 3 · 4: 9 · 3: 7 · 2: 5 · 1: 6 |
+| Sẵn sàng tự ghi giá khi lưu | Chỉ khi app gợi ý sẵn giá gần đây 9 · Không, sẽ bỏ qua 8 · Có, nếu chỉ vài giây 8 · Chỉ khi chụp màn hình là đủ 5 |
+| Tự đặt hạn mức theo nhóm | Có nghĩ nhưng chưa làm 13 · Có, thường xuyên 8 · Chưa nghĩ tới 6 · Không cần 3 |
+| Câu Decision Card dễ chịu hơn | A "Món này chiếm khoảng 44% phần còn lại của nhóm Công nghệ tháng này." 14 · Cả hai như nhau 12 · B "Bạn sắp vượt ngân sách nhóm Công nghệ." 2 · Không muốn thấy câu nào 2 |
+| Cảm giác với báo đỏ "vượt ngân sách" (1 khó chịu – 5 hữu ích) | 1: 4 · 2: 14 · 3: 9 · 4: 2 · 5: 1 |
+| Chia sẻ ẩn danh giá đã thấy | Có 12 · Có, nếu chắc chắn ẩn danh 8 · Chưa rõ 7 · Không 3 |
+| Lý do mua ngoài dự định (chọn nhiều) | Khuyến mãi, flash sale 14 · Cảm xúc 8 · Mong muốn 7 · Bạn bè 7 · KOL, MXH 7 · Nhu cầu thực tế 3 · Tiện lợi 2 · Quảng cáo 1 |
+| Thời gian chấp nhận để ghi một khoản mua | Dưới 10 s 4 · 10–20 s 13 · 20–30 s 4 · 30–60 s 7 · Trên 1 phút 2 |
+| Sẵn sàng dành 10 phút thử prototype | Có 17 · Không 13 |
+
+### 9.4. Có thể và không thể kết luận gì
+
+- **Có thể:** bộ câu hỏi đã bao phủ các giả định chính của hướng mới (H: lưu món phân tán, quên quay lại, ngân sách theo nhóm, nhắc sale, tự ghi giá, extension). Bộ câu này **dùng lại được** cho khảo sát thật.
+- **Không thể:** dùng các số trên để nói "người dùng muốn Smart Wishlist", "người dùng mua trên máy tính ít" hay "câu A dễ chịu hơn câu B". Mọi con số ở 9.3 không được đưa lên slide như kết quả thật; nếu đưa, phải kèm nhãn "Chưa xác minh / mô phỏng".
+
+## 10. Tách loại kết luận (18/10/2026)
+
+| Loại | Nội dung | Dùng thế nào |
+|---|---|---|
+| **Nguồn thật** | D1 (Gen Z 53,4% mua online hằng tuần; 51% chịu ảnh hưởng xu hướng MXH); D2 (FOMO giải thích 86,7% biến thiên mua bốc đồng trên Shopee Live, n = 310); C1–C4 (các app chi tiêu đều xoay quanh ngân sách và danh mục, theo mô tả nhà phát hành); lịch sale công khai của Shopee VN (blog chính thức, 25/9/2026) và điều khoản dịch vụ Shopee VN mục 3.1 (đặc tả Phụ lục A) | Được trích dẫn có nguồn |
+| **Nghiên cứu mô phỏng (14/10)** | Khảo sát S01–S30, phỏng vấn I1–I5, kiểm thử khả dụng 5 người, INS1–INS7 | Minh họa quy trình; luôn ghi [Mô phỏng]; không làm bằng chứng persona |
+| **Dữ liệu chưa xác minh (18/10)** | Khảo sát 30 dòng ở mục 9 | Chỉ số liệu tổng hợp, ghi "chưa xác minh"; chờ nhóm xác nhận cách thu thập |
+| **Giả định nhóm đang dùng** | Người trẻ lưu món phân tán và quên quay lại; muốn tự cân nhắc theo ngân sách tự đặt; flash sale buổi tối là tác nhân; mua Shopee chủ yếu trên điện thoại (extension là kênh phụ – H6); sẵn sàng tự ghi hoặc xác nhận giá nếu nhanh; câu chữ trung tính tốt hơn cảnh báo | Ghi [ASSUMED] trong persona; đưa vào backlog kiểm chứng (mục 11) |
+| **Kết luận được dữ liệu hỗ trợ** | Mua bốc đồng có cơ chế khuyến mãi/khan hiếm → FOMO (D2); người trẻ là nhóm mua online hằng tuần chính (D1); không thể lấy dữ liệu Shopee tự động một cách hợp lệ ở MVP (điều khoản 3.1, không có API cho người mua) | Căn cứ cho định vị và ràng buộc kỹ thuật |
+| **Chưa thể kiểm chứng** | Tỉ lệ người mua Shopee trên máy tính; mức sẵn sàng cài extension; số thông báo chấp nhận được; phản ứng thật với Decision Card; có thật sự chờ sale và quay lại không; Shopee có kèm giá trong chữ chia sẻ không | Nghiên cứu thật (mục 11) |
+
+## 11. Kế hoạch nghiên cứu cho hướng mới
+
+Theo đặc tả mục 13.4 và Overview mục 11–12. Quy mô tối thiểu **chưa được giảng viên xác nhận**: đề xuất khảo sát 30–50 người 18–25 tuổi, phỏng vấn 5–8 người, kiểm thử prototype F11–F13 với 5 người.
+
+| Mức | Giả định cần kiểm | Phương pháp | Dấu hiệu cần chứng minh |
+|---|---|---|---|
+| R1 · Critical | Người dùng có gặp khó khi lưu món? | Phỏng vấn tình huống gần nhất + quan sát thao tác | Mô tả nơi lưu thật; thời gian và lỗi khi lưu |
+| R2 · Critical | Android Share với Shopee có dễ dùng không? | Prototype / thiết bị thật, 5–8 ca lưu | Thành công, không rơi link, ≤ 20 s |
+| R3 · Critical | Thẻ ngân sách có hữu ích hay bị thấy là phán xét? | Think-aloud với 2 kiểu câu chữ | Hiểu số tiền tính từ dữ liệu nào; phản ứng cảm xúc |
+| R4 · High | Có thật sự chờ sale và quay lại? | Phỏng vấn + test nhắc xem lại ngắn | Khả năng quay lại; không nhầm lịch sale với giá giảm |
+| R5 · High | Nhìn lại có giúp hiểu động cơ không? | Prototype insight với dữ liệu thiếu và đủ | Giải thích đúng, không suy diễn |
+| R6 · High | Bao nhiêu người mua Shopee trên máy tính? | Câu hỏi khảo sát thiết bị, tần suất, tình huống | Quyết định giữ hay thu hẹp extension |
+| R7 · Medium | Gián đoạn có tạo nhu cầu riêng? | Interrupted-task + offline task | Tiếp tục được; không mất dữ liệu |
+| R8 · Medium | Có sẵn sàng tự xác nhận giá? | Task nhập giá, quan sát chọn bỏ qua | Công sức nhập, tỉ lệ bỏ lưu, cách hiểu giá cũ |
+
+Câu hỏi phỏng vấn mẫu (không dẫn dắt) ở Overview mục 12. Bảng bằng chứng sau nghiên cứu: `participantCode | method | date | situation | quote/action | observed/reported/inferred | persona | impact | design change`. Lấy đồng ý tham gia, ẩn danh, không đưa dữ liệu thô lên GitHub.

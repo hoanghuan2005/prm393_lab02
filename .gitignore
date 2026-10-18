@@ -12,3 +12,11 @@ desktop.ini
 __pycache__/
 *.pyc
 .venv/
+
+# Dữ liệu khảo sát thô (không đưa lên GitHub công khai)
+*.xlsx
+*.xls
+*.csv
+
+# Thư mục tài liệu tham chiếu tạm thời của nhóm
+WhyIBuy_Update_References/

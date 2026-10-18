@@ -72,3 +72,17 @@ Lưu ý: tiền tố `05a`, `10a`, `10b` trong tên ảnh dưới đây chỉ l�
 | `13c-wishlist-detail-skipped.png` | 13c Chi tiết – Bàn phím cơ, đã bỏ qua |
 | `13d-wishlist-detail-purchased.png` | 13d Chi tiết – Bàn phím cơ, đã mua |
 | `13d-wishlist-detail-purchased-binh-giu-nhiet.png` | 13d Chi tiết – Bình giữ nhiệt, đã mua |
+
+## Cần xuất từ Figma ver2 (18/10/2026)
+
+Ảnh ở trên được xuất từ file Figma cũ (`jCQEcxnXTYJ9b27pdsfFfS`, Flow 1–10). Figma hiện hành là **Why I Buy ver2** (`VaPYFxfpx14tnQmOMSgdjP`). Chưa có ảnh nào của F11–F13 trong thư mục này. **Không dùng ảnh minh họa hay ảnh dựng lại thay cho ảnh export.**
+
+Checklist (PNG 2×, đặt tên `<mã>-<tên-ngắn>.png`, ví dụ `28-decision-card.png`):
+
+- [ ] Section "Flow 11–12 – Danh sách chờ v3": 11 v3, 11a v3, 11f, 13 v3, 13g, 13h, 19, 19a–19f, 20, 20a, 20b, 21, 22, 22a–22c, 23, 24, 24a, 24b, 25, 25b, 25c, 25e, 26, 27, 27a, Thông báo đẩy – 3 mẫu
+- [ ] Section "[MỚI · 18/10]": 28, 28a, 28b, 28c, 29, 29a, 30, 30a, 30b, 31, 31a, 31b, 31c, 19g, 21a, 25f, X2, X2a, X3, X4, X4a, X5
+- [ ] Section "Extension trình duyệt – popup 8 trạng thái": EXT-1 … EXT-8
+- [ ] Page 01: ảnh sơ đồ Flow 11, 12, 13 (bản sắp xếp) → `ux/userflow/`
+- [ ] Page 02: wireframe 28–31, X2–X5 → `ux/wireframe/`; **wireframe cho 19–27 và EXT-1…8 chưa có trên Figma**
+- [ ] Ảnh trước / sau cho các lần sửa sau phản biện PB2 (`ai/ai-design-log.md` mục R5-2)
+- [ ] Ảnh kiểm tra bố cục 360 dp và 412 dp cho ít nhất 28, 19, 31

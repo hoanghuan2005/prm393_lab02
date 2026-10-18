@@ -155,6 +155,39 @@ Bản Stitch của Trang chủ có bố cục khác 02 hiện tại, nhãn "Danh
 
 ---
 
+## 1b. Quyết định theo hướng Smart Shopping Companion (18/10/2026)
+
+> **Cần nhóm chốt:** đề Lab 2 yêu cầu `design-decisions.md` có **không quá 10 quyết định quan trọng nhất**. Mục 1 đang có 10 quyết định của Flow 1–10; mục này thêm 8 quyết định của hướng mới (QĐ-N1 … QĐ-N8), nên tổng hiện là 18. Trước khi nộp, nhóm chọn lại 10 quyết định quan trọng nhất, các quyết định còn lại chuyển sang `ai/ai-design-log.md`. Không quyết định cũ nào bị xóa; chỗ bị thay thế ghi ở cột "Thay thế / liên quan".
+>
+> Nguồn: đặc tả hợp nhất v1.0 (17/10, mục 1.3, 1.5, 6–8, 15), báo cáo "So sánh giá cộng đồng và voucher" (Khoa, tài liệu đề xuất), Figma ver2 đọc ngày 18/10. Các quyết định là **đề xuất của nhóm, chưa được giảng viên xác nhận**.
+
+| # | Vấn đề | Quyết định | Căn cứ chính | Thay thế / liên quan | Hiện trạng Figma 18/10 |
+|---|---|---|---|---|---|
+| N1 | Có làm ngân sách không | **Có**, theo nhóm hàng, tùy chọn, màu trung tính, không chặn mua | Góp ý giảng viên (04:40 "bao nhiêu ngân sách cho các lĩnh vực này"); P3 Huy; Nielsen #3 | **Thay thế** "ngân sách ngoài phạm vi" (DESIGN.md bản 14/10, INS2) | 31, 31a–c đúng; "đã vượt" dùng chữ trung tính |
+| N2 | Cách người dùng quyết định | Ba nút **Mua · Chờ · Bỏ qua** bằng nhau; Chờ là hành động, không phải trạng thái; thời gian cân nhắc gợi ý **3 ngày** (0–14), không khóa Mua | Đặc tả 1.5 #7, #8, mục 15 #7, #15; Nielsen #3, #4 | Giữ tinh thần QĐ 6 (từ chối ép chờ) | 28 đúng. **Lệch:** 13 v3 "Chờ đợt sau"; 18 còn "Vẫn mua / Để mình nghĩ thêm"; 26 mặc định 7 ngày |
+| N3 | Nhãn trên Decision Card | Chỉ nhãn trung tính do Rules Engine tính ("Cần giá gần đây", "Có thể chờ", "Trong ngân sách"…); **không** "Nên mua / Nên chờ / Hợp lý để mua"; AI chỉ diễn giải, không tạo số mới | Đặc tả 7.4, 7.6, 1.3; persona sợ bị phán xét; Nielsen #2 | Mở rộng QĐ 1 và QĐ 4 (không khuyên bảo) | **Lệch:** Verdict tag "Hợp lý để mua", "Nên chờ", "Cân nhắc bỏ" ở 11 v3, 13 v3, 13g, 23 |
+| N4 | Hiển thị giá | Mọi giá có nguồn, ngày, phân loại, trạng thái xác nhận; chỉ so khi "so được" và ≤ 3 ngày; không gọi là giá hiện tại | Đặc tả 6.5, 8.3; Nielsen #1; ràng buộc kỹ thuật: không có nguồn giá tự động hợp lệ | — | 28, 28b, 30, 30b đúng |
+| N5 | Voucher | Không đọc kho voucher hay tài khoản Shopee, không tự áp mã, không ô nhập mã. Khi mua: **giá thực trả** + chip "Có dùng mã giảm giá". Giá sau voucher là giá cá nhân, không dùng làm giá chung | Đặc tả 6.1 (không có API cho người mua; điều khoản Shopee VN mục 3.1), 7.3, quyết định 13, 19; P1 ngại nhập lâu | **Nhóm chốt 18/10:** giữ loại giá "Sau voucher" trong lịch sử giá theo báo cáo của Khoa (khác đặc tả 6.5) | 30a, 30b có "Sau voucher" (đúng quyết định). **Lệch:** 30b lấy giá sau voucher làm "Thấp nhất"; 03 từ Wishlist chưa có chip |
+| N6 | Nguồn dữ liệu Shopee và vai trò extension | Không cào, không vượt chống bot; extension là kênh lưu phụ, **lưu được khi chưa ghép**; đọc giá tự động là thử nghiệm có cổng, giá đọc được ở trạng thái "chưa xác nhận" | Đặc tả 1.5 #1, 5.2, 6.1–6.3, quyết định 1, 21; ràng buộc pháp lý | — | X5 đúng ("Không đọc giỏ hàng, đơn mua, kho voucher hay cookie"). **Lệch:** EXT-1 chặn lưu khi chưa liên kết |
+| N7 | "Tiền đã giữ lại" | Đổi thành chỉ số trung tính **"giá trị món đã quyết định không mua"**, đặt ở Nhìn lại, GĐ4, tùy chọn; không gọi là tiết kiệm | Đặc tả 7.8, quyết định 16; app không biết người dùng có mua món thay thế không | — | **Lệch:** component "Kept money card" ("Tiền đã giữ lại · 1.240.000 ₫ · Nhờ chờ và bỏ bớt") trên Trang chủ (27), 22b, 23 |
+| N8 | Giá cộng đồng | Chỉ là định hướng GĐ5: ẩn danh, có đồng ý, cùng phân loại, ≤ 3 ngày, ≥ 2 người; chỉ là nhãn tham khảo, **không gửi thông báo đẩy**. Không tự coi mọi chênh > 30% là giá sai | Đặc tả 8.3, quyết định 3; báo cáo của Khoa (cold start, dữ liệu sai, quyền riêng tư) | **Xung đột với báo cáo của Khoa:** "giá lệch quá 30% so với trung vị bị ẩn" áp cho mọi lần ghi | Chưa có màn; X5 có công tắc riêng tư |
+
+### QĐ-N3 — SỬA (đề xuất sửa Figma): nhãn nhận định phải trung tính
+
+**Hiện trạng:** component `Verdict tag` (page 05) có 5 biến thể "Hợp lý để mua", "Nên chờ", "Cân nhắc bỏ", "Cần giá", "Đang chờ · còn 4 ngày", được dùng ở 11 v3, 13 v3, 13g và 23.
+**Phân tích:** "Nên chờ" là lời khuyên trực tiếp; "Hợp lý để mua" là phán đoán thay người dùng. Cả hai trái đặc tả 7.4 ("Không có nhãn Nên mua hay Không nên mua") và giọng văn trong DESIGN.md. Persona P1 từng bỏ app vì cảm giác bị phán xét (giả định). Ba nút quyết định đã cân bằng ở 28, nhưng nhãn đứng trước lại nghiêng về một lựa chọn.
+**Quyết định đề xuất:** đổi biến thể theo bảng nhãn của đặc tả 7.4: "Hợp lý để mua" → "Trong ngân sách"; "Nên chờ" → "Có thể chờ"; "Cân nhắc bỏ" → "Có thể cân nhắc bỏ"; "Cần giá" → "Cần giá gần đây". Câu giải thích ở 13g đã dùng "Có thể chờ 11/11 rồi so lại", giữ nguyên.
+
+### QĐ-N5 — ĐÃ CHỐT (18/10): giữ "Sau voucher" trong lịch sử giá
+
+**Hai phương án:**
+1. **Theo đặc tả (khuyến nghị):** bản ghi giá chỉ có loại giá đơn · khoảng giá · Flash Sale. Giá sau voucher chỉ xuất hiện ở khoản mua (giá thực trả). Bỏ chip "Sau voucher" khỏi 30a.
+2. **Theo báo cáo của Khoa:** giữ loại giá "Sau voucher" trong lịch sử giá, hiển thị song song với giá niêm yết, nhưng **không** tính vào "Thấp nhất", không dùng để so tăng/giảm với giá niêm yết, và không bao giờ chia sẻ ra giá cộng đồng.
+
+**Quyết định của nhóm (18/10): phương án 2.** Giữ loại giá "Sau voucher" như Figma 30a, 30b, để người dùng ghi được mức giá mình thực sự thấy sau khi áp mã. Ràng buộc bắt buộc: không tính vào "Thấp nhất", không so tăng/giảm với giá niêm yết, không đưa vào giá cộng đồng (voucher cá nhân hóa theo tài khoản – báo cáo Khoa mục 5.2). Việc còn lại trên Figma: 30b đang lấy 359.000 ₫ (sau voucher) làm "Thấp nhất" – phải sửa. Đây là điểm repo khác đặc tả hợp nhất 6.5; có thể xem lại khi nhóm quyết kỹ hơn.
+
+---
+
 ## 2. Checklist accessibility và responsive
 
 Tóm tắt kết quả (đo trong Figma, page `04 Design System › Accessibility check`):
@@ -253,3 +286,21 @@ Script kiểm tra trong Figma chỉ đo cỡ chữ và chiều cao vùng chạm.
 | Ô nhập (nền #E8F0EB) không có viền: 1.16 : 1 với thẻ trắng, 1.07 : 1 với nền | 00a, 00b, 03, 04, 12 | WCAG 1.4.11 (thành phần UI ≥ 3 : 1) | Viền 1 dp: #8A918A trên thẻ trắng (3.23 : 1), #7A817B trên nền #F5F6F2 (3.68 : 1) | PB-5 |
 | Thanh "Động cơ chính" không có chú giải | 02, 02b, 02c, 02d | WCAG 1.4.1 | Thêm dòng chú giải icon + tên + % cho 3 động cơ lớn nhất | PB-6 |
 | Giờ trong dòng khoản mua khoảng 12 sp | 06, 06b | Chữ nội dung ≥ 14 sp | Đổi sang Body Small 14 sp như ở 02 | PB-7 |
+
+### 2.7. Kiểm tra cho component và màn F11–F13 (18/10/2026)
+
+Đo bằng Figma Plugin API trên file ver2 (màu fill thực tế của component trên page 05). **Chưa kiểm** vùng chạm, bố cục 412 dp và các màn F11–F13 ở mức khung.
+
+| Thành phần | Chữ / nền | Tương phản | Cỡ chữ (sp) | Kết quả |
+|---|---|---|---|---|
+| Price tag – Thấp hơn (biến `price/lower` mới) | #1B5E36 / #DCF1E3 | 6,57 : 1 | 12 | Đạt tương phản; **cỡ chữ 12 sp < 14 sp** |
+| Price tag – Cao hơn, Ổn định | #545E59 / #E8F0EB | 5,80 : 1 | 12 | Đạt tương phản; cỡ chữ 12 sp |
+| Verdict tag – Hợp lý để mua | #2E4A9E / #E3E8F7 | 6,62 : 1 | 12 | Đạt tương phản; cỡ chữ 12 sp; câu chữ cần sửa (QĐ-N3) |
+| Verdict tag – Nên chờ | #1A2320 / #E8F0EB | 13,86 : 1 | 12 | Đạt tương phản; cỡ chữ 12 sp; câu chữ cần sửa |
+| Condition tag – Sắp hỏng | #6B5200 / #FFF3C4 | 6,66 : 1 | 12 | Đạt tương phản; cỡ chữ 12 sp |
+| Condition tag – Đã hỏng | #B3261E / #F9DEDC | 5,14 : 1 | 12 | Đạt tương phản; **dùng màu error cho trạng thái không phải lỗi** (trái quy tắc đỏ chỉ dành cho lỗi và xóa) |
+| Price tag – Cần giá; Verdict tag – Cân nhắc bỏ, Cần giá | #545E59 trên nền thẻ | — | 12 | Không có nền riêng; cần đo trên nền thẻ thực tế |
+
+Quy tắc của dự án: 12 sp chỉ dùng cho nhãn thanh tab và mốc thời gian. Các tag mới nên dùng Label 14 sp, hoặc nhóm ghi rõ ngoại lệ kèm lý do.
+
+**Thiếu so với đề Lab 2 (mục 7):** component `Text field` chỉ có 3 biến thể (Default, Focused, Error); đề yêu cầu thêm **Filled và Disabled**. Đặc tả mục 11.4 đề xuất thêm Budget meter, Sync status chip, ô nhập mã 6 số, khung popup: chưa thấy dưới dạng component trên page 05 (có thể đang là frame rời).

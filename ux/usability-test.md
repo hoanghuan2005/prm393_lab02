@@ -1,5 +1,7 @@
 # Kiểm thử khả dụng – Why I Buy?
 
+> **Cập nhật 18/10/2026:** toàn bộ file này áp dụng cho **Flow 1–10 (hướng cũ)** trên file Figma cũ. **F11–F13 của hướng Smart Shopping Companion chưa được kiểm thử**, kể cả mô phỏng. Kế hoạch kiểm thử thật cho hướng mới (5 người, F11–F13, KPI-01 → KPI-05) ở `ux/persona.md` mục 11–12 và `ux/research.md` mục 11.
+
 > **Đọc trước:** kết quả ở mục 6–7 là **MÔ PHỎNG bằng AI**, không phải 5 người thật.
 >
 > - Cách làm: AI đóng vai 5 người tham gia, đi qua prototype Figma theo từng nhiệm vụ (cognitive walkthrough, nói to suy nghĩ). Thời gian được **tính** bằng mô hình KLM (Keystroke-Level Model), không bấm giờ.

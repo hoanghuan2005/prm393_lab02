@@ -11,6 +11,7 @@
 | Claude (claude.ai + Figma connector), 12/10/2026 | Phản biện ảnh Stitch của Flow 6; dựng Flow 6 trực tiếp trong file Figma (component, Final UI, wireframe, sơ đồ user flow, prototype) theo master prompt của tôi; soạn nội dung tài liệu Flow 6. Tôi kiểm tra lại từng màn và tự quyết định giữ / sửa / bỏ. |
 | Claude (Claude Code, desktop app), 12/10/2026 | Rà repo và file Figma theo đề bài; chụp lại toàn bộ khung Final UI từ Figma vào `assets/figma/`; chạy vòng phản biện bằng AI (mục PB bên dưới, một agent Claude riêng chỉ đọc ảnh và tài liệu); soạn lại `handoff/flutter-handoff.md`, `design/screen-spec.md`, `design/design-decisions.md`, README cho khớp Figma; soạn nháp quyết định cho từng phát hiện để tôi duyệt. |
 | Claude (Cowork, Figma MCP) | Đối chiếu checklist.design/mobile, lập kế hoạch prompt theo giai đoạn, dựng component/wireframe/Final UI/user flow/prototype trực tiếp trong Figma qua Plugin API, AI review theo checklist (nhóm duyệt và xác nhận từng giai đoạn) |
+| Claude (Claude Code, VS Code; Figma MCP chỉ đọc), 18/10/2026 | Đồng bộ repo với đặc tả hợp nhất v1.0 và Figma ver2; kiểm tra nguồn gốc file khảo sát; đọc frame, chữ, component, biến màu và dây nối prototype F11–F13; phản biện PB2 (mục R5). Không sửa Figma. Nhóm duyệt diff trước khi commit |
 
 ---
 
@@ -1200,3 +1201,51 @@ trước khi sang bước tiếp theo. Nhóm chọn checklist.design/mobile (25 
   - Sửa thêm: biến thể nút Disabled dùng độ mờ của lớp (38%) cho chữ và icon, vì độ mờ của màu bị mất ở instance
 - Nhóm chỉnh sửa lại: bỏ R4-4 vì thiết kế đã có mũi tên 48 dp và chip "Tháng 10/2026 ▾"; giữ chọn sẵn ở khung Sửa và khung từ danh sách mong muốn vì động cơ do người dùng chọn trước đó; dời section Flow 8–10 xuống 200 px vì section Flow 7 cao thêm
 - Đánh giá: ảnh trước `assets/figma/r4-truoc-04-purchase-reason.png`, ảnh sau `r4-sau-04-chua-chon.png`, `r4-sau-04-da-chon.png`, `r4-sau-10-ca-nhan.png` (cùng thư mục); cần chạy lại T1 và T5 với người thật để xác nhận
+
+
+---
+
+## R5 — Đổi hướng sau góp ý giảng viên và thiết kế ngày 18/10/2026
+
+> Mục này **chỉ ghi lại những gì có bằng chứng**. Không thêm prompt Stitch hay phản biện nào chưa thực sự chạy. Các session nghiên cứu hướng mới (16–17/10) được ghi chi tiết ở [`ai-design-log-v2.md`](ai-design-log-v2.md) (S1–S4) và không chép lại ở đây.
+
+### R5-0 – Bối cảnh đổi hướng
+- **Góp ý giảng viên:** theo bản gỡ băng tự động buổi chấm (đặc tả hợp nhất mục 2; nhiều đoạn [không rõ]): lưu món vào Wishlist khi lướt sàn ("nhấn thì nó sẽ thấy được cái giá. Nhưng mà nó chưa mua"), ngân sách theo lĩnh vực, khuyến mãi, "AI đánh giá độ phù hợp với ngân sách", kê khai đồ đang có, mã màn phân cấp, research lại khi đổi hướng, có cổng chất lượng trước khi đi tiếp. Không đoạn nào được coi là giảng viên đã duyệt một tính năng.
+- **Kết quả của nhóm:** đặc tả hợp nhất v1.0 (17/10/2026, 38 trang) và Overview & Persona Guideline v2.0 (17/10). Hướng mới: **Smart Shopping Companion** – lưu món → cân nhắc (Decision Card, ngân sách) → Mua · Chờ · Bỏ qua → nhìn lại. Flow mới F11–F13.
+- **Thiết kế trên Figma "Why I Buy ver2" (18/10):** section "Flow 11–12 – Danh sách chờ v3", "Extension trình duyệt – popup 8 trạng thái", "[MỚI · 18/10] Bổ sung theo đặc tả 11.3…" (page 03); wireframe 28–31, X2–X5 (page 02); sơ đồ Flow 11–13 (page 01); prototype F11–F13 (page 06). **Công cụ và prompt dùng để tạo các khung này: chưa ghi nhận** – nhóm cần bổ sung (ai tạo, bằng công cụ gì, prompt nào).
+- **Google Stitch cho hướng mới:** có bộ prompt [`stitch-prompts-why-i-buy.md`](stitch-prompts-why-i-buy.md) (Prompt 1–11). **Chưa có ảnh kết quả Stitch** trong `assets/stitch/` và chưa xác minh được project Stitch (NOT VERIFIED). Các prompt này **chưa được tính** là vòng lặp AI đã chạy.
+
+### R5-1 – Đồng bộ repo với đặc tả mới và Figma ver2
+- **Công cụ AI:** Claude (Claude Code, VS Code extension; Figma MCP: `get_metadata`, `get_screenshot`, `use_figma` **chỉ đọc**).
+- **Prompt:** nhiệm vụ "AUDIT VÀ CẬP NHẬT TOÀN BỘ REPOSITORY WHY I BUY? THEO HƯỚNG SẢN PHẨM MỚI" do thành viên nhóm soạn (vai trò, 6 nguồn phải đọc theo thứ tự ưu tiên, 4 nhiệm vụ, 10 quy tắc sửa repo, 5 bước thực hiện). *Bản rút gọn; bản đầy đủ do nhóm lưu.*
+- **Kết quả AI đưa ra:**
+  - Đọc 6 nguồn trong thư mục tham chiếu tạm `WhyIBuy_Update_References/` (không đưa vào repo).
+  - Kiểm tra nguồn gốc file khảo sát 18/10: 30 câu trả lời trong 111,6 giây, cách nhau 3,7–4,1 giây → xếp "chưa xác minh" (`ux/research.md` mục 9).
+  - Đọc 6 page của Figma ver2: tên frame, chữ hiển thị, biến thể component, biến màu, và **dây nối prototype F11–F13**.
+  - Lập bảng ánh xạ mã màn giữa đặc tả 17/10 và Figma 18/10.
+  - Cập nhật README, persona, research, user-flow (F11–F13), DESIGN, screen-spec, design-decisions (QĐ-N1–N8), handoff (mục 9). Viết báo cáo [`docs/REPO_SYNC_REPORT_2026-10-18.md`](../docs/REPO_SYNC_REPORT_2026-10-18.md).
+- **Nhóm chỉnh sửa lại (18/10):** chốt 3 điểm AI để mở: (1) **giữ** loại giá "Sau voucher" trong lịch sử giá (khác đặc tả 6.5, theo báo cáo của Khoa), không tính vào "Thấp nhất"; (2) **đánh mã màn theo Figma**; (3) **giữ** quy đổi giá ra giờ làm, không bắt buộc. Ghi chú "tạm thời, sẽ xem lại khi quyết kỹ hơn". Các điểm còn lại chưa duyệt.
+- **Đánh giá:** *[nhóm điền]*
+
+### R5-2 – Phản biện bằng AI trên Figma ver2 (đối chiếu đặc tả, heuristic, persona)
+
+Thực hiện trong cùng phiên R5-1, ngày 18/10. **Cách làm:** đọc chữ thật và cấu trúc của các frame bằng Plugin API, đọc dây nối prototype, đo tương phản màu của component; **không** phản biện trên ảnh chụp nên có thể sót lỗi chỉ thấy bằng mắt (chữ tràn, căn lề). Mỗi phát hiện gắn với màn cụ thể. Cột "Quyết định" để nhóm điền Chấp nhận / Sửa / Từ chối kèm lý do.
+
+| # | Màn (Figma) | Phát hiện | Căn cứ | Mức | Đề xuất | Quyết định |
+|---|---|---|---|---|---|---|
+| PB2-1 | 11 v3, 13 v3, 13g, 23 | Verdict tag "Nên chờ", "Hợp lý để mua", "Cân nhắc bỏ" là lời khuyên hoặc phán đoán thay người dùng | Persona P1 (sợ bị phán xét); Nielsen #3; đặc tả 7.4 | Cao | Đổi theo nhãn trung tính của Rules Engine (QĐ-N3) | *[nhóm]* |
+| PB2-2 | 19f | "Bạn có thật sự cần thêm không?" là câu chất vấn, cùng kiểu câu đã bị từ chối ở QĐ 1 | DESIGN.md giọng văn; persona | Cao | "Bạn đã ghi có 5 áo thun. Bạn muốn thay hay mua thêm?" | *[nhóm]* |
+| PB2-3 | EXT-1 | Chưa liên kết thì popup chỉ có nút "Liên kết", không lưu được món | Nielsen #3, #7; đặc tả 5.2, quyết định 21 | Cao | Cho lưu cục bộ; liên kết là dải thông báo nhỏ | *[nhóm]* |
+| PB2-4 | 28 → 03 (prototype) | Bấm Mua ở Decision Card của "Tai nghe Bluetooth" mở 03 điền sẵn "Bàn phím cơ" | Nielsen #1, #4 | Cao | Nối tới bản 03 điền sẵn đúng món, có chip "Có dùng mã giảm giá" | *[nhóm]* |
+| PB2-5 | 28 → 11 v3 (prototype) | "Bỏ qua" không có Hoàn tác | Nielsen #3, #5; đặc tả A-07 | Trung bình | Thêm snackbar "Đã chuyển … vào Bỏ qua · Hoàn tác" (5 s) như Flow 6 | *[nhóm]* |
+| PB2-6 | 30a, 30b | Có loại giá "Sau voucher"; "Thấp nhất" lấy giá sau voucher 359.000 ₫ trong khi các lần khác là giá niêm yết | Nielsen #2; đặc tả 6.5, 10.2 | Trung bình | QĐ-N5 | **Sửa một phần** (18/10): giữ "Sau voucher"; sửa "Thấp nhất" không lấy giá sau voucher |
+| PB2-7 | Price tag, Verdict tag, Condition tag | Chữ trên tag cỡ 12 sp | Accessibility (chữ nội dung ≥ 14 sp); persona cận 2 độ | Trung bình | Dùng Label 14 sp | *[nhóm]* |
+| PB2-8 | Condition tag "Đã hỏng" | Dùng màu error (#B3261E) cho trạng thái không phải lỗi | QĐ 9 (đỏ chỉ dành cho lỗi và xóa); Nielsen #4 | Thấp | Màu trung tính + icon | *[nhóm]* |
+| PB2-9 | 26, 11f, thông báo "Hết 7 ngày chờ" | Thời gian chờ mặc định 7 ngày; câu "Trước khi gợi ý mua, món mới lưu ở trạng thái 'Đang chờ'" | Đặc tả quyết định 15 (3 ngày, không khóa Mua); Nielsen #3 | Trung bình | Mặc định 3 ngày; bỏ ý "gợi ý mua" | *[nhóm]* |
+| PB2-10 | 10 Cá nhân – bản sửa | Không có lối vào Ngân sách (31), Đồ đang dùng (24), Liên kết extension (25), Nhắc nhở & ngưỡng (26); màn 25 lại hướng dẫn "Mở app → Cá nhân → Liên kết extension" | Nielsen #1, #6; IA (đề Lab 2: màn phải truy cập được) | Cao | Thêm 4 hàng vào 10 Cá nhân và nối prototype | *[nhóm]* |
+| PB2-11 | Trang chủ (27), 22b, 23 | "Tiền đã giữ lại · Nhờ chờ và bỏ bớt" khẳng định điều app không biết (người dùng có mua món thay thế hay không) | Nielsen #2; đặc tả 7.8 | Trung bình | Bỏ ở MVP; GĐ4 dùng "giá trị món đã quyết định không mua" | *[nhóm]* |
+| PB2-12 | Thông báo đẩy – 3 mẫu | "Bạn có 3 món đang chờ, có thể được giảm giá" gợi ý giá sẽ giảm, dễ kích hoạt FOMO | Persona P3 (nhầm sale với giá giảm); đặc tả 8.1–8.2 | Trung bình | "Mai là 11.11. Bạn có 3 món trong danh sách. Mở xem nhé?" | *[nhóm]* |
+| PB2-13 | 11 v3, 13 v3, 19d, EXT so với 28–30b, X2, X3 | Cùng món "Tai nghe Bluetooth" có hai bộ giá (225.000 / 250.000 ₫ và 378.000 / 420.000 ₫); nhãn "Dữ liệu mô phỏng" chỉ có ở một số màn | Nielsen #4; đặc tả 11.5 | Thấp | Dùng một bộ dữ liệu mô phỏng thống nhất, nhãn ở mọi màn có số liệu | *[nhóm]* |
+| PB2-14 | 18 Nhận định trước khi mua | Vẫn là "Để mình nghĩ thêm / Vẫn mua" | Nielsen #4; quyết định 7 của đặc tả | Thấp | Mua · Chờ · Bỏ qua | *[nhóm]* |
+
+**Điều rút ra:** đọc chữ và dây nối bằng script bắt được lỗi câu chữ và lỗi điều hướng mà ảnh tĩnh khó thấy (ví dụ PB2-4). Ngược lại, cách này không thay được việc nhìn ảnh: cần chụp lại các màn F11–F13 sau khi sửa và kiểm tra ở 360 và 412 dp.
