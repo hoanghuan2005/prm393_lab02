@@ -3,7 +3,7 @@
 **Project:** Why I Buy? – lấy cảm hứng từ "The Psychology of Money"
 **Course:** PRM323 – Lab 2
 
-> **Cập nhật 18/10/2026:** các màn F11–F13 (19–31, EXT, X2–X5) và bảng **ánh xạ mã màn đặc tả 17/10 ↔ Figma 18/10** ở cuối file, mục "Smart Shopping Companion – màn F11–F13". Figma hiện hành: `Why I Buy ver2` (`VaPYFxfpx14tnQmOMSgdjP`). Ảnh hiện hành của mọi khung: [`assets/figma/ver2/`](../assets/figma/ver2/) (18/10); ảnh ở `assets/figma/` là của file cũ (Flow 1–10, 14/10).
+> **Cập nhật 18/10/2026:** các màn F11–F13 (19–31, EXT, X2–X5) và bảng **ánh xạ mã màn đặc tả 17/10 ↔ Figma 18/10** ở cuối file, mục "Smart Shopping Companion – màn F11–F13". Figma hiện hành: `Why I Buy ver2` (`VaPYFxfpx14tnQmOMSgdjP`). Ảnh hiện hành của mọi khung: [`assets/figma/ver2/`](../assets/figma/ver2/) (18/10); ảnh cũ (Flow 1–10, 14/10) ở [`assets/figma/ver1/`](../assets/figma/ver1/).
 
 Mỗi màn hình: dùng để làm gì, hiển thị nội dung gì (từ trên xuống), thuộc flow nào, có những khung trạng thái nào, và ý đồ thiết kế. Nội dung khớp với page `03 Final UI` trong Figma; ảnh từng khung ở [`assets/figma/`](../assets/figma/). Token và quy tắc component xem [`DESIGN.md`](DESIGN.md); cách dựng bằng Flutter xem [`handoff/flutter-handoff.md`](../handoff/flutter-handoff.md).
 
@@ -12,29 +12,29 @@ Mỗi màn hình: dùng để làm gì, hiển thị nội dung gì (từ trên 
 | # | Màn hình | Cấp | Flow | Khung trạng thái | Ảnh |
 |---|---|---|---|---|---|
 | 00 | Splash | Gốc (mọi lần mở app) | 7 | — | — |
-| 00a | Đăng nhập | Gốc | 7 | — | [00a](../assets/figma/00a-login.png) |
-| 00b | Đăng ký | Gốc | 7 | — | [00b](../assets/figma/00b-register.png) |
+| 00a | Đăng nhập | Gốc | 7 | — | [00a](../assets/figma/ver1/00a-login.png) |
+| 00b | Đăng ký | Gốc | 7 | — | [00b](../assets/figma/ver1/00b-register.png) |
 | — | Quên mật khẩu | Gốc | 7 | — | — |
-| 01 | Onboarding | Gốc (lần đầu) | 1, 7 | — | [01](../assets/figma/01-onboarding.png) |
+| 01 | Onboarding | Gốc (lần đầu) | 1, 7 | — | [01](../assets/figma/ver1/01-onboarding.png) |
 | 00 Hub | Trang chủ tổng hợp | Tab 1 | 1, 6, 7, 8, 9 | chưa ghi hôm nay; các trạng thái của 02 | — |
-| 02 | Trang chủ | Tab 1 | 1, 2, 6 | trống, sau khi lưu, ngoại tuyến, lối vào Danh sách mong muốn, lối vào Trước khi mua | [02](../assets/figma/02-home.png) |
-| 03 | Ghi khoản mua – Bước 1/2 | Lồng | 1, 3, 6 | lỗi, sửa, điền sẵn từ Danh sách mong muốn | [03](../assets/figma/03-add-purchase-step1.png) |
-| 04 | Ghi khoản mua – Bước 2/2 | Lồng | 1, 3, 6 | đang lưu, giải thích động cơ, sửa, điền sẵn | [04](../assets/figma/04-purchase-reason.png) |
-| 05 | Chi tiết khoản mua | Lồng | 3 | dialog xóa | [05](../assets/figma/05-purchase-detail.png) |
+| 02 | Trang chủ | Tab 1 | 1, 2, 6 | trống, sau khi lưu, ngoại tuyến, lối vào Danh sách mong muốn, lối vào Trước khi mua | [02](../assets/figma/ver1/02-home.png) |
+| 03 | Ghi khoản mua – Bước 1/2 | Lồng | 1, 3, 6 | lỗi, sửa, điền sẵn từ Danh sách mong muốn | [03](../assets/figma/ver1/03-add-purchase-step1.png) |
+| 04 | Ghi khoản mua – Bước 2/2 | Lồng | 1, 3, 6 | đang lưu, giải thích động cơ, sửa, điền sẵn | [04](../assets/figma/ver1/04-purchase-reason.png) |
+| 05 | Chi tiết khoản mua | Lồng | 3 | dialog xóa | [05](../assets/figma/ver1/05-purchase-detail.png) |
 | 05 | Khoản mua đã lưu | Lồng | 1, 8 | — | — |
 | 05a | Xin quyền thông báo | Lồng | 1, 5 | — | — |
-| 06 | Lịch sử | Tab 2 | 3, 4 | không có kết quả, sau khi xóa, chọn tháng, tháng 9/2026 | [06](../assets/figma/06-history.png) |
-| 07 | Mô hình | Tab 3 | 2, 4, 8, 10 | đang tải, lỗi, chưa đủ dữ liệu, tháng 9/2026, Tuần; phiên bản có AI | [07](../assets/figma/07-patterns.png) |
-| 08 | Góc nhìn | Tab 4 | 2, 10 | đã lưu chiêm nghiệm; phiên bản có AI (và đã lưu chiêm nghiệm) | [08](../assets/figma/08-insights.png) |
+| 06 | Lịch sử | Tab 2 | 3, 4 | không có kết quả, sau khi xóa, chọn tháng, tháng 9/2026 | [06](../assets/figma/ver1/06-history.png) |
+| 07 | Mô hình | Tab 3 | 2, 4, 8, 10 | đang tải, lỗi, chưa đủ dữ liệu, tháng 9/2026, Tuần; phiên bản có AI | [07](../assets/figma/ver1/07-patterns.png) |
+| 08 | Góc nhìn | Tab 4 | 2, 10 | đã lưu chiêm nghiệm; phiên bản có AI (và đã lưu chiêm nghiệm) | [08](../assets/figma/ver1/08-insights.png) |
 | 08b | Chi tiết mô hình mua sắm | Lồng | 8, 9, 10 | AI đang phân tích – mô hình (08a) | — |
 | 08c | Nhận định AI về khoản mua | Lồng | 8, 10 | AI đang phân tích – khoản vừa lưu (08a); khung "khoản vừa lưu" | — |
-| 09 | Chiêm nghiệm tháng | Lồng | 2, 10 | — | [09](../assets/figma/09-monthly-reflection.png) |
-| 10 | Cá nhân | Tab 5 | 5, 7 | xác nhận xóa toàn bộ, đã xuất dữ liệu, chưa cấp quyền thông báo, xác nhận đăng xuất | [10](../assets/figma/10-profile.png) |
+| 09 | Chiêm nghiệm tháng | Lồng | 2, 10 | — | [09](../assets/figma/ver1/09-monthly-reflection.png) |
+| 10 | Cá nhân | Tab 5 | 5, 7 | xác nhận xóa toàn bộ, đã xuất dữ liệu, chưa cấp quyền thông báo, xác nhận đăng xuất | [10](../assets/figma/ver1/10-profile.png) |
 | 10a | Tài khoản | Lồng | 7 | xác nhận xóa tài khoản, sau khi đổi mật khẩu | — |
 | 10b | Đổi mật khẩu | Lồng | 7 | — | — |
-| 11 | Danh sách mong muốn | Lồng | 6 | 11a–11e | [11](../assets/figma/11-wishlist-overview.png) |
-| 12 | Thêm món mong muốn | Lồng | 6 | 12a–12c | [12](../assets/figma/12-add-item.png) |
-| 13 | Chi tiết món mong muốn | Lồng | 6 | 13a–13d | [13](../assets/figma/13-wishlist-detail.png) |
+| 11 | Danh sách mong muốn | Lồng | 6 | 11a–11e | [11](../assets/figma/ver1/11-wishlist-overview.png) |
+| 12 | Thêm món mong muốn | Lồng | 6 | 12a–12c | [12](../assets/figma/ver1/12-add-item.png) |
+| 13 | Chi tiết món mong muốn | Lồng | 6 | 13a–13d | [13](../assets/figma/ver1/13-wishlist-detail.png) |
 | 14 | Trước khi mua – Bước 1/3 | Lồng | 9 | — | — |
 | 15 | Trước khi mua – Bước 2/3 | Lồng | 9 | — | — |
 | 16 | Trước khi mua – Bước 3/3 | Lồng | 9 | chỉ hiện khi chọn Khuyến mãi ở 15 | — |

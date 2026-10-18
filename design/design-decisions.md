@@ -29,7 +29,7 @@
 
 | Trước | Sau (đã bỏ thẻ) | Figma cuối |
 |---|---|---|
-| ![](../assets/stitch/stitch1/v1-03-add-purchase-error.png) | ![](../assets/stitch/stitch%20refinement%202/r2-step1-error.png) | ![](../assets/figma/03a-add-purchase-error.png) |
+| ![](../assets/stitch/stitch1/v1-03-add-purchase-error.png) | ![](../assets/stitch/stitch%20refinement%202/r2-step1-error.png) | ![](../assets/figma/ver1/03a-add-purchase-error.png) |
 
 **Phân tích:**
 - **Persona:** Nam đã bỏ các app chi tiêu vì cảm giác tội lỗi khi bị cảnh báo. Câu "Bạn có đang thật sự cần?" đặt đúng lúc Nam vừa mua xong chính là trải nghiệm đó.
@@ -46,7 +46,7 @@
 
 | Trước | Sau | Figma cuối |
 |---|---|---|
-| ![](../assets/stitch/stitch1/v1-04-purchase-reason.png) | ![](../assets/stitch/stitch%20refinement%202/r2-step2.png) | ![](../assets/figma/04-purchase-reason.png) |
+| ![](../assets/stitch/stitch1/v1-04-purchase-reason.png) | ![](../assets/stitch/stitch%20refinement%202/r2-step2.png) | ![](../assets/figma/ver1/04-purchase-reason.png) |
 
 **Phân tích:**
 - **Giữ lại:** dạng lưới thẻ có icon thay vì danh sách thả xuống. Nam nhận ra động cơ qua icon mà không phải nhớ (Nielsen #6), và mỗi thẻ là một vùng chạm lớn (156 × 72 dp).
@@ -63,11 +63,11 @@
 
 | P2 | Sau R2 | Figma cuối |
 |---|---|---|
-| ![](../assets/stitch/stitch2/v2-05b-delete-dialog.png) | ![](../assets/stitch/stitch%20refinement%202/r2-delete-dialog.png) | ![](../assets/figma/05a-delete-dialog.png) |
+| ![](../assets/stitch/stitch2/v2-05b-delete-dialog.png) | ![](../assets/stitch/stitch%20refinement%202/r2-delete-dialog.png) | ![](../assets/figma/ver1/05a-delete-dialog.png) |
 
 | Stitch (Flow 6) | Figma cuối | Sau khi xác nhận |
 |---|---|---|
-| ![](../assets/stitch/flow6/f6-stitch-skip-dialog.png) | ![](../assets/figma/13a-skip-dialog.png) | ![](../assets/figma/11c-wishlist-skipped.png) |
+| ![](../assets/stitch/flow6/f6-stitch-skip-dialog.png) | ![](../assets/figma/ver1/13a-skip-dialog.png) | ![](../assets/figma/ver1/11c-wishlist-skipped.png) |
 
 **Phân tích:**
 - **Nielsen #5 (phòng ngừa lỗi):** xóa là hành động khó đảo ngược, cần một bước xác nhận. Hai nút tách biệt, nút nguy hiểm có màu đỏ và icon, nên không chỉ dựa vào màu.
@@ -77,7 +77,7 @@
 
 **Quyết định:** Chấp nhận dạng dialog cho cả hai hành động, cùng một quy tắc: xác nhận trước, hoàn tác 5 giây sau.
 - **Xóa khoản mua:** sửa nội dung thành "“Tai nghe Bluetooth” sẽ bị xóa khỏi lịch sử. Bạn có 5 giây để hoàn tác." và thêm snackbar "Đã xóa … · Hoàn tác" ở màn Lịch sử (khung `06 Lịch sử – sau khi xóa`). Cùng kiểu snackbar dùng cho "Đã lưu … · Hoàn tác" sau khi ghi khoản mua.
-- **Bỏ qua món mong muốn:** giữ nguyên câu chữ của Stitch. Có ba thay đổi: dựng lại thành overlay thật trên khung 360 × 800 (Stitch đặt trong canvas ngang), đổi icon và nền sang primary, và sau khi xác nhận hiện snackbar "Đã chuyển “Bàn phím cơ” vào Bỏ qua · Hoàn tác" (5 giây, [11c](../assets/figma/11c-wishlist-skipped.png)).
+- **Bỏ qua món mong muốn:** giữ nguyên câu chữ của Stitch. Có ba thay đổi: dựng lại thành overlay thật trên khung 360 × 800 (Stitch đặt trong canvas ngang), đổi icon và nền sang primary, và sau khi xác nhận hiện snackbar "Đã chuyển “Bàn phím cơ” vào Bỏ qua · Hoàn tác" (5 giây, [11c](../assets/figma/ver1/11c-wishlist-skipped.png)).
 - **Khác biệt:** xóa dùng nút Danger (màu error), bỏ qua dùng nút Primary vì không phải hành động phá hủy.
 
 ---
@@ -88,7 +88,7 @@
 
 | Trước | Sau | Figma cuối |
 |---|---|---|
-| ![](../assets/stitch/stitch2/v2-08-insights.png) | ![](../assets/stitch/stitch%20refinement%202/r2-quote.png) | ![](../assets/figma/08-insights.png) |
+| ![](../assets/stitch/stitch2/v2-08-insights.png) | ![](../assets/stitch/stitch%20refinement%202/r2-quote.png) | ![](../assets/figma/ver1/08-insights.png) |
 
 **Phân tích:**
 - **Ràng buộc trong brief:** insight phải là quan sát trung lập, lấy từ chính dữ liệu Nam đã ghi.
@@ -106,7 +106,7 @@
 | Đang tải | Lỗi | Chưa đủ dữ liệu |
 |---|---|---|
 | ![](../assets/stitch/stitch%20refinement%203/r3-chart-loading.png) | ![](../assets/stitch/stitch%20refinement%203/r3-chart-error.png) | ![](../assets/stitch/stitch%20refinement%203/r3-chart-insufficient.png) |
-| ![](../assets/figma/07a-patterns-loading.png) | ![](../assets/figma/07b-patterns-error.png) | ![](../assets/figma/07c-patterns-insufficient.png) |
+| ![](../assets/figma/ver1/07a-patterns-loading.png) | ![](../assets/figma/ver1/07b-patterns-error.png) | ![](../assets/figma/ver1/07c-patterns-insufficient.png) |
 
 **Phân tích:**
 - **Nielsen #1:** skeleton cho Nam biết app đang xử lý, và vì giữ đúng hình dạng nên khi có kết quả bố cục không bị nhảy.
@@ -123,7 +123,7 @@ Stitch tự thêm chip "Khoảng lặng 48h", nhãn "Đang tĩnh tâm", dòng "C
 
 | Trước | Sau |
 |---|---|
-| ![](../assets/stitch/flow6/f6-stitch-wishlist-detail.png) | ![](../assets/figma/13-wishlist-detail.png) |
+| ![](../assets/stitch/flow6/f6-stitch-wishlist-detail.png) | ![](../assets/figma/ver1/13-wishlist-detail.png) |
 
 **Phân tích:**
 - **Thời gian chờ và chỉ số "hạ nhiệt":** các chi tiết này biến danh sách mong muốn thành công cụ ép người dùng ngừng mua. Điều đó trái Nielsen #3 (người dùng phải tự quyết định) và trái tông "không phán xét" trong DESIGN.md. Ngoài ra "40%" là con số ứng dụng không có cách đo.
@@ -132,7 +132,7 @@ Stitch tự thêm chip "Khoảng lặng 48h", nhãn "Đang tĩnh tâm", dòng "C
 **Quyết định:** Từ chối cả hai. Bản Figma bỏ toàn bộ: nút "Ghi khoản mua" luôn bấm được, chỉ còn ngày thêm ("2 ngày trước") làm thông tin trung lập. Ghi chú tự do ở 12/13 đã đủ để ghi lại cảm xúc.
 
 ### Quyết định 7 — SỬA: không thiết kế lại Trang chủ
-Bản Stitch của Trang chủ có bố cục khác 02 hiện tại, nhãn "Danh …" bị cắt và thêm thẻ trích dẫn mang giọng khuyên bảo. Figma giữ nguyên 02 của nhóm, chỉ chèn component "Wishlist entry" (thẻ trắng, cao 64 dp, chevron) dưới Tổng quan tuần ([02d](../assets/figma/02d-home-wishlist-entry.png)). Nút "Ghi khoản mua" vẫn là hành động chính duy nhất.
+Bản Stitch của Trang chủ có bố cục khác 02 hiện tại, nhãn "Danh …" bị cắt và thêm thẻ trích dẫn mang giọng khuyên bảo. Figma giữ nguyên 02 của nhóm, chỉ chèn component "Wishlist entry" (thẻ trắng, cao 64 dp, chevron) dưới Tổng quan tuần ([02d](../assets/figma/ver1/02d-home-wishlist-entry.png)). Nút "Ghi khoản mua" vẫn là hành động chính duy nhất.
 
 ### Quyết định 8 — SỬA: bộ lọc không bị cắt ở 360 dp
 Ở 360 dp, ba chip "Đang cân nhắc (2)", "Đã mua (1)", "Bỏ qua (0)" rộng khoảng 410 dp, nên bản Stitch cắt mất chip cuối. Figma cho chip xuống hàng (wrap). Số lượng vẫn nằm trong nhãn để không cần nhìn màu cũng biết đang lọc gì.
@@ -149,7 +149,7 @@ Bản Stitch của Trang chủ có bố cục khác 02 hiện tại, nhãn "Danh
 
 | Trước | Sau (chưa chọn) | Sau (đã chọn) |
 |---|---|---|
-| ![](../assets/figma/r4-truoc-04-purchase-reason.png) | ![](../assets/figma/r4-sau-04-chua-chon.png) | ![](../assets/figma/r4-sau-04-da-chon.png) |
+| ![](../assets/figma/ver1/r4-truoc-04-purchase-reason.png) | ![](../assets/figma/ver1/r4-sau-04-chua-chon.png) | ![](../assets/figma/ver1/r4-sau-04-da-chon.png) |
 
 > Các phát hiện của vòng phản biện bằng AI (Nielsen + accessibility + persona) và quyết định cho từng phát hiện được ghi ở mục **"Phản biện bằng AI"** trong [`ai/ai-design-log.md`](../ai/ai-design-log.md).
 

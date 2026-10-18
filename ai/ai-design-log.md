@@ -1200,7 +1200,7 @@ trước khi sang bước tiếp theo. Nhóm chọn checklist.design/mobile (25 
   - R4-3: nút chữ "Giải thích động cơ" cạnh câu "Vì sao bạn mua?" ở 16 khung Bước 2/2, mở sheet giải thích; câu phụ rút còn 1 dòng, khoảng cách khối 12 → 8 dp
   - Sửa thêm: biến thể nút Disabled dùng độ mờ của lớp (38%) cho chữ và icon, vì độ mờ của màu bị mất ở instance
 - Nhóm chỉnh sửa lại: bỏ R4-4 vì thiết kế đã có mũi tên 48 dp và chip "Tháng 10/2026 ▾"; giữ chọn sẵn ở khung Sửa và khung từ danh sách mong muốn vì động cơ do người dùng chọn trước đó; dời section Flow 8–10 xuống 200 px vì section Flow 7 cao thêm
-- Đánh giá: ảnh trước `assets/figma/r4-truoc-04-purchase-reason.png`, ảnh sau `r4-sau-04-chua-chon.png`, `r4-sau-04-da-chon.png`, `r4-sau-10-ca-nhan.png` (cùng thư mục); cần chạy lại T1 và T5 với người thật để xác nhận
+- Đánh giá: ảnh trước `assets/figma/ver1/r4-truoc-04-purchase-reason.png`, ảnh sau `r4-sau-04-chua-chon.png`, `r4-sau-04-da-chon.png`, `r4-sau-10-ca-nhan.png` (cùng thư mục); cần chạy lại T1 và T5 với người thật để xác nhận
 
 
 ---

@@ -4,7 +4,7 @@
 
 - **Cách xuất:** Figma MCP `get_screenshot` theo từng node, ngày 18/10/2026. Ảnh ở tỉ lệ **1×** (khung 360 × 800 dp → 360 × 800 px; extension 960 × 640). Công cụ không hỗ trợ xuất 2×; nếu cần ảnh nét hơn cho slide, xuất lại 2× trực tiếp trong Figma.
 - **Tên file:** mã + tên khung Figma, bỏ dấu (ví dụ `28-decision-card-du-du-lieu.png`). Mã theo Figma (nhóm chốt 18/10).
-- **Quan hệ với ảnh cũ:** ảnh ở thư mục cha `assets/figma/` xuất từ file Figma cũ (`jCQEcxnXTYJ9b27pdsfFfS`, đến 14/10). Nhiều màn đã đổi trên ver2 (ví dụ 07, 08 bản có AI, 10 bản sửa); **khi hai bộ khác nhau, dùng ảnh trong thư mục này**.
+- **Quan hệ với ảnh cũ:** ảnh trong [`../ver1/`](../ver1/) xuất từ file Figma cũ (`jCQEcxnXTYJ9b27pdsfFfS`, đến 14/10). Nhiều màn đã đổi trên ver2 (ví dụ 07, 08 bản có AI, 10 bản sửa); **khi hai bộ khác nhau, dùng ảnh trong thư mục này**.
 - Ảnh khớp đúng hiện trạng Figma ngày 18/10, kể cả các điểm còn lệch đặc tả (xem `design/design-decisions.md` mục 1b và `ai/ai-design-log.md` mục R5-2).
 
 ## Màn hình chính

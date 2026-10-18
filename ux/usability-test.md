@@ -172,7 +172,7 @@ Cách tính: câu lẻ lấy (điểm − 1), câu chẵn lấy (5 − điểm),
 
 ## 8. Vòng R4: đã sửa trong Figma (14/10/2026)
 
-Ảnh trước: `assets/figma/04-purchase-reason.png`. Ảnh sau: `r4-sau-04-chua-chon.png`, `r4-sau-04-da-chon.png`, `r4-sau-10-ca-nhan.png`.
+Ảnh trước: `assets/figma/ver1/04-purchase-reason.png`. Ảnh sau: `r4-sau-04-chua-chon.png`, `r4-sau-04-da-chon.png`, `r4-sau-10-ca-nhan.png`.
 
 | Mã | Đã sửa | Khung Figma | Kết quả |
 |---|---|---|---|
